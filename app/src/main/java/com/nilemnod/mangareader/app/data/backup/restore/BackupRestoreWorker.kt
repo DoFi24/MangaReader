@@ -12,21 +12,21 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.data.backup.BackupNotifier
 import com.nilemnod.mangareader.app.data.notification.Notifications
+import com.nilemnod.mangareader.app.di.AppGraph
 import com.nilemnod.mangareader.app.util.system.cancelNotification
 import com.nilemnod.mangareader.app.util.system.isRunning
 import com.nilemnod.mangareader.app.util.system.setForegroundSafely
+import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.metro.metroGraph
+import com.nilemnod.mangareader.i18n.MR
+import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import logcat.LogPriority
-import com.nilemnod.mangareader.app.di.AppGraph
-import com.nilemnod.mangareader.core.metro.metroGraph
-import com.nilemnod.mangareader.core.common.i18n.stringResource
-import com.nilemnod.mangareader.core.common.util.system.logcat
-import com.nilemnod.mangareader.i18n.MR
 
 class BackupRestoreWorker(private val context: Context, workerParams: WorkerParameters) :
     CoroutineWorker(context, workerParams) {

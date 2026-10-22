@@ -1,11 +1,11 @@
 package com.nilemnod.mangareader.domain.category.interactor
 
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.domain.category.repository.CategoryRepository
 import com.nilemnod.mangareader.domain.library.model.LibrarySort
 import com.nilemnod.mangareader.domain.library.model.plus
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
+import dev.zacsweers.metro.Inject
 import kotlin.random.Random
 
 @Inject

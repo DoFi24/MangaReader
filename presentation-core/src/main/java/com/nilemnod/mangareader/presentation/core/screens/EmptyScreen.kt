@@ -21,11 +21,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
-import dev.icerock.moko.resources.StringResource
 import com.nilemnod.mangareader.presentation.core.components.ActionButton
 import com.nilemnod.mangareader.presentation.core.components.material.padding
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.presentation.core.util.secondaryItemAlpha
+import dev.icerock.moko.resources.StringResource
 import kotlin.random.Random
 
 data class EmptyScreenAction(

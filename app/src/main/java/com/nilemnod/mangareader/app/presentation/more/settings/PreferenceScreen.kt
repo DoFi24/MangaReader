@@ -13,8 +13,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEachIndexed
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.SearchableSettings
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.PreferenceGroupHeader
-import kotlinx.coroutines.delay
 import com.nilemnod.mangareader.presentation.core.components.ScrollbarLazyColumn
+import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.seconds
 
 /**

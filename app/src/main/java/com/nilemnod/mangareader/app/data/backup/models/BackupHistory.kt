@@ -1,9 +1,9 @@
 package com.nilemnod.mangareader.app.data.backup.models
 
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.protobuf.ProtoNumber
 import com.nilemnod.mangareader.core.common.extensions.toInstantOrNull
 import com.nilemnod.mangareader.domain.history.model.History
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.protobuf.ProtoNumber
 
 @Serializable
 data class BackupHistory(

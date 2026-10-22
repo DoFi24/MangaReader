@@ -29,18 +29,9 @@ import coil3.request.transformations
 import coil3.size.Precision
 import coil3.size.Scale
 import coil3.transform.RoundedCornersTransformation
-import dev.zacsweers.metro.HasMemberInjections
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.core.security.SecurityPreferences
 import com.nilemnod.mangareader.app.util.system.dpToPx
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withContext
-import kotlinx.datetime.DateTimeUnit
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.minus
 import com.nilemnod.mangareader.core.metro.metroGraph
-import com.nilemnod.mangareader.presentation.widget.di.PresentationWidgetGraph
 import com.nilemnod.mangareader.domain.manga.model.MangaCover
 import com.nilemnod.mangareader.domain.updates.interactor.GetUpdates
 import com.nilemnod.mangareader.domain.updates.model.UpdatesWithRelations
@@ -48,8 +39,17 @@ import com.nilemnod.mangareader.presentation.widget.components.CoverHeight
 import com.nilemnod.mangareader.presentation.widget.components.CoverWidth
 import com.nilemnod.mangareader.presentation.widget.components.LockedWidget
 import com.nilemnod.mangareader.presentation.widget.components.UpdatesWidget
+import com.nilemnod.mangareader.presentation.widget.di.PresentationWidgetGraph
 import com.nilemnod.mangareader.presentation.widget.util.appWidgetBackgroundRadius
 import com.nilemnod.mangareader.presentation.widget.util.calculateRowAndColumnCount
+import dev.zacsweers.metro.HasMemberInjections
+import dev.zacsweers.metro.Inject
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.minus
 import kotlin.time.Clock
 import kotlin.time.Instant
 

@@ -6,30 +6,30 @@ import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialExpressiveTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
-import com.nilemnod.mangareader.presentation.core.util.collectAsState
-import androidx.compose.runtime.getValue
+import com.nilemnod.mangareader.app.domain.ui.appUiPreferences
 import com.nilemnod.mangareader.app.domain.ui.model.AppTheme
 import com.nilemnod.mangareader.app.presentation.theme.colorscheme.BaseColorScheme
 import com.nilemnod.mangareader.app.presentation.theme.colorscheme.CatppuccinColorScheme
 import com.nilemnod.mangareader.app.presentation.theme.colorscheme.GreenAppleColorScheme
 import com.nilemnod.mangareader.app.presentation.theme.colorscheme.LavenderColorScheme
+import com.nilemnod.mangareader.app.presentation.theme.colorscheme.MangaReaderColorScheme
 import com.nilemnod.mangareader.app.presentation.theme.colorscheme.MidnightDuskColorScheme
 import com.nilemnod.mangareader.app.presentation.theme.colorscheme.MonetColorScheme
 import com.nilemnod.mangareader.app.presentation.theme.colorscheme.MonochromeColorScheme
 import com.nilemnod.mangareader.app.presentation.theme.colorscheme.NordColorScheme
 import com.nilemnod.mangareader.app.presentation.theme.colorscheme.StrawberryColorScheme
-import com.nilemnod.mangareader.app.presentation.theme.colorscheme.MangaReaderColorScheme
 import com.nilemnod.mangareader.app.presentation.theme.colorscheme.TakoColorScheme
 import com.nilemnod.mangareader.app.presentation.theme.colorscheme.TealTurqoiseColorScheme
 import com.nilemnod.mangareader.app.presentation.theme.colorscheme.TidalWaveColorScheme
 import com.nilemnod.mangareader.app.presentation.theme.colorscheme.TokyoNightColorScheme
 import com.nilemnod.mangareader.app.presentation.theme.colorscheme.YinYangColorScheme
 import com.nilemnod.mangareader.app.presentation.theme.colorscheme.YotsubaColorScheme
-import com.nilemnod.mangareader.app.domain.ui.appUiPreferences
+import com.nilemnod.mangareader.presentation.core.util.collectAsState
 
 @Composable
 fun MangaReaderTheme(

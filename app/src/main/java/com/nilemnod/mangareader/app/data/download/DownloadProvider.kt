@@ -3,18 +3,8 @@ package com.nilemnod.mangareader.app.data.download
 import android.content.ContentResolver
 import android.content.Context
 import com.hippo.unifile.UniFile
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.Inject
-import dev.zacsweers.metro.SingleIn
-import eu.kanade.tachiyomi.source.Source
 import com.nilemnod.mangareader.app.util.lang.Hash.md5
 import com.nilemnod.mangareader.app.util.storage.DiskUtil
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.withContext
-import logcat.LogPriority
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.storage.displayablePath
 import com.nilemnod.mangareader.core.common.util.system.logcat
@@ -23,6 +13,16 @@ import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.storage.service.StorageManager
 import com.nilemnod.mangareader.i18n.MR
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.SingleIn
+import eu.kanade.tachiyomi.source.Source
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.withContext
+import logcat.LogPriority
 import java.io.IOException
 
 /**

@@ -2,8 +2,8 @@ package com.nilemnod.mangareader.app.util.system
 
 import android.content.Context
 import android.widget.Toast
-import dev.icerock.moko.resources.StringResource
 import com.nilemnod.mangareader.core.common.i18n.stringResource
+import dev.icerock.moko.resources.StringResource
 
 /**
  * Display a toast in this context.

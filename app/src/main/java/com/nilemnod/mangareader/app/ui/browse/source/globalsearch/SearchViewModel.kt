@@ -7,6 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.app.extension.ExtensionManager
+import com.nilemnod.mangareader.core.common.preference.toggle
+import com.nilemnod.mangareader.domain.manga.interactor.GetManga
+import com.nilemnod.mangareader.domain.manga.interactor.NetworkToLocalManga
+import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.manga.model.toDomainManga
+import com.nilemnod.mangareader.domain.source.service.SourceManager
+import com.nilemnod.mangareader.source.local.isLocal
 import eu.kanade.tachiyomi.source.Source
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -20,13 +27,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import com.nilemnod.mangareader.domain.manga.model.toDomainManga
-import com.nilemnod.mangareader.core.common.preference.toggle
-import com.nilemnod.mangareader.domain.manga.interactor.GetManga
-import com.nilemnod.mangareader.domain.manga.interactor.NetworkToLocalManga
-import com.nilemnod.mangareader.domain.manga.model.Manga
-import com.nilemnod.mangareader.domain.source.service.SourceManager
-import com.nilemnod.mangareader.source.local.isLocal
 
 abstract class SearchViewModel(
     initialState: State = State(),

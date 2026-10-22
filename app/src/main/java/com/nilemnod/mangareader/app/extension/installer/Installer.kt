@@ -3,11 +3,11 @@ package com.nilemnod.mangareader.app.extension.installer
 import android.app.Service
 import android.net.Uri
 import androidx.annotation.CallSuper
+import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.extension.ExtensionManager
 import com.nilemnod.mangareader.app.extension.model.InstallStep
-import logcat.LogPriority
-import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import logcat.LogPriority
 import java.util.Collections
 import java.util.concurrent.CopyOnWriteArraySet
 import kotlin.concurrent.atomics.AtomicReference

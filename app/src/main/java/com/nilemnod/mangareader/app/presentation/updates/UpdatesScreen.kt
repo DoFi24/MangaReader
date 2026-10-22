@@ -19,23 +19,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastAll
 import androidx.compose.ui.util.fastAny
+import com.nilemnod.mangareader.app.data.download.model.Download
 import com.nilemnod.mangareader.app.presentation.components.AppBar
 import com.nilemnod.mangareader.app.presentation.components.AppBarActions
 import com.nilemnod.mangareader.app.presentation.manga.components.ChapterDownloadAction
 import com.nilemnod.mangareader.app.presentation.manga.components.MangaBottomActionMenu
-import com.nilemnod.mangareader.app.data.download.model.Download
 import com.nilemnod.mangareader.app.ui.updates.UpdatesItem
 import com.nilemnod.mangareader.app.ui.updates.UpdatesViewModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.datetime.LocalDate
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.CalendarMonth
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.FilterList
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.FlipToBack
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Refresh
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.SelectAll
-import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.components.FastScrollLazyColumn
 import com.nilemnod.mangareader.presentation.core.components.material.PullRefresh
 import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
@@ -43,6 +40,9 @@ import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.presentation.core.screens.EmptyScreen
 import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
 import com.nilemnod.mangareader.presentation.core.theme.active
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.datetime.LocalDate
 import kotlin.time.Duration.Companion.seconds
 
 @Composable

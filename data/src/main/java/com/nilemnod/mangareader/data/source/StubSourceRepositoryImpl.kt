@@ -1,15 +1,15 @@
 package com.nilemnod.mangareader.data.source
 
 import app.cash.sqldelight.async.coroutines.awaitAsOneOrNull
+import com.nilemnod.mangareader.data.Database
+import com.nilemnod.mangareader.data.subscribeToList
+import com.nilemnod.mangareader.domain.source.model.StubSource
+import com.nilemnod.mangareader.domain.source.repository.StubSourceRepository
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
 import kotlinx.coroutines.flow.Flow
-import com.nilemnod.mangareader.data.Database
-import com.nilemnod.mangareader.data.subscribeToList
-import com.nilemnod.mangareader.domain.source.model.StubSource
-import com.nilemnod.mangareader.domain.source.repository.StubSourceRepository
 
 @Inject
 @SingleIn(AppScope::class)

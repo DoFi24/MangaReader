@@ -1,9 +1,9 @@
 package com.nilemnod.mangareader.app.domain.chapter.model
 
-import eu.kanade.tachiyomi.source.model.SChapter
 import com.nilemnod.mangareader.core.common.extensions.toEpochMillisOrZero
 import com.nilemnod.mangareader.core.common.extensions.toInstantOrNull
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
+import eu.kanade.tachiyomi.source.model.SChapter
 
 fun Chapter.toSChapter(): SChapter {
     return SChapter.create().also {

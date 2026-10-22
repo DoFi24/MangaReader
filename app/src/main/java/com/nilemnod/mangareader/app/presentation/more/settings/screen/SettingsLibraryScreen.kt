@@ -15,13 +15,12 @@ import androidx.core.content.ContextCompat
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.nilemnod.mangareader.app.data.library.LibraryUpdateWorker
+import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.presentation.category.visualName
 import com.nilemnod.mangareader.app.presentation.more.settings.Preference
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.TriStateListDialog
-import com.nilemnod.mangareader.app.data.library.LibraryUpdateWorker
 import com.nilemnod.mangareader.app.ui.category.CategoryScreen
-import kotlinx.coroutines.launch
-import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences.Companion.DEVICE_CHARGING
@@ -37,6 +36,7 @@ import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.i18n.pluralStringResource
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.presentation.core.util.collectAsState
+import kotlinx.coroutines.launch
 
 object SettingsLibraryScreen : SearchableSettings {
 

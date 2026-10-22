@@ -10,10 +10,10 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.nilemnod.mangareader.app.presentation.library.components.CommonMangaItemDefaults
 import com.nilemnod.mangareader.app.presentation.library.components.MangaListItem
-import kotlinx.coroutines.flow.StateFlow
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaCover
 import com.nilemnod.mangareader.presentation.core.util.plus
+import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 fun BrowseSourceList(

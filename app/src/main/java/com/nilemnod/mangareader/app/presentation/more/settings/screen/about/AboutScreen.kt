@@ -18,6 +18,9 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.nilemnod.mangareader.app.BuildConfig
+import com.nilemnod.mangareader.app.data.updater.RELEASE_URL
+import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.domain.ui.UiPreferences
 import com.nilemnod.mangareader.app.presentation.components.AppBar
 import com.nilemnod.mangareader.app.presentation.more.LogoHeader
@@ -25,8 +28,6 @@ import com.nilemnod.mangareader.app.presentation.more.settings.widget.TextPrefer
 import com.nilemnod.mangareader.app.presentation.util.LocalBackPress
 import com.nilemnod.mangareader.app.presentation.util.Screen
 import com.nilemnod.mangareader.app.presentation.util.rememberIs24HourSystem
-import com.nilemnod.mangareader.app.BuildConfig
-import com.nilemnod.mangareader.app.data.updater.RELEASE_URL
 import com.nilemnod.mangareader.app.ui.more.NewUpdateScreen
 import com.nilemnod.mangareader.app.util.lang.toDateTimestampString
 import com.nilemnod.mangareader.app.util.system.copyToClipboard
@@ -34,19 +35,18 @@ import com.nilemnod.mangareader.app.util.system.isFossBuildType
 import com.nilemnod.mangareader.app.util.system.isNightlyBuildType
 import com.nilemnod.mangareader.app.util.system.toast
 import com.nilemnod.mangareader.app.util.system.updaterEnabled
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
-import logcat.LogPriority
-import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.domain.release.interactor.GetApplicationRelease
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.components.ScrollbarLazyColumn
 import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
+import logcat.LogPriority
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import java.util.Locale
@@ -150,7 +150,6 @@ object AboutScreen : Screen() {
                         onPreferenceClick = { navigator.push(OpenSourceLicensesScreen()) },
                     )
                 }
-
             }
         }
     }

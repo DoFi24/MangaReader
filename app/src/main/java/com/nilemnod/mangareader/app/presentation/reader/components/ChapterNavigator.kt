@@ -45,10 +45,10 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.presentation.theme.MangaReaderPreviewTheme
 import com.nilemnod.mangareader.app.presentation.util.isTabletUi
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.SkipNext
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.SkipPrevious
-import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import kotlin.math.roundToInt
 

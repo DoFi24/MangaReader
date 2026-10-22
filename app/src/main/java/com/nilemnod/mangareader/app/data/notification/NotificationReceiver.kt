@@ -6,10 +6,10 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.core.net.toUri
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.data.backup.restore.BackupRestoreWorker
 import com.nilemnod.mangareader.app.data.download.DownloadManager
 import com.nilemnod.mangareader.app.data.library.LibraryUpdateWorker
+import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
 import com.nilemnod.mangareader.app.util.system.cancelNotification
@@ -17,11 +17,8 @@ import com.nilemnod.mangareader.app.util.system.getParcelableExtraCompat
 import com.nilemnod.mangareader.app.util.system.notificationManager
 import com.nilemnod.mangareader.app.util.system.toShareIntent
 import com.nilemnod.mangareader.app.util.system.workManager
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
-import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.core.common.Constants
+import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.domain.chapter.interactor.GetChapter
 import com.nilemnod.mangareader.domain.chapter.interactor.UpdateChapter
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
@@ -30,6 +27,9 @@ import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
 import com.nilemnod.mangareader.domain.manga.interactor.GetManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.service.SourceManager
+import dev.zacsweers.metro.Inject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import com.nilemnod.mangareader.app.BuildConfig.APPLICATION_ID as ID
 
 /**

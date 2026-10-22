@@ -16,12 +16,12 @@ import com.nilemnod.mangareader.app.ui.reader.viewer.ReaderButton
 import com.nilemnod.mangareader.app.ui.reader.viewer.ReaderTransitionView
 import com.nilemnod.mangareader.app.util.system.dpToPx
 import com.nilemnod.mangareader.app.widget.ViewPagerAdapter
+import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.i18n.MR
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import com.nilemnod.mangareader.core.common.i18n.stringResource
-import com.nilemnod.mangareader.i18n.MR
 
 /**
  * View of the ViewPager that contains a chapter transition.

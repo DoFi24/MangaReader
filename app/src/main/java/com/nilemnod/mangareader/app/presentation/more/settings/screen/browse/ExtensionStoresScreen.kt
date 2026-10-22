@@ -7,7 +7,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import dev.zacsweers.metrox.viewmodel.metroViewModel
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.browse.components.ExtensionStoreConfirmDialog
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.browse.components.ExtensionStoreCreateDialog
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.browse.components.ExtensionStoreDeleteDialog
@@ -16,6 +15,7 @@ import com.nilemnod.mangareader.app.presentation.util.Screen
 import com.nilemnod.mangareader.app.util.system.copyToClipboard
 import com.nilemnod.mangareader.app.util.system.openInBrowser
 import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
+import dev.zacsweers.metrox.viewmodel.metroViewModel
 
 class ExtensionStoresScreen(
     private val url: String? = null,

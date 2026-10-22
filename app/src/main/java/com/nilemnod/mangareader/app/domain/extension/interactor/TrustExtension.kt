@@ -2,16 +2,16 @@ package com.nilemnod.mangareader.app.domain.extension.interactor
 
 import android.content.pm.PackageInfo
 import androidx.core.content.pm.PackageInfoCompat
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
+import com.nilemnod.mangareader.core.common.preference.getAndSet
+import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
+import com.nilemnod.mangareader.domain.extension.repository.ExtensionStoreRepository
+import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
-import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
-import com.nilemnod.mangareader.domain.extension.repository.ExtensionStoreRepository
-import com.nilemnod.mangareader.core.common.preference.getAndSet
 
 @Inject
 class TrustExtension(

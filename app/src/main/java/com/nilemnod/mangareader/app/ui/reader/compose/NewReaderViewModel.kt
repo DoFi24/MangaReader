@@ -1,19 +1,14 @@
 package com.nilemnod.mangareader.app.ui.reader.compose
 
 import android.content.Context
+import android.net.Uri
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.Assisted
-import dev.zacsweers.metro.AssistedFactory
-import dev.zacsweers.metro.AssistedInject
-import dev.zacsweers.metro.ContributesIntoMap
-import dev.zacsweers.metrox.viewmodel.ViewModelAssistedFactory
-import dev.zacsweers.metrox.viewmodel.ViewModelAssistedFactoryKey
 import com.nilemnod.mangareader.app.data.cache.ChapterCache
+import com.nilemnod.mangareader.app.data.download.DownloadCache
 import com.nilemnod.mangareader.app.data.download.DownloadManager
 import com.nilemnod.mangareader.app.data.download.DownloadProvider
 import com.nilemnod.mangareader.app.data.download.model.Download
@@ -21,7 +16,6 @@ import com.nilemnod.mangareader.app.data.saver.Image
 import com.nilemnod.mangareader.app.data.saver.ImageSaver
 import com.nilemnod.mangareader.app.data.saver.Location
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
-import com.nilemnod.mangareader.app.data.download.DownloadCache
 import com.nilemnod.mangareader.app.domain.manga.interactor.SetMangaViewerFlags
 import com.nilemnod.mangareader.app.domain.manga.model.readingMode
 import com.nilemnod.mangareader.app.domain.source.interactor.GetIncognitoState
@@ -30,17 +24,15 @@ import com.nilemnod.mangareader.app.ui.reader.loader.ChapterLoader
 import com.nilemnod.mangareader.app.ui.reader.loader.DownloadPageLoader
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderChapter
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
-import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode as AppReadingMode
 import com.nilemnod.mangareader.app.util.chapter.filterDownloaded
 import com.nilemnod.mangareader.app.util.chapter.removeDuplicates
 import com.nilemnod.mangareader.app.util.lang.byteSize
 import com.nilemnod.mangareader.app.util.storage.DiskUtil
 import com.nilemnod.mangareader.app.util.storage.cacheImageDir
 import com.nilemnod.mangareader.app.util.system.activeNetworkState
-import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
-import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.domain.chapter.interactor.GetChaptersByMangaId
 import com.nilemnod.mangareader.domain.chapter.interactor.UpdateChapter
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
@@ -56,22 +48,27 @@ import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.feature.reader.model.PageSource
 import com.nilemnod.mangareader.feature.reader.model.ReaderChapterContent
-import com.nilemnod.mangareader.feature.reader.model.ReaderPage as ComposeReaderPage
-import com.nilemnod.mangareader.feature.reader.settings.ReadingMode as ReaderMode
+import com.nilemnod.mangareader.i18n.MR
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.Assisted
+import dev.zacsweers.metro.AssistedFactory
+import dev.zacsweers.metro.AssistedInject
+import dev.zacsweers.metro.ContributesIntoMap
+import dev.zacsweers.metrox.viewmodel.ViewModelAssistedFactory
+import dev.zacsweers.metrox.viewmodel.ViewModelAssistedFactoryKey
 import eu.kanade.tachiyomi.source.model.Page
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import android.net.Uri
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -82,6 +79,9 @@ import okio.buffer
 import okio.source
 import kotlin.time.Clock
 import kotlin.time.Instant
+import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode as AppReadingMode
+import com.nilemnod.mangareader.feature.reader.model.ReaderPage as ComposeReaderPage
+import com.nilemnod.mangareader.feature.reader.settings.ReadingMode as ReaderMode
 
 @AssistedInject
 class NewReaderViewModel(
@@ -254,7 +254,11 @@ class NewReaderViewModel(
             (manga.bookmarkedFilterRaw == Manga.CHAPTER_SHOW_NOT_BOOKMARKED && chapter.bookmark)
     }
 
-    private fun buildContent(target: ReaderChapter, pages: List<com.nilemnod.mangareader.app.ui.reader.model.ReaderPage>, start: Int): ReaderChapterContent {
+    private fun buildContent(
+        target: ReaderChapter,
+        pages: List<com.nilemnod.mangareader.app.ui.reader.model.ReaderPage>,
+        start: Int,
+    ): ReaderChapterContent {
         val position = chapterList.indexOf(target)
         return ReaderChapterContent(
             id = target.chapter.id,

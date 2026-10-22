@@ -1,9 +1,9 @@
 package com.nilemnod.mangareader.app.domain.chapter.interactor
 
+import com.nilemnod.mangareader.domain.chapter.repository.ChapterRepository
 import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import com.nilemnod.mangareader.domain.chapter.repository.ChapterRepository
 
 @Inject
 class GetAvailableScanlators(

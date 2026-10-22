@@ -4,10 +4,10 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import cafe.adriel.voyager.core.screen.Screen
-import dev.icerock.moko.resources.StringResource
 import com.nilemnod.mangareader.app.presentation.more.settings.Preference
 import com.nilemnod.mangareader.app.presentation.more.settings.PreferenceScaffold
 import com.nilemnod.mangareader.app.presentation.util.LocalBackPress
+import dev.icerock.moko.resources.StringResource
 
 interface SearchableSettings : Screen {
 

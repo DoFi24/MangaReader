@@ -9,6 +9,20 @@ import coil3.asDrawable
 import coil3.imageLoader
 import coil3.request.ImageRequest
 import coil3.size.Size
+import com.nilemnod.mangareader.app.data.cache.CoverCache
+import com.nilemnod.mangareader.app.data.saver.Image
+import com.nilemnod.mangareader.app.data.saver.ImageSaver
+import com.nilemnod.mangareader.app.data.saver.Location
+import com.nilemnod.mangareader.app.domain.manga.interactor.UpdateManga
+import com.nilemnod.mangareader.app.util.editCover
+import com.nilemnod.mangareader.app.util.system.getBitmapOrNull
+import com.nilemnod.mangareader.app.util.system.toShareIntent
+import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.domain.manga.interactor.GetManga
+import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.source.local.image.LocalCoverManager
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Assisted
 import dev.zacsweers.metro.AssistedFactory
@@ -16,14 +30,6 @@ import dev.zacsweers.metro.AssistedInject
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactory
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactoryKey
-import com.nilemnod.mangareader.app.domain.manga.interactor.UpdateManga
-import com.nilemnod.mangareader.app.data.cache.CoverCache
-import com.nilemnod.mangareader.app.data.saver.Image
-import com.nilemnod.mangareader.app.data.saver.ImageSaver
-import com.nilemnod.mangareader.app.data.saver.Location
-import com.nilemnod.mangareader.app.util.editCover
-import com.nilemnod.mangareader.app.util.system.getBitmapOrNull
-import com.nilemnod.mangareader.app.util.system.toShareIntent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -33,12 +39,6 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import logcat.LogPriority
-import com.nilemnod.mangareader.core.common.i18n.stringResource
-import com.nilemnod.mangareader.core.common.util.system.logcat
-import com.nilemnod.mangareader.domain.manga.interactor.GetManga
-import com.nilemnod.mangareader.domain.manga.model.Manga
-import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.source.local.image.LocalCoverManager
 import kotlin.time.Duration.Companion.seconds
 
 @AssistedInject

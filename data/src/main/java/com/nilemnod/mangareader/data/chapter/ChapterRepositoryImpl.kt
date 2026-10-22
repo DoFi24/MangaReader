@@ -3,12 +3,6 @@ package com.nilemnod.mangareader.data.chapter
 import app.cash.sqldelight.async.coroutines.awaitAsList
 import app.cash.sqldelight.async.coroutines.awaitAsOne
 import app.cash.sqldelight.async.coroutines.awaitAsOneOrNull
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.ContributesBinding
-import dev.zacsweers.metro.Inject
-import dev.zacsweers.metro.SingleIn
-import kotlinx.coroutines.flow.Flow
-import kotlinx.serialization.json.JsonObject
 import com.nilemnod.mangareader.core.common.util.lang.toLong
 import com.nilemnod.mangareader.data.Database
 import com.nilemnod.mangareader.data.subscribeToList
@@ -17,6 +11,12 @@ import com.nilemnod.mangareader.domain.chapter.model.ChapterRemoteUpdate
 import com.nilemnod.mangareader.domain.chapter.model.ChapterSummary
 import com.nilemnod.mangareader.domain.chapter.model.ChapterUpdate
 import com.nilemnod.mangareader.domain.chapter.repository.ChapterRepository
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesBinding
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.SingleIn
+import kotlinx.coroutines.flow.Flow
+import kotlinx.serialization.json.JsonObject
 import kotlin.time.Instant
 
 @Inject

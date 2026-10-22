@@ -19,8 +19,6 @@ import com.nilemnod.mangareader.app.presentation.components.TabbedDialog
 import com.nilemnod.mangareader.app.presentation.components.TabbedDialogPaddings
 import com.nilemnod.mangareader.app.ui.library.LibrarySettingsViewModel
 import com.nilemnod.mangareader.app.util.system.isReleaseBuildType
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Refresh
 import com.nilemnod.mangareader.core.common.preference.TriState
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.domain.library.model.LibraryDisplayMode
@@ -28,6 +26,8 @@ import com.nilemnod.mangareader.domain.library.model.LibrarySort
 import com.nilemnod.mangareader.domain.library.model.sort
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
+import com.nilemnod.mangareader.icons.materialsymbols.rounded.Refresh
 import com.nilemnod.mangareader.presentation.core.components.BaseSortItem
 import com.nilemnod.mangareader.presentation.core.components.CheckboxItem
 import com.nilemnod.mangareader.presentation.core.components.HeadingItem

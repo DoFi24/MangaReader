@@ -35,12 +35,12 @@ import com.nilemnod.mangareader.app.presentation.util.formattedMessage
 import com.nilemnod.mangareader.app.ui.reader.model.ChapterTransition
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderChapter
 import com.nilemnod.mangareader.app.ui.webview.WebViewActivity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.components.CombinedCircularProgressIndicator
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.source.local.isLocal
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /** The side padding `PagerTransitionHolder` gave the same transition view. */
 private const val TRANSITION_SIDE_PADDING = 64

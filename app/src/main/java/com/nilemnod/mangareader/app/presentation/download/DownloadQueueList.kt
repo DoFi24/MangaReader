@@ -43,24 +43,24 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.nilemnod.mangareader.app.presentation.components.DropdownMenu
 import com.nilemnod.mangareader.app.data.download.model.Download
-import eu.kanade.tachiyomi.source.model.Page
+import com.nilemnod.mangareader.app.presentation.components.DropdownMenu
 import com.nilemnod.mangareader.app.ui.download.DownloadQueueSection
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flowOf
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.DragHandle
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.MoreVert
+import com.nilemnod.mangareader.presentation.core.components.ListGroupHeader
+import com.nilemnod.mangareader.presentation.core.components.material.padding
+import com.nilemnod.mangareader.presentation.core.i18n.stringResource
+import eu.kanade.tachiyomi.source.model.Page
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
 import sh.calvin.reorderable.ReorderableCollectionItemScope
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
 import sh.calvin.reorderable.rememberScroller
-import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.components.ListGroupHeader
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 
 @Composable
 fun DownloadQueueList(

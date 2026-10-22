@@ -1,12 +1,12 @@
 package com.nilemnod.mangareader.app.domain.source.interactor
 
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.app.util.system.LocaleHelper
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
 import com.nilemnod.mangareader.domain.source.model.Source
 import com.nilemnod.mangareader.domain.source.repository.SourceRepository
+import dev.zacsweers.metro.Inject
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import java.util.SortedMap
 
 @Inject

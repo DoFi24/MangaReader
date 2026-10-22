@@ -9,20 +9,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.Assisted
-import dev.zacsweers.metro.AssistedFactory
-import dev.zacsweers.metro.AssistedInject
-import dev.zacsweers.metro.ContributesIntoMap
-import dev.zacsweers.metrox.viewmodel.ViewModelAssistedFactory
-import dev.zacsweers.metrox.viewmodel.ViewModelAssistedFactoryKey
-import com.nilemnod.mangareader.app.domain.base.BasePreferences
-import com.nilemnod.mangareader.app.domain.chapter.model.toSChapter
-import com.nilemnod.mangareader.app.domain.manga.interactor.SetMangaViewerFlags
-import com.nilemnod.mangareader.app.domain.manga.interactor.UpdateManga
-import com.nilemnod.mangareader.app.domain.manga.model.readerOrientation
-import com.nilemnod.mangareader.app.domain.manga.model.readingMode
-import com.nilemnod.mangareader.app.domain.source.interactor.GetIncognitoState
 import com.nilemnod.mangareader.app.data.cache.ChapterCache
 import com.nilemnod.mangareader.app.data.cache.CoverCache
 import com.nilemnod.mangareader.app.data.download.DownloadCache
@@ -32,9 +18,13 @@ import com.nilemnod.mangareader.app.data.download.model.Download
 import com.nilemnod.mangareader.app.data.saver.Image
 import com.nilemnod.mangareader.app.data.saver.ImageSaver
 import com.nilemnod.mangareader.app.data.saver.Location
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.model.Page
-import eu.kanade.tachiyomi.source.online.HttpSource
+import com.nilemnod.mangareader.app.domain.base.BasePreferences
+import com.nilemnod.mangareader.app.domain.chapter.model.toSChapter
+import com.nilemnod.mangareader.app.domain.manga.interactor.SetMangaViewerFlags
+import com.nilemnod.mangareader.app.domain.manga.interactor.UpdateManga
+import com.nilemnod.mangareader.app.domain.manga.model.readerOrientation
+import com.nilemnod.mangareader.app.domain.manga.model.readingMode
+import com.nilemnod.mangareader.app.domain.source.interactor.GetIncognitoState
 import com.nilemnod.mangareader.app.ui.reader.loader.ChapterLoader
 import com.nilemnod.mangareader.app.ui.reader.loader.DownloadPageLoader
 import com.nilemnod.mangareader.app.ui.reader.loader.HttpPageLoader
@@ -53,6 +43,34 @@ import com.nilemnod.mangareader.app.util.lang.byteSize
 import com.nilemnod.mangareader.app.util.storage.DiskUtil
 import com.nilemnod.mangareader.app.util.storage.cacheImageDir
 import com.nilemnod.mangareader.app.util.system.activeNetworkState
+import com.nilemnod.mangareader.core.common.preference.toggle
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.domain.chapter.interactor.GetChaptersByMangaId
+import com.nilemnod.mangareader.domain.chapter.interactor.UpdateChapter
+import com.nilemnod.mangareader.domain.chapter.model.Chapter
+import com.nilemnod.mangareader.domain.chapter.model.ChapterUpdate
+import com.nilemnod.mangareader.domain.chapter.service.getChapterSort
+import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
+import com.nilemnod.mangareader.domain.history.interactor.GetNextChapters
+import com.nilemnod.mangareader.domain.history.interactor.UpsertHistory
+import com.nilemnod.mangareader.domain.history.model.HistoryUpdate
+import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
+import com.nilemnod.mangareader.domain.manga.interactor.GetManga
+import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.source.service.SourceManager
+import com.nilemnod.mangareader.source.local.image.LocalCoverManager
+import com.nilemnod.mangareader.source.local.isLocal
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.Assisted
+import dev.zacsweers.metro.AssistedFactory
+import dev.zacsweers.metro.AssistedInject
+import dev.zacsweers.metro.ContributesIntoMap
+import dev.zacsweers.metrox.viewmodel.ViewModelAssistedFactory
+import dev.zacsweers.metrox.viewmodel.ViewModelAssistedFactoryKey
+import eu.kanade.tachiyomi.source.Source
+import eu.kanade.tachiyomi.source.model.Page
+import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -75,24 +93,6 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import logcat.LogPriority
-import com.nilemnod.mangareader.core.metro.AppCoroutineScope
-import com.nilemnod.mangareader.core.common.preference.toggle
-import com.nilemnod.mangareader.core.common.util.system.logcat
-import com.nilemnod.mangareader.domain.chapter.interactor.GetChaptersByMangaId
-import com.nilemnod.mangareader.domain.chapter.interactor.UpdateChapter
-import com.nilemnod.mangareader.domain.chapter.model.Chapter
-import com.nilemnod.mangareader.domain.chapter.model.ChapterUpdate
-import com.nilemnod.mangareader.domain.chapter.service.getChapterSort
-import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
-import com.nilemnod.mangareader.domain.history.interactor.GetNextChapters
-import com.nilemnod.mangareader.domain.history.interactor.UpsertHistory
-import com.nilemnod.mangareader.domain.history.model.HistoryUpdate
-import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
-import com.nilemnod.mangareader.domain.manga.interactor.GetManga
-import com.nilemnod.mangareader.domain.manga.model.Manga
-import com.nilemnod.mangareader.domain.source.service.SourceManager
-import com.nilemnod.mangareader.source.local.image.LocalCoverManager
-import com.nilemnod.mangareader.source.local.isLocal
 import kotlin.time.Clock
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.Instant
@@ -1058,7 +1058,6 @@ class ReaderViewModel(
         class Success(val uri: Uri) : SaveImageResult
         class Error(val error: Throwable) : SaveImageResult
     }
-
 
     /**
      * Enqueues these [chapters] to be deleted when [deletePendingChapters] is called. The download

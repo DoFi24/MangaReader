@@ -1,9 +1,9 @@
 package com.nilemnod.mangareader.app.data.backup
 
 import android.net.Uri
+import com.nilemnod.mangareader.domain.source.service.SourceManager
 import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.CancellationException
-import com.nilemnod.mangareader.domain.source.service.SourceManager
 
 @Inject
 class BackupFileValidator(

@@ -6,12 +6,12 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
 import com.nilemnod.mangareader.app.presentation.browse.ExtensionDetailsScreen
 import com.nilemnod.mangareader.app.presentation.util.Screen
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.screens.EmptyScreen
 import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
+import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
 
 data class ExtensionDetailsScreen(
     private val pkgName: String,

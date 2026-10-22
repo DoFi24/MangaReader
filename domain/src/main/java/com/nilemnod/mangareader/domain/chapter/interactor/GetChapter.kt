@@ -1,10 +1,10 @@
 package com.nilemnod.mangareader.domain.chapter.interactor
 
-import dev.zacsweers.metro.Inject
-import logcat.LogPriority
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.chapter.repository.ChapterRepository
+import dev.zacsweers.metro.Inject
+import logcat.LogPriority
 
 @Inject
 class GetChapter(

@@ -1,5 +1,6 @@
 package eu.kanade.tachiyomi.source
 
+import com.nilemnod.mangareader.core.common.util.lang.awaitSingle
 import eu.kanade.tachiyomi.source.model.FilterList
 import eu.kanade.tachiyomi.source.model.MangasPage
 import eu.kanade.tachiyomi.source.model.Page
@@ -9,7 +10,6 @@ import eu.kanade.tachiyomi.source.model.SMangaUpdate
 import kotlinx.coroutines.async
 import kotlinx.coroutines.supervisorScope
 import rx.Observable
-import com.nilemnod.mangareader.core.common.util.lang.awaitSingle
 
 interface CatalogueSource : Source {
 

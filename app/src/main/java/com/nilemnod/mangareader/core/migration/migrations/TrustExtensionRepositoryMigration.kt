@@ -1,16 +1,16 @@
 package com.nilemnod.mangareader.core.migration.migrations
 
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.ContributesIntoSet
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import logcat.LogPriority
+import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.migration.Migration
 import com.nilemnod.mangareader.core.migration.MigrationContext
 import com.nilemnod.mangareader.domain.extension.repository.ExtensionStoreRepository
-import com.nilemnod.mangareader.core.common.util.system.logcat
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesIntoSet
+import dev.zacsweers.metro.Inject
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import logcat.LogPriority
 
 @Inject
 @ContributesIntoSet(AppScope::class)

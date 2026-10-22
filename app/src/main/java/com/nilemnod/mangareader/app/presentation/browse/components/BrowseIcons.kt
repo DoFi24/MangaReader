@@ -14,15 +14,15 @@ import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.nilemnod.mangareader.app.presentation.util.rememberResourceBitmapPainter
 import com.nilemnod.mangareader.app.R
 import com.nilemnod.mangareader.app.data.coil.InstalledExtensionIcon
 import com.nilemnod.mangareader.app.data.coil.InstalledSourceIcon
 import com.nilemnod.mangareader.app.extension.model.Extension
+import com.nilemnod.mangareader.app.presentation.util.rememberResourceBitmapPainter
+import com.nilemnod.mangareader.domain.source.model.Source
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Dangerous
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Warning
-import com.nilemnod.mangareader.domain.source.model.Source
 import com.nilemnod.mangareader.source.local.isLocal
 
 private val defaultModifier = Modifier

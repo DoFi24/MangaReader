@@ -1,9 +1,9 @@
 package com.nilemnod.mangareader.app.domain.source.interactor
 
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.core.common.preference.getAndSet
 import com.nilemnod.mangareader.domain.source.model.Source
+import dev.zacsweers.metro.Inject
 
 @Inject
 class ToggleSource(

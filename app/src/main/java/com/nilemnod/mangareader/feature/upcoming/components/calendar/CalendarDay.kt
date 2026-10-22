@@ -19,10 +19,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.nilemnod.mangareader.presentation.core.components.material.DISABLED_ALPHA
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
-import com.nilemnod.mangareader.presentation.core.components.material.DISABLED_ALPHA
 import kotlin.time.Clock
 
 private const val MAX_EVENTS = 3

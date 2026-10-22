@@ -1,6 +1,9 @@
 package com.nilemnod.mangareader.data.release
 
 import android.os.Build
+import com.nilemnod.mangareader.domain.release.interactor.GetApplicationRelease
+import com.nilemnod.mangareader.domain.release.model.Release
+import com.nilemnod.mangareader.domain.release.service.ReleaseService
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 import dev.zacsweers.metro.Inject
@@ -12,9 +15,6 @@ import eu.kanade.tachiyomi.network.parseAs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
-import com.nilemnod.mangareader.domain.release.interactor.GetApplicationRelease
-import com.nilemnod.mangareader.domain.release.model.Release
-import com.nilemnod.mangareader.domain.release.service.ReleaseService
 
 @Inject
 @SingleIn(AppScope::class)

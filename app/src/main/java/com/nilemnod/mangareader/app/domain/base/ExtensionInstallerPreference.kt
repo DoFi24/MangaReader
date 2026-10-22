@@ -4,10 +4,10 @@ import android.content.Context
 import com.nilemnod.mangareader.app.domain.base.BasePreferences.ExtensionInstaller
 import com.nilemnod.mangareader.app.util.system.hasMiuiPackageInstaller
 import com.nilemnod.mangareader.app.util.system.isShizukuInstalled
-import kotlinx.coroutines.CoroutineScope
 import com.nilemnod.mangareader.core.common.preference.Preference
 import com.nilemnod.mangareader.core.common.preference.PreferenceStore
 import com.nilemnod.mangareader.core.common.preference.getEnum
+import kotlinx.coroutines.CoroutineScope
 
 class ExtensionInstallerPreference(
     private val context: Context,

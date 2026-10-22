@@ -11,6 +11,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.viewpager.widget.ViewPager
 import com.nilemnod.mangareader.app.R
+import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
 import com.nilemnod.mangareader.app.ui.reader.model.ChapterTransition
 import com.nilemnod.mangareader.app.ui.reader.model.InsertPage
@@ -18,10 +19,9 @@ import com.nilemnod.mangareader.app.ui.reader.model.ReaderPage
 import com.nilemnod.mangareader.app.ui.reader.model.ViewerChapters
 import com.nilemnod.mangareader.app.ui.reader.viewer.Viewer
 import com.nilemnod.mangareader.app.ui.reader.viewer.ViewerNavigation.NavigationRegion
+import com.nilemnod.mangareader.core.common.util.system.logcat
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
-import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.core.common.util.system.logcat
 import kotlin.math.min
 
 /**

@@ -51,18 +51,18 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kotlinx.coroutines.flow.drop
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.ArrowBack
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Close
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.MoreVert
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Search
-import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.presentation.core.util.clearFocusOnSoftKeyboardHide
 import com.nilemnod.mangareader.presentation.core.util.runOnEnterKeyPressed
 import com.nilemnod.mangareader.presentation.core.util.secondaryItemAlpha
 import com.nilemnod.mangareader.presentation.core.util.showSoftKeyboard
+import kotlinx.coroutines.flow.drop
 
 @Composable
 fun AppBar(

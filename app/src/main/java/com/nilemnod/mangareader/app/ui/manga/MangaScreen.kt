@@ -20,7 +20,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
 import com.nilemnod.mangareader.app.domain.manga.model.hasCustomCover
 import com.nilemnod.mangareader.app.domain.manga.model.toSManga
 import com.nilemnod.mangareader.app.presentation.browse.components.RemoveMangaDialog
@@ -36,9 +35,7 @@ import com.nilemnod.mangareader.app.presentation.manga.components.SetIntervalDia
 import com.nilemnod.mangareader.app.presentation.util.AssistContentScreen
 import com.nilemnod.mangareader.app.presentation.util.Screen
 import com.nilemnod.mangareader.app.presentation.util.isTabletUi
-import eu.kanade.tachiyomi.source.Source
 import com.nilemnod.mangareader.app.source.isLocalOrStub
-import eu.kanade.tachiyomi.source.online.HttpSource
 import com.nilemnod.mangareader.app.ui.browse.source.browse.BrowseSourceScreen
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.GlobalSearchScreen
 import com.nilemnod.mangareader.app.ui.category.CategoryScreen
@@ -49,16 +46,19 @@ import com.nilemnod.mangareader.app.ui.webview.WebViewScreen
 import com.nilemnod.mangareader.app.util.system.copyToClipboard
 import com.nilemnod.mangareader.app.util.system.toShareIntent
 import com.nilemnod.mangareader.app.util.system.toast
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.domain.chapter.model.Chapter
+import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.feature.migration.config.MigrationConfigScreen
+import com.nilemnod.mangareader.feature.migration.dialog.MigrateMangaDialog
+import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
+import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
+import eu.kanade.tachiyomi.source.Source
+import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import logcat.LogPriority
-import com.nilemnod.mangareader.feature.migration.config.MigrationConfigScreen
-import com.nilemnod.mangareader.feature.migration.dialog.MigrateMangaDialog
-import com.nilemnod.mangareader.core.common.util.system.logcat
-import com.nilemnod.mangareader.domain.chapter.model.Chapter
-import com.nilemnod.mangareader.domain.manga.model.Manga
-import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
 
 class MangaScreen(
     private val mangaId: Long,

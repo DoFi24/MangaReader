@@ -147,7 +147,9 @@ private fun ReaderChapterScreen(
     }
     val pageCount = active.pages.size
     val lastIndex = (pageCount - 1).coerceAtLeast(0)
-    var currentPage by remember { mutableIntStateOf(chapter.startPage.coerceIn(0, (chapter.pages.size - 1).coerceAtLeast(0))) }
+    var currentPage by remember {
+        mutableIntStateOf(chapter.startPage.coerceIn(0, (chapter.pages.size - 1).coerceAtLeast(0)))
+    }
     val commands = remember { MutableSharedFlow<ReaderCommand>(extraBufferCapacity = 8) }
     val finished = remember { mutableSetOf<Long>() }
     val reportFinished = { id: Long -> if (finished.add(id)) host.onChapterFinished(id) }

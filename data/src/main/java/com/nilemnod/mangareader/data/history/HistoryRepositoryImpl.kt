@@ -3,12 +3,6 @@ package com.nilemnod.mangareader.data.history
 import app.cash.sqldelight.async.coroutines.awaitAsList
 import app.cash.sqldelight.async.coroutines.awaitAsOne
 import app.cash.sqldelight.async.coroutines.awaitAsOneOrNull
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.ContributesBinding
-import dev.zacsweers.metro.Inject
-import dev.zacsweers.metro.SingleIn
-import kotlinx.coroutines.flow.Flow
-import logcat.LogPriority
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.data.Database
 import com.nilemnod.mangareader.data.subscribeToList
@@ -16,6 +10,12 @@ import com.nilemnod.mangareader.domain.history.model.History
 import com.nilemnod.mangareader.domain.history.model.HistoryUpdate
 import com.nilemnod.mangareader.domain.history.model.HistoryWithRelations
 import com.nilemnod.mangareader.domain.history.repository.HistoryRepository
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesBinding
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.SingleIn
+import kotlinx.coroutines.flow.Flow
+import logcat.LogPriority
 
 @Inject
 @SingleIn(AppScope::class)

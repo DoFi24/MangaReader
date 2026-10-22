@@ -1,11 +1,11 @@
 package com.nilemnod.mangareader.domain.chapter.interactor
 
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.domain.category.interactor.GetCategories
 import com.nilemnod.mangareader.domain.chapter.interactor.GetChaptersByMangaId
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import dev.zacsweers.metro.Inject
 
 /**
  * Interactor responsible for determining which chapters of a manga should be downloaded.
