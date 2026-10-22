@@ -37,7 +37,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.extension.model.Extension
 import com.nilemnod.mangareader.app.extension.model.InstallStep
 import com.nilemnod.mangareader.app.presentation.browse.components.BaseBrowseItem
 import com.nilemnod.mangareader.app.presentation.browse.components.ExtensionIcon
@@ -52,6 +51,7 @@ import com.nilemnod.mangareader.app.util.system.LocaleHelper
 import com.nilemnod.mangareader.app.util.system.copyToClipboard
 import com.nilemnod.mangareader.app.util.system.launchRequestPackageInstallsPermission
 import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.domain.extension.model.Extension
 import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols

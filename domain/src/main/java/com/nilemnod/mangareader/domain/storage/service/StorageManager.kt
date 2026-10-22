@@ -3,7 +3,7 @@ package com.nilemnod.mangareader.domain.storage.service
 import android.content.Context
 import androidx.core.net.toUri
 import com.hippo.unifile.UniFile
-import com.nilemnod.mangareader.app.util.storage.DiskUtil
+import com.nilemnod.mangareader.core.common.storage.DiskUtil
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Inject

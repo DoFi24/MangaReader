@@ -11,14 +11,14 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.nilemnod.mangareader.app.data.notification.Notifications
 import com.nilemnod.mangareader.app.di.AppGraph
-import com.nilemnod.mangareader.app.util.system.isRunning
-import com.nilemnod.mangareader.app.util.system.setForegroundSafely
+import com.nilemnod.mangareader.app.source.interactor.UpdateMangaFromRemote
+import com.nilemnod.mangareader.core.android.system.isRunning
+import com.nilemnod.mangareader.core.android.system.setForegroundSafely
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.metro.metroGraph
 import com.nilemnod.mangareader.domain.library.model.LibraryManga
 import com.nilemnod.mangareader.domain.manga.interactor.GetLibraryManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
-import com.nilemnod.mangareader.domain.source.interactor.UpdateMangaFromRemote
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.CancellationException

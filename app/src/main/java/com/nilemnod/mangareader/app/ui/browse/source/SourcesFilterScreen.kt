@@ -9,7 +9,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.presentation.browse.SourcesFilterScreen
 import com.nilemnod.mangareader.app.presentation.util.Screen
-import com.nilemnod.mangareader.app.util.system.toast
+import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
 import dev.zacsweers.metrox.viewmodel.metroViewModel

@@ -8,12 +8,12 @@ import android.os.Build
 import androidx.core.content.pm.PackageInfoCompat
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.domain.extension.interactor.TrustExtension
-import com.nilemnod.mangareader.app.extension.model.Extension
-import com.nilemnod.mangareader.app.util.lang.Hash
 import com.nilemnod.mangareader.app.util.storage.copyAndSetReadOnlyTo
+import com.nilemnod.mangareader.core.common.util.lang.Hash
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.data.dalvik.DelegateLastClassLoaderCompat
 import com.nilemnod.mangareader.domain.extension.model.ContentWarning
+import com.nilemnod.mangareader.domain.extension.model.Extension
 import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
 import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.source.SourceFactory

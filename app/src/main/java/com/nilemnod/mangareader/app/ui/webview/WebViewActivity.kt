@@ -13,13 +13,13 @@ import com.nilemnod.mangareader.app.R
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.presentation.webview.WebViewScreenContent
 import com.nilemnod.mangareader.app.ui.base.activity.BaseActivity
-import com.nilemnod.mangareader.app.util.system.WebViewUtil
 import com.nilemnod.mangareader.app.util.system.openInBrowser
-import com.nilemnod.mangareader.app.util.system.toShareIntent
-import com.nilemnod.mangareader.app.util.system.toWebViewHeaders
-import com.nilemnod.mangareader.app.util.system.toast
 import com.nilemnod.mangareader.app.util.view.setComposeContent
+import com.nilemnod.mangareader.core.android.system.toShareIntent
+import com.nilemnod.mangareader.core.common.util.system.WebViewUtil
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.common.util.system.toWebViewHeaders
+import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen

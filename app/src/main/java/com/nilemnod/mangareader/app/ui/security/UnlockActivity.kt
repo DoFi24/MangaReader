@@ -5,8 +5,8 @@ import androidx.biometric.BiometricPrompt
 import androidx.fragment.app.FragmentActivity
 import com.nilemnod.mangareader.app.ui.base.activity.BaseActivity
 import com.nilemnod.mangareader.app.ui.base.delegate.SecureActivityDelegate
-import com.nilemnod.mangareader.app.util.system.AuthenticatorUtil
-import com.nilemnod.mangareader.app.util.system.AuthenticatorUtil.startAuthentication
+import com.nilemnod.mangareader.core.android.system.AuthenticatorUtil
+import com.nilemnod.mangareader.core.android.system.AuthenticatorUtil.startAuthentication
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.i18n.MR

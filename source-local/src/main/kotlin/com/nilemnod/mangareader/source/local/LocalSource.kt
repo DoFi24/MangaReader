@@ -2,12 +2,12 @@ package com.nilemnod.mangareader.source.local
 
 import android.content.Context
 import com.hippo.unifile.UniFile
-import com.nilemnod.mangareader.app.util.lang.compareToCaseInsensitiveNaturalOrder
 import com.nilemnod.mangareader.core.archive.archiveReader
 import com.nilemnod.mangareader.core.archive.epubReader
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.storage.extension
 import com.nilemnod.mangareader.core.common.storage.nameWithoutExtension
+import com.nilemnod.mangareader.core.common.util.lang.compareToCaseInsensitiveNaturalOrder
 import com.nilemnod.mangareader.core.common.util.system.ImageUtil
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.metadata.comicinfo.COMIC_INFO_FILE

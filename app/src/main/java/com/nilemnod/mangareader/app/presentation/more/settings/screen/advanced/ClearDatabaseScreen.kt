@@ -35,7 +35,7 @@ import com.nilemnod.mangareader.app.presentation.browse.components.SourceIcon
 import com.nilemnod.mangareader.app.presentation.components.AppBar
 import com.nilemnod.mangareader.app.presentation.components.AppBarActions
 import com.nilemnod.mangareader.app.presentation.util.Screen
-import com.nilemnod.mangareader.app.util.system.toast
+import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.domain.history.repository.HistoryRepository
 import com.nilemnod.mangareader.domain.manga.repository.MangaRepository

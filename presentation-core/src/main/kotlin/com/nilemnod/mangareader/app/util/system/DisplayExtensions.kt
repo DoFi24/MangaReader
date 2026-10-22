@@ -7,6 +7,7 @@ import android.os.Build
 import android.view.View
 import com.nilemnod.mangareader.app.domain.ui.UiPreferences
 import com.nilemnod.mangareader.app.domain.ui.model.TabletUiMode
+import com.nilemnod.mangareader.core.android.system.InternalResourceHelper
 
 private const val TABLET_UI_REQUIRED_SCREEN_WIDTH_DP = 720
 

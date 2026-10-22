@@ -1,8 +1,8 @@
 package com.nilemnod.mangareader.data.extension.model
 
 import android.annotation.SuppressLint
-import com.nilemnod.mangareader.app.extension.model.Extension
 import com.nilemnod.mangareader.domain.extension.model.ContentWarning
+import com.nilemnod.mangareader.domain.extension.model.Extension
 import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
 import kotlinx.serialization.Serializable
 

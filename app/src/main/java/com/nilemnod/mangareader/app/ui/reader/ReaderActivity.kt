@@ -79,12 +79,12 @@ import com.nilemnod.mangareader.app.ui.reader.viewer.webgpu.WebGpuViewer
 import com.nilemnod.mangareader.app.ui.webview.WebViewActivity
 import com.nilemnod.mangareader.app.util.system.openInBrowser
 import com.nilemnod.mangareader.app.util.system.readerBackgroundColor
-import com.nilemnod.mangareader.app.util.system.toShareIntent
-import com.nilemnod.mangareader.app.util.system.toast
 import com.nilemnod.mangareader.app.util.view.setComposeContent
+import com.nilemnod.mangareader.core.android.system.toShareIntent
 import com.nilemnod.mangareader.core.common.Constants
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.core.metro.metroGraph
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.util.collectAsState

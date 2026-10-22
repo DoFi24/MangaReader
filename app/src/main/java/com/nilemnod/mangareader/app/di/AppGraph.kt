@@ -2,7 +2,6 @@ package com.nilemnod.mangareader.app.di
 
 import android.content.Context
 import com.nilemnod.mangareader.app.App
-import com.nilemnod.mangareader.app.core.security.SecurityPreferences
 import com.nilemnod.mangareader.app.data.backup.create.BackupCreateWorker
 import com.nilemnod.mangareader.app.data.backup.restore.BackupRestoreWorker
 import com.nilemnod.mangareader.app.data.cache.ChapterCache
@@ -27,6 +26,7 @@ import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
 import com.nilemnod.mangareader.app.ui.webview.WebViewActivity
 import com.nilemnod.mangareader.app.util.CrashLogUtil
+import com.nilemnod.mangareader.core.common.security.SecurityPreferences
 import com.nilemnod.mangareader.core.metro.IsDebugBuild
 import com.nilemnod.mangareader.domain.backup.service.BackupPreferences
 import com.nilemnod.mangareader.domain.category.interactor.GetCategories

@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.nilemnod.mangareader.app.core.util.insertSeparators
 import com.nilemnod.mangareader.app.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.app.presentation.history.HistoryUiModel
-import com.nilemnod.mangareader.app.util.lang.toLocalDate
+import com.nilemnod.mangareader.core.android.lang.toLocalDate
 import com.nilemnod.mangareader.core.common.preference.CheckboxState
 import com.nilemnod.mangareader.core.common.preference.mapAsCheckboxState
 import com.nilemnod.mangareader.core.common.util.lang.SubscriberGate

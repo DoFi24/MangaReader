@@ -2,7 +2,7 @@ package com.nilemnod.mangareader.app.ui.reader.loader
 
 import com.hippo.unifile.UniFile
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderPage
-import com.nilemnod.mangareader.app.util.lang.compareToCaseInsensitiveNaturalOrder
+import com.nilemnod.mangareader.core.common.util.lang.compareToCaseInsensitiveNaturalOrder
 import com.nilemnod.mangareader.core.common.util.system.ImageUtil
 import eu.kanade.tachiyomi.source.model.Page
 

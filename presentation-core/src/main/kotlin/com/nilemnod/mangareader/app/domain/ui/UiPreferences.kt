@@ -5,11 +5,11 @@ import com.nilemnod.mangareader.app.domain.ui.model.AppTheme
 import com.nilemnod.mangareader.app.domain.ui.model.TabletUiMode
 import com.nilemnod.mangareader.app.domain.ui.model.ThemeMode
 import com.nilemnod.mangareader.app.domain.ui.model.TimeFormat
-import com.nilemnod.mangareader.app.util.system.DeviceUtil
-import com.nilemnod.mangareader.app.util.system.isDynamicColorAvailable
+import com.nilemnod.mangareader.core.android.system.isDynamicColorAvailable
 import com.nilemnod.mangareader.core.common.preference.Preference
 import com.nilemnod.mangareader.core.common.preference.PreferenceStore
 import com.nilemnod.mangareader.core.common.preference.getEnum
+import com.nilemnod.mangareader.core.common.util.system.DeviceUtil
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Inject

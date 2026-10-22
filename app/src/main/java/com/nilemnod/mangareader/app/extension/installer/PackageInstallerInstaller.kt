@@ -13,9 +13,9 @@ import android.os.Build
 import androidx.core.content.ContextCompat
 import androidx.core.content.IntentSanitizer
 import com.nilemnod.mangareader.app.extension.model.InstallStep
-import com.nilemnod.mangareader.app.util.lang.use
-import com.nilemnod.mangareader.app.util.system.getParcelableExtraCompat
 import com.nilemnod.mangareader.app.util.system.getUriSize
+import com.nilemnod.mangareader.core.android.lang.use
+import com.nilemnod.mangareader.core.android.system.getParcelableExtraCompat
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

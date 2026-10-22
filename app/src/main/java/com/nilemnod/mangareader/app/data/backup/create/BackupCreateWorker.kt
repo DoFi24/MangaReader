@@ -22,9 +22,9 @@ import com.nilemnod.mangareader.app.data.notification.Notifications
 import com.nilemnod.mangareader.app.di.AppGraph
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.util.system.cancelNotification
-import com.nilemnod.mangareader.app.util.system.isRunning
-import com.nilemnod.mangareader.app.util.system.setForegroundSafely
-import com.nilemnod.mangareader.app.util.system.workManager
+import com.nilemnod.mangareader.core.android.system.isRunning
+import com.nilemnod.mangareader.core.android.system.setForegroundSafely
+import com.nilemnod.mangareader.core.android.system.workManager
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.metro.metroGraph
 import com.nilemnod.mangareader.domain.storage.service.StorageManager

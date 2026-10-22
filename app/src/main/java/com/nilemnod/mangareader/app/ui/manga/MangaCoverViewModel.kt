@@ -15,8 +15,8 @@ import com.nilemnod.mangareader.app.data.saver.ImageSaver
 import com.nilemnod.mangareader.app.data.saver.Location
 import com.nilemnod.mangareader.app.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.app.util.editCover
-import com.nilemnod.mangareader.app.util.system.getBitmapOrNull
-import com.nilemnod.mangareader.app.util.system.toShareIntent
+import com.nilemnod.mangareader.core.android.system.getBitmapOrNull
+import com.nilemnod.mangareader.core.android.system.toShareIntent
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.domain.manga.interactor.GetManga

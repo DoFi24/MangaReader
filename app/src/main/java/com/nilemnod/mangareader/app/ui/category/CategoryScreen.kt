@@ -13,7 +13,7 @@ import com.nilemnod.mangareader.app.presentation.category.components.CategoryCre
 import com.nilemnod.mangareader.app.presentation.category.components.CategoryDeleteDialog
 import com.nilemnod.mangareader.app.presentation.category.components.CategoryRenameDialog
 import com.nilemnod.mangareader.app.presentation.util.Screen
-import com.nilemnod.mangareader.app.util.system.toast
+import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 import kotlinx.coroutines.flow.collectLatest

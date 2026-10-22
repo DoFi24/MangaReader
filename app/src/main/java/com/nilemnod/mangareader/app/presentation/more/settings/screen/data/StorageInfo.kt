@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.nilemnod.mangareader.app.util.storage.DiskUtil
+import com.nilemnod.mangareader.core.common.storage.DiskUtil
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.components.material.padding
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource

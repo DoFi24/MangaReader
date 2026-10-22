@@ -23,7 +23,7 @@ import com.nilemnod.mangareader.app.presentation.components.AppBar
 import com.nilemnod.mangareader.app.presentation.manga.components.BaseMangaListItem
 import com.nilemnod.mangareader.app.presentation.util.Screen
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
-import com.nilemnod.mangareader.app.util.system.toast
+import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.feature.migration.config.MigrationConfigScreen
 import com.nilemnod.mangareader.i18n.MR

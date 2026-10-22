@@ -38,8 +38,8 @@ import com.nilemnod.mangareader.app.data.coil.ImageDecoder
 import com.nilemnod.mangareader.app.data.coil.cropBorders
 import com.nilemnod.mangareader.app.data.coil.webtoonStrips
 import com.nilemnod.mangareader.app.ui.reader.viewer.webtoon.WebtoonStripImageView
-import com.nilemnod.mangareader.app.util.system.animatorDurationScale
 import com.nilemnod.mangareader.app.util.view.isVisibleOnScreen
+import com.nilemnod.mangareader.core.android.system.animatorDurationScale
 import okio.BufferedSource
 
 /**

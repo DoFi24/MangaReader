@@ -29,13 +29,13 @@ import com.nilemnod.mangareader.app.presentation.util.LocalBackPress
 import com.nilemnod.mangareader.app.presentation.util.Screen
 import com.nilemnod.mangareader.app.presentation.util.rememberIs24HourSystem
 import com.nilemnod.mangareader.app.ui.more.NewUpdateScreen
-import com.nilemnod.mangareader.app.util.lang.toDateTimestampString
 import com.nilemnod.mangareader.app.util.system.copyToClipboard
 import com.nilemnod.mangareader.app.util.system.isFossBuildType
 import com.nilemnod.mangareader.app.util.system.isNightlyBuildType
-import com.nilemnod.mangareader.app.util.system.toast
 import com.nilemnod.mangareader.app.util.system.updaterEnabled
+import com.nilemnod.mangareader.core.android.lang.toDateTimestampString
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.domain.release.interactor.GetApplicationRelease
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.components.ScrollbarLazyColumn

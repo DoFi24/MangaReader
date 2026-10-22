@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetManager
 import androidx.glance.appwidget.updateAll
-import com.nilemnod.mangareader.app.core.security.SecurityPreferences
+import com.nilemnod.mangareader.core.common.security.SecurityPreferences
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.domain.updates.interactor.GetUpdates
 import dev.zacsweers.metro.Inject

@@ -94,12 +94,12 @@ import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.more.NewUpdateScreen
 import com.nilemnod.mangareader.app.ui.more.OnboardingScreen
 import com.nilemnod.mangareader.app.ui.setting.SettingsScreen
-import com.nilemnod.mangareader.app.util.system.dpToPx
 import com.nilemnod.mangareader.app.util.system.isBenchmarkBuildType
 import com.nilemnod.mangareader.app.util.system.isNavigationBarNeedsScrim
 import com.nilemnod.mangareader.app.util.system.updaterEnabled
 import com.nilemnod.mangareader.app.util.view.setComposeContent
 import com.nilemnod.mangareader.core.common.Constants
+import com.nilemnod.mangareader.core.common.util.system.dpToPx
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.metro.metroGraph
 import com.nilemnod.mangareader.core.migration.Migrator

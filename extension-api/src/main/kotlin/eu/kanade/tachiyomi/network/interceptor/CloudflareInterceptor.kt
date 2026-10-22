@@ -13,11 +13,11 @@ import androidx.core.content.ContextCompat
 import androidx.webkit.ScriptHandler
 import androidx.webkit.WebViewCompat
 import androidx.webkit.WebViewFeature
-import com.nilemnod.mangareader.app.util.system.isOutdated
-import com.nilemnod.mangareader.app.util.system.toWebViewHeaders
-import com.nilemnod.mangareader.app.util.system.toast
 import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.common.util.system.isOutdated
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.common.util.system.toWebViewHeaders
+import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.i18n.MR
 import eu.kanade.tachiyomi.network.AndroidCookieJar
 import kotlinx.coroutines.CoroutineScope

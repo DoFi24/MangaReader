@@ -43,8 +43,8 @@ import androidx.core.app.ActivityCompat
 import com.nilemnod.mangareader.app.domain.ui.model.AppTheme
 import com.nilemnod.mangareader.app.presentation.manga.components.MangaCover
 import com.nilemnod.mangareader.app.presentation.theme.MangaReaderTheme
-import com.nilemnod.mangareader.app.util.system.DeviceUtil
-import com.nilemnod.mangareader.app.util.system.isDynamicColorAvailable
+import com.nilemnod.mangareader.core.android.system.isDynamicColorAvailable
+import com.nilemnod.mangareader.core.common.util.system.DeviceUtil
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.CheckCircle

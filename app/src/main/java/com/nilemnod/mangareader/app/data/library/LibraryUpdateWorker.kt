@@ -23,12 +23,13 @@ import com.nilemnod.mangareader.app.data.download.DownloadManager
 import com.nilemnod.mangareader.app.data.notification.Notifications
 import com.nilemnod.mangareader.app.di.AppGraph
 import com.nilemnod.mangareader.app.di.appGraph
+import com.nilemnod.mangareader.app.source.interactor.UpdateMangaFromRemote
 import com.nilemnod.mangareader.app.util.storage.getUriCompat
 import com.nilemnod.mangareader.app.util.system.createFileInCacheDir
-import com.nilemnod.mangareader.app.util.system.isConnectedToWifi
-import com.nilemnod.mangareader.app.util.system.isRunning
-import com.nilemnod.mangareader.app.util.system.setForegroundSafely
-import com.nilemnod.mangareader.app.util.system.workManager
+import com.nilemnod.mangareader.core.android.system.isConnectedToWifi
+import com.nilemnod.mangareader.core.android.system.isRunning
+import com.nilemnod.mangareader.core.android.system.setForegroundSafely
+import com.nilemnod.mangareader.core.android.system.workManager
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.preference.getAndSet
 import com.nilemnod.mangareader.core.common.util.system.logcat
@@ -50,7 +51,6 @@ import com.nilemnod.mangareader.domain.manga.interactor.FetchInterval
 import com.nilemnod.mangareader.domain.manga.interactor.GetLibraryManga
 import com.nilemnod.mangareader.domain.manga.interactor.GetManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
-import com.nilemnod.mangareader.domain.source.interactor.UpdateMangaFromRemote
 import com.nilemnod.mangareader.domain.source.model.SourceNotInstalledException
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.i18n.MR

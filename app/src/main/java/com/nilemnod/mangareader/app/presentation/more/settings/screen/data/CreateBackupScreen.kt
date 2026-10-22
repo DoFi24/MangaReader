@@ -21,8 +21,8 @@ import com.nilemnod.mangareader.app.data.backup.create.BackupOptions
 import com.nilemnod.mangareader.app.presentation.components.AppBar
 import com.nilemnod.mangareader.app.presentation.components.WarningBanner
 import com.nilemnod.mangareader.app.presentation.util.Screen
-import com.nilemnod.mangareader.app.util.system.DeviceUtil
-import com.nilemnod.mangareader.app.util.system.toast
+import com.nilemnod.mangareader.core.common.util.system.DeviceUtil
+import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.components.LabeledCheckbox
 import com.nilemnod.mangareader.presentation.core.components.LazyColumnWithAction

@@ -39,7 +39,7 @@ import com.nilemnod.mangareader.app.ui.home.HomeScreen
 import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
-import com.nilemnod.mangareader.app.util.system.workManager
+import com.nilemnod.mangareader.core.android.system.workManager
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.domain.library.model.LibraryManga

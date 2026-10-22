@@ -1,7 +1,7 @@
 package com.nilemnod.mangareader.app.data.cache
 
 import android.content.Context
-import com.nilemnod.mangareader.app.util.storage.DiskUtil
+import com.nilemnod.mangareader.core.common.storage.DiskUtil
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import dev.zacsweers.metro.AppScope

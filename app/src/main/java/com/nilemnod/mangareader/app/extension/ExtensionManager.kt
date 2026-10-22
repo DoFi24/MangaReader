@@ -4,15 +4,15 @@ import android.content.Context
 import com.nilemnod.mangareader.app.domain.extension.interactor.TrustExtension
 import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.app.extension.api.ExtensionUpdateNotifier
-import com.nilemnod.mangareader.app.extension.model.Extension
 import com.nilemnod.mangareader.app.extension.model.InstallStep
 import com.nilemnod.mangareader.app.extension.util.ExtensionInstallReceiver
 import com.nilemnod.mangareader.app.extension.util.ExtensionInstaller
 import com.nilemnod.mangareader.app.extension.util.ExtensionLoader
-import com.nilemnod.mangareader.app.util.system.toast
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.domain.extension.interactor.UpdateExtensionStores
+import com.nilemnod.mangareader.domain.extension.model.Extension
 import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
 import com.nilemnod.mangareader.domain.extension.repository.ExtensionStoreRepository
 import com.nilemnod.mangareader.domain.source.model.StubSource
