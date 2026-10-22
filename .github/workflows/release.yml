@@ -35,12 +35,16 @@ jobs:
           keyAlias: ${{ secrets.KEY_ALIAS }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
 
-      - name: Rename APK
+      - name: Collect APKs
         run: |
-          apk=$(find app/build/outputs/apk/release -name "*.apk" | head -n 1)
-          cp "$apk" "MangaReader-${GITHUB_REF_NAME#v}.apk"
+          version="${GITHUB_REF_NAME#v}"
+          mkdir dist
+          cp app/build/outputs/apk/release/app-universal-release.apk "dist/MangaReader-$version.apk"
+          for abi in arm64-v8a armeabi-v7a x86_64 x86; do
+            cp "app/build/outputs/apk/release/app-$abi-release.apk" "dist/MangaReader-$version-$abi.apk"
+          done
 
       - name: Publish release
-        run: gh release create "$GITHUB_REF_NAME" "MangaReader-${GITHUB_REF_NAME#v}.apk" --title "$GITHUB_REF_NAME" --generate-notes
+        run: gh release create "$GITHUB_REF_NAME" dist/*.apk --title "$GITHUB_REF_NAME" --generate-notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
