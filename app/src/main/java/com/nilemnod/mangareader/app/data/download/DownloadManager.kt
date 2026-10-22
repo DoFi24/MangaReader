@@ -1,10 +1,22 @@
 package com.nilemnod.mangareader.app.data.download
 
 import android.content.Context
+import com.nilemnod.mangareader.app.data.download.model.Download
+import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.common.storage.extension
+import com.nilemnod.mangareader.core.common.util.system.ImageUtil
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.domain.category.interactor.GetCategories
+import com.nilemnod.mangareader.domain.chapter.interactor.GetChapter
+import com.nilemnod.mangareader.domain.chapter.model.Chapter
+import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
+import com.nilemnod.mangareader.domain.manga.interactor.GetManga
+import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.source.service.SourceManager
+import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
-import com.nilemnod.mangareader.app.data.download.model.Download
 import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.source.model.Page
 import eu.kanade.tachiyomi.source.online.HttpSource
@@ -20,18 +32,6 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import logcat.LogPriority
-import com.nilemnod.mangareader.core.common.i18n.stringResource
-import com.nilemnod.mangareader.core.common.storage.extension
-import com.nilemnod.mangareader.core.common.util.system.ImageUtil
-import com.nilemnod.mangareader.core.common.util.system.logcat
-import com.nilemnod.mangareader.domain.category.interactor.GetCategories
-import com.nilemnod.mangareader.domain.chapter.interactor.GetChapter
-import com.nilemnod.mangareader.domain.chapter.model.Chapter
-import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
-import com.nilemnod.mangareader.domain.manga.interactor.GetManga
-import com.nilemnod.mangareader.domain.manga.model.Manga
-import com.nilemnod.mangareader.domain.source.service.SourceManager
-import com.nilemnod.mangareader.i18n.MR
 
 /**
  * This class is used to manage chapter downloads in the application. It must be instantiated once

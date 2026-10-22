@@ -1,8 +1,8 @@
 package com.nilemnod.mangareader.app.domain.manga.interactor
 
+import com.nilemnod.mangareader.domain.manga.repository.MangaRepository
 import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.flow.Flow
-import com.nilemnod.mangareader.domain.manga.repository.MangaRepository
 
 @Inject
 class GetExcludedScanlators(

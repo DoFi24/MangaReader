@@ -1,9 +1,9 @@
 package com.nilemnod.mangareader.domain.category.interactor
 
-import dev.zacsweers.metro.Inject
-import kotlinx.coroutines.flow.Flow
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.domain.category.repository.CategoryRepository
+import dev.zacsweers.metro.Inject
+import kotlinx.coroutines.flow.Flow
 
 @Inject
 class GetCategories(

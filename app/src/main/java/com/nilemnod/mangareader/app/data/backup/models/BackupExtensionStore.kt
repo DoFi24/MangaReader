@@ -1,8 +1,8 @@
 package com.nilemnod.mangareader.app.data.backup.models
 
+import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.protobuf.ProtoNumber
-import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
 
 @Serializable
 class BackupExtensionStore(

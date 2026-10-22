@@ -3,10 +3,10 @@ package com.nilemnod.mangareader.presentation.core.i18n
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.platform.LocalContext
-import dev.icerock.moko.resources.PluralsResource
-import dev.icerock.moko.resources.StringResource
 import com.nilemnod.mangareader.core.common.i18n.pluralStringResource
 import com.nilemnod.mangareader.core.common.i18n.stringResource
+import dev.icerock.moko.resources.PluralsResource
+import dev.icerock.moko.resources.StringResource
 
 @Composable
 @ReadOnlyComposable

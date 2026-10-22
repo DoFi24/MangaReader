@@ -1,11 +1,11 @@
 package com.nilemnod.mangareader.feature.migration.list.search
 
+import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.manga.model.toDomainManga
 import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.source.model.SManga
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import com.nilemnod.mangareader.domain.manga.model.toDomainManga
-import com.nilemnod.mangareader.domain.manga.model.Manga
 
 class SmartSourceSearchEngine(extraSearchParams: String?) : BaseSmartSearchEngine<SManga>(extraSearchParams) {
 

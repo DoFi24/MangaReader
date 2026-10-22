@@ -1,10 +1,10 @@
 package com.nilemnod.mangareader.app.data.backup.create.creators
 
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.data.backup.models.BackupCategory
 import com.nilemnod.mangareader.app.data.backup.models.backupCategoryMapper
 import com.nilemnod.mangareader.domain.category.interactor.GetCategories
 import com.nilemnod.mangareader.domain.category.model.Category
+import dev.zacsweers.metro.Inject
 
 @Inject
 class CategoriesBackupCreator(

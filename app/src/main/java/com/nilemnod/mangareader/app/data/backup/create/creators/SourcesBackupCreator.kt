@@ -1,9 +1,9 @@
 package com.nilemnod.mangareader.app.data.backup.create.creators
 
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.data.backup.models.BackupSource
-import eu.kanade.tachiyomi.source.Source
 import com.nilemnod.mangareader.domain.source.service.SourceManager
+import dev.zacsweers.metro.Inject
+import eu.kanade.tachiyomi.source.Source
 
 @Inject
 class SourcesBackupCreator(

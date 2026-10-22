@@ -1,11 +1,17 @@
 package com.nilemnod.mangareader.app.source
 
+import com.nilemnod.mangareader.app.data.download.DownloadManager
+import com.nilemnod.mangareader.app.extension.ExtensionManager
+import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.domain.source.model.StubSource
+import com.nilemnod.mangareader.domain.source.repository.StubSourceRepository
+import com.nilemnod.mangareader.domain.source.service.SourceManager
+import com.nilemnod.mangareader.source.local.LocalSource
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
-import com.nilemnod.mangareader.app.data.download.DownloadManager
-import com.nilemnod.mangareader.app.extension.ExtensionManager
+import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -15,13 +21,7 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import com.nilemnod.mangareader.core.metro.AppCoroutineScope
-import com.nilemnod.mangareader.domain.source.model.StubSource
-import com.nilemnod.mangareader.domain.source.repository.StubSourceRepository
-import com.nilemnod.mangareader.domain.source.service.SourceManager
-import com.nilemnod.mangareader.source.local.LocalSource
 import java.util.concurrent.ConcurrentHashMap
-import eu.kanade.tachiyomi.source.Source
 
 @Inject
 @SingleIn(AppScope::class)

@@ -2,14 +2,14 @@ package com.nilemnod.mangareader.source.local.image
 
 import android.content.Context
 import com.hippo.unifile.UniFile
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.Inject
-import dev.zacsweers.metro.SingleIn
-import eu.kanade.tachiyomi.source.model.SManga
 import com.nilemnod.mangareader.app.util.storage.DiskUtil
 import com.nilemnod.mangareader.core.common.storage.nameWithoutExtension
 import com.nilemnod.mangareader.core.common.util.system.ImageUtil
 import com.nilemnod.mangareader.source.local.io.LocalSourceFileSystem
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.SingleIn
+import eu.kanade.tachiyomi.source.model.SManga
 import java.io.InputStream
 
 private const val DEFAULT_COVER_NAME = "cover.jpg"

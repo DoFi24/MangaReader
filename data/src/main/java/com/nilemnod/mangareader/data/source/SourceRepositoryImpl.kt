@@ -1,5 +1,13 @@
 package com.nilemnod.mangareader.data.source
 
+import com.nilemnod.mangareader.data.Database
+import com.nilemnod.mangareader.data.subscribeToList
+import com.nilemnod.mangareader.domain.manga.interactor.NetworkToLocalManga
+import com.nilemnod.mangareader.domain.source.model.SourceWithCount
+import com.nilemnod.mangareader.domain.source.model.StubSource
+import com.nilemnod.mangareader.domain.source.repository.SourcePagingSource
+import com.nilemnod.mangareader.domain.source.repository.SourceRepository
+import com.nilemnod.mangareader.domain.source.service.SourceManager
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 import dev.zacsweers.metro.Inject
@@ -10,14 +18,6 @@ import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
-import com.nilemnod.mangareader.data.Database
-import com.nilemnod.mangareader.data.subscribeToList
-import com.nilemnod.mangareader.domain.manga.interactor.NetworkToLocalManga
-import com.nilemnod.mangareader.domain.source.model.SourceWithCount
-import com.nilemnod.mangareader.domain.source.model.StubSource
-import com.nilemnod.mangareader.domain.source.repository.SourcePagingSource
-import com.nilemnod.mangareader.domain.source.repository.SourceRepository
-import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.domain.source.model.Source as DomainSource
 
 @Inject

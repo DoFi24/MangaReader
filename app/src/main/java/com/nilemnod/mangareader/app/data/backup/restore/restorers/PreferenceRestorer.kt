@@ -2,7 +2,6 @@ package com.nilemnod.mangareader.app.data.backup.restore.restorers
 
 import android.content.Context
 import android.util.Log
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.data.backup.create.BackupCreateWorker
 import com.nilemnod.mangareader.app.data.backup.models.BackupCategory
 import com.nilemnod.mangareader.app.data.backup.models.BackupPreference
@@ -14,7 +13,6 @@ import com.nilemnod.mangareader.app.data.backup.models.LongPreferenceValue
 import com.nilemnod.mangareader.app.data.backup.models.StringPreferenceValue
 import com.nilemnod.mangareader.app.data.backup.models.StringSetPreferenceValue
 import com.nilemnod.mangareader.app.data.library.LibraryUpdateWorker
-import eu.kanade.tachiyomi.source.sourcePreferences
 import com.nilemnod.mangareader.core.common.preference.AndroidPreferenceStore
 import com.nilemnod.mangareader.core.common.preference.PreferenceStore
 import com.nilemnod.mangareader.core.common.preference.plusAssign
@@ -22,6 +20,8 @@ import com.nilemnod.mangareader.domain.category.interactor.GetCategories
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
+import dev.zacsweers.metro.Inject
+import eu.kanade.tachiyomi.source.sourcePreferences
 
 @Inject
 class PreferenceRestorer(

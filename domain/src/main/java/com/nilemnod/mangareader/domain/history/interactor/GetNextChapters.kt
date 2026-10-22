@@ -1,11 +1,11 @@
 package com.nilemnod.mangareader.domain.history.interactor
 
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.domain.chapter.interactor.GetChaptersByMangaId
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.chapter.service.getChapterSort
 import com.nilemnod.mangareader.domain.history.repository.HistoryRepository
 import com.nilemnod.mangareader.domain.manga.interactor.GetManga
+import dev.zacsweers.metro.Inject
 import kotlin.math.max
 
 @Inject

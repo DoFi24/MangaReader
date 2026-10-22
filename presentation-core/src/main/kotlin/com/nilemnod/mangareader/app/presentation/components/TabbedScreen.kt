@@ -21,11 +21,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.zIndex
-import dev.icerock.moko.resources.StringResource
-import kotlinx.coroutines.launch
 import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
 import com.nilemnod.mangareader.presentation.core.components.material.TabText
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
+import dev.icerock.moko.resources.StringResource
+import kotlinx.coroutines.launch
 
 @Composable
 fun TabbedScreen(

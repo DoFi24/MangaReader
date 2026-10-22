@@ -1,12 +1,12 @@
 package com.nilemnod.mangareader.domain.category.interactor
 
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.domain.category.model.Category
+import com.nilemnod.mangareader.domain.category.repository.CategoryRepository
 import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import logcat.LogPriority
-import com.nilemnod.mangareader.core.common.util.system.logcat
-import com.nilemnod.mangareader.domain.category.model.Category
-import com.nilemnod.mangareader.domain.category.repository.CategoryRepository
 
 @Inject
 class ReorderCategory(

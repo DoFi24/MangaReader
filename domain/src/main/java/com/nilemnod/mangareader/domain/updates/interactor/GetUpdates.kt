@@ -1,9 +1,9 @@
 package com.nilemnod.mangareader.domain.updates.interactor
 
-import dev.zacsweers.metro.Inject
-import kotlinx.coroutines.flow.Flow
 import com.nilemnod.mangareader.domain.updates.model.UpdatesWithRelations
 import com.nilemnod.mangareader.domain.updates.repository.UpdatesRepository
+import dev.zacsweers.metro.Inject
+import kotlinx.coroutines.flow.Flow
 import kotlin.time.Instant
 
 @Inject

@@ -1,9 +1,9 @@
 package com.nilemnod.mangareader.app.extension.model
 
-import eu.kanade.tachiyomi.source.Source
 import com.nilemnod.mangareader.domain.extension.model.ContentWarning
 import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
 import com.nilemnod.mangareader.domain.source.model.StubSource
+import eu.kanade.tachiyomi.source.Source
 
 sealed interface Extension {
 

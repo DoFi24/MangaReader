@@ -13,16 +13,16 @@ import com.nilemnod.mangareader.app.presentation.components.AppBarTitle
 import com.nilemnod.mangareader.app.presentation.components.DropdownMenu
 import com.nilemnod.mangareader.app.presentation.components.RadioMenuItem
 import com.nilemnod.mangareader.app.presentation.components.SearchToolbar
-import eu.kanade.tachiyomi.source.ConfigurableSource
-import eu.kanade.tachiyomi.source.Source
+import com.nilemnod.mangareader.domain.library.model.LibraryDisplayMode
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredroundedfilled.ViewList
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.ViewCompact
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.ViewModule
-import com.nilemnod.mangareader.domain.library.model.LibraryDisplayMode
-import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.source.local.LocalSource
+import eu.kanade.tachiyomi.source.ConfigurableSource
+import eu.kanade.tachiyomi.source.Source
 
 @Composable
 fun BrowseSourceToolbar(

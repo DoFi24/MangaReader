@@ -3,10 +3,11 @@ package com.nilemnod.mangareader.domain.storage.service
 import android.content.Context
 import androidx.core.net.toUri
 import com.hippo.unifile.UniFile
+import com.nilemnod.mangareader.app.util.storage.DiskUtil
+import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
-import com.nilemnod.mangareader.app.util.storage.DiskUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.SharingStarted
@@ -16,7 +17,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.shareIn
-import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import java.util.concurrent.ConcurrentHashMap
 
 @Inject

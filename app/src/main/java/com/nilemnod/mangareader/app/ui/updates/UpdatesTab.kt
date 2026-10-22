@@ -14,23 +14,23 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import dev.zacsweers.metrox.viewmodel.metroViewModel
+import com.nilemnod.mangareader.app.R
 import com.nilemnod.mangareader.app.presentation.updates.UpdateScreen
 import com.nilemnod.mangareader.app.presentation.updates.UpdatesDeleteConfirmationDialog
 import com.nilemnod.mangareader.app.presentation.updates.UpdatesFilterDialog
 import com.nilemnod.mangareader.app.presentation.util.Tab
-import com.nilemnod.mangareader.app.R
 import com.nilemnod.mangareader.app.ui.download.DownloadQueueScreen
 import com.nilemnod.mangareader.app.ui.home.HomeScreen
 import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
 import com.nilemnod.mangareader.app.ui.updates.UpdatesViewModel.Event
-import kotlinx.coroutines.flow.collectLatest
-import com.nilemnod.mangareader.feature.upcoming.UpcomingScreen
 import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.feature.upcoming.UpcomingScreen
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
+import dev.zacsweers.metrox.viewmodel.metroViewModel
+import kotlinx.coroutines.flow.collectLatest
 
 data object UpdatesTab : Tab {
 

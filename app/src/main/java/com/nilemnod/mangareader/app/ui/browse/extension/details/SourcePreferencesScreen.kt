@@ -32,19 +32,19 @@ import androidx.preference.forEach
 import androidx.preference.getOnBindEditTextListener
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.nilemnod.mangareader.app.data.preference.SharedPreferencesDataStore
+import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.presentation.components.AppBar
 import com.nilemnod.mangareader.app.presentation.util.Screen
-import com.nilemnod.mangareader.app.data.preference.SharedPreferencesDataStore
+import com.nilemnod.mangareader.app.widget.AppTextInputEditText.Companion.setIncognito
+import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
+import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
 import eu.kanade.tachiyomi.source.ConfigurableSource
 import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.source.sourcePreferences
-import com.nilemnod.mangareader.app.widget.AppTextInputEditText.Companion.setIncognito
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
-import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
 
 class SourcePreferencesScreen(val sourceId: Long) : Screen() {
 

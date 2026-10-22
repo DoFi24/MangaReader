@@ -1,8 +1,8 @@
 package com.nilemnod.mangareader.feature.common.utils
 
-import dev.icerock.moko.resources.StringResource
 import com.nilemnod.mangareader.domain.migration.models.MigrationFlag
 import com.nilemnod.mangareader.i18n.MR
+import dev.icerock.moko.resources.StringResource
 
 fun MigrationFlag.getLabel(): StringResource {
     return when (this) {

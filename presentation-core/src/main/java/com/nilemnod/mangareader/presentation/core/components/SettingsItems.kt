@@ -44,16 +44,15 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import dev.icerock.moko.resources.StringResource
+import com.nilemnod.mangareader.core.common.preference.Preference
+import com.nilemnod.mangareader.core.common.preference.TriState
+import com.nilemnod.mangareader.core.common.preference.toggle
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.ArrowDownward
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.ArrowUpward
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.CheckBoxOutlineBlank
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.CheckBox
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.DisabledByDefault
-import com.nilemnod.mangareader.core.common.preference.Preference
-import com.nilemnod.mangareader.core.common.preference.TriState
-import com.nilemnod.mangareader.core.common.preference.toggle
 import com.nilemnod.mangareader.presentation.core.components.material.DISABLED_ALPHA
 import com.nilemnod.mangareader.presentation.core.components.material.Slider
 import com.nilemnod.mangareader.presentation.core.components.material.padding
@@ -61,6 +60,7 @@ import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.presentation.core.theme.header
 import com.nilemnod.mangareader.presentation.core.util.collectAsState
 import com.nilemnod.mangareader.presentation.core.util.secondaryItemAlpha
+import dev.icerock.moko.resources.StringResource
 
 object SettingsItemsPaddings {
     val Horizontal = 24.dp

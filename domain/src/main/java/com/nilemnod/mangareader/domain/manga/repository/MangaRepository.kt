@@ -1,11 +1,11 @@
 package com.nilemnod.mangareader.domain.manga.repository
 
-import kotlinx.coroutines.flow.Flow
 import com.nilemnod.mangareader.domain.library.model.LibraryManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaRemoteUpdate
 import com.nilemnod.mangareader.domain.manga.model.MangaUpdate
 import com.nilemnod.mangareader.domain.manga.model.MangaWithChapterCount
+import kotlinx.coroutines.flow.Flow
 
 interface MangaRepository {
 

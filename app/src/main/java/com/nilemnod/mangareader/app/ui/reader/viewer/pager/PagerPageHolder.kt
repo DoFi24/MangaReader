@@ -4,15 +4,19 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import androidx.core.view.isVisible
-import com.nilemnod.mangareader.app.presentation.util.formattedMessage
 import com.nilemnod.mangareader.app.databinding.ReaderErrorBinding
-import eu.kanade.tachiyomi.source.model.Page
+import com.nilemnod.mangareader.app.presentation.util.formattedMessage
 import com.nilemnod.mangareader.app.ui.reader.model.InsertPage
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderPage
 import com.nilemnod.mangareader.app.ui.reader.viewer.ReaderPageImageView
 import com.nilemnod.mangareader.app.ui.reader.viewer.ReaderProgressIndicator
 import com.nilemnod.mangareader.app.ui.webview.WebViewActivity
 import com.nilemnod.mangareader.app.widget.ViewPagerAdapter
+import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.common.util.system.ImageUtil
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.i18n.MR
+import eu.kanade.tachiyomi.source.model.Page
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
@@ -23,10 +27,6 @@ import kotlinx.coroutines.withContext
 import logcat.LogPriority
 import okio.Buffer
 import okio.BufferedSource
-import com.nilemnod.mangareader.core.common.i18n.stringResource
-import com.nilemnod.mangareader.core.common.util.system.ImageUtil
-import com.nilemnod.mangareader.core.common.util.system.logcat
-import com.nilemnod.mangareader.i18n.MR
 
 /**
  * View of the ViewPager that contains a page of a chapter.

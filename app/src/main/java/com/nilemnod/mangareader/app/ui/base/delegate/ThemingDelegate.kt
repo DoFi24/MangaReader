@@ -1,9 +1,9 @@
 package com.nilemnod.mangareader.app.ui.base.delegate
 
 import android.app.Activity
-import com.nilemnod.mangareader.app.domain.ui.model.AppTheme
 import com.nilemnod.mangareader.app.R
 import com.nilemnod.mangareader.app.di.appGraph
+import com.nilemnod.mangareader.app.domain.ui.model.AppTheme
 
 interface ThemingDelegate {
     fun applyAppTheme(activity: Activity)

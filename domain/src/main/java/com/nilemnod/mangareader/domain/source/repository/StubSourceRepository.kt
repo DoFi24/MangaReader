@@ -1,7 +1,7 @@
 package com.nilemnod.mangareader.domain.source.repository
 
-import kotlinx.coroutines.flow.Flow
 import com.nilemnod.mangareader.domain.source.model.StubSource
+import kotlinx.coroutines.flow.Flow
 
 interface StubSourceRepository {
     fun subscribeAll(): Flow<List<StubSource>>

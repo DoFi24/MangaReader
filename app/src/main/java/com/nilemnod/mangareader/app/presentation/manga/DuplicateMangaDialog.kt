@@ -46,14 +46,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastMaxOfOrNull
 import coil3.request.ImageRequest
 import coil3.request.crossfade
+import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.presentation.components.AdaptiveSheet
 import com.nilemnod.mangareader.app.presentation.components.TabbedDialogPaddings
 import com.nilemnod.mangareader.app.presentation.manga.components.MangaCover
 import com.nilemnod.mangareader.app.presentation.more.settings.LocalPreferenceMinHeight
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.TextPreferenceWidget
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.model.SManga
-import com.nilemnod.mangareader.app.di.appGraph
+import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.manga.model.MangaWithChapterCount
+import com.nilemnod.mangareader.domain.source.model.StubSource
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Add
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.AttachMoney
@@ -66,16 +68,14 @@ import com.nilemnod.mangareader.icons.materialsymbols.rounded.Schedule
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Brush
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Pause
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Warning
-import com.nilemnod.mangareader.domain.manga.model.Manga
-import com.nilemnod.mangareader.domain.manga.model.MangaWithChapterCount
-import com.nilemnod.mangareader.domain.source.model.StubSource
-import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.components.Badge
 import com.nilemnod.mangareader.presentation.core.components.BadgeGroup
 import com.nilemnod.mangareader.presentation.core.components.material.padding
 import com.nilemnod.mangareader.presentation.core.i18n.pluralStringResource
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.presentation.core.util.secondaryItemAlpha
+import eu.kanade.tachiyomi.source.Source
+import eu.kanade.tachiyomi.source.model.SManga
 
 @Composable
 fun DuplicateMangaDialog(

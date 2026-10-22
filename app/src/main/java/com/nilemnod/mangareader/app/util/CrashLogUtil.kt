@@ -2,17 +2,17 @@ package com.nilemnod.mangareader.app.util
 
 import android.content.Context
 import android.os.Build
-import dev.zacsweers.metro.Inject
-import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.BuildConfig
+import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.extension.ExtensionManager
 import com.nilemnod.mangareader.app.extension.model.Extension
-import eu.kanade.tachiyomi.network.NetworkPreferences
 import com.nilemnod.mangareader.app.util.storage.getUriCompat
 import com.nilemnod.mangareader.app.util.system.WebViewUtil
 import com.nilemnod.mangareader.app.util.system.createFileInCacheDir
 import com.nilemnod.mangareader.app.util.system.toShareIntent
 import com.nilemnod.mangareader.app.util.system.toast
+import dev.zacsweers.metro.Inject
+import eu.kanade.tachiyomi.network.NetworkPreferences
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.TimeZone

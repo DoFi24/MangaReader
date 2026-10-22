@@ -12,9 +12,9 @@ import com.nilemnod.mangareader.app.presentation.category.components.CategoryFlo
 import com.nilemnod.mangareader.app.presentation.components.AppBar
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.browse.ExtensionStoreScreenState
 import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Refresh
-import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
 import com.nilemnod.mangareader.presentation.core.components.material.padding
 import com.nilemnod.mangareader.presentation.core.components.material.topSmallPaddingValues

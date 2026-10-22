@@ -27,7 +27,8 @@ internal class PanelSession(
 
     suspend fun zoomToPanelAt(position: Offset): Boolean {
         val layout = layout() ?: return false
-        val target = layout.balloonAt(position, zoom.viewport) ?: layout.panelAt(position, zoom.viewport) ?: return false
+        val target =
+            layout.balloonAt(position, zoom.viewport) ?: layout.panelAt(position, zoom.viewport) ?: return false
         zoom.zoomToRect(target)
         return true
     }

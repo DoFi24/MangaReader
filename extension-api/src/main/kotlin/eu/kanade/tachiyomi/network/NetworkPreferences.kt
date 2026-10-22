@@ -1,11 +1,11 @@
 package eu.kanade.tachiyomi.network
 
+import com.nilemnod.mangareader.core.common.preference.Preference
+import com.nilemnod.mangareader.core.common.preference.PreferenceStore
+import com.nilemnod.mangareader.core.metro.IsDebugBuild
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
-import com.nilemnod.mangareader.core.metro.IsDebugBuild
-import com.nilemnod.mangareader.core.common.preference.Preference
-import com.nilemnod.mangareader.core.common.preference.PreferenceStore
 
 @Inject
 @SingleIn(AppScope::class)

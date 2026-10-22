@@ -1,5 +1,8 @@
 package com.nilemnod.mangareader.domain.manga.interactor
 
+import com.nilemnod.mangareader.domain.chapter.interactor.GetChaptersByMangaId
+import com.nilemnod.mangareader.domain.chapter.model.Chapter
+import com.nilemnod.mangareader.domain.manga.model.Manga
 import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -17,9 +20,6 @@ import kotlinx.datetime.toLocalDateTime
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.parallel.Execution
 import org.junit.jupiter.api.parallel.ExecutionMode
-import com.nilemnod.mangareader.domain.chapter.interactor.GetChaptersByMangaId
-import com.nilemnod.mangareader.domain.chapter.model.Chapter
-import com.nilemnod.mangareader.domain.manga.model.Manga
 import kotlin.time.Clock
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.days

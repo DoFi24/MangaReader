@@ -9,7 +9,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
 import com.nilemnod.mangareader.app.presentation.util.Screen
 import com.nilemnod.mangareader.app.ui.browse.migration.search.MigrateSearchScreen
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
@@ -18,6 +17,7 @@ import com.nilemnod.mangareader.feature.migration.list.components.MigrationExitD
 import com.nilemnod.mangareader.feature.migration.list.components.MigrationMangaDialog
 import com.nilemnod.mangareader.feature.migration.list.components.MigrationProgressDialog
 import com.nilemnod.mangareader.i18n.MR
+import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
 
 class MigrationListScreen(private val mangaIds: Collection<Long>, private val extraSearchQuery: String?) : Screen() {
 

@@ -3,15 +3,18 @@ package com.nilemnod.mangareader.app.ui.browse.source
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nilemnod.mangareader.app.domain.source.interactor.GetEnabledSources
+import com.nilemnod.mangareader.app.domain.source.interactor.ToggleSource
+import com.nilemnod.mangareader.app.domain.source.interactor.ToggleSourcePin
+import com.nilemnod.mangareader.app.presentation.browse.SourceUiModel
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.domain.source.model.Pin
+import com.nilemnod.mangareader.domain.source.model.Source
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.binding
 import dev.zacsweers.metrox.viewmodel.ViewModelKey
-import com.nilemnod.mangareader.app.domain.source.interactor.GetEnabledSources
-import com.nilemnod.mangareader.app.domain.source.interactor.ToggleSource
-import com.nilemnod.mangareader.app.domain.source.interactor.ToggleSourcePin
-import com.nilemnod.mangareader.app.presentation.browse.SourceUiModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,9 +29,6 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import logcat.LogPriority
-import com.nilemnod.mangareader.core.common.util.system.logcat
-import com.nilemnod.mangareader.domain.source.model.Pin
-import com.nilemnod.mangareader.domain.source.model.Source
 import java.util.TreeMap
 import kotlin.time.Duration.Companion.seconds
 

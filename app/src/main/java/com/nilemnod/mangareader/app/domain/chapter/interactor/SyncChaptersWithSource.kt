@@ -1,19 +1,12 @@
 package com.nilemnod.mangareader.app.domain.chapter.interactor
 
-import dev.zacsweers.metro.Inject
+import com.nilemnod.mangareader.app.data.download.DownloadManager
+import com.nilemnod.mangareader.app.data.download.DownloadProvider
 import com.nilemnod.mangareader.app.domain.chapter.model.copyFromSChapter
 import com.nilemnod.mangareader.app.domain.chapter.model.toSChapter
 import com.nilemnod.mangareader.app.domain.manga.interactor.GetExcludedScanlators
 import com.nilemnod.mangareader.app.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.app.domain.manga.model.toSManga
-import com.nilemnod.mangareader.app.data.download.DownloadManager
-import com.nilemnod.mangareader.app.data.download.DownloadProvider
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.model.SChapter
-import eu.kanade.tachiyomi.source.online.HttpSource
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toInstant
-import kotlinx.datetime.toLocalDateTime
 import com.nilemnod.mangareader.data.chapter.ChapterSanitizer
 import com.nilemnod.mangareader.domain.chapter.interactor.ShouldUpdateDbChapter
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
@@ -24,6 +17,13 @@ import com.nilemnod.mangareader.domain.chapter.service.ChapterRecognition
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.source.local.isLocal
+import dev.zacsweers.metro.Inject
+import eu.kanade.tachiyomi.source.Source
+import eu.kanade.tachiyomi.source.model.SChapter
+import eu.kanade.tachiyomi.source.online.HttpSource
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
+import kotlinx.datetime.toLocalDateTime
 import java.lang.Long.max
 import java.util.TreeSet
 import kotlin.time.Clock

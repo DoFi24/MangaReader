@@ -16,27 +16,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
 import com.nilemnod.mangareader.app.presentation.browse.BrowseSourceContent
 import com.nilemnod.mangareader.app.presentation.components.SearchToolbar
 import com.nilemnod.mangareader.app.presentation.util.Screen
-import eu.kanade.tachiyomi.source.online.HttpSource
 import com.nilemnod.mangareader.app.ui.browse.source.browse.BrowseSourceViewModel
 import com.nilemnod.mangareader.app.ui.browse.source.browse.SourceFilterDialog
 import com.nilemnod.mangareader.app.ui.home.HomeScreen
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.webview.WebViewScreen
-import kotlinx.coroutines.launch
+import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.feature.migration.dialog.MigrateMangaDialog
 import com.nilemnod.mangareader.feature.migration.list.MigrationListScreen
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.FilterList
-import com.nilemnod.mangareader.presentation.core.util.collectAsLazyPagingItems
-import com.nilemnod.mangareader.domain.manga.model.Manga
-import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
+import com.nilemnod.mangareader.presentation.core.util.collectAsLazyPagingItems
+import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
+import eu.kanade.tachiyomi.source.online.HttpSource
+import kotlinx.coroutines.launch
 
 data class MigrateSourceSearchScreen(
     private val currentManga: Manga,

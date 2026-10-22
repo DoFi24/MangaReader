@@ -11,20 +11,20 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.data.notification.Notifications
+import com.nilemnod.mangareader.app.di.AppGraph
 import com.nilemnod.mangareader.app.util.system.activeNetworkState
 import com.nilemnod.mangareader.app.util.system.notificationBuilder
 import com.nilemnod.mangareader.app.util.system.setForegroundSafely
+import com.nilemnod.mangareader.core.metro.metroGraph
+import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
+import com.nilemnod.mangareader.i18n.R
+import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
-import com.nilemnod.mangareader.app.di.AppGraph
-import com.nilemnod.mangareader.core.metro.metroGraph
-import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
-import com.nilemnod.mangareader.i18n.R
 import kotlin.time.Duration.Companion.seconds
 
 /**

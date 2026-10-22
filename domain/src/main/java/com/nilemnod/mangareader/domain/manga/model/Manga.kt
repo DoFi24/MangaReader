@@ -2,13 +2,13 @@ package com.nilemnod.mangareader.domain.manga.model
 
 import android.annotation.SuppressLint
 import androidx.compose.runtime.Immutable
+import com.nilemnod.mangareader.core.common.extensions.EMPTY
+import com.nilemnod.mangareader.core.common.preference.TriState
 import eu.kanade.tachiyomi.source.model.SManga
 import eu.kanade.tachiyomi.source.model.UpdateStrategy
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
-import com.nilemnod.mangareader.core.common.extensions.EMPTY
-import com.nilemnod.mangareader.core.common.preference.TriState
 import java.io.ObjectStreamException
 import kotlin.time.Instant
 import java.io.Serializable as JavaSerializable

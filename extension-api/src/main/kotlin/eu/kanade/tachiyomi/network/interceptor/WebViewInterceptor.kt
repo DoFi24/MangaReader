@@ -10,13 +10,13 @@ import com.nilemnod.mangareader.app.util.system.WebViewUtil
 import com.nilemnod.mangareader.app.util.system.setDefaultSettings
 import com.nilemnod.mangareader.app.util.system.setUserAgent
 import com.nilemnod.mangareader.app.util.system.toast
+import com.nilemnod.mangareader.i18n.MR
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
-import com.nilemnod.mangareader.i18n.MR
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 

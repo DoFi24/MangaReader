@@ -7,13 +7,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import dev.zacsweers.metrox.viewmodel.metroViewModel
 import com.nilemnod.mangareader.app.presentation.browse.ExtensionFilterScreen
 import com.nilemnod.mangareader.app.presentation.util.Screen
-import kotlinx.coroutines.flow.collectLatest
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
+import dev.zacsweers.metrox.viewmodel.metroViewModel
+import kotlinx.coroutines.flow.collectLatest
 
 class ExtensionFilterScreen : Screen() {
 

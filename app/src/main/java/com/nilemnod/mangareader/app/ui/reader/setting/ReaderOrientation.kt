@@ -2,14 +2,14 @@ package com.nilemnod.mangareader.app.ui.reader.setting
 
 import android.content.pm.ActivityInfo
 import androidx.compose.ui.graphics.vector.ImageVector
-import dev.icerock.moko.resources.StringResource
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Mobile
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.MobileLandscape
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.MobileLockLandscape
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.MobileLockPortrait
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.MobileRotate
-import com.nilemnod.mangareader.i18n.MR
+import dev.icerock.moko.resources.StringResource
 
 enum class ReaderOrientation(
     val flag: Int,

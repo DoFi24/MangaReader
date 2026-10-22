@@ -9,10 +9,10 @@ import android.webkit.WebView
 import androidx.webkit.UserAgentMetadata
 import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewFeature
+import com.nilemnod.mangareader.core.common.util.system.logcat
 import kotlinx.coroutines.suspendCancellableCoroutine
 import logcat.LogPriority
 import okhttp3.Headers
-import com.nilemnod.mangareader.core.common.util.system.logcat
 import java.util.Locale
 import kotlin.coroutines.resume
 

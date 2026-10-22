@@ -39,8 +39,8 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import dev.icerock.moko.resources.StringResource
 import com.nilemnod.mangareader.app.domain.extension.interactor.ExtensionSourceItem
+import com.nilemnod.mangareader.app.extension.model.Extension
 import com.nilemnod.mangareader.app.presentation.browse.components.ExtensionIcon
 import com.nilemnod.mangareader.app.presentation.browse.components.ExtensionPill
 import com.nilemnod.mangareader.app.presentation.browse.components.label
@@ -49,19 +49,19 @@ import com.nilemnod.mangareader.app.presentation.components.AppBarActions
 import com.nilemnod.mangareader.app.presentation.components.WarningBanner
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.TextPreferenceWidget
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.TrailingWidgetBuffer
-import com.nilemnod.mangareader.app.extension.model.Extension
-import eu.kanade.tachiyomi.source.ConfigurableSource
 import com.nilemnod.mangareader.app.ui.browse.extension.details.ExtensionDetailsViewModel
 import com.nilemnod.mangareader.app.util.system.LocaleHelper
 import com.nilemnod.mangareader.app.util.system.copyToClipboard
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Eyeglasses2
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Settings
-import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.components.ScrollbarLazyColumn
 import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
 import com.nilemnod.mangareader.presentation.core.components.material.padding
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
+import dev.icerock.moko.resources.StringResource
+import eu.kanade.tachiyomi.source.ConfigurableSource
 
 @Composable
 fun ExtensionDetailsScreen(

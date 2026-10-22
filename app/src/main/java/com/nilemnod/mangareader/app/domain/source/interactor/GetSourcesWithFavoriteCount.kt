@@ -1,13 +1,13 @@
 package com.nilemnod.mangareader.app.domain.source.interactor
 
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
 import com.nilemnod.mangareader.core.common.util.lang.compareToWithCollator
 import com.nilemnod.mangareader.domain.source.model.Source
 import com.nilemnod.mangareader.domain.source.repository.SourceRepository
 import com.nilemnod.mangareader.source.local.isLocal
+import dev.zacsweers.metro.Inject
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import java.util.Collections
 
 @Inject

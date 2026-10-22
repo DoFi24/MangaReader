@@ -6,12 +6,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import dev.zacsweers.metrox.viewmodel.metroViewModel
 import com.nilemnod.mangareader.app.presentation.browse.MigrateSourceScreen
 import com.nilemnod.mangareader.app.presentation.components.TabContent
 import com.nilemnod.mangareader.app.ui.browse.migration.manga.MigrateMangaScreen
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
+import dev.zacsweers.metrox.viewmodel.metroViewModel
 
 @Composable
 fun Screen.migrateSourceTab(): TabContent {

@@ -12,13 +12,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.AbstractComposeView
+import com.nilemnod.mangareader.app.data.download.DownloadManager
 import com.nilemnod.mangareader.app.presentation.reader.ChapterTransition
 import com.nilemnod.mangareader.app.presentation.theme.MangaReaderTheme
-import com.nilemnod.mangareader.app.data.download.DownloadManager
-import eu.kanade.tachiyomi.source.Source
 import com.nilemnod.mangareader.app.ui.reader.model.ChapterTransition
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.source.local.isLocal
+import eu.kanade.tachiyomi.source.Source
 
 class ReaderTransitionView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) :
     AbstractComposeView(context, attrs) {

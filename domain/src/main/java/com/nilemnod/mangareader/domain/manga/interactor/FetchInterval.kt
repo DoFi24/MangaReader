@@ -1,14 +1,14 @@
 package com.nilemnod.mangareader.domain.manga.interactor
 
+import com.nilemnod.mangareader.domain.chapter.interactor.GetChaptersByMangaId
+import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.manga.model.MangaUpdate
 import dev.zacsweers.metro.Inject
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.toLocalDateTime
-import com.nilemnod.mangareader.domain.chapter.interactor.GetChaptersByMangaId
-import com.nilemnod.mangareader.domain.manga.model.Manga
-import com.nilemnod.mangareader.domain.manga.model.MangaUpdate
 import kotlin.time.Clock
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.milliseconds

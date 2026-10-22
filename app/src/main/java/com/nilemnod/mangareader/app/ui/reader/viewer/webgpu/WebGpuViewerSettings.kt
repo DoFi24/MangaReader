@@ -31,7 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
-import dev.icerock.moko.resources.StringResource
+import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.domain.manga.model.readerOrientation
 import com.nilemnod.mangareader.app.domain.manga.model.readingMode
 import com.nilemnod.mangareader.app.presentation.reader.settings.TapZonesItems
@@ -39,18 +39,13 @@ import com.nilemnod.mangareader.app.ui.reader.setting.ReaderOrientation
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderSettingsViewModel
 import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode
-import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.launch
-import logcat.LogPriority
-import com.nilemnod.mangareader.app.di.appGraph
+import com.nilemnod.mangareader.core.common.preference.Preference
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Add
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Delete
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.DragHandle
-import sh.calvin.reorderable.ReorderableColumn
-import com.nilemnod.mangareader.core.common.preference.Preference
-import com.nilemnod.mangareader.core.common.util.system.logcat
-import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.components.CheckboxItem
 import com.nilemnod.mangareader.presentation.core.components.HeadingItem
 import com.nilemnod.mangareader.presentation.core.components.SettingsChipRow
@@ -59,6 +54,11 @@ import com.nilemnod.mangareader.presentation.core.components.SliderItem
 import com.nilemnod.mangareader.presentation.core.components.material.padding
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.presentation.core.util.collectAsState
+import dev.icerock.moko.resources.StringResource
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.launch
+import logcat.LogPriority
+import sh.calvin.reorderable.ReorderableColumn
 import java.text.NumberFormat
 
 @Composable

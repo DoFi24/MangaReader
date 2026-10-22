@@ -15,9 +15,9 @@ import androidx.compose.runtime.CompositionContext
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import dev.zacsweers.metrox.viewmodel.LocalMetroViewModelFactory
-import com.nilemnod.mangareader.app.presentation.theme.MangaReaderTheme
 import com.nilemnod.mangareader.app.di.appGraph
+import com.nilemnod.mangareader.app.presentation.theme.MangaReaderTheme
+import dev.zacsweers.metrox.viewmodel.LocalMetroViewModelFactory
 
 inline fun ComponentActivity.setComposeContent(
     parent: CompositionContext? = null,

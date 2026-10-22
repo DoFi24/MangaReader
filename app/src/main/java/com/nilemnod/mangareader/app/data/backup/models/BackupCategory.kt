@@ -1,8 +1,8 @@
 package com.nilemnod.mangareader.app.data.backup.models
 
+import com.nilemnod.mangareader.domain.category.model.Category
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.protobuf.ProtoNumber
-import com.nilemnod.mangareader.domain.category.model.Category
 
 @Serializable
 class BackupCategory(

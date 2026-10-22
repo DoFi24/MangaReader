@@ -1,14 +1,14 @@
 package com.nilemnod.mangareader.domain.manga.interactor
 
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.domain.library.model.LibraryManga
+import com.nilemnod.mangareader.domain.manga.repository.MangaRepository
 import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.retry
 import logcat.LogPriority
-import com.nilemnod.mangareader.core.common.util.system.logcat
-import com.nilemnod.mangareader.domain.library.model.LibraryManga
-import com.nilemnod.mangareader.domain.manga.repository.MangaRepository
 import kotlin.time.Duration.Companion.seconds
 
 @Inject

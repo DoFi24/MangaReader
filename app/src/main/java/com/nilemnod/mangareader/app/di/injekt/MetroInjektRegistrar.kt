@@ -2,12 +2,12 @@ package com.nilemnod.mangareader.app.di.injekt
 
 import android.app.Application
 import android.content.Context
+import com.nilemnod.mangareader.app.di.AppGraph
+import com.nilemnod.mangareader.core.metro.GraphProvider
 import eu.kanade.tachiyomi.network.JavaScriptEngine
 import eu.kanade.tachiyomi.network.NetworkHelper
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.protobuf.ProtoBuf
-import com.nilemnod.mangareader.app.di.AppGraph
-import com.nilemnod.mangareader.core.metro.GraphProvider
 import nl.adaptivity.xmlutil.serialization.XML
 import uy.kohesive.injekt.api.InjektModule
 import uy.kohesive.injekt.api.InjektRegistrar

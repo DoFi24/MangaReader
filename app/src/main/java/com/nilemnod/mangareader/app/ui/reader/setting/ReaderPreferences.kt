@@ -2,10 +2,6 @@ package com.nilemnod.mangareader.app.ui.reader.setting
 
 import android.os.Build
 import androidx.compose.ui.graphics.BlendMode
-import dev.icerock.moko.resources.StringResource
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.Inject
-import dev.zacsweers.metro.SingleIn
 import com.nilemnod.mangareader.app.ui.reader.viewer.webgpu.WebGpuShader
 import com.nilemnod.mangareader.app.ui.reader.viewer.webgpu.WebGpuShaders
 import com.nilemnod.mangareader.core.common.preference.Preference
@@ -13,6 +9,10 @@ import com.nilemnod.mangareader.core.common.preference.PreferenceStore
 import com.nilemnod.mangareader.core.common.preference.getEnum
 import com.nilemnod.mangareader.core.common.preference.getEnumSet
 import com.nilemnod.mangareader.i18n.MR
+import dev.icerock.moko.resources.StringResource
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.SingleIn
 
 @Inject
 @SingleIn(AppScope::class)
