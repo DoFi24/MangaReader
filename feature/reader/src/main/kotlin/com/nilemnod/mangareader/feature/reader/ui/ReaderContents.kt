@@ -214,6 +214,7 @@ private sealed interface WebtoonEntry {
 @Composable
 internal fun WebtoonReaderContent(
     chapters: List<ReaderChapterContent>,
+    anchorId: Long,
     startPage: Int,
     settings: ReaderSettings,
     imageLoader: ImageLoader,
@@ -221,6 +222,7 @@ internal fun WebtoonReaderContent(
     onPositionChanged: (chapterId: Long, pageIndex: Int) -> Unit,
     onReachedEnd: (chapterId: Long) -> Unit,
     onNearEnd: () -> Unit,
+    onNearStart: () -> Unit,
     onOpenNext: () -> Unit,
     onTap: (Offset, IntSize) -> Unit,
     onLongPress: () -> Unit,
@@ -236,7 +238,11 @@ internal fun WebtoonReaderContent(
     }
     val lastEntry = entries.lastIndex
     val listState = rememberLazyListState(
-        initialFirstVisibleItemIndex = startPage.coerceIn(0, (chapters.first().pages.size - 1).coerceAtLeast(0)),
+        initialFirstVisibleItemIndex = run {
+            val anchor = chapters.firstOrNull { it.id == anchorId } ?: chapters.first()
+            val anchorStart = entries.indexOfFirst { it.chapter.id == anchor.id }.coerceAtLeast(0)
+            anchorStart + startPage.coerceIn(0, (anchor.pages.size - 1).coerceAtLeast(0))
+        },
     )
     val colorFilter = remember(settings.brightness, settings.contrast, settings.grayscale, settings.invertColors) {
         settings.colorFilter()
@@ -245,6 +251,7 @@ internal fun WebtoonReaderContent(
     val currentOnPositionChanged by rememberUpdatedState(onPositionChanged)
     val currentOnReachedEnd by rememberUpdatedState(onReachedEnd)
     val currentOnNearEnd by rememberUpdatedState(onNearEnd)
+    val currentOnNearStart by rememberUpdatedState(onNearStart)
 
     LaunchedEffect(listState) {
         snapshotFlow { listState.firstVisibleItemIndex }.collect { index ->
@@ -271,6 +278,10 @@ internal fun WebtoonReaderContent(
             val lastVisible = listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0
             lastVisible >= lastEntry - PRELOAD_ENTRIES
         }.collect { near -> if (near) currentOnNearEnd() }
+    }
+    LaunchedEffect(listState, entries) {
+        snapshotFlow { listState.firstVisibleItemIndex <= PRELOAD_ENTRIES }
+            .collect { near -> if (near) currentOnNearStart() }
     }
     LaunchedEffect(commands) {
         commands.collect { command ->

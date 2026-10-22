@@ -167,4 +167,45 @@ class PanelDetectorTest {
     fun `has an empty reading order without panels`() {
         PanelLayout(1f, emptyList()).readingOrder(rightToLeft = false) shouldBe emptyList()
     }
+
+    private fun balloonPage(withText: Boolean): IntArray {
+        val pixels = IntArray(width * height) { 150 }
+        for (y in 200 until 280) {
+            for (x in 100 until 220) {
+                val edge = x < 103 || x >= 217 || y < 203 || y >= 277
+                pixels[y * width + x] = if (edge) 20 else 250
+            }
+        }
+        if (withText) {
+            for (y in 225 until 255) {
+                for (x in 125 until 195) if ((x / 4 + y / 4) % 2 == 0) pixels[y * width + x] = 20
+            }
+        }
+        return pixels
+    }
+
+    @Test
+    fun `finds a speech balloon with text`() {
+        val layout = PanelDetector.analyzeLuminance(balloonPage(withText = true), width, height)
+
+        layout.shouldNotBeNull()
+        layout.balloons shouldHaveSize 1
+        val balloon = layout.balloons.single()
+        balloon.contains(Offset(160f / width, 240f / height)) shouldBe true
+    }
+
+    @Test
+    fun `ignores a bright area without text`() {
+        val layout = PanelDetector.analyzeLuminance(balloonPage(withText = false), width, height)
+
+        layout?.balloons.orEmpty() shouldHaveSize 0
+    }
+
+    @Test
+    fun `maps the tapped balloon into viewport coordinates`() {
+        val layout = PanelLayout(1f, emptyList(), listOf(Rect(0.1f, 0.1f, 0.3f, 0.3f)))
+
+        layout.balloonAt(Offset(200f, 200f), IntSize(1000, 1000)) shouldBe Rect(100f, 100f, 300f, 300f)
+        layout.balloonAt(Offset(800f, 800f), IntSize(1000, 1000)).shouldBeNull()
+    }
 }
