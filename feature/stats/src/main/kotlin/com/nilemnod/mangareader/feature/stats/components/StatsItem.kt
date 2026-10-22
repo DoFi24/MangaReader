@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.more.stats.components
+package com.nilemnod.mangareader.feature.stats.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
