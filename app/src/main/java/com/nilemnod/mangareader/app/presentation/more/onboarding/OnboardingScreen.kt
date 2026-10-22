@@ -15,12 +15,12 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.screens.InfoScreen
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.RocketLaunch
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.screens.InfoScreen
 import soup.compose.material.motion.animation.materialSharedAxisX
 import soup.compose.material.motion.animation.rememberSlideDistance
 

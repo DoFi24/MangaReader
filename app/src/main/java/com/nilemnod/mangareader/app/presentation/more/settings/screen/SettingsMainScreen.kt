@@ -25,12 +25,14 @@ import androidx.core.graphics.ColorUtils
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.presentation.components.AppBar
-import com.nilemnod.mangareader.app.presentation.components.AppBarActions
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.about.AboutScreen
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.TextPreferenceWidget
-import com.nilemnod.mangareader.app.presentation.util.LocalBackPress
-import com.nilemnod.mangareader.app.presentation.util.Screen
+import com.nilemnod.mangareader.core.ui.components.AppBar
+import com.nilemnod.mangareader.core.ui.components.AppBarActions
+import com.nilemnod.mangareader.core.ui.components.material.Scaffold
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.util.LocalBackPress
+import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.ChromeReaderMode
@@ -43,8 +45,6 @@ import com.nilemnod.mangareader.icons.materialsymbols.rounded.Palette
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Search
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Security
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Storage
-import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import dev.icerock.moko.resources.StringResource
 import cafe.adriel.voyager.core.screen.Screen as VoyagerScreen
 

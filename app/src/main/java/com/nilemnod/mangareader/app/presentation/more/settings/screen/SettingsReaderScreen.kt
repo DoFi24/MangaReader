@@ -11,11 +11,11 @@ import com.nilemnod.mangareader.app.presentation.more.settings.Preference
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderOrientation
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
 import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode
-import com.nilemnod.mangareader.app.util.system.hasDisplayCutout
+import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.util.collectAsState
+import com.nilemnod.mangareader.core.ui.util.system.hasDisplayCutout
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.i18n.pluralStringResource
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.util.collectAsState
 import java.text.NumberFormat
 
 object SettingsReaderScreen : SearchableSettings {

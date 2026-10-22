@@ -10,9 +10,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.nilemnod.mangareader.core.common.preference.CheckboxState
+import com.nilemnod.mangareader.core.ui.components.LabeledCheckbox
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.components.LabeledCheckbox
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import dev.icerock.moko.resources.StringResource
 
 @Composable

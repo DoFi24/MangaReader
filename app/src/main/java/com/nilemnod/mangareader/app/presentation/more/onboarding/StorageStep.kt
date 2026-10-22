@@ -19,10 +19,10 @@ import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.SettingsDataScreen
 import com.nilemnod.mangareader.core.common.util.system.toast
+import com.nilemnod.mangareader.core.ui.components.material.Button
+import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.components.material.Button
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import kotlinx.coroutines.flow.collectLatest
 
 internal class StorageStep : OnboardingStep {

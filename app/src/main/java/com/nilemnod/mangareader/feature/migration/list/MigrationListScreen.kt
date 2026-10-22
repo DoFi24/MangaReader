@@ -9,10 +9,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.presentation.util.Screen
 import com.nilemnod.mangareader.app.ui.browse.migration.search.MigrateSearchScreen
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.core.common.util.system.toast
+import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.feature.migration.list.components.MigrationExitDialog
 import com.nilemnod.mangareader.feature.migration.list.components.MigrationMangaDialog
 import com.nilemnod.mangareader.feature.migration.list.components.MigrationProgressDialog

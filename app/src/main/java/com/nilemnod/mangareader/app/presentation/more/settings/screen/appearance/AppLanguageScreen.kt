@@ -21,16 +21,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.core.os.LocaleListCompat
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.presentation.components.AppBar
-import com.nilemnod.mangareader.app.presentation.util.Screen
 import com.nilemnod.mangareader.app.util.system.LocaleHelper
 import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.components.AppBar
+import com.nilemnod.mangareader.core.ui.components.material.Scaffold
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.i18n.R
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Check
-import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import org.xmlpull.v1.XmlPullParser
 
 class AppLanguageScreen : Screen() {

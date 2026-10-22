@@ -24,14 +24,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
+import com.nilemnod.mangareader.core.ui.components.material.TextButton
+import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.CheckBoxOutlineBlank
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.DisabledByDefault
-import com.nilemnod.mangareader.presentation.core.components.material.TextButton
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-
 @Composable
 fun ScanlatorFilterDialog(
     availableScanlators: Set<String>,

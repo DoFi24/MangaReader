@@ -25,11 +25,12 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.nilemnod.mangareader.app.di.AppGraph
-import com.nilemnod.mangareader.app.presentation.theme.MangaReaderTheme
 import com.nilemnod.mangareader.app.ui.base.activity.BaseActivity
 import com.nilemnod.mangareader.core.android.system.toShareIntent
 import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.core.metro.metroGraph
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.theme.MangaReaderTheme
 import com.nilemnod.mangareader.feature.reader.ReaderScreen
 import com.nilemnod.mangareader.feature.reader.image.createReaderImageLoader
 import com.nilemnod.mangareader.feature.reader.model.ReaderHost
@@ -37,7 +38,6 @@ import com.nilemnod.mangareader.feature.reader.model.ReaderRemote
 import com.nilemnod.mangareader.feature.reader.settings.ReadingMode
 import com.nilemnod.mangareader.feature.reader.settings.SharedPreferencesReaderSettingsStore
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 

@@ -30,14 +30,14 @@ import androidx.compose.ui.util.fastCoerceIn
 import ca.mpreg.webgpuviewer.viewer.ComposePageSize
 import ca.mpreg.webgpuviewer.viewer.ImagePage
 import com.nilemnod.mangareader.app.presentation.reader.ChapterTransition
-import com.nilemnod.mangareader.app.presentation.theme.MangaReaderTheme
 import com.nilemnod.mangareader.app.presentation.util.formattedMessage
 import com.nilemnod.mangareader.app.ui.reader.model.ChapterTransition
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderChapter
 import com.nilemnod.mangareader.app.ui.webview.WebViewActivity
+import com.nilemnod.mangareader.core.ui.components.CombinedCircularProgressIndicator
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.theme.MangaReaderTheme
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.components.CombinedCircularProgressIndicator
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.source.local.isLocal
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

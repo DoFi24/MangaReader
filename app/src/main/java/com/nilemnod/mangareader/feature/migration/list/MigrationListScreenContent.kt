@@ -41,11 +41,19 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.R
-import com.nilemnod.mangareader.app.presentation.components.AppBar
-import com.nilemnod.mangareader.app.presentation.components.AppBarActions
 import com.nilemnod.mangareader.app.presentation.manga.components.MangaCover
-import com.nilemnod.mangareader.app.presentation.util.formatChapterNumber
-import com.nilemnod.mangareader.app.presentation.util.rememberResourceBitmapPainter
+import com.nilemnod.mangareader.core.ui.components.AppBar
+import com.nilemnod.mangareader.core.ui.components.AppBarActions
+import com.nilemnod.mangareader.core.ui.components.Badge
+import com.nilemnod.mangareader.core.ui.components.BadgeGroup
+import com.nilemnod.mangareader.core.ui.components.FastScrollLazyColumn
+import com.nilemnod.mangareader.core.ui.components.material.Scaffold
+import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.components.material.topSmallPaddingValues
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.util.formatChapterNumber
+import com.nilemnod.mangareader.core.ui.util.plus
+import com.nilemnod.mangareader.core.ui.util.rememberResourceBitmapPainter
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.feature.migration.list.models.MigratingManga
 import com.nilemnod.mangareader.i18n.MR
@@ -57,15 +65,6 @@ import com.nilemnod.mangareader.icons.materialsymbols.rounded.ContentCopy
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.CopyAll
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.DoneAll
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.MoreVert
-import com.nilemnod.mangareader.presentation.core.components.Badge
-import com.nilemnod.mangareader.presentation.core.components.BadgeGroup
-import com.nilemnod.mangareader.presentation.core.components.FastScrollLazyColumn
-import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.components.material.topSmallPaddingValues
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.util.plus
-
 @Composable
 fun MigrationListScreenContent(
     items: List<MigratingManga>,

@@ -9,9 +9,8 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.window.DialogProperties
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-
 @Composable
 fun MigrationProgressDialog(
     progress: Float,

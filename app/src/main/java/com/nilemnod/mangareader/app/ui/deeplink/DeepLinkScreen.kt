@@ -8,15 +8,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.presentation.components.AppBar
-import com.nilemnod.mangareader.app.presentation.util.Screen
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.GlobalSearchScreen
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
+import com.nilemnod.mangareader.core.ui.components.AppBar
+import com.nilemnod.mangareader.core.ui.components.material.Scaffold
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
+import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
 import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
 
 class DeepLinkScreen(

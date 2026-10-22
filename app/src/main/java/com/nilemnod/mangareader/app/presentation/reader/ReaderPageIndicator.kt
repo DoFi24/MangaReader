@@ -13,8 +13,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.sp
-import com.nilemnod.mangareader.app.presentation.theme.MangaReaderPreviewTheme
-
+import com.nilemnod.mangareader.core.ui.theme.MangaReaderPreviewTheme
 @Composable
 fun ReaderPageIndicator(
     currentPage: Int,

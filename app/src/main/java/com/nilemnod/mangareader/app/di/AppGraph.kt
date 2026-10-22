@@ -16,8 +16,6 @@ import com.nilemnod.mangareader.app.data.updater.AppUpdateChecker
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.domain.extension.interactor.TrustExtension
 import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
-import com.nilemnod.mangareader.app.domain.ui.UiPreferences
-import com.nilemnod.mangareader.app.domain.ui.UiPreferencesProvider
 import com.nilemnod.mangareader.app.extension.ExtensionManager
 import com.nilemnod.mangareader.app.extension.util.ExtensionInstallActivity
 import com.nilemnod.mangareader.app.ui.base.delegate.SecureActivityDelegateImpl
@@ -28,6 +26,8 @@ import com.nilemnod.mangareader.app.ui.webview.WebViewActivity
 import com.nilemnod.mangareader.app.util.CrashLogUtil
 import com.nilemnod.mangareader.core.common.security.SecurityPreferences
 import com.nilemnod.mangareader.core.metro.IsDebugBuild
+import com.nilemnod.mangareader.core.ui.preference.UiPreferences
+import com.nilemnod.mangareader.core.ui.preference.UiPreferencesProvider
 import com.nilemnod.mangareader.domain.backup.service.BackupPreferences
 import com.nilemnod.mangareader.domain.category.interactor.GetCategories
 import com.nilemnod.mangareader.domain.category.interactor.ResetCategoryFlags

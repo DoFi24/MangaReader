@@ -10,12 +10,11 @@ import com.mikepenz.aboutlibraries.ui.compose.android.produceLibraries
 import com.mikepenz.aboutlibraries.ui.compose.m3.LibrariesContainer
 import com.mikepenz.aboutlibraries.ui.compose.variant.LibraryDetailMode
 import com.nilemnod.mangareader.app.R
-import com.nilemnod.mangareader.app.presentation.components.AppBar
-import com.nilemnod.mangareader.app.presentation.util.Screen
+import com.nilemnod.mangareader.core.ui.components.AppBar
+import com.nilemnod.mangareader.core.ui.components.material.Scaffold
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-
 class OpenSourceLicensesScreen : Screen() {
 
     @Composable

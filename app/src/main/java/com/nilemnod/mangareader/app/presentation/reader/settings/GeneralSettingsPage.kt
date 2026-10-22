@@ -10,15 +10,14 @@ import androidx.compose.runtime.getValue
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderSettingsViewModel
 import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode
-import com.nilemnod.mangareader.app.util.system.hasDisplayCutout
+import com.nilemnod.mangareader.core.ui.components.CheckboxItem
+import com.nilemnod.mangareader.core.ui.components.SettingsChipRow
+import com.nilemnod.mangareader.core.ui.components.SliderItem
+import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.util.collectAsState
+import com.nilemnod.mangareader.core.ui.util.system.hasDisplayCutout
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.components.CheckboxItem
-import com.nilemnod.mangareader.presentation.core.components.SettingsChipRow
-import com.nilemnod.mangareader.presentation.core.components.SliderItem
-import com.nilemnod.mangareader.presentation.core.i18n.pluralStringResource
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.util.collectAsState
-
 private val themes = listOf(
     MR.strings.black_background to 1,
     MR.strings.gray_background to 2,

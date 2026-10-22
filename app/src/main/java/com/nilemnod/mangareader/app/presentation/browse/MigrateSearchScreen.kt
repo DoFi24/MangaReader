@@ -5,8 +5,8 @@ import androidx.compose.runtime.State
 import com.nilemnod.mangareader.app.presentation.browse.components.GlobalSearchToolbar
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.SearchViewModel
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.SourceFilter
+import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.domain.manga.model.Manga
-import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
 import eu.kanade.tachiyomi.source.Source
 
 @Composable

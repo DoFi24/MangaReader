@@ -21,16 +21,16 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.presentation.manga.components.MangaCover
-import com.nilemnod.mangareader.app.presentation.theme.MangaReaderPreviewTheme
-import com.nilemnod.mangareader.app.presentation.util.formatChapterNumber
 import com.nilemnod.mangareader.core.android.lang.toTimestampString
+import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.theme.MangaReaderPreviewTheme
+import com.nilemnod.mangareader.core.ui.util.formatChapterNumber
 import com.nilemnod.mangareader.domain.history.model.HistoryWithRelations
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Delete
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Favorite
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 

@@ -14,9 +14,8 @@ import androidx.compose.ui.platform.AbstractComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.core.view.isVisible
 import com.google.android.material.progressindicator.CircularProgressIndicator
-import com.nilemnod.mangareader.app.presentation.theme.MangaReaderTheme
-import com.nilemnod.mangareader.presentation.core.components.CombinedCircularProgressIndicator
-
+import com.nilemnod.mangareader.core.ui.components.CombinedCircularProgressIndicator
+import com.nilemnod.mangareader.core.ui.theme.MangaReaderTheme
 /**
  * A wrapper for [CircularProgressIndicator] that always rotates.
  *

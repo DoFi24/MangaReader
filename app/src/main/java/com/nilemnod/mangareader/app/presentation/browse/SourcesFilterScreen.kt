@@ -8,17 +8,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.nilemnod.mangareader.app.presentation.browse.components.BaseSourceItem
-import com.nilemnod.mangareader.app.presentation.components.AppBar
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.SwitchPreferenceWidget
 import com.nilemnod.mangareader.app.ui.browse.source.SourcesFilterViewModel
 import com.nilemnod.mangareader.app.util.system.LocaleHelper
+import com.nilemnod.mangareader.core.ui.components.AppBar
+import com.nilemnod.mangareader.core.ui.components.FastScrollLazyColumn
+import com.nilemnod.mangareader.core.ui.components.material.Scaffold
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
 import com.nilemnod.mangareader.domain.source.model.Source
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.components.FastScrollLazyColumn
-import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.screens.EmptyScreen
-
 @Composable
 fun SourcesFilterScreen(
     navigateUp: () -> Unit,

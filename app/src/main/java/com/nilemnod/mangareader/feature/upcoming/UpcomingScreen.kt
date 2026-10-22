@@ -21,18 +21,18 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.presentation.category.visualName
-import com.nilemnod.mangareader.app.presentation.components.TabbedDialog
-import com.nilemnod.mangareader.app.presentation.components.TabbedDialogPaddings
-import com.nilemnod.mangareader.app.presentation.util.Screen
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.core.common.preference.TriState
+import com.nilemnod.mangareader.core.ui.components.SettingsItemsPaddings
+import com.nilemnod.mangareader.core.ui.components.TabbedDialog
+import com.nilemnod.mangareader.core.ui.components.TabbedDialogPaddings
+import com.nilemnod.mangareader.core.ui.components.TriStateItem
+import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
+import com.nilemnod.mangareader.core.ui.util.Screen
+import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.components.SettingsItemsPaddings
-import com.nilemnod.mangareader.presentation.core.components.TriStateItem
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
-import com.nilemnod.mangareader.presentation.core.util.collectAsState
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 
 class UpcomingScreen : Screen() {

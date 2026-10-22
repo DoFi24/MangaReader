@@ -7,6 +7,10 @@ import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.SwitchPreferenceWidget
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.TextPreferenceWidget
 import com.nilemnod.mangareader.app.ui.more.DownloadQueueState
+import com.nilemnod.mangareader.core.ui.components.ScrollbarLazyColumn
+import com.nilemnod.mangareader.core.ui.components.material.Scaffold
+import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.Label
@@ -17,11 +21,6 @@ import com.nilemnod.mangareader.icons.materialsymbols.rounded.Info
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.QueryStats
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Settings
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Storage
-import com.nilemnod.mangareader.presentation.core.components.ScrollbarLazyColumn
-import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
-import com.nilemnod.mangareader.presentation.core.i18n.pluralStringResource
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-
 @Composable
 fun MoreScreen(
     downloadQueueStateProvider: () -> DownloadQueueState,

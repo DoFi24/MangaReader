@@ -37,8 +37,7 @@ import com.nilemnod.mangareader.app.presentation.reader.components.ChapterNaviga
 import com.nilemnod.mangareader.app.presentation.reader.components.ChapterNavigatorType
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderOrientation
 import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-
+import com.nilemnod.mangareader.core.ui.components.material.padding
 private val readerBarsSlideAnimationSpec = tween<IntOffset>(200)
 private val readerBarsFadeAnimationSpec = tween<Float>(150)
 

@@ -15,15 +15,15 @@ import androidx.compose.ui.platform.LocalContext
 import com.nilemnod.mangareader.app.presentation.more.stats.components.StatsItem
 import com.nilemnod.mangareader.app.presentation.more.stats.components.StatsOverviewItem
 import com.nilemnod.mangareader.app.presentation.more.stats.data.StatsData
-import com.nilemnod.mangareader.app.presentation.util.toDurationString
+import com.nilemnod.mangareader.core.ui.components.SectionCard
+import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.util.toDurationString
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.CollectionsBookmark
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.LocalLibrary
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Schedule
-import com.nilemnod.mangareader.presentation.core.components.SectionCard
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 

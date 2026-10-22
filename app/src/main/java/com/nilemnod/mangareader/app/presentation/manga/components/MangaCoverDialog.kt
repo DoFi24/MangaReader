@@ -50,11 +50,14 @@ import coil3.size.Size
 import com.nilemnod.mangareader.app.data.coil.ImageDecoder
 import com.nilemnod.mangareader.app.data.coil.newDecoder
 import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.presentation.components.AppBar
-import com.nilemnod.mangareader.app.presentation.components.AppBarActions
-import com.nilemnod.mangareader.app.presentation.components.DropdownMenu
 import com.nilemnod.mangareader.app.presentation.manga.EditCoverAction
 import com.nilemnod.mangareader.app.ui.reader.viewer.ReaderPageImageView
+import com.nilemnod.mangareader.core.ui.components.AppBar
+import com.nilemnod.mangareader.core.ui.components.AppBarActions
+import com.nilemnod.mangareader.core.ui.components.DropdownMenu
+import com.nilemnod.mangareader.core.ui.components.material.Scaffold
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.util.clickableNoIndication
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
@@ -62,9 +65,6 @@ import com.nilemnod.mangareader.icons.materialsymbols.rounded.Close
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Edit
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Save
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Share
-import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.util.clickableNoIndication
 import com.nilemnod.mangareader.source.local.isLocal
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

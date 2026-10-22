@@ -15,11 +15,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
-import com.nilemnod.mangareader.app.presentation.components.TabbedDialog
-import com.nilemnod.mangareader.app.presentation.components.TabbedDialogPaddings
 import com.nilemnod.mangareader.app.ui.library.LibrarySettingsViewModel
 import com.nilemnod.mangareader.app.util.system.isReleaseBuildType
 import com.nilemnod.mangareader.core.common.preference.TriState
+import com.nilemnod.mangareader.core.ui.components.BaseSortItem
+import com.nilemnod.mangareader.core.ui.components.CheckboxItem
+import com.nilemnod.mangareader.core.ui.components.HeadingItem
+import com.nilemnod.mangareader.core.ui.components.SettingsChipRow
+import com.nilemnod.mangareader.core.ui.components.SliderItem
+import com.nilemnod.mangareader.core.ui.components.SortItem
+import com.nilemnod.mangareader.core.ui.components.TabbedDialog
+import com.nilemnod.mangareader.core.ui.components.TabbedDialogPaddings
+import com.nilemnod.mangareader.core.ui.components.TriStateItem
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.domain.library.model.LibraryDisplayMode
 import com.nilemnod.mangareader.domain.library.model.LibrarySort
@@ -28,16 +37,6 @@ import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Refresh
-import com.nilemnod.mangareader.presentation.core.components.BaseSortItem
-import com.nilemnod.mangareader.presentation.core.components.CheckboxItem
-import com.nilemnod.mangareader.presentation.core.components.HeadingItem
-import com.nilemnod.mangareader.presentation.core.components.SettingsChipRow
-import com.nilemnod.mangareader.presentation.core.components.SliderItem
-import com.nilemnod.mangareader.presentation.core.components.SortItem
-import com.nilemnod.mangareader.presentation.core.components.TriStateItem
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.util.collectAsState
-
 @Composable
 fun LibrarySettingsDialog(
     onDismissRequest: () -> Unit,

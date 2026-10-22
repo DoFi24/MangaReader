@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.nilemnod.mangareader.app.presentation.theme.MangaReaderPreviewTheme
+import com.nilemnod.mangareader.core.ui.theme.MangaReaderPreviewTheme
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Preview
 

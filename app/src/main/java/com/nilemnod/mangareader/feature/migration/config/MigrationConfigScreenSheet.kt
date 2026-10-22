@@ -29,23 +29,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.util.fastForEach
 import com.nilemnod.mangareader.app.core.util.fastFilterNot
 import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
-import com.nilemnod.mangareader.app.presentation.components.AdaptiveSheet
 import com.nilemnod.mangareader.core.common.preference.Preference
 import com.nilemnod.mangareader.core.common.preference.getAndSet
 import com.nilemnod.mangareader.core.common.preference.toggle
+import com.nilemnod.mangareader.core.ui.components.AdaptiveSheet
+import com.nilemnod.mangareader.core.ui.components.material.Button
+import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.theme.active
+import com.nilemnod.mangareader.core.ui.theme.header
+import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.domain.migration.models.MigrationFlag
 import com.nilemnod.mangareader.feature.common.utils.getLabel
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Check
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Warning
-import com.nilemnod.mangareader.presentation.core.components.material.Button
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.theme.active
-import com.nilemnod.mangareader.presentation.core.theme.header
-import com.nilemnod.mangareader.presentation.core.util.collectAsState
-
 @Composable
 fun MigrationConfigScreenSheet(
     preferences: SourcePreferences,

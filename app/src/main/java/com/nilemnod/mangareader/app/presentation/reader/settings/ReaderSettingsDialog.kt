@@ -12,12 +12,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.window.DialogWindowProvider
-import com.nilemnod.mangareader.app.presentation.components.TabbedDialog
-import com.nilemnod.mangareader.app.presentation.components.TabbedDialogPaddings
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderSettingsViewModel
+import com.nilemnod.mangareader.core.ui.components.TabbedDialog
+import com.nilemnod.mangareader.core.ui.components.TabbedDialogPaddings
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-
 @Composable
 fun ReaderSettingsDialog(
     onDismissRequest: () -> Unit,

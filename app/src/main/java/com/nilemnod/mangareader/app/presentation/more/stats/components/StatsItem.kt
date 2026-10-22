@@ -15,9 +15,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import com.nilemnod.mangareader.presentation.core.components.material.SECONDARY_ALPHA
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-
+import com.nilemnod.mangareader.core.ui.components.material.SECONDARY_ALPHA
+import com.nilemnod.mangareader.core.ui.components.material.padding
 @Composable
 fun RowScope.StatsOverviewItem(
     title: String,

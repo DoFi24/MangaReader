@@ -15,10 +15,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.presentation.manga.components.MangaCover
+import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.asMangaCover
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-
 private val UpcomingItemHeight = 96.dp
 
 @Composable

@@ -4,8 +4,8 @@ import androidx.annotation.IntRange
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.core.common.preference.Preference as PreferenceData
 
 sealed class Preference {

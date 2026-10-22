@@ -25,9 +25,9 @@ import com.nilemnod.mangareader.app.presentation.more.settings.widget.PrefsVerti
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.SwitchPreferenceWidget
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.TextPreferenceWidget
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.TitleFontSize
+import com.nilemnod.mangareader.core.ui.components.BaseSliderItem
+import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.components.BaseSliderItem
-import com.nilemnod.mangareader.presentation.core.util.collectAsState
 import kotlinx.coroutines.launch
 
 val LocalPreferenceHighlighted = compositionLocalOf(structuralEqualityPolicy()) { false }

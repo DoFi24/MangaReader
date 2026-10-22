@@ -7,10 +7,10 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.presentation.browse.MigrateSourceScreen
-import com.nilemnod.mangareader.app.presentation.components.TabContent
 import com.nilemnod.mangareader.app.ui.browse.migration.manga.MigrateMangaScreen
+import com.nilemnod.mangareader.core.ui.components.TabContent
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 
 @Composable

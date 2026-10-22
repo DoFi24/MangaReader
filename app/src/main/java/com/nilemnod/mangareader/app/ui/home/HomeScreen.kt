@@ -32,8 +32,6 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.presentation.util.Screen
-import com.nilemnod.mangareader.app.presentation.util.isTabletUi
 import com.nilemnod.mangareader.app.ui.browse.BrowseTab
 import com.nilemnod.mangareader.app.ui.download.DownloadQueueScreen
 import com.nilemnod.mangareader.app.ui.history.HistoryTab
@@ -41,8 +39,10 @@ import com.nilemnod.mangareader.app.ui.library.LibraryTab
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.more.MoreTab
 import com.nilemnod.mangareader.app.ui.updates.UpdatesTab
+import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
+import com.nilemnod.mangareader.core.ui.util.Screen
+import com.nilemnod.mangareader.core.ui.util.isTabletUi
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.i18n.pluralStringResource
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
@@ -167,7 +167,7 @@ object HomeScreen : Screen() {
 
     @Composable
     private fun NavigationSuiteItem(
-        tab: com.nilemnod.mangareader.app.presentation.util.Tab,
+        tab: com.nilemnod.mangareader.core.ui.util.Tab,
         navigationSuiteType: NavigationSuiteType,
     ) {
         val tabNavigator = LocalTabNavigator.current
@@ -203,7 +203,7 @@ object HomeScreen : Screen() {
     }
 
     @Composable
-    private fun tabBadge(tab: com.nilemnod.mangareader.app.presentation.util.Tab): (@Composable () -> Unit)? {
+    private fun tabBadge(tab: com.nilemnod.mangareader.core.ui.util.Tab): (@Composable () -> Unit)? {
         val context = LocalContext.current
         val count by produceState(initialValue = 0, tab) {
             val graph = context.appGraph

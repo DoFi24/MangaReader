@@ -40,22 +40,22 @@ import com.kevinnzou.web.WebView
 import com.kevinnzou.web.WebViewNavigator
 import com.kevinnzou.web.WebViewState
 import com.nilemnod.mangareader.app.BuildConfig
-import com.nilemnod.mangareader.app.presentation.components.AppBar
-import com.nilemnod.mangareader.app.presentation.components.AppBarActions
-import com.nilemnod.mangareader.app.presentation.components.WarningBanner
 import com.nilemnod.mangareader.core.common.util.system.getHtml
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.setDefaultSettings
 import com.nilemnod.mangareader.core.common.util.system.setUserAgent
 import com.nilemnod.mangareader.core.common.util.system.toast
+import com.nilemnod.mangareader.core.ui.components.AppBar
+import com.nilemnod.mangareader.core.ui.components.AppBarActions
+import com.nilemnod.mangareader.core.ui.components.WarningBanner
+import com.nilemnod.mangareader.core.ui.components.material.Scaffold
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.ArrowBack
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.ArrowForward
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Close
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.TabClose
-import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import kotlinx.coroutines.launch
 import logcat.LogPriority
 

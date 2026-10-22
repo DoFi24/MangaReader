@@ -21,7 +21,7 @@ import com.cheonjaeung.compose.grid.SimpleGridCells
 import com.cheonjaeung.compose.grid.VerticalGrid
 import com.nilemnod.mangareader.core.designsystem.utils.isExpandedWidthWindow
 import com.nilemnod.mangareader.core.designsystem.utils.isMediumWidthWindow
-import com.nilemnod.mangareader.presentation.core.components.material.padding
+import com.nilemnod.mangareader.core.ui.components.material.padding
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.YearMonth
 import kotlinx.datetime.minusMonth

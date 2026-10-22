@@ -31,21 +31,21 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.presentation.components.AppBar
-import com.nilemnod.mangareader.app.presentation.components.AppBarActions
-import com.nilemnod.mangareader.app.presentation.components.DropdownMenu
-import com.nilemnod.mangareader.app.presentation.components.NestedMenuItem
 import com.nilemnod.mangareader.app.presentation.download.DownloadQueueList
-import com.nilemnod.mangareader.app.presentation.util.Screen
+import com.nilemnod.mangareader.core.ui.components.AppBar
+import com.nilemnod.mangareader.core.ui.components.AppBarActions
+import com.nilemnod.mangareader.core.ui.components.DropdownMenu
+import com.nilemnod.mangareader.core.ui.components.NestedMenuItem
+import com.nilemnod.mangareader.core.ui.components.Pill
+import com.nilemnod.mangareader.core.ui.components.material.Scaffold
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
+import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.Sort
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Pause
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.PlayArrow
-import com.nilemnod.mangareader.presentation.core.components.Pill
-import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.screens.EmptyScreen
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 
 object DownloadQueueScreen : Screen() {

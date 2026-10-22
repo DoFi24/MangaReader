@@ -29,7 +29,10 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.data.download.model.Download
-import com.nilemnod.mangareader.app.presentation.components.DropdownMenu
+import com.nilemnod.mangareader.core.ui.components.DropdownMenu
+import com.nilemnod.mangareader.core.ui.components.material.IconButtonTokens
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.util.secondaryItemAlpha
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
 import com.nilemnod.mangareader.icons.custommaterialsymbols.rounded.DownloadArrow
@@ -37,10 +40,6 @@ import com.nilemnod.mangareader.icons.custommaterialsymbols.rounded.DownloadCirc
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Error
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.CheckCircle
-import com.nilemnod.mangareader.presentation.core.components.material.IconButtonTokens
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.util.secondaryItemAlpha
-
 enum class ChapterDownloadAction {
     START,
     START_NOW,

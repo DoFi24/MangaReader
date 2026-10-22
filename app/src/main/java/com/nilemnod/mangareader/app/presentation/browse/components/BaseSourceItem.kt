@@ -12,10 +12,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.util.system.LocaleHelper
+import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.util.secondaryItemAlpha
 import com.nilemnod.mangareader.domain.source.model.Source
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.util.secondaryItemAlpha
-
 @Composable
 fun BaseSourceItem(
     source: Source,

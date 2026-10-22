@@ -16,12 +16,11 @@ import com.nilemnod.mangareader.app.presentation.more.settings.screen.SettingsAp
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.SettingsDataScreen
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.SettingsMainScreen
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.about.AboutScreen
-import com.nilemnod.mangareader.app.presentation.util.DefaultNavigatorScreenTransition
-import com.nilemnod.mangareader.app.presentation.util.LocalBackPress
-import com.nilemnod.mangareader.app.presentation.util.Screen
-import com.nilemnod.mangareader.app.presentation.util.isTabletUi
-import com.nilemnod.mangareader.presentation.core.components.TwoPanelBox
-
+import com.nilemnod.mangareader.core.ui.components.TwoPanelBox
+import com.nilemnod.mangareader.core.ui.util.DefaultNavigatorScreenTransition
+import com.nilemnod.mangareader.core.ui.util.LocalBackPress
+import com.nilemnod.mangareader.core.ui.util.Screen
+import com.nilemnod.mangareader.core.ui.util.isTabletUi
 class SettingsScreen(
     private val destination: Int? = null,
 ) : Screen() {

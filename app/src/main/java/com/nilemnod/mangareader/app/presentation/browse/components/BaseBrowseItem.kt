@@ -8,8 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-
+import com.nilemnod.mangareader.core.ui.components.material.padding
 @Composable
 fun BaseBrowseItem(
     modifier: Modifier = Modifier,

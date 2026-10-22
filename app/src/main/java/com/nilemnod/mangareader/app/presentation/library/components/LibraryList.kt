@@ -8,11 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.ui.library.LibraryItem
+import com.nilemnod.mangareader.core.ui.components.FastScrollLazyColumn
+import com.nilemnod.mangareader.core.ui.util.plus
 import com.nilemnod.mangareader.domain.library.model.LibraryManga
 import com.nilemnod.mangareader.domain.manga.model.MangaCover
-import com.nilemnod.mangareader.presentation.core.components.FastScrollLazyColumn
-import com.nilemnod.mangareader.presentation.core.util.plus
-
 @Composable
 internal fun LibraryList(
     items: List<LibraryItem>,

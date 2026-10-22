@@ -14,17 +14,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.nilemnod.mangareader.app.presentation.components.AdaptiveSheet
+import com.nilemnod.mangareader.core.ui.components.ActionButton
+import com.nilemnod.mangareader.core.ui.components.AdaptiveSheet
+import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.ContentCopy
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Photo
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Save
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Share
-import com.nilemnod.mangareader.presentation.core.components.ActionButton
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-
 @Composable
 fun ReaderPageActionsDialog(
     onDismissRequest: () -> Unit,

@@ -36,10 +36,10 @@ import com.nilemnod.mangareader.core.android.system.workManager
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.setDefaultSettings
 import com.nilemnod.mangareader.core.common.util.system.toast
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.util.collectAsState
 import eu.kanade.tachiyomi.network.NetworkPreferences
 import eu.kanade.tachiyomi.network.PREF_DOH_360
 import eu.kanade.tachiyomi.network.PREF_DOH_ADGUARD

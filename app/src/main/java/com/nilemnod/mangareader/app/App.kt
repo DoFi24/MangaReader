@@ -37,8 +37,6 @@ import com.nilemnod.mangareader.app.data.notification.Notifications
 import com.nilemnod.mangareader.app.di.AppGraph
 import com.nilemnod.mangareader.app.di.injekt.MetroInjektRegistrar
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
-import com.nilemnod.mangareader.app.domain.ui.UiPreferences
-import com.nilemnod.mangareader.app.domain.ui.model.setAppCompatDelegateThemeMode
 import com.nilemnod.mangareader.app.extension.ExtensionManager
 import com.nilemnod.mangareader.app.ui.base.delegate.SecureActivityDelegate
 import com.nilemnod.mangareader.app.util.system.cancelNotification
@@ -55,6 +53,8 @@ import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.core.metro.GraphProvider
 import com.nilemnod.mangareader.core.migration.Migration
 import com.nilemnod.mangareader.core.migration.Migrator
+import com.nilemnod.mangareader.core.ui.preference.UiPreferences
+import com.nilemnod.mangareader.core.ui.preference.model.setAppCompatDelegateThemeMode
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.widget.WidgetManager
