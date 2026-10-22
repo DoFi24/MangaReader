@@ -1,10 +1,9 @@
-package com.nilemnod.mangareader.app.ui.download
+package com.nilemnod.mangareader.feature.downloads
 
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nilemnod.mangareader.app.data.download.DownloadManager
-import com.nilemnod.mangareader.app.data.download.model.Download
+import com.nilemnod.mangareader.domain.download.model.Download
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metro.Inject
@@ -23,10 +22,10 @@ import kotlin.time.Duration.Companion.seconds
 @ViewModelKey
 @ContributesIntoMap(AppScope::class)
 class DownloadQueueViewModel(
-    private val downloadManager: DownloadManager,
+    private val downloadQueue: DownloadQueue,
 ) : ViewModel() {
 
-    val state: StateFlow<List<DownloadQueueSection>> = downloadManager.queueState
+    val state: StateFlow<List<DownloadQueueSection>> = downloadQueue.queueState
         .map { downloads ->
             downloads
                 .groupBy { it.source }
@@ -35,27 +34,27 @@ class DownloadQueueViewModel(
         .flowOn(Dispatchers.Default)
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5.seconds), emptyList())
 
-    val isDownloaderRunning = downloadManager.isDownloaderRunning
+    val isDownloaderRunning = downloadQueue.isRunning
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5.seconds), false)
 
     fun startDownloads() {
-        downloadManager.startDownloads()
+        downloadQueue.start()
     }
 
     fun pauseDownloads() {
-        viewModelScope.launch { downloadManager.pauseDownloads() }
+        viewModelScope.launch { downloadQueue.pause() }
     }
 
     fun clearQueue() {
-        viewModelScope.launch { downloadManager.clearQueue() }
+        viewModelScope.launch { downloadQueue.clear() }
     }
 
     fun reorder(downloads: List<Download>) {
-        viewModelScope.launch { downloadManager.reorderQueue(downloads) }
+        viewModelScope.launch { downloadQueue.reorder(downloads) }
     }
 
     fun cancel(downloads: List<Download>) {
-        viewModelScope.launch { downloadManager.cancelQueuedDownloads(downloads) }
+        viewModelScope.launch { downloadQueue.cancel(downloads) }
     }
 
     /**

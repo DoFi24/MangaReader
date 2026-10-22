@@ -2,8 +2,8 @@ package com.nilemnod.mangareader.app.data.download
 
 import android.content.Context
 import androidx.core.content.edit
-import com.nilemnod.mangareader.app.data.download.model.Download
 import com.nilemnod.mangareader.domain.chapter.interactor.GetChapter
+import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.domain.manga.interactor.GetManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.service.SourceManager

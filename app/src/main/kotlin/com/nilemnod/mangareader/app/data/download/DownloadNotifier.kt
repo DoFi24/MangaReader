@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory
 import android.os.SystemClock
 import androidx.core.app.NotificationCompat
 import com.nilemnod.mangareader.app.R
-import com.nilemnod.mangareader.app.data.download.model.Download
 import com.nilemnod.mangareader.app.data.notification.NotificationHandler
 import com.nilemnod.mangareader.app.data.notification.NotificationReceiver
 import com.nilemnod.mangareader.app.data.notification.Notifications
@@ -16,6 +15,7 @@ import com.nilemnod.mangareader.app.util.system.notify
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.security.SecurityPreferences
 import com.nilemnod.mangareader.core.common.util.lang.chop
+import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metro.Inject
 import java.util.regex.Pattern

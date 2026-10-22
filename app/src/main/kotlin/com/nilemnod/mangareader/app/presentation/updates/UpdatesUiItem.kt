@@ -29,7 +29,6 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.nilemnod.mangareader.app.data.download.model.Download
 import com.nilemnod.mangareader.app.presentation.manga.components.ChapterDownloadAction
 import com.nilemnod.mangareader.app.presentation.manga.components.ChapterDownloadIndicator
 import com.nilemnod.mangareader.app.presentation.manga.components.DotSeparatorText
@@ -42,6 +41,7 @@ import com.nilemnod.mangareader.core.ui.components.relativeDateText
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.relativeTimeSpanString
 import com.nilemnod.mangareader.core.ui.util.selectedBackground
+import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.domain.updates.model.UpdatesWithRelations
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
