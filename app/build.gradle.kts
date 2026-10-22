@@ -196,14 +196,14 @@ dependencies {
     implementation(projects.core.archive)
     implementation(projects.core.common)
     implementation(projects.core.metro)
-    implementation(projects.coreMetadata)
+    implementation(projects.core.metadata)
     implementation(projects.extensionApi)
-    implementation(projects.sourceLocal)
+    implementation(projects.source.local)
     implementation(projects.data)
     implementation(projects.domain)
     implementation(projects.feature.reader)
-    implementation(projects.presentationCore)
-    implementation(projects.presentationWidget)
+    implementation(projects.core.ui)
+    implementation(projects.feature.widget)
 
     // Compose
     implementation(libs.androidx.activity.compose)

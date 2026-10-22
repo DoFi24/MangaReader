@@ -21,14 +21,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.ArrowBack
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Settings
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.SkipNext
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.SkipPrevious
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ReaderTopBar(

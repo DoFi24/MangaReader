@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import coil3.ImageLoader
 import coil3.request.ImageRequest
 import coil3.size.Size
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.feature.reader.model.ReaderChapterContent
 import com.nilemnod.mangareader.feature.reader.model.ReaderHost
 import com.nilemnod.mangareader.feature.reader.model.ReaderRemote
@@ -58,7 +59,6 @@ import com.nilemnod.mangareader.feature.reader.ui.ReaderSettingsSheet
 import com.nilemnod.mangareader.feature.reader.ui.ReaderTopBar
 import com.nilemnod.mangareader.feature.reader.ui.WebtoonReaderContent
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 

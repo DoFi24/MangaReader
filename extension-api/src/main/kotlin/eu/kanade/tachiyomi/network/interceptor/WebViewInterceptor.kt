@@ -5,11 +5,11 @@ import android.os.Build
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.widget.Toast
-import com.nilemnod.mangareader.app.util.system.DeviceUtil
-import com.nilemnod.mangareader.app.util.system.WebViewUtil
-import com.nilemnod.mangareader.app.util.system.setDefaultSettings
-import com.nilemnod.mangareader.app.util.system.setUserAgent
-import com.nilemnod.mangareader.app.util.system.toast
+import com.nilemnod.mangareader.core.common.util.system.DeviceUtil
+import com.nilemnod.mangareader.core.common.util.system.WebViewUtil
+import com.nilemnod.mangareader.core.common.util.system.setDefaultSettings
+import com.nilemnod.mangareader.core.common.util.system.setUserAgent
+import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.i18n.MR
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
