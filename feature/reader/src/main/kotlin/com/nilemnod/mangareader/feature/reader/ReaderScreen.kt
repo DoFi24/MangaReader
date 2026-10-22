@@ -33,10 +33,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import coil3.ImageLoader
+import coil3.request.ImageRequest
+import coil3.size.Size
 import com.nilemnod.mangareader.feature.reader.model.ReaderChapterContent
 import com.nilemnod.mangareader.feature.reader.model.ReaderHost
 import com.nilemnod.mangareader.feature.reader.model.ReaderRemote
@@ -67,7 +70,7 @@ fun ReaderScreen(
     imageLoader: ImageLoader,
     modifier: Modifier = Modifier,
     remote: ReaderRemote = remember { ReaderRemote() },
-    following: List<ReaderChapterContent> = emptyList(),
+    chapters: List<ReaderChapterContent> = listOf(chapter),
 ) {
     val storedSettings by settingsStore.settings.collectAsState()
     var chromeVisible by rememberSaveable { mutableStateOf(false) }
@@ -97,7 +100,7 @@ fun ReaderScreen(
         key(chapter.id) {
             ReaderChapterScreen(
                 chapter = chapter,
-                following = following,
+                chapters = chapters,
                 settings = settings,
                 background = background,
                 host = host,
@@ -121,7 +124,7 @@ fun ReaderScreen(
 @Composable
 private fun ReaderChapterScreen(
     chapter: ReaderChapterContent,
-    following: List<ReaderChapterContent>,
+    chapters: List<ReaderChapterContent>,
     settings: ReaderSettings,
     background: Color,
     host: ReaderHost,
@@ -135,16 +138,16 @@ private fun ReaderChapterScreen(
     onModeChange: (ReadingMode) -> Unit,
     modifier: Modifier,
 ) {
-    val all = remember(chapter, following) { listOf(chapter) + following }
+    val all = chapters.ifEmpty { listOf(chapter) }
     var activeId by remember { mutableLongStateOf(chapter.id) }
     val active = if (settings.mode == ReadingMode.Webtoon) {
-        all.firstOrNull { it.id == activeId } ?: chapter
+        all.firstOrNull { it.id == activeId } ?: all.first()
     } else {
         chapter
     }
     val pageCount = active.pages.size
     val lastIndex = (pageCount - 1).coerceAtLeast(0)
-    var currentPage by remember { mutableIntStateOf(chapter.startPage.coerceIn(0, lastIndex)) }
+    var currentPage by remember { mutableIntStateOf(chapter.startPage.coerceIn(0, (chapter.pages.size - 1).coerceAtLeast(0))) }
     val commands = remember { MutableSharedFlow<ReaderCommand>(extraBufferCapacity = 8) }
     val finished = remember { mutableSetOf<Long>() }
     val reportFinished = { id: Long -> if (finished.add(id)) host.onChapterFinished(id) }
@@ -171,6 +174,26 @@ private fun ReaderChapterScreen(
         }
         host.onPageChanged(active.id, currentPage)
         if (pageCount > 0 && currentPage == lastIndex) reportFinished(active.id)
+    }
+
+    val context = LocalContext.current
+    val preloadNext = settings.mode != ReadingMode.Webtoon &&
+        chapter.hasNext &&
+        all.size == 1 &&
+        currentPage >= lastIndex / 2
+    LaunchedEffect(preloadNext, chapter.id) {
+        if (preloadNext) host.onAppendNextChapter()
+    }
+    LaunchedEffect(all.size, settings.mode) {
+        if (settings.mode == ReadingMode.Webtoon) return@LaunchedEffect
+        all.getOrNull(1)?.pages?.take(PRELOAD_NEXT_PAGES)?.forEach { page ->
+            imageLoader.enqueue(
+                ImageRequest.Builder(context)
+                    .data(page.source)
+                    .size(Size(PRELOAD_SIZE, PRELOAD_SIZE))
+                    .build(),
+            )
+        }
     }
 
     fun navigatePage(delta: Int) {
@@ -234,7 +257,8 @@ private fun ReaderChapterScreen(
         } else if (settings.mode == ReadingMode.Webtoon) {
             WebtoonReaderContent(
                 chapters = all,
-                startPage = chapter.startPage,
+                anchorId = chapter.id,
+                startPage = currentPage,
                 settings = settings,
                 imageLoader = imageLoader,
                 commands = commands,
@@ -244,6 +268,7 @@ private fun ReaderChapterScreen(
                 },
                 onReachedEnd = reportFinished,
                 onNearEnd = { if (all.last().hasNext) host.onAppendNextChapter() },
+                onNearStart = { if (all.first().hasPrevious) host.onPrependPreviousChapter() },
                 onOpenNext = host::onRequestNextChapter,
                 onTap = onTap,
                 onLongPress = onLongPress,
@@ -336,6 +361,8 @@ private fun ReaderChapterScreen(
 }
 
 private const val EDGE_ZONE = 0.3f
+private const val PRELOAD_NEXT_PAGES = 2
+private const val PRELOAD_SIZE = 2400
 private const val FLASH_MS = 80L
 private const val GRAY_BACKGROUND = 0xFF202125
 private const val LUMINANCE_THRESHOLD = 0.5f

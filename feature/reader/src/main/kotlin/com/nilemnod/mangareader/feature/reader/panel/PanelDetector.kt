@@ -17,7 +17,19 @@ import kotlin.math.max
 internal class PanelLayout(
     private val aspect: Float,
     val panels: List<Rect>,
+    val balloons: List<Rect> = emptyList(),
 ) {
+
+    fun balloonAt(position: Offset, viewport: IntSize): Rect? {
+        if (balloons.isEmpty() || viewport.width == 0 || viewport.height == 0) return null
+        val (origin, imageSize) = frame(viewport)
+        val normalized = Offset(
+            (position.x - origin.x) / imageSize.width,
+            (position.y - origin.y) / imageSize.height,
+        )
+        return balloons.filter { it.contains(normalized) }.minByOrNull { it.width * it.height }
+            ?.let { toViewport(it, viewport) }
+    }
 
     fun panelAt(position: Offset, viewport: IntSize): Rect? {
         if (panels.isEmpty() || viewport.width == 0 || viewport.height == 0) return null
@@ -107,7 +119,8 @@ internal object PanelDetector {
 
         val rects = cut(mask, IntRect(0, 0, width, height), 0)
             .filter { it.width >= width * MIN_PANEL_FRACTION && it.height >= height * MIN_PANEL_FRACTION }
-        if (rects.isEmpty()) return null
+        val balloons = findBalloons(luminance, width, height)
+        if (rects.isEmpty() && balloons.isEmpty()) return null
 
         val panels = rects.map {
             Rect(
@@ -117,8 +130,89 @@ internal object PanelDetector {
                 it.bottom.toFloat() / height,
             )
         }
-        if (panels.size == 1 && panels[0].width * panels[0].height > MAX_SINGLE_PANEL_AREA) return null
-        return PanelLayout(width.toFloat() / height, panels)
+        val usablePanels = if (panels.size == 1 && panels[0].width * panels[0].height > MAX_SINGLE_PANEL_AREA) {
+            emptyList()
+        } else {
+            panels
+        }
+        if (usablePanels.isEmpty() && balloons.isEmpty()) return null
+        return PanelLayout(width.toFloat() / height, usablePanels, balloons)
+    }
+
+    internal fun findBalloons(luminance: IntArray, width: Int, height: Int): List<Rect> {
+        val pageArea = width * height
+        val label = IntArray(pageArea)
+        val stack = IntArray(pageArea)
+        val result = mutableListOf<Rect>()
+        var next = 0
+        for (start in 0 until pageArea) {
+            if (label[start] != 0 || luminance[start] < BALLOON_BRIGHT) continue
+            next++
+            var top = 0
+            stack[top++] = start
+            label[start] = next
+            var area = 0
+            var minX = width
+            var minY = height
+            var maxX = 0
+            var maxY = 0
+            while (top > 0) {
+                val index = stack[--top]
+                val x = index % width
+                val y = index / width
+                area++
+                if (x < minX) minX = x
+                if (x > maxX) maxX = x
+                if (y < minY) minY = y
+                if (y > maxY) maxY = y
+                if (x > 0) top = push(luminance, label, stack, top, index - 1, next)
+                if (x < width - 1) top = push(luminance, label, stack, top, index + 1, next)
+                if (y > 0) top = push(luminance, label, stack, top, index - width, next)
+                if (y < height - 1) top = push(luminance, label, stack, top, index + width, next)
+            }
+            val boxWidth = maxX - minX + 1
+            val boxHeight = maxY - minY + 1
+            val touchesEdge = minX == 0 || minY == 0 || maxX == width - 1 || maxY == height - 1
+            if (touchesEdge) continue
+            if (area < pageArea * BALLOON_MIN_AREA || area > pageArea * BALLOON_MAX_AREA) continue
+            if (boxWidth > width * BALLOON_MAX_SIDE || boxHeight > height * BALLOON_MAX_SIDE) continue
+            val aspect = boxWidth.toFloat() / boxHeight
+            if (aspect < BALLOON_MIN_ASPECT || aspect > BALLOON_MAX_ASPECT) continue
+            val fill = area.toFloat() / (boxWidth * boxHeight)
+            if (fill < BALLOON_MIN_FILL || fill > BALLOON_MAX_FILL) continue
+            if (!hasText(luminance, width, minX, minY, boxWidth, boxHeight)) continue
+
+            val padX = boxWidth * BALLOON_PADDING
+            val padY = boxHeight * BALLOON_PADDING
+            result += Rect(
+                ((minX - padX) / width).coerceAtLeast(0f),
+                ((minY - padY) / height).coerceAtLeast(0f),
+                ((maxX + 1 + padX) / width).coerceAtMost(1f),
+                ((maxY + 1 + padY) / height).coerceAtMost(1f),
+            )
+        }
+        return result
+    }
+
+    private fun push(luminance: IntArray, label: IntArray, stack: IntArray, top: Int, index: Int, id: Int): Int {
+        if (label[index] != 0 || luminance[index] < BALLOON_BRIGHT) return top
+        label[index] = id
+        stack[top] = index
+        return top + 1
+    }
+
+    private fun hasText(luminance: IntArray, width: Int, left: Int, top: Int, boxWidth: Int, boxHeight: Int): Boolean {
+        val insetX = (boxWidth * BALLOON_TEXT_INSET).toInt()
+        val insetY = (boxHeight * BALLOON_TEXT_INSET).toInt()
+        var dark = 0
+        var total = 0
+        for (y in top + insetY until top + boxHeight - insetY) {
+            for (x in left + insetX until left + boxWidth - insetX) {
+                total++
+                if (luminance[y * width + x] < BALLOON_DARK) dark++
+            }
+        }
+        return total > 0 && dark.toFloat() / total >= BALLOON_MIN_TEXT
     }
 
     private fun backgroundLuminance(luminance: IntArray, width: Int, height: Int): Int {
@@ -197,6 +291,18 @@ internal object PanelDetector {
         return runs.filter { it.last - it.first + 1 >= MIN_SIZE }
     }
 
+    private const val BALLOON_BRIGHT = 225
+    private const val BALLOON_DARK = 110
+    private const val BALLOON_MIN_AREA = 0.004f
+    private const val BALLOON_MAX_AREA = 0.12f
+    private const val BALLOON_MAX_SIDE = 0.6f
+    private const val BALLOON_MIN_ASPECT = 0.25f
+    private const val BALLOON_MAX_ASPECT = 4f
+    private const val BALLOON_MIN_FILL = 0.45f
+    private const val BALLOON_MAX_FILL = 0.88f
+    private const val BALLOON_TEXT_INSET = 0.15f
+    private const val BALLOON_MIN_TEXT = 0.01f
+    private const val BALLOON_PADDING = 0.08f
     private const val MAX_SIDE = 800
     private const val BORDER_RING = 2
     private const val TOLERANCE = 32

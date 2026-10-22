@@ -64,6 +64,8 @@ class NewReaderActivity : BaseActivity() {
 
         override fun onAppendNextChapter() = viewModel.appendNextChapter()
 
+        override fun onPrependPreviousChapter() = viewModel.prependPreviousChapter()
+
         override fun onReadingModeChanged(mode: ReadingMode) = viewModel.setReadingMode(mode)
 
         override fun onSavePage(chapterId: Long, pageIndex: Int) = viewModel.savePage(chapterId, pageIndex)
@@ -158,7 +160,7 @@ class NewReaderActivity : BaseActivity() {
             is NewReaderViewModel.UiState.Content -> {
                 ReaderScreen(
                     chapter = current.chapter,
-                    following = current.following,
+                    chapters = current.chapters,
                     settingsStore = settingsStore,
                     host = host,
                     imageLoader = imageLoader,

@@ -40,6 +40,7 @@ interface ReaderHost {
     fun onRequestPreviousChapter()
     fun onRequestNextChapter()
     fun onAppendNextChapter()
+    fun onPrependPreviousChapter()
     fun onReadingModeChanged(mode: ReadingMode)
     fun onSavePage(chapterId: Long, pageIndex: Int)
     fun onSharePage(chapterId: Long, pageIndex: Int)

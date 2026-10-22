@@ -123,7 +123,7 @@ class NewReaderViewModel(
         data class Error(val error: Throwable) : UiState
         data class Content(
             val chapter: ReaderChapterContent,
-            val following: List<ReaderChapterContent> = emptyList(),
+            val chapters: List<ReaderChapterContent> = listOf(chapter),
         ) : UiState
     }
 
@@ -148,7 +148,7 @@ class NewReaderViewModel(
     private var current: ReaderChapter? = null
     private val window = mutableListOf<ReaderChapter>()
     private var rootContent: ReaderChapterContent? = null
-    private val followingContent = mutableListOf<ReaderChapterContent>()
+    private val contents = mutableListOf<ReaderChapterContent>()
     private var incognito = false
     private var readStart: Instant? = null
     private var pendingSave: Job? = null
@@ -254,6 +254,23 @@ class NewReaderViewModel(
             (manga.bookmarkedFilterRaw == Manga.CHAPTER_SHOW_NOT_BOOKMARKED && chapter.bookmark)
     }
 
+    private fun buildContent(target: ReaderChapter, pages: List<com.nilemnod.mangareader.app.ui.reader.model.ReaderPage>, start: Int): ReaderChapterContent {
+        val position = chapterList.indexOf(target)
+        return ReaderChapterContent(
+            id = target.chapter.id,
+            title = target.chapter.name,
+            pages = pages.map { page ->
+                ComposeReaderPage(page.index, createPageSource(target, page))
+            },
+            hasPrevious = position > 0,
+            hasNext = position < chapterList.lastIndex,
+            previousTitle = chapterList.getOrNull(position - 1)?.chapter?.name,
+            nextTitle = chapterList.getOrNull(position + 1)?.chapter?.name,
+            readingMode = resolveReadingMode(),
+            startPage = start,
+        )
+    }
+
     private suspend fun open(target: ReaderChapter, startPage: Int?) {
         openMutex.withLock {
             val chapterLoader = loader ?: return
@@ -264,7 +281,7 @@ class NewReaderViewModel(
             window.forEach { it.unref() }
             window.clear()
             window += target
-            followingContent.clear()
+            contents.clear()
             current = target
 
             savedState[KEY_CHAPTER_ID] = target.chapter.id
@@ -274,61 +291,57 @@ class NewReaderViewModel(
                 downloadManager.cancelQueuedDownloads(listOf(it))
             }
 
-            val position = chapterList.indexOf(target)
             val start = (startPage ?: target.requestedPage).coerceIn(0, pages.lastIndex)
             readStart = Clock.System.now()
 
-            val content = ReaderChapterContent(
-                id = target.chapter.id,
-                title = target.chapter.name,
-                pages = pages.map { page ->
-                    ComposeReaderPage(page.index, createPageSource(target, page))
-                },
-                hasPrevious = position > 0,
-                hasNext = position < chapterList.lastIndex,
-                previousTitle = chapterList.getOrNull(position - 1)?.chapter?.name,
-                nextTitle = chapterList.getOrNull(position + 1)?.chapter?.name,
-                readingMode = resolveReadingMode(),
-                startPage = start,
-            )
+            val content = buildContent(target, pages, start)
+            contents += content
             rootContent = content
-            mutableState.value = UiState.Content(content)
+            mutableState.value = UiState.Content(content, contents.toList())
         }
     }
 
-    fun appendNextChapter() {
+    fun appendNextChapter() = extendWindow(1)
+
+    fun prependPreviousChapter() = extendWindow(-1)
+
+    private fun extendWindow(delta: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 openMutex.withLock {
                     val root = rootContent ?: return@withLock
-                    val last = window.lastOrNull() ?: return@withLock
-                    val position = chapterList.indexOf(last)
-                    val next = chapterList.getOrNull(position + 1) ?: return@withLock
+                    val edge = (if (delta > 0) window.lastOrNull() else window.firstOrNull()) ?: return@withLock
+                    val target = chapterList.getOrNull(chapterList.indexOf(edge) + delta) ?: return@withLock
                     val chapterLoader = loader ?: return@withLock
-                    chapterLoader.loadChapter(next)
-                    val pages = next.pages ?: return@withLock
+                    chapterLoader.loadChapter(target)
+                    val pages = target.pages ?: return@withLock
 
-                    next.ref()
-                    window += next
-                    followingContent += ReaderChapterContent(
-                        id = next.chapter.id,
-                        title = next.chapter.name,
-                        pages = pages.map { page ->
-                            ComposeReaderPage(page.index, createPageSource(next, page))
-                        },
-                        hasPrevious = true,
-                        hasNext = position + 1 < chapterList.lastIndex,
-                        previousTitle = last.chapter.name,
-                        nextTitle = chapterList.getOrNull(position + 2)?.chapter?.name,
-                        readingMode = root.readingMode,
-                        startPage = 0,
-                    )
-                    mutableState.value = UiState.Content(root, followingContent.toList())
+                    target.ref()
+                    val content = buildContent(target, pages, 0)
+                    if (delta > 0) {
+                        window += target
+                        contents += content
+                    } else {
+                        window.add(0, target)
+                        contents.add(0, content)
+                    }
+                    trimWindow()
+                    mutableState.value = UiState.Content(root, contents.toList())
                 }
             } catch (e: Throwable) {
                 if (e is CancellationException) throw e
                 logcat(LogPriority.ERROR, e)
             }
+        }
+    }
+
+    private fun trimWindow() {
+        while (window.size > MAX_WINDOW) {
+            val index = window.indexOf(current).coerceAtLeast(0)
+            val removeFirst = index > window.lastIndex - index
+            val removed = if (removeFirst) window.removeAt(0) else window.removeAt(window.lastIndex)
+            if (removeFirst) contents.removeAt(0) else contents.removeAt(contents.lastIndex)
+            removed.unref()
         }
     }
 
@@ -599,7 +612,7 @@ class NewReaderViewModel(
 
     fun setReadingMode(mode: ReaderMode) {
         modeOverride = mode
-        val detached = current?.takeIf { mode != ReaderMode.Webtoon && window.size > 1 && it !== window.first() }
+        val detached = current?.takeIf { mode != ReaderMode.Webtoon && it.chapter.id != rootContent?.id }
         if (detached != null) {
             viewModelScope.launch(Dispatchers.IO) {
                 try {
@@ -684,6 +697,7 @@ class NewReaderViewModel(
     }
 
     private companion object {
+        const val MAX_WINDOW = 4
         const val KEY_CHAPTER_ID = "chapter_id"
         const val KEY_PAGE_INDEX = "page_index"
         const val PROGRESS_SAVE_DELAY = 1000L
