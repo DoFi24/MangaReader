@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.more.stats
+package com.nilemnod.mangareader.feature.stats
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -12,13 +12,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import com.nilemnod.mangareader.app.presentation.more.stats.components.StatsItem
-import com.nilemnod.mangareader.app.presentation.more.stats.components.StatsOverviewItem
-import com.nilemnod.mangareader.app.presentation.more.stats.data.StatsData
 import com.nilemnod.mangareader.core.ui.components.SectionCard
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.toDurationString
+import com.nilemnod.mangareader.feature.stats.components.StatsItem
+import com.nilemnod.mangareader.feature.stats.components.StatsOverviewItem
+import com.nilemnod.mangareader.feature.stats.data.StatsData
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.CollectionsBookmark

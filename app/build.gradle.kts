@@ -203,6 +203,7 @@ dependencies {
     implementation(projects.domain)
     implementation(projects.feature.reader)
     implementation(projects.core.ui)
+    implementation(projects.feature.stats)
     implementation(projects.feature.widget)
 
     // Compose

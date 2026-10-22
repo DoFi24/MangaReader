@@ -23,6 +23,7 @@ class PluginFeature : Plugin<Project> {
         dependencies {
             implementation(target.project(":core:ui"))
             implementation(target.project(":i18n"))
+            implementation(target.project(":icons:material-symbols"))
 
             implementation(libs.androidx.compose.foundation)
             implementation(libs.androidx.compose.material3)

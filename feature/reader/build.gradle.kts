@@ -14,8 +14,6 @@ kotlin {
 }
 
 dependencies {
-    implementation(projects.icons.materialSymbols)
-
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.animation)
     implementation(libs.androidx.compose.uiUtil)

@@ -1,17 +1,17 @@
-package com.nilemnod.mangareader.app.ui.stats
+package com.nilemnod.mangareader.feature.stats
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.presentation.more.stats.StatsScreenContent
-import com.nilemnod.mangareader.app.presentation.more.stats.StatsScreenState
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
 import com.nilemnod.mangareader.core.ui.util.Screen
+import com.nilemnod.mangareader.feature.stats.StatsScreenContent
+import com.nilemnod.mangareader.feature.stats.StatsScreenState
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 

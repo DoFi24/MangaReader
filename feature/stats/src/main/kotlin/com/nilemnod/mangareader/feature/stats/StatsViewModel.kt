@@ -1,12 +1,9 @@
-package com.nilemnod.mangareader.app.ui.stats
+package com.nilemnod.mangareader.feature.stats
 
 import androidx.compose.ui.util.fastDistinctBy
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nilemnod.mangareader.app.core.util.fastCountNot
-import com.nilemnod.mangareader.app.data.download.DownloadManager
-import com.nilemnod.mangareader.app.presentation.more.stats.StatsScreenState
-import com.nilemnod.mangareader.app.presentation.more.stats.data.StatsData
+import com.nilemnod.mangareader.core.ui.util.fastCountNot
 import com.nilemnod.mangareader.domain.history.interactor.GetTotalReadDuration
 import com.nilemnod.mangareader.domain.library.model.LibraryManga
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
@@ -14,6 +11,8 @@ import com.nilemnod.mangareader.domain.library.service.LibraryPreferences.Compan
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences.Companion.MANGA_NON_COMPLETED
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences.Companion.MANGA_NON_READ
 import com.nilemnod.mangareader.domain.manga.interactor.GetLibraryManga
+import com.nilemnod.mangareader.feature.stats.StatsScreenState
+import com.nilemnod.mangareader.feature.stats.data.StatsData
 import com.nilemnod.mangareader.source.local.isLocal
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
@@ -31,7 +30,7 @@ import kotlinx.coroutines.launch
 @ViewModelKey
 @ContributesIntoMap(AppScope::class, binding = binding<ViewModel>())
 class StatsViewModel(
-    private val downloadManager: DownloadManager,
+    private val downloadStats: DownloadStats,
     private val getLibraryManga: GetLibraryManga,
     private val getTotalReadDuration: GetTotalReadDuration,
     private val preferences: LibraryPreferences,
@@ -63,7 +62,7 @@ class StatsViewModel(
             val chaptersStatData = StatsData.Chapters(
                 totalChapterCount = distinctLibraryManga.sumOf { it.totalChapters }.toInt(),
                 readChapterCount = distinctLibraryManga.sumOf { it.readCount }.toInt(),
-                downloadCount = downloadManager.getDownloadCount(),
+                downloadCount = downloadStats.downloadCount(),
             )
 
             state.update {

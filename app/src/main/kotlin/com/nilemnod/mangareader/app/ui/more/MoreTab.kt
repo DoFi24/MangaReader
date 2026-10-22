@@ -21,10 +21,10 @@ import com.nilemnod.mangareader.app.presentation.more.MoreScreen
 import com.nilemnod.mangareader.app.ui.category.CategoryScreen
 import com.nilemnod.mangareader.app.ui.download.DownloadQueueScreen
 import com.nilemnod.mangareader.app.ui.setting.SettingsScreen
-import com.nilemnod.mangareader.app.ui.stats.StatsScreen
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.Tab
 import com.nilemnod.mangareader.core.ui.util.rememberAnimatedVectorPainter
+import com.nilemnod.mangareader.feature.stats.StatsScreen
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
