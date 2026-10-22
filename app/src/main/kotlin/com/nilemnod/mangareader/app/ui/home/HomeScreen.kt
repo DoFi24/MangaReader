@@ -39,6 +39,8 @@ import com.nilemnod.mangareader.app.ui.library.LibraryTab
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.more.MoreTab
 import com.nilemnod.mangareader.app.ui.updates.UpdatesTab
+import com.nilemnod.mangareader.core.navigation.SharedScreen
+import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
 import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.core.ui.util.isTabletUi
@@ -154,7 +156,7 @@ object HomeScreen : Screen() {
                         }
 
                         if (it is Tab.Library && it.mangaIdToOpen != null) {
-                            navigator.push(MangaScreen(it.mangaIdToOpen))
+                            navigator.push(SharedScreen.Manga(it.mangaIdToOpen).screen())
                         }
                         if (it is Tab.More && it.toDownloads) {
                             navigator.push(DownloadQueueScreen)

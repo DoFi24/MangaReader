@@ -40,6 +40,8 @@ import com.nilemnod.mangareader.app.ui.browse.source.browse.BrowseSourceViewMode
 import com.nilemnod.mangareader.app.ui.category.CategoryScreen
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.webview.WebViewScreen
+import com.nilemnod.mangareader.core.navigation.SharedScreen
+import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
@@ -215,7 +217,7 @@ data class BrowseSourceScreen(
                 snackbarHostState = snackbarHostState,
                 contentPadding = paddingValues,
                 onWebViewClick = onWebViewClick,
-                onMangaClick = { navigator.push((MangaScreen(it.id, true))) },
+                onMangaClick = { navigator.push((SharedScreen.Manga(it.id, true).screen())) },
                 onMangaLongClick = { manga ->
                     scope.launch(Dispatchers.IO) {
                         val duplicates = viewModel.getDuplicateLibraryManga(manga)
@@ -248,7 +250,7 @@ data class BrowseSourceScreen(
                     duplicates = dialog.duplicates,
                     onDismissRequest = onDismissRequest,
                     onConfirm = { viewModel.addFavorite(dialog.manga) },
-                    onOpenManga = { navigator.push(MangaScreen(it.id)) },
+                    onOpenManga = { navigator.push(SharedScreen.Manga(it.id).screen()) },
                     onMigrate = { viewModel.setDialog(BrowseSourceViewModel.Dialog.Migrate(dialog.manga, it)) },
                 )
             }
@@ -258,7 +260,7 @@ data class BrowseSourceScreen(
                     current = dialog.current,
                     target = dialog.target,
                     // Initiated from the context of [dialog.target] so we show [dialog.current].
-                    onClickTitle = { navigator.push(MangaScreen(dialog.current.id)) },
+                    onClickTitle = { navigator.push(SharedScreen.Manga(dialog.current.id).screen()) },
                     onDismissRequest = onDismissRequest,
                 )
             }

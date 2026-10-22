@@ -8,6 +8,8 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.presentation.browse.MigrateSearchScreen
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.SearchViewModel
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
+import com.nilemnod.mangareader.core.navigation.SharedScreen
+import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.feature.migration.dialog.MigrateMangaDialog
 import com.nilemnod.mangareader.feature.migration.list.MigrationListScreen
@@ -45,7 +47,7 @@ class MigrateSearchScreen(private val mangaId: Long) : Screen() {
                     navigator.popUntil { screen -> screen is MigrationListScreen }
                 }
             },
-            onLongClickItem = { navigator.push(MangaScreen(it.id, true)) },
+            onLongClickItem = { navigator.push(SharedScreen.Manga(it.id, true).screen()) },
         )
 
         when (val dialog = state.dialog) {
@@ -54,15 +56,15 @@ class MigrateSearchScreen(private val mangaId: Long) : Screen() {
                     current = dialog.current,
                     target = dialog.target,
                     // Initiated from the context of [dialog.current] so we show [dialog.target].
-                    onClickTitle = { navigator.push(MangaScreen(dialog.target.id, true)) },
+                    onClickTitle = { navigator.push(SharedScreen.Manga(dialog.target.id, true).screen()) },
                     onDismissRequest = { viewModel.clearDialog() },
                     onComplete = {
                         if (navigator.lastItem is MangaScreen) {
                             val lastItem = navigator.lastItem
                             navigator.popUntil { navigator.items.contains(lastItem) }
-                            navigator.push(MangaScreen(dialog.target.id))
+                            navigator.push(SharedScreen.Manga(dialog.target.id).screen())
                         } else {
-                            navigator.replace(MangaScreen(dialog.target.id))
+                            navigator.replace(SharedScreen.Manga(dialog.target.id).screen())
                         }
                     },
                 )

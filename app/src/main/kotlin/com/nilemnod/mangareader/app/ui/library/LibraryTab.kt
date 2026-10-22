@@ -40,6 +40,10 @@ import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
 import com.nilemnod.mangareader.core.android.system.workManager
 import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.navigation.SharedIntent
+import com.nilemnod.mangareader.core.navigation.SharedScreen
+import com.nilemnod.mangareader.core.navigation.intent
+import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
@@ -124,7 +128,7 @@ data object LibraryTab : Tab {
                         scope.launch {
                             val randomItem = viewModel.getRandomLibraryItemForCurrentCategory()
                             if (randomItem != null) {
-                                navigator.push(MangaScreen(randomItem.libraryManga.manga.id))
+                                navigator.push(SharedScreen.Manga(randomItem.libraryManga.manga.id).screen())
                             } else {
                                 snackbarHostState.showSnackbar(
                                     context.stringResource(MR.strings.information_no_entries_found),
@@ -176,13 +180,13 @@ data object LibraryTab : Tab {
                         hasActiveFilters = state.hasActiveFilters,
                         showPageTabs = state.showCategoryTabs || !state.searchQuery.isNullOrEmpty(),
                         onChangeCurrentPage = viewModel::updateActiveCategoryIndex,
-                        onClickManga = { navigator.push(MangaScreen(it)) },
+                        onClickManga = { navigator.push(SharedScreen.Manga(it).screen()) },
                         onContinueReadingClicked = { it: LibraryManga ->
                             scope.launch {
                                 val chapter = viewModel.getNextUnreadChapter(it.manga)
                                 if (chapter != null) {
                                     context.startActivity(
-                                        ReaderActivity.newIntent(context, chapter.mangaId, chapter.id),
+                                        SharedIntent.Reader(chapter.mangaId, chapter.id).intent(context),
                                     )
                                 } else {
                                     snackbarHostState.showSnackbar(context.stringResource(MR.strings.no_next_chapter))
