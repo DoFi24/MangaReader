@@ -6,7 +6,7 @@ import androidx.compose.runtime.ReadOnlyComposable
 import cafe.adriel.voyager.core.screen.Screen
 import com.nilemnod.mangareader.app.presentation.more.settings.Preference
 import com.nilemnod.mangareader.app.presentation.more.settings.PreferenceScaffold
-import com.nilemnod.mangareader.app.presentation.util.LocalBackPress
+import com.nilemnod.mangareader.core.ui.util.LocalBackPress
 import dev.icerock.moko.resources.StringResource
 
 interface SearchableSettings : Screen {

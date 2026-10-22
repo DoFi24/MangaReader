@@ -15,6 +15,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
@@ -24,9 +26,6 @@ import com.nilemnod.mangareader.icons.materialsymbols.rounded.Delete
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Public
 import com.nilemnod.mangareader.icons.simpleicons.Discord
 import com.nilemnod.mangareader.icons.simpleicons.SimpleIcons
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-
 @Composable
 fun ExtensionStoresContent(
     repos: List<ExtensionStore>,

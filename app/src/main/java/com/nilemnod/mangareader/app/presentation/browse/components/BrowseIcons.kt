@@ -17,7 +17,7 @@ import coil3.compose.AsyncImage
 import com.nilemnod.mangareader.app.R
 import com.nilemnod.mangareader.app.data.coil.InstalledExtensionIcon
 import com.nilemnod.mangareader.app.data.coil.InstalledSourceIcon
-import com.nilemnod.mangareader.app.presentation.util.rememberResourceBitmapPainter
+import com.nilemnod.mangareader.core.ui.util.rememberResourceBitmapPainter
 import com.nilemnod.mangareader.domain.extension.model.Extension
 import com.nilemnod.mangareader.domain.source.model.Source
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols

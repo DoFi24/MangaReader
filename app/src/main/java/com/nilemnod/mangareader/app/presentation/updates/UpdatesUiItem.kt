@@ -30,24 +30,23 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.data.download.model.Download
-import com.nilemnod.mangareader.app.presentation.components.relativeDateText
 import com.nilemnod.mangareader.app.presentation.manga.components.ChapterDownloadAction
 import com.nilemnod.mangareader.app.presentation.manga.components.ChapterDownloadIndicator
 import com.nilemnod.mangareader.app.presentation.manga.components.DotSeparatorText
 import com.nilemnod.mangareader.app.presentation.manga.components.MangaCover
-import com.nilemnod.mangareader.app.presentation.util.relativeTimeSpanString
 import com.nilemnod.mangareader.app.ui.updates.UpdatesItem
+import com.nilemnod.mangareader.core.ui.components.ListGroupHeader
+import com.nilemnod.mangareader.core.ui.components.material.DISABLED_ALPHA
+import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.components.relativeDateText
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.util.relativeTimeSpanString
+import com.nilemnod.mangareader.core.ui.util.selectedBackground
 import com.nilemnod.mangareader.domain.updates.model.UpdatesWithRelations
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Bookmark
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Circle
-import com.nilemnod.mangareader.presentation.core.components.ListGroupHeader
-import com.nilemnod.mangareader.presentation.core.components.material.DISABLED_ALPHA
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.util.selectedBackground
-
 internal fun LazyListScope.updatesLastUpdatedItem(
     lastUpdated: Long,
 ) {

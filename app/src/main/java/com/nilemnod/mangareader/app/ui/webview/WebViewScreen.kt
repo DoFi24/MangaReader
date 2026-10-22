@@ -6,10 +6,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.presentation.util.AssistContentScreen
-import com.nilemnod.mangareader.app.presentation.util.Screen
 import com.nilemnod.mangareader.app.presentation.webview.WebViewScreenContent
-import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
+import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
+import com.nilemnod.mangareader.core.ui.util.AssistContentScreen
+import com.nilemnod.mangareader.core.ui.util.Screen
 import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
 
 class WebViewScreen(

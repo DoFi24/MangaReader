@@ -7,9 +7,8 @@ import androidx.compose.material3.Tab
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.presentation.category.visualName
+import com.nilemnod.mangareader.core.ui.components.material.TabText
 import com.nilemnod.mangareader.domain.category.model.Category
-import com.nilemnod.mangareader.presentation.core.components.material.TabText
-
 @Composable
 internal fun LibraryTabs(
     categories: List<Category>,

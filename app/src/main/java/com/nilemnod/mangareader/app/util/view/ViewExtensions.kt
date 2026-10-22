@@ -16,7 +16,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.presentation.theme.MangaReaderTheme
+import com.nilemnod.mangareader.core.ui.theme.MangaReaderTheme
 import dev.zacsweers.metrox.viewmodel.LocalMetroViewModelFactory
 
 inline fun ComponentActivity.setComposeContent(

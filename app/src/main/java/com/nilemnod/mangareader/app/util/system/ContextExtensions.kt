@@ -17,13 +17,14 @@ import androidx.core.net.toUri
 import com.hippo.unifile.UniFile
 import com.nilemnod.mangareader.app.R
 import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.domain.ui.model.ThemeMode
 import com.nilemnod.mangareader.app.ui.base.delegate.ThemingDelegate
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.util.lang.truncateCenter
 import com.nilemnod.mangareader.core.common.util.system.DeviceUtil
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.toast
+import com.nilemnod.mangareader.core.ui.preference.model.ThemeMode
+import com.nilemnod.mangareader.core.ui.util.system.isNightMode
 import com.nilemnod.mangareader.i18n.MR
 import logcat.LogPriority
 import rikka.shizuku.ShizukuProvider

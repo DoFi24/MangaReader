@@ -17,13 +17,13 @@ import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode
 import com.nilemnod.mangareader.app.ui.reader.viewer.webgpu.WebGpuViewer
 import com.nilemnod.mangareader.app.ui.reader.viewer.webgpu.WebGpuViewerSettings
 import com.nilemnod.mangareader.app.ui.reader.viewer.webtoon.WebtoonViewer
+import com.nilemnod.mangareader.core.ui.components.CheckboxItem
+import com.nilemnod.mangareader.core.ui.components.HeadingItem
+import com.nilemnod.mangareader.core.ui.components.SettingsChipRow
+import com.nilemnod.mangareader.core.ui.components.SliderItem
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.components.CheckboxItem
-import com.nilemnod.mangareader.presentation.core.components.HeadingItem
-import com.nilemnod.mangareader.presentation.core.components.SettingsChipRow
-import com.nilemnod.mangareader.presentation.core.components.SliderItem
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.util.collectAsState
 import java.text.NumberFormat
 
 @Composable

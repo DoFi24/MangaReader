@@ -14,13 +14,12 @@ import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.presentation.category.visualName
 import com.nilemnod.mangareader.app.presentation.more.settings.Preference
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.TriStateListDialog
+import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.i18n.pluralStringResource
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.util.collectAsState
-
 object SettingsDownloadScreen : SearchableSettings {
 
     @ReadOnlyComposable

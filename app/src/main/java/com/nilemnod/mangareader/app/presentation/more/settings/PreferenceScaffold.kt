@@ -2,9 +2,9 @@ package com.nilemnod.mangareader.app.presentation.more.settings
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable
-import com.nilemnod.mangareader.app.presentation.components.AppBar
-import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.components.AppBar
+import com.nilemnod.mangareader.core.ui.components.material.Scaffold
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import dev.icerock.moko.resources.StringResource
 
 @Composable

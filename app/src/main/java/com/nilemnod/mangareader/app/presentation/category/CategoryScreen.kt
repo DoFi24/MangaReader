@@ -16,16 +16,16 @@ import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import com.nilemnod.mangareader.app.presentation.category.components.CategoryFloatingActionButton
 import com.nilemnod.mangareader.app.presentation.category.components.CategoryListItem
-import com.nilemnod.mangareader.app.presentation.components.AppBar
 import com.nilemnod.mangareader.app.ui.category.CategoryScreenState
+import com.nilemnod.mangareader.core.ui.components.AppBar
+import com.nilemnod.mangareader.core.ui.components.material.Scaffold
+import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.components.material.topSmallPaddingValues
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
+import com.nilemnod.mangareader.core.ui.util.plus
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.components.material.topSmallPaddingValues
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.screens.EmptyScreen
-import com.nilemnod.mangareader.presentation.core.util.plus
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
 

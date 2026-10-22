@@ -28,20 +28,19 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.domain.manga.model.downloadedFilter
-import com.nilemnod.mangareader.app.presentation.components.TabbedDialog
-import com.nilemnod.mangareader.app.presentation.components.TabbedDialogPaddings
 import com.nilemnod.mangareader.core.common.preference.TriState
+import com.nilemnod.mangareader.core.ui.components.LabeledCheckbox
+import com.nilemnod.mangareader.core.ui.components.RadioItem
+import com.nilemnod.mangareader.core.ui.components.SortItem
+import com.nilemnod.mangareader.core.ui.components.TabbedDialog
+import com.nilemnod.mangareader.core.ui.components.TabbedDialogPaddings
+import com.nilemnod.mangareader.core.ui.components.TriStateItem
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.theme.active
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Group
-import com.nilemnod.mangareader.presentation.core.components.LabeledCheckbox
-import com.nilemnod.mangareader.presentation.core.components.RadioItem
-import com.nilemnod.mangareader.presentation.core.components.SortItem
-import com.nilemnod.mangareader.presentation.core.components.TriStateItem
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.theme.active
-
 @Composable
 fun ChapterSettingsDialog(
     onDismissRequest: () -> Unit,

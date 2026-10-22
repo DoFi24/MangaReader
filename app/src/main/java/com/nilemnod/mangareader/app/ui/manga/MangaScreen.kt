@@ -32,9 +32,6 @@ import com.nilemnod.mangareader.app.presentation.manga.components.DeleteChapters
 import com.nilemnod.mangareader.app.presentation.manga.components.MangaCoverDialog
 import com.nilemnod.mangareader.app.presentation.manga.components.ScanlatorFilterDialog
 import com.nilemnod.mangareader.app.presentation.manga.components.SetIntervalDialog
-import com.nilemnod.mangareader.app.presentation.util.AssistContentScreen
-import com.nilemnod.mangareader.app.presentation.util.Screen
-import com.nilemnod.mangareader.app.presentation.util.isTabletUi
 import com.nilemnod.mangareader.app.source.isLocalOrStub
 import com.nilemnod.mangareader.app.ui.browse.source.browse.BrowseSourceScreen
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.GlobalSearchScreen
@@ -47,11 +44,14 @@ import com.nilemnod.mangareader.app.util.system.copyToClipboard
 import com.nilemnod.mangareader.core.android.system.toShareIntent
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.toast
+import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
+import com.nilemnod.mangareader.core.ui.util.AssistContentScreen
+import com.nilemnod.mangareader.core.ui.util.Screen
+import com.nilemnod.mangareader.core.ui.util.isTabletUi
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.feature.migration.config.MigrationConfigScreen
 import com.nilemnod.mangareader.feature.migration.dialog.MigrateMangaDialog
-import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
 import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
 import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.source.online.HttpSource

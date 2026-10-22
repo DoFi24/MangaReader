@@ -8,10 +8,9 @@ import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.nilemnod.mangareader.app.domain.ui.model.ThemeMode
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.preference.model.ThemeMode
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-
 private val options = mapOf(
     ThemeMode.SYSTEM to MR.strings.theme_system,
     ThemeMode.LIGHT to MR.strings.theme_light,

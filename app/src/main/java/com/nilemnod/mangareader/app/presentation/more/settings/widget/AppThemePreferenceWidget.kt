@@ -40,18 +40,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
-import com.nilemnod.mangareader.app.domain.ui.model.AppTheme
 import com.nilemnod.mangareader.app.presentation.manga.components.MangaCover
-import com.nilemnod.mangareader.app.presentation.theme.MangaReaderTheme
 import com.nilemnod.mangareader.core.android.system.isDynamicColorAvailable
 import com.nilemnod.mangareader.core.common.util.system.DeviceUtil
+import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.preference.model.AppTheme
+import com.nilemnod.mangareader.core.ui.theme.MangaReaderTheme
+import com.nilemnod.mangareader.core.ui.util.secondaryItemAlpha
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.CheckCircle
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.util.secondaryItemAlpha
-
 @Composable
 internal fun AppThemePreferenceWidget(
     value: AppTheme,

@@ -12,11 +12,10 @@ import com.nilemnod.mangareader.core.android.system.AuthenticatorUtil.authentica
 import com.nilemnod.mangareader.core.android.system.AuthenticatorUtil.isAuthenticationSupported
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.security.SecurityPreferences
+import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.i18n.pluralStringResource
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.util.collectAsState
-
 object SettingsSecurityScreen : SearchableSettings {
 
     @ReadOnlyComposable

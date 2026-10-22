@@ -21,21 +21,21 @@ import com.nilemnod.mangareader.app.presentation.browse.components.BaseSourceIte
 import com.nilemnod.mangareader.app.ui.browse.source.SourcesViewModel
 import com.nilemnod.mangareader.app.ui.browse.source.browse.BrowseSourceViewModel.Listing
 import com.nilemnod.mangareader.app.util.system.LocaleHelper
+import com.nilemnod.mangareader.core.ui.components.ScrollbarLazyColumn
+import com.nilemnod.mangareader.core.ui.components.material.SECONDARY_ALPHA
+import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.components.material.topSmallPaddingValues
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
+import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
+import com.nilemnod.mangareader.core.ui.theme.header
+import com.nilemnod.mangareader.core.ui.util.plus
 import com.nilemnod.mangareader.domain.source.model.Pin
 import com.nilemnod.mangareader.domain.source.model.Source
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Keep
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Keep
-import com.nilemnod.mangareader.presentation.core.components.ScrollbarLazyColumn
-import com.nilemnod.mangareader.presentation.core.components.material.SECONDARY_ALPHA
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.components.material.topSmallPaddingValues
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.screens.EmptyScreen
-import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
-import com.nilemnod.mangareader.presentation.core.theme.header
-import com.nilemnod.mangareader.presentation.core.util.plus
 import com.nilemnod.mangareader.source.local.isLocal
 
 @Composable

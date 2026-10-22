@@ -9,8 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-
+import com.nilemnod.mangareader.core.ui.components.material.padding
 @Composable
 internal fun ExtensionPill(
     text: String,

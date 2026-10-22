@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.feature.reader.R
 import com.nilemnod.mangareader.feature.reader.settings.ContrastPreset
 import com.nilemnod.mangareader.feature.reader.settings.PageFit
@@ -23,8 +24,6 @@ import com.nilemnod.mangareader.feature.reader.settings.ReadingMode
 import com.nilemnod.mangareader.feature.reader.settings.matchingPreset
 import com.nilemnod.mangareader.feature.reader.settings.withPreset
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-
 @Composable
 internal fun ReaderQuickSettings(
     settings: ReaderSettings,

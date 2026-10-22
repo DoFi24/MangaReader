@@ -44,8 +44,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.presentation.components.DownloadDropdownMenu
-import com.nilemnod.mangareader.app.presentation.components.DropdownMenu
 import com.nilemnod.mangareader.app.presentation.manga.DownloadAction
+import com.nilemnod.mangareader.core.ui.components.DropdownMenu
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
 import com.nilemnod.mangareader.icons.custommaterialsymbols.rounded.DonePrevious
@@ -59,7 +60,6 @@ import com.nilemnod.mangareader.icons.materialsymbols.rounded.Download
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.MoreVert
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.RemoveDone
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.SwapCalls
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive

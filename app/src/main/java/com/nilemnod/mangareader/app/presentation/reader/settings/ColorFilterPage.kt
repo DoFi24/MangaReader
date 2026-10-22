@@ -13,13 +13,12 @@ import androidx.core.graphics.red
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences.Companion.ColorFilterMode
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderSettingsViewModel
 import com.nilemnod.mangareader.core.common.preference.getAndSet
+import com.nilemnod.mangareader.core.ui.components.CheckboxItem
+import com.nilemnod.mangareader.core.ui.components.SettingsChipRow
+import com.nilemnod.mangareader.core.ui.components.SliderItem
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.components.CheckboxItem
-import com.nilemnod.mangareader.presentation.core.components.SettingsChipRow
-import com.nilemnod.mangareader.presentation.core.components.SliderItem
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.util.collectAsState
-
 @Composable
 internal fun ColumnScope.ColorFilterPage(viewModel: ReaderSettingsViewModel) {
     val customBrightness by viewModel.preferences.customBrightness.collectAsState()

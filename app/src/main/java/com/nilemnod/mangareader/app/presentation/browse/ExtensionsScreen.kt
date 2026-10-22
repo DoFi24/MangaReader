@@ -42,15 +42,25 @@ import com.nilemnod.mangareader.app.presentation.browse.components.BaseBrowseIte
 import com.nilemnod.mangareader.app.presentation.browse.components.ExtensionIcon
 import com.nilemnod.mangareader.app.presentation.browse.components.ExtensionPill
 import com.nilemnod.mangareader.app.presentation.browse.components.label
-import com.nilemnod.mangareader.app.presentation.components.WarningBanner
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.browse.ExtensionStoresScreen
-import com.nilemnod.mangareader.app.presentation.util.rememberRequestPackageInstallsPermissionState
 import com.nilemnod.mangareader.app.ui.browse.extension.ExtensionUiModel
 import com.nilemnod.mangareader.app.ui.browse.extension.ExtensionsViewModel
 import com.nilemnod.mangareader.app.util.system.LocaleHelper
 import com.nilemnod.mangareader.app.util.system.copyToClipboard
 import com.nilemnod.mangareader.app.util.system.launchRequestPackageInstallsPermission
 import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.components.FastScrollLazyColumn
+import com.nilemnod.mangareader.core.ui.components.WarningBanner
+import com.nilemnod.mangareader.core.ui.components.material.PullRefresh
+import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.components.material.topSmallPaddingValues
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
+import com.nilemnod.mangareader.core.ui.screens.EmptyScreenAction
+import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
+import com.nilemnod.mangareader.core.ui.theme.header
+import com.nilemnod.mangareader.core.ui.util.plus
+import com.nilemnod.mangareader.core.ui.util.rememberRequestPackageInstallsPermissionState
 import com.nilemnod.mangareader.domain.extension.model.Extension
 import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
 import com.nilemnod.mangareader.i18n.MR
@@ -62,16 +72,6 @@ import com.nilemnod.mangareader.icons.materialsymbols.rounded.Public
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Refresh
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Settings
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.VerifiedUser
-import com.nilemnod.mangareader.presentation.core.components.FastScrollLazyColumn
-import com.nilemnod.mangareader.presentation.core.components.material.PullRefresh
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.components.material.topSmallPaddingValues
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.screens.EmptyScreen
-import com.nilemnod.mangareader.presentation.core.screens.EmptyScreenAction
-import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
-import com.nilemnod.mangareader.presentation.core.theme.header
-import com.nilemnod.mangareader.presentation.core.util.plus
 import dev.icerock.moko.resources.StringResource
 
 @Composable

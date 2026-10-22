@@ -46,7 +46,6 @@ import androidx.compose.ui.util.fastAll
 import androidx.compose.ui.util.fastAny
 import androidx.compose.ui.util.fastMap
 import com.nilemnod.mangareader.app.data.download.model.Download
-import com.nilemnod.mangareader.app.presentation.components.relativeDateText
 import com.nilemnod.mangareader.app.presentation.manga.components.ChapterDownloadAction
 import com.nilemnod.mangareader.app.presentation.manga.components.ChapterHeader
 import com.nilemnod.mangareader.app.presentation.manga.components.ExpandableMangaDescription
@@ -56,11 +55,18 @@ import com.nilemnod.mangareader.app.presentation.manga.components.MangaChapterLi
 import com.nilemnod.mangareader.app.presentation.manga.components.MangaInfoBox
 import com.nilemnod.mangareader.app.presentation.manga.components.MangaToolbar
 import com.nilemnod.mangareader.app.presentation.manga.components.MissingChapterCountListItem
-import com.nilemnod.mangareader.app.presentation.util.formatChapterNumber
 import com.nilemnod.mangareader.app.source.getNameForMangaInfo
 import com.nilemnod.mangareader.app.ui.manga.ChapterList
 import com.nilemnod.mangareader.app.ui.manga.MangaViewModel
 import com.nilemnod.mangareader.app.util.system.copyToClipboard
+import com.nilemnod.mangareader.core.ui.components.TwoPanelBox
+import com.nilemnod.mangareader.core.ui.components.VerticalFastScroller
+import com.nilemnod.mangareader.core.ui.components.material.PullRefresh
+import com.nilemnod.mangareader.core.ui.components.material.Scaffold
+import com.nilemnod.mangareader.core.ui.components.relativeDateText
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.util.formatChapterNumber
+import com.nilemnod.mangareader.core.ui.util.shouldExpandFAB
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.model.Manga
@@ -68,12 +74,6 @@ import com.nilemnod.mangareader.domain.source.model.StubSource
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.PlayArrow
-import com.nilemnod.mangareader.presentation.core.components.TwoPanelBox
-import com.nilemnod.mangareader.presentation.core.components.VerticalFastScroller
-import com.nilemnod.mangareader.presentation.core.components.material.PullRefresh
-import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.util.shouldExpandFAB
 import com.nilemnod.mangareader.source.local.isLocal
 import kotlin.time.Instant
 

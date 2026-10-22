@@ -23,10 +23,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import com.nilemnod.mangareader.core.ui.components.ScrollbarLazyColumn
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.components.ScrollbarLazyColumn
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-
 @Composable
 fun <T> ListPreferenceWidget(
     value: T,

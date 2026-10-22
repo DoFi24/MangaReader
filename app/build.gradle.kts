@@ -202,7 +202,7 @@ dependencies {
     implementation(projects.data)
     implementation(projects.domain)
     implementation(projects.feature.reader)
-    implementation(projects.presentationCore)
+    implementation(projects.core.ui)
     implementation(projects.presentationWidget)
 
     // Compose

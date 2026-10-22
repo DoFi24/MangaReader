@@ -16,13 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.presentation.library.components.CommonMangaItemDefaults
 import com.nilemnod.mangareader.app.presentation.library.components.MangaComfortableGridItem
+import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaCover
 import com.nilemnod.mangareader.domain.manga.model.asMangaCover
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-
 @Composable
 fun GlobalSearchCardRow(
     titles: List<Manga>,

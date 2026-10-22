@@ -32,14 +32,13 @@ import androidx.core.net.toUri
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import com.nilemnod.mangareader.app.presentation.util.rememberRequestPackageInstallsPermissionState
 import com.nilemnod.mangareader.app.util.system.launchRequestPackageInstallsPermission
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.util.rememberRequestPackageInstallsPermissionState
+import com.nilemnod.mangareader.core.ui.util.secondaryItemAlpha
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Check
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.util.secondaryItemAlpha
-
 internal class PermissionStep : OnboardingStep {
 
     private var notificationGranted by mutableStateOf(false)

@@ -8,9 +8,8 @@ import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.nilemnod.mangareader.presentation.core.components.FastScrollLazyVerticalGrid
-import com.nilemnod.mangareader.presentation.core.util.plus
-
+import com.nilemnod.mangareader.core.ui.components.FastScrollLazyVerticalGrid
+import com.nilemnod.mangareader.core.ui.util.plus
 @Composable
 internal fun LazyLibraryGrid(
     modifier: Modifier = Modifier,

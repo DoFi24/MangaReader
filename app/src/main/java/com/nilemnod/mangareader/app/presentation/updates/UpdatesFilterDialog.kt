@@ -23,20 +23,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEachIndexed
 import com.nilemnod.mangareader.app.presentation.category.visualName
-import com.nilemnod.mangareader.app.presentation.components.TabbedDialog
-import com.nilemnod.mangareader.app.presentation.components.TabbedDialogPaddings
 import com.nilemnod.mangareader.app.ui.updates.UpdatesSettingsViewModel
 import com.nilemnod.mangareader.core.common.preference.TriState
 import com.nilemnod.mangareader.core.common.preference.getAndSet
+import com.nilemnod.mangareader.core.ui.components.SettingsItemsPaddings
+import com.nilemnod.mangareader.core.ui.components.TabbedDialog
+import com.nilemnod.mangareader.core.ui.components.TabbedDialogPaddings
+import com.nilemnod.mangareader.core.ui.components.TriStateItem
+import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
+import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.domain.updates.service.UpdatesPreferences
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.components.SettingsItemsPaddings
-import com.nilemnod.mangareader.presentation.core.components.TriStateItem
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
-import com.nilemnod.mangareader.presentation.core.util.collectAsState
-
 @Composable
 fun UpdatesFilterDialog(
     onDismissRequest: () -> Unit,

@@ -20,13 +20,12 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.core.preference.PreferenceMutableState
 import com.nilemnod.mangareader.app.ui.library.LibraryItem
+import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
+import com.nilemnod.mangareader.core.ui.util.plus
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.domain.library.model.LibraryDisplayMode
 import com.nilemnod.mangareader.domain.library.model.LibraryManga
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.screens.EmptyScreen
-import com.nilemnod.mangareader.presentation.core.util.plus
-
 @Composable
 fun LibraryPager(
     state: PagerState,

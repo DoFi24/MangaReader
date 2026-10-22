@@ -46,16 +46,16 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.presentation.components.UpIcon
 import com.nilemnod.mangareader.app.presentation.more.settings.Preference
-import com.nilemnod.mangareader.app.presentation.util.Screen
+import com.nilemnod.mangareader.core.ui.components.UpIcon
+import com.nilemnod.mangareader.core.ui.components.material.Scaffold
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
+import com.nilemnod.mangareader.core.ui.util.Screen
+import com.nilemnod.mangareader.core.ui.util.runOnEnterKeyPressed
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Close
-import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.screens.EmptyScreen
-import com.nilemnod.mangareader.presentation.core.util.runOnEnterKeyPressed
 import kotlinx.coroutines.flow.collectLatest
 import cafe.adriel.voyager.core.screen.Screen as VoyagerScreen
 

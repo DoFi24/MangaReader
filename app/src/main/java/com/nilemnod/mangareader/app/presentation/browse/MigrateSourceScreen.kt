@@ -23,6 +23,18 @@ import com.nilemnod.mangareader.app.presentation.browse.components.BaseSourceIte
 import com.nilemnod.mangareader.app.presentation.browse.components.SourceIcon
 import com.nilemnod.mangareader.app.ui.browse.migration.sources.MigrateSourceViewModel
 import com.nilemnod.mangareader.app.util.system.copyToClipboard
+import com.nilemnod.mangareader.core.ui.components.Badge
+import com.nilemnod.mangareader.core.ui.components.BadgeGroup
+import com.nilemnod.mangareader.core.ui.components.ScrollbarLazyColumn
+import com.nilemnod.mangareader.core.ui.components.Scroller.STICKY_HEADER_KEY_PREFIX
+import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.components.material.topSmallPaddingValues
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
+import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
+import com.nilemnod.mangareader.core.ui.theme.header
+import com.nilemnod.mangareader.core.ui.util.plus
+import com.nilemnod.mangareader.core.ui.util.secondaryItemAlpha
 import com.nilemnod.mangareader.domain.source.model.Source
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
@@ -30,19 +42,6 @@ import com.nilemnod.mangareader.icons.materialsymbols.rounded.ArrowDownward
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.ArrowUpward
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Numbers
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.SortByAlpha
-import com.nilemnod.mangareader.presentation.core.components.Badge
-import com.nilemnod.mangareader.presentation.core.components.BadgeGroup
-import com.nilemnod.mangareader.presentation.core.components.ScrollbarLazyColumn
-import com.nilemnod.mangareader.presentation.core.components.Scroller.STICKY_HEADER_KEY_PREFIX
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.components.material.topSmallPaddingValues
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.screens.EmptyScreen
-import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
-import com.nilemnod.mangareader.presentation.core.theme.header
-import com.nilemnod.mangareader.presentation.core.util.plus
-import com.nilemnod.mangareader.presentation.core.util.secondaryItemAlpha
-
 @Composable
 fun MigrateSourceScreen(
     state: MigrateSourceViewModel.State,

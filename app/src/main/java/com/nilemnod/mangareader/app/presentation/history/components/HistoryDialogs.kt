@@ -12,12 +12,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.nilemnod.mangareader.app.presentation.theme.MangaReaderPreviewTheme
+import com.nilemnod.mangareader.core.ui.components.LabeledCheckbox
+import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.theme.MangaReaderPreviewTheme
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.components.LabeledCheckbox
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-
 @Composable
 fun HistoryDeleteDialog(
     onDismissRequest: () -> Unit,

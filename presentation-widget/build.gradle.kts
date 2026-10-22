@@ -14,7 +14,7 @@ dependencies {
     implementation(projects.core.common)
     implementation(projects.core.metro)
     implementation(projects.domain)
-    implementation(projects.presentationCore)
+    implementation(projects.core.ui)
     implementation(projects.i18n)
 
     implementation(libs.androidx.glance.appWidget)

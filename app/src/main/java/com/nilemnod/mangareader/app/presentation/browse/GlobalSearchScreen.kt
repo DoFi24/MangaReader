@@ -14,8 +14,8 @@ import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.SearchItemResu
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.SearchViewModel
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.SourceFilter
 import com.nilemnod.mangareader.app.util.system.LocaleHelper
+import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.domain.manga.model.Manga
-import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
 import eu.kanade.tachiyomi.source.Source
 
 @Composable

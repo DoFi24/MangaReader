@@ -21,7 +21,7 @@ kotlin {
 }
 
 dependencies {
-    implementation(projects.presentationCore)
+    implementation(projects.core.ui)
     implementation(projects.i18n)
     implementation(projects.icons.materialSymbols)
 

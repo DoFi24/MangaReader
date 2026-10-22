@@ -8,8 +8,7 @@ import com.nilemnod.mangareader.app.ui.base.delegate.SecureActivityDelegate
 import com.nilemnod.mangareader.app.ui.base.delegate.SecureActivityDelegateImpl
 import com.nilemnod.mangareader.app.ui.base.delegate.ThemingDelegate
 import com.nilemnod.mangareader.app.ui.base.delegate.ThemingDelegateImpl
-import com.nilemnod.mangareader.app.util.system.prepareTabletUiContext
-
+import com.nilemnod.mangareader.core.ui.util.system.prepareTabletUiContext
 open class BaseActivity :
     AppCompatActivity(),
     SecureActivityDelegate by SecureActivityDelegateImpl(),

@@ -24,13 +24,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.CheckBoxOutlineBlank
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.CheckBox
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.DisabledByDefault
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-
 private enum class State {
     CHECKED,
     INVERSED,

@@ -11,20 +11,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
-import com.nilemnod.mangareader.app.presentation.components.AppBar
-import com.nilemnod.mangareader.app.presentation.components.AppBarActions
-import com.nilemnod.mangareader.app.presentation.components.AppBarTitle
 import com.nilemnod.mangareader.app.presentation.components.DownloadDropdownMenu
 import com.nilemnod.mangareader.app.presentation.manga.DownloadAction
+import com.nilemnod.mangareader.core.ui.components.AppBar
+import com.nilemnod.mangareader.core.ui.components.AppBarActions
+import com.nilemnod.mangareader.core.ui.components.AppBarTitle
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.theme.active
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Download
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.FilterList
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.FlipToBack
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.SelectAll
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.theme.active
-
 @Composable
 fun MangaToolbar(
     title: String,

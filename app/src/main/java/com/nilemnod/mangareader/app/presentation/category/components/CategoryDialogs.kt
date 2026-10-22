@@ -28,11 +28,10 @@ import androidx.compose.ui.focus.focusRequester
 import com.nilemnod.mangareader.app.core.preference.asToggleableState
 import com.nilemnod.mangareader.app.presentation.category.visualName
 import com.nilemnod.mangareader.core.common.preference.CheckboxState
+import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-
 @Composable
 fun CategoryCreateDialog(
     onDismissRequest: () -> Unit,
@@ -196,7 +195,7 @@ fun ChangeCategoryDialog(
         AlertDialog(
             onDismissRequest = onDismissRequest,
             confirmButton = {
-                com.nilemnod.mangareader.presentation.core.components.material.TextButton(
+                com.nilemnod.mangareader.core.ui.components.material.TextButton(
                     onClick = {
                         onDismissRequest()
                         onEditCategories()
@@ -219,17 +218,17 @@ fun ChangeCategoryDialog(
         onDismissRequest = onDismissRequest,
         confirmButton = {
             Row {
-                com.nilemnod.mangareader.presentation.core.components.material.TextButton(onClick = {
+                com.nilemnod.mangareader.core.ui.components.material.TextButton(onClick = {
                     onDismissRequest()
                     onEditCategories()
                 }) {
                     Text(text = stringResource(MR.strings.action_edit))
                 }
                 Spacer(modifier = Modifier.weight(1f))
-                com.nilemnod.mangareader.presentation.core.components.material.TextButton(onClick = onDismissRequest) {
+                com.nilemnod.mangareader.core.ui.components.material.TextButton(onClick = onDismissRequest) {
                     Text(text = stringResource(MR.strings.action_cancel))
                 }
-                com.nilemnod.mangareader.presentation.core.components.material.TextButton(
+                com.nilemnod.mangareader.core.ui.components.material.TextButton(
                     onClick = {
                         onDismissRequest()
                         onConfirm(

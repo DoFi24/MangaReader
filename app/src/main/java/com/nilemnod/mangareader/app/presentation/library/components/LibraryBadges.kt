@@ -4,11 +4,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.nilemnod.mangareader.app.presentation.theme.MangaReaderPreviewTheme
+import com.nilemnod.mangareader.core.ui.components.Badge
+import com.nilemnod.mangareader.core.ui.theme.MangaReaderPreviewTheme
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Folder
-import com.nilemnod.mangareader.presentation.core.components.Badge
-
 @Composable
 internal fun DownloadsBadge(count: Int) {
     if (count > 0) {

@@ -32,7 +32,6 @@ import com.nilemnod.mangareader.app.presentation.library.LibrarySettingsDialog
 import com.nilemnod.mangareader.app.presentation.library.components.LibraryContent
 import com.nilemnod.mangareader.app.presentation.library.components.LibraryToolbar
 import com.nilemnod.mangareader.app.presentation.manga.components.LibraryBottomActionMenu
-import com.nilemnod.mangareader.app.presentation.util.Tab
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.GlobalSearchScreen
 import com.nilemnod.mangareader.app.ui.category.CategoryScreen
 import com.nilemnod.mangareader.app.ui.home.HomeScreen
@@ -41,6 +40,11 @@ import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
 import com.nilemnod.mangareader.core.android.system.workManager
 import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.components.material.Scaffold
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
+import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
+import com.nilemnod.mangareader.core.ui.util.Tab
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.domain.library.model.LibraryManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
@@ -48,10 +52,6 @@ import com.nilemnod.mangareader.feature.migration.config.MigrationConfigScreen
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.Help
-import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.screens.EmptyScreen
-import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
 import com.nilemnod.mangareader.source.local.isLocal
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 import kotlinx.coroutines.channels.Channel

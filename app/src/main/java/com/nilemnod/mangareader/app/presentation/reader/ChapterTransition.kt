@@ -29,9 +29,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.nilemnod.mangareader.app.presentation.theme.MangaReaderPreviewTheme
 import com.nilemnod.mangareader.app.ui.reader.model.ChapterTransition
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderChapter
+import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.theme.MangaReaderPreviewTheme
+import com.nilemnod.mangareader.core.ui.util.secondaryItemAlpha
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.chapter.service.calculateChapterGap
 import com.nilemnod.mangareader.i18n.MR
@@ -39,10 +42,6 @@ import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Info
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.CheckCircle
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Warning
-import com.nilemnod.mangareader.presentation.core.i18n.pluralStringResource
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.util.secondaryItemAlpha
-
 @Composable
 fun ChapterTransition(
     transition: ChapterTransition,

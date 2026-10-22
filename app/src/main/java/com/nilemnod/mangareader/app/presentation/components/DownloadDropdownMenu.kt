@@ -6,10 +6,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.DpOffset
 import com.nilemnod.mangareader.app.presentation.manga.DownloadAction
+import com.nilemnod.mangareader.core.ui.components.DropdownMenu
+import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.i18n.pluralStringResource
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-
 @Composable
 fun DownloadDropdownMenu(
     modifier: Modifier = Modifier,

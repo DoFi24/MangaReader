@@ -19,7 +19,6 @@ import com.nilemnod.mangareader.app.R
 import com.nilemnod.mangareader.app.data.download.Downloader
 import com.nilemnod.mangareader.app.data.notification.NotificationReceiver
 import com.nilemnod.mangareader.app.data.notification.Notifications
-import com.nilemnod.mangareader.app.presentation.util.formatChapterNumber
 import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.app.util.system.cancelNotification
 import com.nilemnod.mangareader.app.util.system.notificationBuilder
@@ -30,6 +29,7 @@ import com.nilemnod.mangareader.core.common.i18n.pluralStringResource
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.security.SecurityPreferences
 import com.nilemnod.mangareader.core.common.util.lang.chop
+import com.nilemnod.mangareader.core.ui.util.formatChapterNumber
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.library.model.LibraryManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
