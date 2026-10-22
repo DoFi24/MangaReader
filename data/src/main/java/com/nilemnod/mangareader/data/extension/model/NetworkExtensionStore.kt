@@ -7,8 +7,8 @@ import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonNames
 import kotlinx.serialization.protobuf.ProtoNumber
-import com.nilemnod.mangareader.app.extension.model.Extension as AppExtension
 import com.nilemnod.mangareader.domain.extension.model.ContentWarning as DomainContentWarning
+import com.nilemnod.mangareader.domain.extension.model.Extension as AppExtension
 
 @SuppressLint("UnsafeOptInUsageError")
 @Serializable

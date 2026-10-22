@@ -1,11 +1,11 @@
 package com.nilemnod.mangareader.data.extension.service
 
-import com.nilemnod.mangareader.app.extension.model.Extension
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.data.extension.model.NetworkExtensionStore
 import com.nilemnod.mangareader.data.extension.model.NetworkLegacyExtension
 import com.nilemnod.mangareader.data.extension.model.NetworkLegacyExtensionRepo
 import com.nilemnod.mangareader.data.extension.model.toAvailableExtensions
+import com.nilemnod.mangareader.domain.extension.model.Extension
 import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Inject

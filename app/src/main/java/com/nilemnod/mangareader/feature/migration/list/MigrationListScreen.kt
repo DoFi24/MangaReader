@@ -12,7 +12,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.presentation.util.Screen
 import com.nilemnod.mangareader.app.ui.browse.migration.search.MigrateSearchScreen
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
-import com.nilemnod.mangareader.app.util.system.toast
+import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.feature.migration.list.components.MigrationExitDialog
 import com.nilemnod.mangareader.feature.migration.list.components.MigrationMangaDialog
 import com.nilemnod.mangareader.feature.migration.list.components.MigrationProgressDialog

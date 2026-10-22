@@ -4,8 +4,8 @@ import android.content.Context
 import android.text.format.Formatter
 import com.jakewharton.disklrucache.DiskLruCache
 import com.nilemnod.mangareader.app.ui.reader.model.DownloadStream
-import com.nilemnod.mangareader.app.util.storage.DiskUtil
-import com.nilemnod.mangareader.app.util.storage.saveTo
+import com.nilemnod.mangareader.core.android.storage.saveTo
+import com.nilemnod.mangareader.core.common.storage.DiskUtil
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import dev.zacsweers.metro.AppScope

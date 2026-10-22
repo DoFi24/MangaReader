@@ -10,9 +10,9 @@ import com.nilemnod.mangareader.app.domain.source.interactor.ToggleIncognito
 import com.nilemnod.mangareader.app.domain.source.interactor.ToggleSource
 import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.app.extension.ExtensionManager
-import com.nilemnod.mangareader.app.extension.model.Extension
 import com.nilemnod.mangareader.app.util.system.LocaleHelper
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.domain.extension.model.Extension
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Assisted
 import dev.zacsweers.metro.AssistedFactory

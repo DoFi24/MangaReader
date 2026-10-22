@@ -1,8 +1,8 @@
 package com.nilemnod.mangareader.app.data.download
 
-import com.nilemnod.mangareader.app.util.lang.Hash.md5
-import com.nilemnod.mangareader.app.util.storage.DiskUtil
 import com.nilemnod.mangareader.core.common.preference.InMemoryPreferenceStore
+import com.nilemnod.mangareader.core.common.storage.DiskUtil
+import com.nilemnod.mangareader.core.common.util.lang.Hash.md5
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.shouldBe

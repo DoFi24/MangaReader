@@ -30,9 +30,9 @@ import com.nilemnod.mangareader.app.presentation.components.AppBar
 import com.nilemnod.mangareader.app.presentation.components.AppBarActions
 import com.nilemnod.mangareader.app.presentation.util.Screen
 import com.nilemnod.mangareader.app.presentation.util.rememberIs24HourSystem
-import com.nilemnod.mangareader.app.util.lang.toDateTimestampString
 import com.nilemnod.mangareader.app.util.system.copyToClipboard
-import com.nilemnod.mangareader.app.util.system.workManager
+import com.nilemnod.mangareader.core.android.lang.toDateTimestampString
+import com.nilemnod.mangareader.core.android.system.workManager
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.ContentCopy

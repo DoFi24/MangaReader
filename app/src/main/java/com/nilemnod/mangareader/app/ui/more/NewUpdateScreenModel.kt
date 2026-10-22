@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.extension.util.ExtensionInstaller
 import com.nilemnod.mangareader.app.util.storage.getUriCompat
-import com.nilemnod.mangareader.app.util.storage.saveTo
+import com.nilemnod.mangareader.core.android.storage.saveTo
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Assisted

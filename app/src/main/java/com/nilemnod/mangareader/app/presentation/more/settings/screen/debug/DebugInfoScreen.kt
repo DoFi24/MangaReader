@@ -20,10 +20,10 @@ import com.nilemnod.mangareader.app.presentation.more.settings.PreferenceScaffol
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.about.AboutScreen
 import com.nilemnod.mangareader.app.presentation.util.Screen
 import com.nilemnod.mangareader.app.presentation.util.rememberIs24HourSystem
-import com.nilemnod.mangareader.app.util.system.DeviceUtil
-import com.nilemnod.mangareader.app.util.system.WebViewUtil
 import com.nilemnod.mangareader.app.util.system.copyToClipboard
 import com.nilemnod.mangareader.core.common.FeatureFlags
+import com.nilemnod.mangareader.core.common.util.system.DeviceUtil
+import com.nilemnod.mangareader.core.common.util.system.WebViewUtil
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Autorenew

@@ -29,8 +29,8 @@ import coil3.request.transformations
 import coil3.size.Precision
 import coil3.size.Scale
 import coil3.transform.RoundedCornersTransformation
-import com.nilemnod.mangareader.app.core.security.SecurityPreferences
-import com.nilemnod.mangareader.app.util.system.dpToPx
+import com.nilemnod.mangareader.core.common.security.SecurityPreferences
+import com.nilemnod.mangareader.core.common.util.system.dpToPx
 import com.nilemnod.mangareader.core.metro.metroGraph
 import com.nilemnod.mangareader.domain.manga.model.MangaCover
 import com.nilemnod.mangareader.domain.updates.interactor.GetUpdates

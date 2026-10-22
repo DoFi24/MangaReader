@@ -6,7 +6,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLocale
 import com.nilemnod.mangareader.app.domain.ui.UiPreferences
 import com.nilemnod.mangareader.app.domain.ui.appUiPreferences
-import com.nilemnod.mangareader.app.util.lang.toRelativeString
+import com.nilemnod.mangareader.core.android.lang.toRelativeString
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import kotlinx.datetime.LocalDate

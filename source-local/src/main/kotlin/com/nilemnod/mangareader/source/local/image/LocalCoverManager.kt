@@ -2,7 +2,7 @@ package com.nilemnod.mangareader.source.local.image
 
 import android.content.Context
 import com.hippo.unifile.UniFile
-import com.nilemnod.mangareader.app.util.storage.DiskUtil
+import com.nilemnod.mangareader.core.common.storage.DiskUtil
 import com.nilemnod.mangareader.core.common.storage.nameWithoutExtension
 import com.nilemnod.mangareader.core.common.util.system.ImageUtil
 import com.nilemnod.mangareader.source.local.io.LocalSourceFileSystem

@@ -13,7 +13,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.extension.model.Extension
 import com.nilemnod.mangareader.app.presentation.browse.ExtensionScreen
 import com.nilemnod.mangareader.app.presentation.components.AppBar
 import com.nilemnod.mangareader.app.presentation.components.TabContent
@@ -21,6 +20,7 @@ import com.nilemnod.mangareader.app.presentation.more.settings.screen.browse.Ext
 import com.nilemnod.mangareader.app.ui.browse.extension.details.ExtensionDetailsScreen
 import com.nilemnod.mangareader.app.ui.webview.WebViewScreen
 import com.nilemnod.mangareader.app.util.system.isPackageInstalled
+import com.nilemnod.mangareader.domain.extension.model.Extension
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 

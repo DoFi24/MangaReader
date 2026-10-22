@@ -15,9 +15,9 @@ import com.nilemnod.mangareader.app.ui.reader.model.ReaderPage
 import com.nilemnod.mangareader.app.ui.reader.viewer.ReaderPageImageView
 import com.nilemnod.mangareader.app.ui.reader.viewer.ReaderProgressIndicator
 import com.nilemnod.mangareader.app.ui.webview.WebViewActivity
-import com.nilemnod.mangareader.app.util.system.dpToPx
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.util.system.ImageUtil
+import com.nilemnod.mangareader.core.common.util.system.dpToPx
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.i18n.MR
 import eu.kanade.tachiyomi.source.model.Page

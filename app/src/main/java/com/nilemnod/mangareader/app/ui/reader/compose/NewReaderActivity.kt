@@ -27,8 +27,8 @@ import androidx.lifecycle.lifecycleScope
 import com.nilemnod.mangareader.app.di.AppGraph
 import com.nilemnod.mangareader.app.presentation.theme.MangaReaderTheme
 import com.nilemnod.mangareader.app.ui.base.activity.BaseActivity
-import com.nilemnod.mangareader.app.util.system.toShareIntent
-import com.nilemnod.mangareader.app.util.system.toast
+import com.nilemnod.mangareader.core.android.system.toShareIntent
+import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.core.metro.metroGraph
 import com.nilemnod.mangareader.feature.reader.ReaderScreen
 import com.nilemnod.mangareader.feature.reader.image.createReaderImageLoader

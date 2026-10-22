@@ -12,8 +12,8 @@ import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.nilemnod.mangareader.app.ui.reader.model.ChapterTransition
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderChapter
 import com.nilemnod.mangareader.app.ui.reader.viewer.ReaderTransitionView
-import com.nilemnod.mangareader.app.util.system.dpToPx
 import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.common.util.system.dpToPx
 import com.nilemnod.mangareader.i18n.MR
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope

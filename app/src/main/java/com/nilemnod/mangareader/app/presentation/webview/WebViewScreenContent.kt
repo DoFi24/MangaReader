@@ -43,11 +43,11 @@ import com.nilemnod.mangareader.app.BuildConfig
 import com.nilemnod.mangareader.app.presentation.components.AppBar
 import com.nilemnod.mangareader.app.presentation.components.AppBarActions
 import com.nilemnod.mangareader.app.presentation.components.WarningBanner
-import com.nilemnod.mangareader.app.util.system.getHtml
-import com.nilemnod.mangareader.app.util.system.setDefaultSettings
-import com.nilemnod.mangareader.app.util.system.setUserAgent
-import com.nilemnod.mangareader.app.util.system.toast
+import com.nilemnod.mangareader.core.common.util.system.getHtml
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.common.util.system.setDefaultSettings
+import com.nilemnod.mangareader.core.common.util.system.setUserAgent
+import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.ArrowBack

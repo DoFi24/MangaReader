@@ -28,6 +28,7 @@ import com.nilemnod.mangareader.app.domain.manga.model.downloadedFilter
 import com.nilemnod.mangareader.app.presentation.manga.DownloadAction
 import com.nilemnod.mangareader.app.presentation.manga.components.ChapterDownloadAction
 import com.nilemnod.mangareader.app.presentation.util.formattedMessage
+import com.nilemnod.mangareader.app.source.interactor.UpdateMangaFromRemote
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
 import com.nilemnod.mangareader.app.util.chapter.getNextUnread
 import com.nilemnod.mangareader.app.util.removeCovers
@@ -58,7 +59,6 @@ import com.nilemnod.mangareader.domain.manga.interactor.SetMangaChapterFlags
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaWithChapterCount
 import com.nilemnod.mangareader.domain.manga.model.applyFilter
-import com.nilemnod.mangareader.domain.source.interactor.UpdateMangaFromRemote
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.source.local.isLocal

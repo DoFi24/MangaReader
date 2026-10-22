@@ -5,7 +5,6 @@ import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
 import com.hippo.unifile.UniFile
 import com.nilemnod.mangareader.app.R
-import com.nilemnod.mangareader.app.core.security.SecurityPreferences
 import com.nilemnod.mangareader.app.data.notification.NotificationReceiver
 import com.nilemnod.mangareader.app.data.notification.Notifications
 import com.nilemnod.mangareader.app.util.storage.getUriCompat
@@ -14,6 +13,7 @@ import com.nilemnod.mangareader.app.util.system.notificationBuilder
 import com.nilemnod.mangareader.app.util.system.notify
 import com.nilemnod.mangareader.core.common.i18n.pluralStringResource
 import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.common.security.SecurityPreferences
 import com.nilemnod.mangareader.core.common.storage.displayablePath
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metro.Inject

@@ -39,11 +39,11 @@ import com.nilemnod.mangareader.app.ui.reader.viewer.Viewer
 import com.nilemnod.mangareader.app.util.chapter.filterDownloaded
 import com.nilemnod.mangareader.app.util.chapter.removeDuplicates
 import com.nilemnod.mangareader.app.util.editCover
-import com.nilemnod.mangareader.app.util.lang.byteSize
-import com.nilemnod.mangareader.app.util.storage.DiskUtil
 import com.nilemnod.mangareader.app.util.storage.cacheImageDir
-import com.nilemnod.mangareader.app.util.system.activeNetworkState
+import com.nilemnod.mangareader.core.android.system.activeNetworkState
 import com.nilemnod.mangareader.core.common.preference.toggle
+import com.nilemnod.mangareader.core.common.storage.DiskUtil
+import com.nilemnod.mangareader.core.common.util.lang.byteSize
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.domain.chapter.interactor.GetChaptersByMangaId

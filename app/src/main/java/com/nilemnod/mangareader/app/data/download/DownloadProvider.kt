@@ -3,10 +3,10 @@ package com.nilemnod.mangareader.app.data.download
 import android.content.ContentResolver
 import android.content.Context
 import com.hippo.unifile.UniFile
-import com.nilemnod.mangareader.app.util.lang.Hash.md5
-import com.nilemnod.mangareader.app.util.storage.DiskUtil
 import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.common.storage.DiskUtil
 import com.nilemnod.mangareader.core.common.storage.displayablePath
+import com.nilemnod.mangareader.core.common.util.lang.Hash.md5
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences

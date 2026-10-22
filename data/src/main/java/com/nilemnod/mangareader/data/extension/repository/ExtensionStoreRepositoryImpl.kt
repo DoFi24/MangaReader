@@ -2,13 +2,13 @@ package com.nilemnod.mangareader.data.extension.repository
 
 import app.cash.sqldelight.async.coroutines.awaitAsList
 import app.cash.sqldelight.async.coroutines.awaitAsOne
-import com.nilemnod.mangareader.app.extension.model.Extension
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.data.Database
 import com.nilemnod.mangareader.data.extension.service.ExtensionStoreService
 import com.nilemnod.mangareader.data.subscribeToList
 import com.nilemnod.mangareader.data.subscribeToOne
+import com.nilemnod.mangareader.domain.extension.model.Extension
 import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
 import com.nilemnod.mangareader.domain.extension.repository.ExtensionStoreRepository
 import dev.zacsweers.metro.AppScope

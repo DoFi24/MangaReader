@@ -16,8 +16,8 @@ import com.nilemnod.mangareader.app.data.backup.BackupNotifier
 import com.nilemnod.mangareader.app.data.notification.Notifications
 import com.nilemnod.mangareader.app.di.AppGraph
 import com.nilemnod.mangareader.app.util.system.cancelNotification
-import com.nilemnod.mangareader.app.util.system.isRunning
-import com.nilemnod.mangareader.app.util.system.setForegroundSafely
+import com.nilemnod.mangareader.core.android.system.isRunning
+import com.nilemnod.mangareader.core.android.system.setForegroundSafely
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.metro.metroGraph

@@ -23,7 +23,7 @@ import com.nilemnod.mangareader.core.common.preference.TriState
 import com.nilemnod.mangareader.core.common.util.lang.SubscriberGate
 import com.nilemnod.mangareader.core.common.util.lang.compareToWithCollator
 import com.nilemnod.mangareader.core.common.util.lang.pausedWhileUnsubscribed
-import com.nilemnod.mangareader.core.common.utils.mutate
+import com.nilemnod.mangareader.core.common.util.mutate
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.domain.category.interactor.GetCategories
 import com.nilemnod.mangareader.domain.category.interactor.SetMangaCategories

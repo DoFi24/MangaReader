@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.nilemnod.mangareader.app.core.common"
+    namespace = "com.nilemnod.mangareader.core.common"
 }
 
 kotlin {

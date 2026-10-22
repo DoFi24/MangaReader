@@ -3,7 +3,7 @@ package com.nilemnod.mangareader.app.domain.extension.interactor
 import com.nilemnod.mangareader.app.domain.extension.model.Extensions
 import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.app.extension.ExtensionManager
-import com.nilemnod.mangareader.app.extension.model.Extension
+import com.nilemnod.mangareader.domain.extension.model.Extension
 import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine

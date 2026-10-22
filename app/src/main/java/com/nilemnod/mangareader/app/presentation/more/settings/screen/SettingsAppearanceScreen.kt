@@ -22,7 +22,7 @@ import com.nilemnod.mangareader.app.presentation.more.settings.screen.appearance
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.AppThemeModePreferenceWidget
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.AppThemePreferenceWidget
 import com.nilemnod.mangareader.app.presentation.util.rememberIs24HourSystem
-import com.nilemnod.mangareader.app.util.system.toast
+import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.presentation.core.util.collectAsState

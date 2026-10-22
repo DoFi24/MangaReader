@@ -13,10 +13,10 @@ import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
 import com.nilemnod.mangareader.app.util.system.cancelNotification
-import com.nilemnod.mangareader.app.util.system.getParcelableExtraCompat
 import com.nilemnod.mangareader.app.util.system.notificationManager
-import com.nilemnod.mangareader.app.util.system.toShareIntent
-import com.nilemnod.mangareader.app.util.system.workManager
+import com.nilemnod.mangareader.core.android.system.getParcelableExtraCompat
+import com.nilemnod.mangareader.core.android.system.toShareIntent
+import com.nilemnod.mangareader.core.android.system.workManager
 import com.nilemnod.mangareader.core.common.Constants
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.domain.chapter.interactor.GetChapter

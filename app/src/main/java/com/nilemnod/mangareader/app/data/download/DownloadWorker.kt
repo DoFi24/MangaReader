@@ -13,9 +13,9 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.nilemnod.mangareader.app.data.notification.Notifications
 import com.nilemnod.mangareader.app.di.AppGraph
-import com.nilemnod.mangareader.app.util.system.activeNetworkState
 import com.nilemnod.mangareader.app.util.system.notificationBuilder
-import com.nilemnod.mangareader.app.util.system.setForegroundSafely
+import com.nilemnod.mangareader.core.android.system.activeNetworkState
+import com.nilemnod.mangareader.core.android.system.setForegroundSafely
 import com.nilemnod.mangareader.core.metro.metroGraph
 import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
 import com.nilemnod.mangareader.i18n.R

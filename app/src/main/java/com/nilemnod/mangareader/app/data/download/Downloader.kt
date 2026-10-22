@@ -6,11 +6,11 @@ import com.nilemnod.mangareader.app.data.cache.ChapterCache
 import com.nilemnod.mangareader.app.data.download.model.Download
 import com.nilemnod.mangareader.app.domain.chapter.model.toSChapter
 import com.nilemnod.mangareader.app.domain.manga.model.getComicInfo
-import com.nilemnod.mangareader.app.util.storage.DiskUtil
-import com.nilemnod.mangareader.app.util.storage.DiskUtil.NOMEDIA_FILE
-import com.nilemnod.mangareader.app.util.storage.saveTo
+import com.nilemnod.mangareader.core.android.storage.saveTo
 import com.nilemnod.mangareader.core.archive.ZipWriter
 import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.common.storage.DiskUtil
+import com.nilemnod.mangareader.core.common.storage.DiskUtil.NOMEDIA_FILE
 import com.nilemnod.mangareader.core.common.util.system.ImageUtil
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.metadata.comicinfo.COMIC_INFO_FILE

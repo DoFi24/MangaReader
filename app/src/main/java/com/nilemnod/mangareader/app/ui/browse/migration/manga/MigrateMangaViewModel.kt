@@ -3,8 +3,8 @@ package com.nilemnod.mangareader.app.ui.browse.migration.manga
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nilemnod.mangareader.core.common.util.mutate
 import com.nilemnod.mangareader.core.common.util.system.logcat
-import com.nilemnod.mangareader.core.common.utils.mutate
 import com.nilemnod.mangareader.domain.manga.interactor.GetFavorites
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.service.SourceManager

@@ -1,6 +1,6 @@
 package com.nilemnod.mangareader.domain.extension.repository
 
-import com.nilemnod.mangareader.app.extension.model.Extension
+import com.nilemnod.mangareader.domain.extension.model.Extension
 import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
 import kotlinx.coroutines.flow.Flow
 

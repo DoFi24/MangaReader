@@ -12,7 +12,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.presentation.more.settings.Preference
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.browse.ExtensionStoresScreen
-import com.nilemnod.mangareader.app.util.system.AuthenticatorUtil.authenticate
+import com.nilemnod.mangareader.core.android.system.AuthenticatorUtil.authenticate
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.domain.extension.model.ContentWarning
 import com.nilemnod.mangareader.i18n.MR

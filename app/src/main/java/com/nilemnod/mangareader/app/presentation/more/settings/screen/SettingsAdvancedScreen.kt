@@ -32,10 +32,10 @@ import com.nilemnod.mangareader.app.ui.more.OnboardingScreen
 import com.nilemnod.mangareader.app.util.system.isReleaseBuildType
 import com.nilemnod.mangareader.app.util.system.isShizukuInstalled
 import com.nilemnod.mangareader.app.util.system.powerManager
-import com.nilemnod.mangareader.app.util.system.setDefaultSettings
-import com.nilemnod.mangareader.app.util.system.toast
-import com.nilemnod.mangareader.app.util.system.workManager
+import com.nilemnod.mangareader.core.android.system.workManager
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.common.util.system.setDefaultSettings
+import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
