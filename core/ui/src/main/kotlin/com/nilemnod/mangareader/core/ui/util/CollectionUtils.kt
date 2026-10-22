@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.core.util
+package com.nilemnod.mangareader.core.ui.util
 
 import androidx.compose.ui.util.fastFilter
 import androidx.compose.ui.util.fastForEach

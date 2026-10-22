@@ -5,9 +5,9 @@ import androidx.compose.ui.util.fastMap
 import androidx.compose.ui.util.fastMapIndexedNotNull
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nilemnod.mangareader.app.core.util.insertSeparatorsReversed
 import com.nilemnod.mangareader.core.common.preference.getAndSet
 import com.nilemnod.mangareader.core.common.util.lang.SubscriberGate
+import com.nilemnod.mangareader.core.ui.util.insertSeparatorsReversed
 import com.nilemnod.mangareader.domain.category.interactor.GetCategories
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.domain.manga.model.Manga
