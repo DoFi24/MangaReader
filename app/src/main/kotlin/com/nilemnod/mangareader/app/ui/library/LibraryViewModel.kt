@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nilemnod.mangareader.app.core.preference.PreferenceMutableState
 import com.nilemnod.mangareader.app.core.preference.asState
-import com.nilemnod.mangareader.app.core.util.fastFilterNot
 import com.nilemnod.mangareader.app.data.cache.CoverCache
 import com.nilemnod.mangareader.app.data.download.DownloadCache
 import com.nilemnod.mangareader.app.data.download.DownloadManager
@@ -25,6 +24,7 @@ import com.nilemnod.mangareader.core.common.util.lang.compareToWithCollator
 import com.nilemnod.mangareader.core.common.util.lang.pausedWhileUnsubscribed
 import com.nilemnod.mangareader.core.common.util.mutate
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.core.ui.util.fastFilterNot
 import com.nilemnod.mangareader.domain.category.interactor.GetCategories
 import com.nilemnod.mangareader.domain.category.interactor.SetMangaCategories
 import com.nilemnod.mangareader.domain.category.model.Category
