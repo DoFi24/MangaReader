@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="reader_contrast">Contrast</string>
+    <string name="reader_text_boost">Text readability</string>
+    <string name="reader_preset_normal">Normal</string>
+    <string name="reader_preset_text">Text</string>
+    <string name="reader_preset_strong">Strong</string>
+    <string name="reader_preset_mono">Mono</string>
+    <string name="reader_panel_zoom">Zoom to panel on double tap</string>
+    <string name="reader_panel_navigation">Navigate panel by panel</string>
+    <string name="reader_crop_borders">Crop borders</string>
+    <string name="reader_split_spreads">Split double-page spreads</string>
+    <string name="reader_eink_mode">E-ink mode</string>
+    <string name="reader_double_tap_scale">Double-tap zoom level</string>
+</resources>

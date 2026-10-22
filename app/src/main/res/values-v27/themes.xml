@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Base.V27.MangaReader" parent="Base.Theme.MangaReader">
+        <item name="android:navigationBarColor">?attr/colorSurface</item>
+        <item name="android:windowLightNavigationBar">@bool/lightNavigationBar</item>
+    </style>
+
+    <style name="Theme.MangaReader" parent="Base.V27.MangaReader" />
+</resources>

@@ -1,0 +1,39 @@
+package com.nilemnod.mangareader.core.migration.migrations
+
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesIntoSet
+import dev.zacsweers.metro.Inject
+import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
+import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import com.nilemnod.mangareader.core.migration.Migration
+import com.nilemnod.mangareader.core.migration.MigrationContext
+import com.nilemnod.mangareader.core.common.preference.PreferenceStore
+
+@Inject
+@ContributesIntoSet(AppScope::class)
+class VerticalNavigatorMigration(
+    private val preferenceStore: PreferenceStore,
+    private val readerPreferences: ReaderPreferences,
+) : Migration {
+    override val version: Float = 25f
+
+    override suspend fun invoke(migrationContext: MigrationContext): Boolean = withContext(Dispatchers.IO) {
+        if (migrationContext.previousVersion == 24) {
+            val oldVerticalNavigator = preferenceStore.getBoolean("pref_webtoon_vertical_navigator", true)
+            if (oldVerticalNavigator.get()) {
+                readerPreferences.verticalNavigator.set(setOf(ReadingMode.WEBTOON, ReadingMode.CONTINUOUS_VERTICAL))
+            }
+            if (oldVerticalNavigator.isSet()) oldVerticalNavigator.delete()
+        }
+
+        val oldVerticalNavigatorOnLeft = preferenceStore.getBoolean("pref_webtoon_vertical_navigator_on_left", false)
+        if (oldVerticalNavigatorOnLeft.isSet()) {
+            readerPreferences.verticalNavigatorOnLeft.set(oldVerticalNavigatorOnLeft.get())
+            oldVerticalNavigatorOnLeft.delete()
+        }
+
+        return@withContext true
+    }
+}

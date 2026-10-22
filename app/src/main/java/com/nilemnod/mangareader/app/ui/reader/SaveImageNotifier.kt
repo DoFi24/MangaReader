@@ -1,0 +1,97 @@
+package com.nilemnod.mangareader.app.ui.reader
+
+import android.content.Context
+import android.graphics.Bitmap
+import android.net.Uri
+import androidx.core.app.NotificationCompat
+import coil3.asDrawable
+import coil3.imageLoader
+import coil3.request.CachePolicy
+import coil3.request.ImageRequest
+import com.nilemnod.mangareader.app.R
+import com.nilemnod.mangareader.app.data.notification.NotificationHandler
+import com.nilemnod.mangareader.app.data.notification.NotificationReceiver
+import com.nilemnod.mangareader.app.data.notification.Notifications
+import com.nilemnod.mangareader.app.util.system.cancelNotification
+import com.nilemnod.mangareader.app.util.system.getBitmapOrNull
+import com.nilemnod.mangareader.app.util.system.notificationBuilder
+import com.nilemnod.mangareader.app.util.system.notify
+import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.materialsymbols.R as MaterialSymbolsR
+
+/**
+ * Class used to show BigPictureStyle notifications
+ */
+class SaveImageNotifier(private val context: Context) {
+
+    private val notificationBuilder = context.notificationBuilder(Notifications.CHANNEL_COMMON)
+    private val notificationId: Int = Notifications.ID_DOWNLOAD_IMAGE
+
+    /**
+     * Called when image download/copy is complete.
+     *
+     * @param uri image file containing downloaded page image.
+     */
+    fun onComplete(uri: Uri) {
+        val request = ImageRequest.Builder(context)
+            .data(uri)
+            .memoryCachePolicy(CachePolicy.DISABLED)
+            .size(720, 1280)
+            .target(
+                onSuccess = { showCompleteNotification(uri, it.asDrawable(context.resources).getBitmapOrNull()) },
+                onError = { onError(null) },
+            )
+            .build()
+        context.imageLoader.enqueue(request)
+    }
+
+    /**
+     * Clears the notification message.
+     */
+    fun onClear() {
+        context.cancelNotification(notificationId)
+    }
+
+    /**
+     * Called on error while downloading image.
+     * @param error string containing error information.
+     */
+    fun onError(error: String?) {
+        // Create notification
+        with(notificationBuilder) {
+            setContentTitle(context.stringResource(MR.strings.download_notifier_title_error))
+            setContentText(error ?: context.stringResource(MR.strings.unknown_error))
+            setSmallIcon(android.R.drawable.ic_menu_report_image)
+        }
+        updateNotification()
+    }
+
+    private fun showCompleteNotification(uri: Uri, image: Bitmap?) {
+        with(notificationBuilder) {
+            setContentTitle(context.stringResource(MR.strings.picture_saved))
+            setSmallIcon(MaterialSymbolsR.drawable.rounded_filled_photo)
+            image?.let { setStyle(NotificationCompat.BigPictureStyle().bigPicture(it)) }
+            setLargeIcon(image)
+            setAutoCancel(true)
+
+            // Clear old actions if they exist
+            clearActions()
+
+            setContentIntent(NotificationHandler.openImagePendingActivity(context, uri))
+            // Share action
+            addAction(
+                MaterialSymbolsR.drawable.rounded_share,
+                context.stringResource(MR.strings.action_share),
+                NotificationReceiver.shareImagePendingBroadcast(context, uri),
+            )
+
+            updateNotification()
+        }
+    }
+
+    private fun updateNotification() {
+        // Displays the progress bar on notification
+        context.notify(notificationId, notificationBuilder.build())
+    }
+}

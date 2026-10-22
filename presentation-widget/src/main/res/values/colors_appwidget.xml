@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="appwidget_background">@color/app_surface</color>
+    <color name="appwidget_coverscreen_background">#00000000</color>
+    <color name="appwidget_on_background">@color/app_onSurface</color>
+    <color name="appwidget_surface_variant">@color/app_surfaceVariant</color>
+    <color name="appwidget_on_surface_variant">@color/app_onSurfaceVariant</color>
+    <color name="appwidget_secondary_container">@color/app_secondaryContainer</color>
+    <color name="appwidget_on_secondary_container">@color/app_onSecondaryContainer</color>
+</resources>

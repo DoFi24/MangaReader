@@ -1,0 +1,18 @@
+package com.nilemnod.mangareader.app.domain.source.interactor
+
+import dev.zacsweers.metro.Inject
+import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
+import com.nilemnod.mangareader.core.common.preference.getAndSet
+
+@Inject
+class ToggleLanguage(
+    val preferences: SourcePreferences,
+) {
+
+    fun await(language: String) {
+        val isEnabled = language in preferences.enabledLanguages.get()
+        preferences.enabledLanguages.getAndSet { enabled ->
+            if (isEnabled) enabled.minus(language) else enabled.plus(language)
+        }
+    }
+}
