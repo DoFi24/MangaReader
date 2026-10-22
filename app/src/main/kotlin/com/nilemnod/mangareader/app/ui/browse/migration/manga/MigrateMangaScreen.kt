@@ -22,6 +22,8 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.presentation.manga.components.BaseMangaListItem
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.core.common.util.system.toast
+import com.nilemnod.mangareader.core.navigation.SharedScreen
+import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.FastScrollLazyColumn
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
@@ -109,7 +111,7 @@ data class MigrateMangaScreen(
                 contentPadding = contentPadding,
                 state = state,
                 onClickItem = viewModel::toggleSelection,
-                onClickCover = { navigator.push(MangaScreen(it.id)) },
+                onClickCover = { navigator.push(SharedScreen.Manga(it.id).screen()) },
             )
         }
 

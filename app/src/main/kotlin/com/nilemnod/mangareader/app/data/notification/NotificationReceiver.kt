@@ -19,6 +19,8 @@ import com.nilemnod.mangareader.core.android.system.toShareIntent
 import com.nilemnod.mangareader.core.android.system.workManager
 import com.nilemnod.mangareader.core.common.Constants
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.core.navigation.SharedIntent
+import com.nilemnod.mangareader.core.navigation.intent
 import com.nilemnod.mangareader.domain.chapter.interactor.GetChapter
 import com.nilemnod.mangareader.domain.chapter.interactor.UpdateChapter
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
@@ -379,7 +381,7 @@ class NotificationReceiver : BroadcastReceiver() {
          * @param chapter chapter that needs to be opened
          */
         internal fun openChapterPendingActivity(context: Context, manga: Manga, chapter: Chapter): PendingIntent {
-            val newIntent = ReaderActivity.newIntent(context, manga.id, chapter.id)
+            val newIntent = SharedIntent.Reader(manga.id, chapter.id).intent(context)
             return PendingIntent.getActivity(
                 context,
                 manga.id.hashCode(),

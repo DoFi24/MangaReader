@@ -11,6 +11,10 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.GlobalSearchScreen
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
+import com.nilemnod.mangareader.core.navigation.SharedIntent
+import com.nilemnod.mangareader.core.navigation.SharedScreen
+import com.nilemnod.mangareader.core.navigation.intent
+import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
@@ -50,18 +54,13 @@ class DeepLinkScreen(
                     val resultState = state as DeepLinkViewModel.State.Result
                     if (resultState.chapterId == null) {
                         navigator.replace(
-                            MangaScreen(
-                                resultState.manga.id,
-                                true,
-                            ),
+                            SharedScreen.Manga(resultState.manga.id, true).screen(),
                         )
                     } else {
                         navigator.pop()
-                        ReaderActivity.newIntent(
-                            context,
-                            resultState.manga.id,
-                            resultState.chapterId,
-                        ).also(context::startActivity)
+                        SharedIntent.Reader(resultState.manga.id, resultState.chapterId)
+                            .intent(context)
+                            .also(context::startActivity)
                     }
                 }
             }
