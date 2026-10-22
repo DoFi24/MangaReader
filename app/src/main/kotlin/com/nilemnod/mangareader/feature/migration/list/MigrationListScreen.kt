@@ -12,6 +12,8 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.ui.browse.migration.search.MigrateSearchScreen
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.core.common.util.system.toast
+import com.nilemnod.mangareader.core.navigation.SharedScreen
+import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.feature.migration.list.components.MigrationExitDialog
 import com.nilemnod.mangareader.feature.migration.list.components.MigrationMangaDialog
@@ -59,7 +61,7 @@ class MigrationListScreen(private val mangaIds: Collection<Long>, private val ex
             migrationComplete = state.migrationComplete,
             finishedCount = state.finishedCount,
             onItemClick = {
-                navigator.push(MangaScreen(it.id, true))
+                navigator.push(SharedScreen.Manga(it.id, true).screen())
             },
             onSearchManually = { migrationItem ->
                 navigator push MigrateSearchScreen(migrationItem.manga.id)
