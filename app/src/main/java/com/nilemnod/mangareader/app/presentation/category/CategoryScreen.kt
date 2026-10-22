@@ -18,8 +18,6 @@ import com.nilemnod.mangareader.app.presentation.category.components.CategoryFlo
 import com.nilemnod.mangareader.app.presentation.category.components.CategoryListItem
 import com.nilemnod.mangareader.app.presentation.components.AppBar
 import com.nilemnod.mangareader.app.ui.category.CategoryScreenState
-import sh.calvin.reorderable.ReorderableItem
-import sh.calvin.reorderable.rememberReorderableLazyListState
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
@@ -28,6 +26,8 @@ import com.nilemnod.mangareader.presentation.core.components.material.topSmallPa
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.presentation.core.screens.EmptyScreen
 import com.nilemnod.mangareader.presentation.core.util.plus
+import sh.calvin.reorderable.ReorderableItem
+import sh.calvin.reorderable.rememberReorderableLazyListState
 
 @Composable
 fun CategoryScreen(

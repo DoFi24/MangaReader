@@ -1,8 +1,8 @@
 package com.nilemnod.mangareader.source.local.metadata
 
+import com.nilemnod.mangareader.core.archive.EpubReader
 import eu.kanade.tachiyomi.source.model.SChapter
 import eu.kanade.tachiyomi.source.model.SManga
-import com.nilemnod.mangareader.core.archive.EpubReader
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Locale

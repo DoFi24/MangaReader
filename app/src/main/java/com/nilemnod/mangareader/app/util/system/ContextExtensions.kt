@@ -15,16 +15,16 @@ import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import com.hippo.unifile.UniFile
-import com.nilemnod.mangareader.app.domain.ui.model.ThemeMode
 import com.nilemnod.mangareader.app.R
+import com.nilemnod.mangareader.app.di.appGraph
+import com.nilemnod.mangareader.app.domain.ui.model.ThemeMode
 import com.nilemnod.mangareader.app.ui.base.delegate.ThemingDelegate
 import com.nilemnod.mangareader.app.util.lang.truncateCenter
-import logcat.LogPriority
-import com.nilemnod.mangareader.app.di.appGraph
-import rikka.shizuku.ShizukuProvider
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.i18n.MR
+import logcat.LogPriority
+import rikka.shizuku.ShizukuProvider
 import java.io.File
 
 /**

@@ -16,8 +16,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.presentation.components.AdaptiveSheet
-import eu.kanade.tachiyomi.source.model.Filter
-import eu.kanade.tachiyomi.source.model.FilterList
 import com.nilemnod.mangareader.core.common.preference.TriState
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.components.CheckboxItem
@@ -29,6 +27,8 @@ import com.nilemnod.mangareader.presentation.core.components.TextItem
 import com.nilemnod.mangareader.presentation.core.components.TriStateItem
 import com.nilemnod.mangareader.presentation.core.components.material.Button
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
+import eu.kanade.tachiyomi.source.model.Filter
+import eu.kanade.tachiyomi.source.model.FilterList
 
 @Composable
 fun SourceFilterDialog(

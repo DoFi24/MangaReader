@@ -1,10 +1,10 @@
 package com.nilemnod.mangareader.domain.chapter.repository
 
-import kotlinx.coroutines.flow.Flow
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.chapter.model.ChapterRemoteUpdate
 import com.nilemnod.mangareader.domain.chapter.model.ChapterSummary
 import com.nilemnod.mangareader.domain.chapter.model.ChapterUpdate
+import kotlinx.coroutines.flow.Flow
 
 interface ChapterRepository {
 

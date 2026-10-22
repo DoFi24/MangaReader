@@ -1,12 +1,12 @@
 package com.nilemnod.mangareader.app.data.updater
 
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.BuildConfig
 import com.nilemnod.mangareader.app.util.system.isFossBuildType
 import com.nilemnod.mangareader.app.util.system.isNightlyBuildType
+import com.nilemnod.mangareader.domain.release.interactor.GetApplicationRelease
+import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import com.nilemnod.mangareader.domain.release.interactor.GetApplicationRelease
 
 @Inject
 class AppUpdateChecker(

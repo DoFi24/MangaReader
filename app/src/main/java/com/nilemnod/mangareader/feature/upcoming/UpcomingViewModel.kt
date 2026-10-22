@@ -5,12 +5,19 @@ import androidx.compose.ui.util.fastMap
 import androidx.compose.ui.util.fastMapIndexedNotNull
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nilemnod.mangareader.app.core.util.insertSeparatorsReversed
+import com.nilemnod.mangareader.core.common.preference.getAndSet
+import com.nilemnod.mangareader.core.common.util.lang.SubscriberGate
+import com.nilemnod.mangareader.domain.category.interactor.GetCategories
+import com.nilemnod.mangareader.domain.category.model.Category
+import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.upcoming.interactor.GetUpcomingManga
+import com.nilemnod.mangareader.domain.upcoming.service.UpcomingPreferences
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.binding
 import dev.zacsweers.metrox.viewmodel.ViewModelKey
-import com.nilemnod.mangareader.app.core.util.insertSeparatorsReversed
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -29,13 +36,6 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.YearMonth
 import kotlinx.datetime.toLocalDateTime
 import kotlinx.datetime.yearMonth
-import com.nilemnod.mangareader.domain.upcoming.interactor.GetUpcomingManga
-import com.nilemnod.mangareader.core.common.preference.getAndSet
-import com.nilemnod.mangareader.core.common.util.lang.SubscriberGate
-import com.nilemnod.mangareader.domain.category.interactor.GetCategories
-import com.nilemnod.mangareader.domain.category.model.Category
-import com.nilemnod.mangareader.domain.manga.model.Manga
-import com.nilemnod.mangareader.domain.upcoming.service.UpcomingPreferences
 import kotlin.time.Clock
 import kotlin.time.Duration.Companion.seconds
 

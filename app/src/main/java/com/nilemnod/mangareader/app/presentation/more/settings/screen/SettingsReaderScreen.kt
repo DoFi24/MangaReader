@@ -6,12 +6,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
+import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.presentation.more.settings.Preference
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderOrientation
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
 import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode
 import com.nilemnod.mangareader.app.util.system.hasDisplayCutout
-import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.i18n.pluralStringResource
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource

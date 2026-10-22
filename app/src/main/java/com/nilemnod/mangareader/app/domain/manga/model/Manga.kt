@@ -2,18 +2,18 @@ package com.nilemnod.mangareader.app.domain.manga.model
 
 import android.content.Context
 import com.nilemnod.mangareader.app.data.cache.CoverCache
-import eu.kanade.tachiyomi.source.model.SManga
+import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderOrientation
 import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.number
-import kotlinx.datetime.toLocalDateTime
-import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.core.common.preference.TriState
 import com.nilemnod.mangareader.core.metadata.comicinfo.ComicInfo
 import com.nilemnod.mangareader.core.metadata.comicinfo.ComicInfoPublishingStatus
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import eu.kanade.tachiyomi.source.model.SManga
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.number
+import kotlinx.datetime.toLocalDateTime
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 

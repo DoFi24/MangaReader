@@ -1,5 +1,6 @@
 package eu.kanade.tachiyomi.source.online
 
+import com.nilemnod.mangareader.core.common.util.lang.awaitSingle
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.NetworkHelper
 import eu.kanade.tachiyomi.network.asObservableSuccess
@@ -16,7 +17,6 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import rx.Observable
-import com.nilemnod.mangareader.core.common.util.lang.awaitSingle
 import uy.kohesive.injekt.injectLazy
 import java.net.URI
 import java.net.URISyntaxException

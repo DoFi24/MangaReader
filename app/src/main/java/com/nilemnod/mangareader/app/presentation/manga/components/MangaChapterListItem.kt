@@ -27,7 +27,8 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.data.download.model.Download
-import me.saket.swipe.SwipeableActionsBox
+import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.BookmarkAdd
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.BookmarkRemove
@@ -38,12 +39,11 @@ import com.nilemnod.mangareader.icons.materialsymbols.rounded.FileDownloadOff
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.RemoveDone
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Bookmark
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Circle
-import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
-import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.components.material.DISABLED_ALPHA
 import com.nilemnod.mangareader.presentation.core.components.material.SECONDARY_ALPHA
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.presentation.core.util.selectedBackground
+import me.saket.swipe.SwipeableActionsBox
 
 @Composable
 fun MangaChapterListItem(

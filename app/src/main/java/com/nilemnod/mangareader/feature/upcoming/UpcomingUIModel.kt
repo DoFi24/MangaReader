@@ -1,7 +1,7 @@
 package com.nilemnod.mangareader.feature.upcoming
 
-import kotlinx.datetime.LocalDate
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import kotlinx.datetime.LocalDate
 
 sealed interface UpcomingUIModel {
     data class Header(val date: LocalDate, val mangaCount: Int) : UpcomingUIModel

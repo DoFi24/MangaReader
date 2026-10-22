@@ -31,34 +31,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.ContributesIntoMap
-import dev.zacsweers.metro.Inject
-import dev.zacsweers.metro.binding
-import dev.zacsweers.metrox.viewmodel.ViewModelKey
-import dev.zacsweers.metrox.viewmodel.metroViewModel
 import com.nilemnod.mangareader.app.presentation.browse.components.SourceIcon
 import com.nilemnod.mangareader.app.presentation.components.AppBar
 import com.nilemnod.mangareader.app.presentation.components.AppBarActions
 import com.nilemnod.mangareader.app.presentation.util.Screen
 import com.nilemnod.mangareader.app.util.system.toast
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.FlipToBack
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.SelectAll
 import com.nilemnod.mangareader.domain.history.repository.HistoryRepository
 import com.nilemnod.mangareader.domain.manga.repository.MangaRepository
 import com.nilemnod.mangareader.domain.source.interactor.GetSourcesWithNonLibraryManga
 import com.nilemnod.mangareader.domain.source.model.Source
 import com.nilemnod.mangareader.domain.source.model.SourceWithCount
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
+import com.nilemnod.mangareader.icons.materialsymbols.rounded.FlipToBack
+import com.nilemnod.mangareader.icons.materialsymbols.rounded.SelectAll
 import com.nilemnod.mangareader.presentation.core.components.LazyColumnWithAction
 import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
 import com.nilemnod.mangareader.presentation.core.components.material.padding
@@ -66,6 +53,19 @@ import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.presentation.core.screens.EmptyScreen
 import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
 import com.nilemnod.mangareader.presentation.core.util.selectedBackground
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesIntoMap
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.binding
+import dev.zacsweers.metrox.viewmodel.ViewModelKey
+import dev.zacsweers.metrox.viewmodel.metroViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class ClearDatabaseScreen : Screen() {
 

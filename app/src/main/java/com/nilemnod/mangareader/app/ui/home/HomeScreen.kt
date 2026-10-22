@@ -31,6 +31,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabNavigator
+import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.presentation.util.Screen
 import com.nilemnod.mangareader.app.presentation.util.isTabletUi
 import com.nilemnod.mangareader.app.ui.browse.BrowseTab
@@ -40,16 +41,15 @@ import com.nilemnod.mangareader.app.ui.library.LibraryTab
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.more.MoreTab
 import com.nilemnod.mangareader.app.ui.updates.UpdatesTab
+import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.presentation.core.i18n.pluralStringResource
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import com.nilemnod.mangareader.app.di.appGraph
 import soup.compose.material.motion.animation.materialFadeThroughIn
 import soup.compose.material.motion.animation.materialFadeThroughOut
-import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.i18n.pluralStringResource
 
 object HomeScreen : Screen() {
 

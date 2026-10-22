@@ -17,22 +17,22 @@ import com.nilemnod.mangareader.app.presentation.browse.components.BrowseSourceC
 import com.nilemnod.mangareader.app.presentation.browse.components.BrowseSourceList
 import com.nilemnod.mangareader.app.presentation.components.AppBar
 import com.nilemnod.mangareader.app.presentation.util.formattedMessage
-import eu.kanade.tachiyomi.source.Source
-import kotlinx.coroutines.flow.StateFlow
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Public
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Refresh
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.domain.library.model.LibraryDisplayMode
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.model.StubSource
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
+import com.nilemnod.mangareader.icons.materialsymbols.rounded.Public
+import com.nilemnod.mangareader.icons.materialsymbols.rounded.Refresh
 import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.presentation.core.screens.EmptyScreen
 import com.nilemnod.mangareader.presentation.core.screens.EmptyScreenAction
 import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
 import com.nilemnod.mangareader.source.local.LocalSource
+import eu.kanade.tachiyomi.source.Source
+import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 fun BrowseSourceContent(

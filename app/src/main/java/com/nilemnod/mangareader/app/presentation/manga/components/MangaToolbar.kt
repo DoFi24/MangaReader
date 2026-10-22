@@ -16,12 +16,12 @@ import com.nilemnod.mangareader.app.presentation.components.AppBarActions
 import com.nilemnod.mangareader.app.presentation.components.AppBarTitle
 import com.nilemnod.mangareader.app.presentation.components.DownloadDropdownMenu
 import com.nilemnod.mangareader.app.presentation.manga.DownloadAction
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Download
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.FilterList
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.FlipToBack
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.SelectAll
-import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.presentation.core.theme.active
 

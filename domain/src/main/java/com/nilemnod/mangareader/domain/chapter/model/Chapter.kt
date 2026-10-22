@@ -1,7 +1,7 @@
 package com.nilemnod.mangareader.domain.chapter.model
 
-import kotlinx.serialization.json.JsonObject
 import com.nilemnod.mangareader.core.common.extensions.EMPTY
+import kotlinx.serialization.json.JsonObject
 import kotlin.time.Instant
 
 data class Chapter(

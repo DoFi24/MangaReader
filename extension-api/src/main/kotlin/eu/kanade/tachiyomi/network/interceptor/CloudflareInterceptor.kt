@@ -13,19 +13,19 @@ import androidx.core.content.ContextCompat
 import androidx.webkit.ScriptHandler
 import androidx.webkit.WebViewCompat
 import androidx.webkit.WebViewFeature
-import eu.kanade.tachiyomi.network.AndroidCookieJar
 import com.nilemnod.mangareader.app.util.system.isOutdated
 import com.nilemnod.mangareader.app.util.system.toWebViewHeaders
 import com.nilemnod.mangareader.app.util.system.toast
+import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.i18n.MR
+import eu.kanade.tachiyomi.network.AndroidCookieJar
 import kotlinx.coroutines.CoroutineScope
 import logcat.LogPriority
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
-import com.nilemnod.mangareader.core.common.i18n.stringResource
-import com.nilemnod.mangareader.core.common.util.system.logcat
-import com.nilemnod.mangareader.i18n.MR
 import java.io.IOException
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.CountDownLatch
@@ -160,7 +160,13 @@ class CloudflareInterceptor(
                 // An isolated world keeps the bridge out of the page's reach
                 val world = WebViewCompat.getExecutionWorld(webview, "mangareader")
                 val origins = setOf(originalRequest.url.origin())
-                WebViewCompat.addWebMessageListener(webview, "mangareader", origins, world) { _, message, _, isMainFrame, _ ->
+                WebViewCompat.addWebMessageListener(webview, "mangareader", origins, world) {
+                        _,
+                        message,
+                        _,
+                        isMainFrame,
+                        _,
+                    ->
                     if (isMainFrame) message.data?.let(::onChallengeEvent)
                 }
                 listenerScriptHandler = WebViewCompat.addJavaScriptOnEvent(

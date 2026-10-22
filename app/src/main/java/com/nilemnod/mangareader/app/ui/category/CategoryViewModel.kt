@@ -3,6 +3,14 @@ package com.nilemnod.mangareader.app.ui.category
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.domain.category.interactor.CreateCategoryWithName
+import com.nilemnod.mangareader.domain.category.interactor.DeleteCategory
+import com.nilemnod.mangareader.domain.category.interactor.GetCategories
+import com.nilemnod.mangareader.domain.category.interactor.RenameCategory
+import com.nilemnod.mangareader.domain.category.interactor.ReorderCategory
+import com.nilemnod.mangareader.domain.category.model.Category
+import com.nilemnod.mangareader.i18n.MR
 import dev.icerock.moko.resources.StringResource
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
@@ -21,14 +29,6 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import com.nilemnod.mangareader.core.metro.AppCoroutineScope
-import com.nilemnod.mangareader.domain.category.interactor.CreateCategoryWithName
-import com.nilemnod.mangareader.domain.category.interactor.DeleteCategory
-import com.nilemnod.mangareader.domain.category.interactor.GetCategories
-import com.nilemnod.mangareader.domain.category.interactor.RenameCategory
-import com.nilemnod.mangareader.domain.category.interactor.ReorderCategory
-import com.nilemnod.mangareader.domain.category.model.Category
-import com.nilemnod.mangareader.i18n.MR
 import kotlin.time.Duration.Companion.seconds
 
 @Inject

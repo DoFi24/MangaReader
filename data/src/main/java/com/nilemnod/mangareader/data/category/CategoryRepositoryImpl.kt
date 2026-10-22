@@ -2,16 +2,16 @@ package com.nilemnod.mangareader.data.category
 
 import app.cash.sqldelight.async.coroutines.awaitAsList
 import app.cash.sqldelight.async.coroutines.awaitAsOneOrNull
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.ContributesBinding
-import dev.zacsweers.metro.Inject
-import dev.zacsweers.metro.SingleIn
-import kotlinx.coroutines.flow.Flow
 import com.nilemnod.mangareader.data.Database
 import com.nilemnod.mangareader.data.subscribeToList
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.domain.category.model.NewCategory
 import com.nilemnod.mangareader.domain.category.repository.CategoryRepository
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesBinding
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.SingleIn
+import kotlinx.coroutines.flow.Flow
 
 @Inject
 @SingleIn(AppScope::class)

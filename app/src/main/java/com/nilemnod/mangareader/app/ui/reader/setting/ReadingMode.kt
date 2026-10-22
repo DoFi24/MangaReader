@@ -1,7 +1,7 @@
 package com.nilemnod.mangareader.app.ui.reader.setting
 
 import androidx.compose.ui.graphics.vector.ImageVector
-import dev.icerock.moko.resources.StringResource
+import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
 import com.nilemnod.mangareader.app.ui.reader.viewer.Viewer
 import com.nilemnod.mangareader.app.ui.reader.viewer.pager.L2RPagerViewer
@@ -10,7 +10,7 @@ import com.nilemnod.mangareader.app.ui.reader.viewer.pager.VerticalPagerViewer
 import com.nilemnod.mangareader.app.ui.reader.viewer.webgpu.WebGpuViewer
 import com.nilemnod.mangareader.app.ui.reader.viewer.webgpu.WebGpuViewerContinuous
 import com.nilemnod.mangareader.app.ui.reader.viewer.webtoon.WebtoonViewer
-import com.nilemnod.mangareader.app.di.appGraph
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
 import com.nilemnod.mangareader.icons.custommaterialsymbols.rounded.ReaderLeftToRight
 import com.nilemnod.mangareader.icons.custommaterialsymbols.rounded.ReaderLongStrip
@@ -19,7 +19,7 @@ import com.nilemnod.mangareader.icons.custommaterialsymbols.rounded.ReaderRightT
 import com.nilemnod.mangareader.icons.custommaterialsymbols.rounded.ReaderVertical
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.MobileGear
-import com.nilemnod.mangareader.i18n.MR
+import dev.icerock.moko.resources.StringResource
 
 enum class ReadingMode(
     val stringRes: StringResource,

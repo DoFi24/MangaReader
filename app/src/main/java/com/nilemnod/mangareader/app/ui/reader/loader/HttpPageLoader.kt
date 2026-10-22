@@ -1,11 +1,11 @@
 package com.nilemnod.mangareader.app.ui.reader.loader
 
-import com.nilemnod.mangareader.app.domain.chapter.model.toSChapter
 import com.nilemnod.mangareader.app.data.cache.ChapterCache
-import eu.kanade.tachiyomi.source.model.Page
-import eu.kanade.tachiyomi.source.online.HttpSource
+import com.nilemnod.mangareader.app.domain.chapter.model.toSChapter
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderChapter
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderPage
+import eu.kanade.tachiyomi.source.model.Page
+import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart

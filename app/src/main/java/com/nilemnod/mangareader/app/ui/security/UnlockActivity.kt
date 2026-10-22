@@ -7,10 +7,10 @@ import com.nilemnod.mangareader.app.ui.base.activity.BaseActivity
 import com.nilemnod.mangareader.app.ui.base.delegate.SecureActivityDelegate
 import com.nilemnod.mangareader.app.util.system.AuthenticatorUtil
 import com.nilemnod.mangareader.app.util.system.AuthenticatorUtil.startAuthentication
-import logcat.LogPriority
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.i18n.MR
+import logcat.LogPriority
 
 /**
  * Blank activity with a BiometricPrompt.

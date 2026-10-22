@@ -3,6 +3,19 @@ package com.nilemnod.mangareader.feature.migration.list
 import androidx.annotation.FloatRange
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
+import com.nilemnod.mangareader.app.source.getNameForMangaInfo
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.domain.chapter.interactor.GetChapterSummaryByMangaId
+import com.nilemnod.mangareader.domain.manga.interactor.GetManga
+import com.nilemnod.mangareader.domain.manga.interactor.NetworkToLocalManga
+import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.migration.usecases.MigrateMangaUseCase
+import com.nilemnod.mangareader.domain.source.interactor.UpdateMangaFromRemote
+import com.nilemnod.mangareader.domain.source.service.SourceManager
+import com.nilemnod.mangareader.feature.migration.list.models.MigratingManga
+import com.nilemnod.mangareader.feature.migration.list.models.MigratingManga.SearchResult
+import com.nilemnod.mangareader.feature.migration.list.search.SmartSourceSearchEngine
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Assisted
 import dev.zacsweers.metro.AssistedFactory
@@ -10,9 +23,7 @@ import dev.zacsweers.metro.AssistedInject
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactory
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactoryKey
-import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import eu.kanade.tachiyomi.source.Source
-import com.nilemnod.mangareader.app.source.getNameForMangaInfo
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -32,17 +43,6 @@ import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withContext
 import logcat.LogPriority
-import com.nilemnod.mangareader.domain.migration.usecases.MigrateMangaUseCase
-import com.nilemnod.mangareader.domain.source.interactor.UpdateMangaFromRemote
-import com.nilemnod.mangareader.feature.migration.list.models.MigratingManga
-import com.nilemnod.mangareader.feature.migration.list.models.MigratingManga.SearchResult
-import com.nilemnod.mangareader.feature.migration.list.search.SmartSourceSearchEngine
-import com.nilemnod.mangareader.core.common.util.system.logcat
-import com.nilemnod.mangareader.domain.chapter.interactor.GetChapterSummaryByMangaId
-import com.nilemnod.mangareader.domain.manga.interactor.GetManga
-import com.nilemnod.mangareader.domain.manga.interactor.NetworkToLocalManga
-import com.nilemnod.mangareader.domain.manga.model.Manga
-import com.nilemnod.mangareader.domain.source.service.SourceManager
 
 @AssistedInject
 class MigrationListViewModel(

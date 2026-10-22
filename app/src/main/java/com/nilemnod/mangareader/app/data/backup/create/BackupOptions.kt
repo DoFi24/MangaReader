@@ -1,7 +1,7 @@
 package com.nilemnod.mangareader.app.data.backup.create
 
-import dev.icerock.moko.resources.StringResource
 import com.nilemnod.mangareader.i18n.MR
+import dev.icerock.moko.resources.StringResource
 
 data class BackupOptions(
     val libraryEntries: Boolean = true,

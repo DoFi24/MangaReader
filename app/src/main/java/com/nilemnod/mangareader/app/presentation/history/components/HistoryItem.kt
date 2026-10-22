@@ -24,11 +24,11 @@ import com.nilemnod.mangareader.app.presentation.manga.components.MangaCover
 import com.nilemnod.mangareader.app.presentation.theme.MangaReaderPreviewTheme
 import com.nilemnod.mangareader.app.presentation.util.formatChapterNumber
 import com.nilemnod.mangareader.app.util.lang.toTimestampString
+import com.nilemnod.mangareader.domain.history.model.HistoryWithRelations
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Delete
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Favorite
-import com.nilemnod.mangareader.domain.history.model.HistoryWithRelations
-import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.components.material.padding
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import java.time.format.DateTimeFormatter

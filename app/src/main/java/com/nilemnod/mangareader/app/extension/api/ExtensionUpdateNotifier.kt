@@ -2,9 +2,6 @@ package com.nilemnod.mangareader.app.extension.api
 
 import android.content.Context
 import androidx.core.app.NotificationCompat
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.Inject
-import dev.zacsweers.metro.SingleIn
 import com.nilemnod.mangareader.app.core.security.SecurityPreferences
 import com.nilemnod.mangareader.app.data.notification.NotificationReceiver
 import com.nilemnod.mangareader.app.data.notification.Notifications
@@ -12,6 +9,9 @@ import com.nilemnod.mangareader.app.util.system.cancelNotification
 import com.nilemnod.mangareader.app.util.system.notify
 import com.nilemnod.mangareader.core.common.i18n.pluralStringResource
 import com.nilemnod.mangareader.i18n.MR
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.SingleIn
 import com.nilemnod.mangareader.icons.materialsymbols.R as MaterialSymbolsR
 
 @Inject

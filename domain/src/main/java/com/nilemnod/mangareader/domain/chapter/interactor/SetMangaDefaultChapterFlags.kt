@@ -1,10 +1,10 @@
 package com.nilemnod.mangareader.domain.chapter.interactor
 
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.interactor.GetFavorites
 import com.nilemnod.mangareader.domain.manga.interactor.SetMangaChapterFlags
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import dev.zacsweers.metro.Inject
 
 @Inject
 class SetMangaDefaultChapterFlags(

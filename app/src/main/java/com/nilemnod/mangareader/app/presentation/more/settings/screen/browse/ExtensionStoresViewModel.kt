@@ -3,12 +3,17 @@ package com.nilemnod.mangareader.app.presentation.more.settings.screen.browse
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nilemnod.mangareader.app.extension.ExtensionManager
+import com.nilemnod.mangareader.domain.extension.interactor.AddExtensionStore
+import com.nilemnod.mangareader.domain.extension.interactor.GetExtensionStores
+import com.nilemnod.mangareader.domain.extension.interactor.RemoveExtensionStore
+import com.nilemnod.mangareader.domain.extension.interactor.UpdateExtensionStores
+import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.binding
 import dev.zacsweers.metrox.viewmodel.ViewModelKey
-import com.nilemnod.mangareader.app.extension.ExtensionManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -19,11 +24,6 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import com.nilemnod.mangareader.domain.extension.interactor.AddExtensionStore
-import com.nilemnod.mangareader.domain.extension.interactor.GetExtensionStores
-import com.nilemnod.mangareader.domain.extension.interactor.RemoveExtensionStore
-import com.nilemnod.mangareader.domain.extension.interactor.UpdateExtensionStores
-import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
 import kotlin.time.Duration.Companion.seconds
 
 @Inject

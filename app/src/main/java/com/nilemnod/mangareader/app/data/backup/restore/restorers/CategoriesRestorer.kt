@@ -1,11 +1,11 @@
 package com.nilemnod.mangareader.app.data.backup.restore.restorers
 
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.data.backup.models.BackupCategory
 import com.nilemnod.mangareader.domain.category.interactor.GetCategories
 import com.nilemnod.mangareader.domain.category.model.NewCategory
 import com.nilemnod.mangareader.domain.category.repository.CategoryRepository
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
+import dev.zacsweers.metro.Inject
 
 @Inject
 class CategoriesRestorer(

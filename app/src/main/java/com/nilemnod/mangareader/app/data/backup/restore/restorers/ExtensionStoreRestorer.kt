@@ -1,9 +1,9 @@
 package com.nilemnod.mangareader.app.data.backup.restore.restorers
 
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.data.backup.models.BackupExtensionStore
 import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
 import com.nilemnod.mangareader.domain.extension.repository.ExtensionStoreRepository
+import dev.zacsweers.metro.Inject
 
 @Inject
 class ExtensionStoreRestorer(

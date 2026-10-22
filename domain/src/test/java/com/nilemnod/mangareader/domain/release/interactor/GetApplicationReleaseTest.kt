@@ -1,13 +1,13 @@
 package com.nilemnod.mangareader.domain.release.interactor
 
+import com.nilemnod.mangareader.domain.release.model.Release
+import com.nilemnod.mangareader.domain.release.service.ReleaseService
 import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import com.nilemnod.mangareader.domain.release.model.Release
-import com.nilemnod.mangareader.domain.release.service.ReleaseService
 
 class GetApplicationReleaseTest {
 

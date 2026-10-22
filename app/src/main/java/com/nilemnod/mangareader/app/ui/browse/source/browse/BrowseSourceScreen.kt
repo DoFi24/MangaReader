@@ -29,7 +29,6 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalHapticFeedback
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
 import com.nilemnod.mangareader.app.presentation.browse.BrowseSourceContent
 import com.nilemnod.mangareader.app.presentation.browse.MissingSourceScreen
 import com.nilemnod.mangareader.app.presentation.browse.components.BrowseSourceToolbar
@@ -38,29 +37,30 @@ import com.nilemnod.mangareader.app.presentation.category.components.ChangeCateg
 import com.nilemnod.mangareader.app.presentation.manga.DuplicateMangaDialog
 import com.nilemnod.mangareader.app.presentation.util.AssistContentScreen
 import com.nilemnod.mangareader.app.presentation.util.Screen
-import eu.kanade.tachiyomi.source.online.HttpSource
 import com.nilemnod.mangareader.app.ui.browse.extension.details.SourcePreferencesScreen
 import com.nilemnod.mangareader.app.ui.browse.source.browse.BrowseSourceViewModel.Listing
 import com.nilemnod.mangareader.app.ui.category.CategoryScreen
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.webview.WebViewScreen
+import com.nilemnod.mangareader.domain.source.model.StubSource
+import com.nilemnod.mangareader.feature.migration.dialog.MigrateMangaDialog
+import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
+import com.nilemnod.mangareader.icons.materialsymbols.rounded.FilterList
+import com.nilemnod.mangareader.icons.materialsymbols.rounded.Verified
+import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Favorite
+import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
+import com.nilemnod.mangareader.presentation.core.components.material.padding
+import com.nilemnod.mangareader.presentation.core.i18n.stringResource
+import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
+import com.nilemnod.mangareader.presentation.core.util.collectAsLazyPagingItems
+import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
+import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import com.nilemnod.mangareader.feature.migration.dialog.MigrateMangaDialog
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.FilterList
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Verified
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Favorite
-import com.nilemnod.mangareader.presentation.core.util.collectAsLazyPagingItems
-import com.nilemnod.mangareader.domain.source.model.StubSource
-import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
 
 data class BrowseSourceScreen(
     val sourceId: Long,

@@ -13,11 +13,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.nilemnod.mangareader.app.extension.model.Extension
 import com.nilemnod.mangareader.app.presentation.browse.ExtensionScreen
 import com.nilemnod.mangareader.app.presentation.components.AppBar
 import com.nilemnod.mangareader.app.presentation.components.TabContent
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.browse.ExtensionStoresScreen
-import com.nilemnod.mangareader.app.extension.model.Extension
 import com.nilemnod.mangareader.app.ui.browse.extension.details.ExtensionDetailsScreen
 import com.nilemnod.mangareader.app.ui.webview.WebViewScreen
 import com.nilemnod.mangareader.app.util.system.isPackageInstalled

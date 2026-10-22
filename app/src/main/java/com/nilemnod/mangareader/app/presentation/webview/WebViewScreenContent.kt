@@ -39,25 +39,25 @@ import com.kevinnzou.web.WebContent
 import com.kevinnzou.web.WebView
 import com.kevinnzou.web.WebViewNavigator
 import com.kevinnzou.web.WebViewState
+import com.nilemnod.mangareader.app.BuildConfig
 import com.nilemnod.mangareader.app.presentation.components.AppBar
 import com.nilemnod.mangareader.app.presentation.components.AppBarActions
 import com.nilemnod.mangareader.app.presentation.components.WarningBanner
-import com.nilemnod.mangareader.app.BuildConfig
 import com.nilemnod.mangareader.app.util.system.getHtml
 import com.nilemnod.mangareader.app.util.system.setDefaultSettings
 import com.nilemnod.mangareader.app.util.system.setUserAgent
 import com.nilemnod.mangareader.app.util.system.toast
-import kotlinx.coroutines.launch
-import logcat.LogPriority
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.ArrowBack
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.ArrowForward
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Close
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.TabClose
-import com.nilemnod.mangareader.core.common.util.system.logcat
-import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
+import kotlinx.coroutines.launch
+import logcat.LogPriority
 
 class WebViewWindow(webContent: WebContent, val navigator: WebViewNavigator) {
     var state by mutableStateOf(WebViewState(webContent))

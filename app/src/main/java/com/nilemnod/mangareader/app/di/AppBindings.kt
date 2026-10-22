@@ -1,5 +1,8 @@
 package com.nilemnod.mangareader.app.di
 
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.core.metro.IsDebugBuild
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.BindingContainer
 import dev.zacsweers.metro.Provides
@@ -11,12 +14,9 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.protobuf.ProtoBuf
 import logcat.LogPriority
-import com.nilemnod.mangareader.core.metro.AppCoroutineScope
-import com.nilemnod.mangareader.core.metro.IsDebugBuild
 import nl.adaptivity.xmlutil.XmlDeclMode
 import nl.adaptivity.xmlutil.core.XmlVersion
 import nl.adaptivity.xmlutil.serialization.XML
-import com.nilemnod.mangareader.core.common.util.system.logcat
 
 @BindingContainer
 object AppBindings {

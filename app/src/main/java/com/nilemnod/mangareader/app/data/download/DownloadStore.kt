@@ -2,17 +2,17 @@ package com.nilemnod.mangareader.app.data.download
 
 import android.content.Context
 import androidx.core.content.edit
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.Inject
-import dev.zacsweers.metro.SingleIn
 import com.nilemnod.mangareader.app.data.download.model.Download
-import eu.kanade.tachiyomi.source.online.HttpSource
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
 import com.nilemnod.mangareader.domain.chapter.interactor.GetChapter
 import com.nilemnod.mangareader.domain.manga.interactor.GetManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.service.SourceManager
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.SingleIn
+import eu.kanade.tachiyomi.source.online.HttpSource
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
 
 /**
  * This class is used to persist active downloads across application restarts.

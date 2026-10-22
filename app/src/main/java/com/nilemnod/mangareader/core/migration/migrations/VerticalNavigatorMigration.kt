@@ -1,15 +1,15 @@
 package com.nilemnod.mangareader.core.migration.migrations
 
+import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
+import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode
+import com.nilemnod.mangareader.core.common.preference.PreferenceStore
+import com.nilemnod.mangareader.core.migration.Migration
+import com.nilemnod.mangareader.core.migration.MigrationContext
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoSet
 import dev.zacsweers.metro.Inject
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
-import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import com.nilemnod.mangareader.core.migration.Migration
-import com.nilemnod.mangareader.core.migration.MigrationContext
-import com.nilemnod.mangareader.core.common.preference.PreferenceStore
 
 @Inject
 @ContributesIntoSet(AppScope::class)

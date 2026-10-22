@@ -5,12 +5,12 @@ import android.net.Uri
 import com.hippo.unifile.UniFile
 import com.nilemnod.mangareader.app.data.download.DownloadManager
 import com.nilemnod.mangareader.app.data.download.DownloadProvider
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.model.Page
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderChapter
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderPage
 import com.nilemnod.mangareader.core.archive.archiveReader
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import eu.kanade.tachiyomi.source.Source
+import eu.kanade.tachiyomi.source.model.Page
 import uy.kohesive.injekt.injectLazy
 
 /**

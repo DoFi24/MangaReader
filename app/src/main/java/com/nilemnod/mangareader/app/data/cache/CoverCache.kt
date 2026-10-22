@@ -1,14 +1,14 @@
 package com.nilemnod.mangareader.app.data.cache
 
 import android.content.Context
+import com.nilemnod.mangareader.app.util.storage.DiskUtil
+import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.domain.manga.model.Manga
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
-import com.nilemnod.mangareader.app.util.storage.DiskUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import com.nilemnod.mangareader.core.metro.AppCoroutineScope
-import com.nilemnod.mangareader.domain.manga.model.Manga
 import java.io.File
 import java.io.IOException
 import java.io.InputStream

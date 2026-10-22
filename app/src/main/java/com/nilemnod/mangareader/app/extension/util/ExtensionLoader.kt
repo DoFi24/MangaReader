@@ -6,23 +6,23 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.core.content.pm.PackageInfoCompat
+import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.domain.extension.interactor.TrustExtension
 import com.nilemnod.mangareader.app.extension.model.Extension
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.SourceFactory
 import com.nilemnod.mangareader.app.util.lang.Hash
 import com.nilemnod.mangareader.app.util.storage.copyAndSetReadOnlyTo
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.data.dalvik.DelegateLastClassLoaderCompat
+import com.nilemnod.mangareader.domain.extension.model.ContentWarning
+import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
+import eu.kanade.tachiyomi.source.Source
+import eu.kanade.tachiyomi.source.SourceFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import logcat.LogPriority
-import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.data.dalvik.DelegateLastClassLoaderCompat
-import com.nilemnod.mangareader.domain.extension.model.ContentWarning
-import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
-import com.nilemnod.mangareader.core.common.util.system.logcat
 import java.io.File
 
 /**

@@ -1,9 +1,9 @@
 package com.nilemnod.mangareader.domain.source.interactor
 
-import dev.zacsweers.metro.Inject
-import kotlinx.coroutines.flow.Flow
 import com.nilemnod.mangareader.domain.source.model.SourceWithCount
 import com.nilemnod.mangareader.domain.source.repository.SourceRepository
+import dev.zacsweers.metro.Inject
+import kotlinx.coroutines.flow.Flow
 
 @Inject
 class GetSourcesWithNonLibraryManga(

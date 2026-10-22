@@ -1,12 +1,12 @@
 package com.nilemnod.mangareader.core.migration.migrations
 
 import android.content.Context
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.ContributesIntoSet
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.data.library.LibraryUpdateWorker
 import com.nilemnod.mangareader.core.migration.Migration
 import com.nilemnod.mangareader.core.migration.MigrationContext
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesIntoSet
+import dev.zacsweers.metro.Inject
 
 @Inject
 @ContributesIntoSet(AppScope::class)

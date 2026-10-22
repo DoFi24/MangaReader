@@ -13,30 +13,30 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import com.nilemnod.mangareader.app.R
+import com.nilemnod.mangareader.app.core.preference.asState
+import com.nilemnod.mangareader.app.data.download.DownloadManager
+import com.nilemnod.mangareader.app.domain.base.BasePreferences
+import com.nilemnod.mangareader.app.presentation.more.MoreScreen
+import com.nilemnod.mangareader.app.presentation.util.Tab
+import com.nilemnod.mangareader.app.presentation.util.rememberAnimatedVectorPainter
+import com.nilemnod.mangareader.app.ui.category.CategoryScreen
+import com.nilemnod.mangareader.app.ui.download.DownloadQueueScreen
+import com.nilemnod.mangareader.app.ui.setting.SettingsScreen
+import com.nilemnod.mangareader.app.ui.stats.StatsScreen
+import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metrox.viewmodel.ViewModelKey
 import dev.zacsweers.metrox.viewmodel.metroViewModel
-import com.nilemnod.mangareader.app.core.preference.asState
-import com.nilemnod.mangareader.app.domain.base.BasePreferences
-import com.nilemnod.mangareader.app.presentation.more.MoreScreen
-import com.nilemnod.mangareader.app.presentation.util.Tab
-import com.nilemnod.mangareader.app.presentation.util.rememberAnimatedVectorPainter
-import com.nilemnod.mangareader.app.R
-import com.nilemnod.mangareader.app.data.download.DownloadManager
-import com.nilemnod.mangareader.app.ui.category.CategoryScreen
-import com.nilemnod.mangareader.app.ui.download.DownloadQueueScreen
-import com.nilemnod.mangareader.app.ui.setting.SettingsScreen
-import com.nilemnod.mangareader.app.ui.stats.StatsScreen
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 
 data object MoreTab : Tab {
 

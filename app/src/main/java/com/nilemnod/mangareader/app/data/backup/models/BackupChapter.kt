@@ -1,13 +1,13 @@
 package com.nilemnod.mangareader.app.data.backup.models
 
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.protobuf.ProtoNumber
 import com.nilemnod.mangareader.core.common.extensions.JsonObjectEmptyBytes
 import com.nilemnod.mangareader.core.common.extensions.toByteArray
 import com.nilemnod.mangareader.core.common.extensions.toEpochMillisOrZero
 import com.nilemnod.mangareader.core.common.extensions.toInstantOrNull
 import com.nilemnod.mangareader.core.common.extensions.toJsonObject
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.protobuf.ProtoNumber
 import kotlin.time.Instant
 
 @Serializable

@@ -1,9 +1,9 @@
 package com.nilemnod.mangareader.app.data.backup.create.creators
 
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.data.backup.models.BackupExtensionStore
 import com.nilemnod.mangareader.app.data.backup.models.backupExtensionStoreMapper
 import com.nilemnod.mangareader.domain.extension.interactor.GetExtensionStores
+import dev.zacsweers.metro.Inject
 
 @Inject
 class ExtensionStoresBackupCreator(

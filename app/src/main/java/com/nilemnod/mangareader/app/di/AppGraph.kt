@@ -1,16 +1,6 @@
 package com.nilemnod.mangareader.app.di
 
 import android.content.Context
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.DependencyGraph
-import dev.zacsweers.metro.Provides
-import dev.zacsweers.metrox.viewmodel.MetroViewModelFactory
-import dev.zacsweers.metrox.viewmodel.ViewModelGraph
-import com.nilemnod.mangareader.app.domain.base.BasePreferences
-import com.nilemnod.mangareader.app.domain.extension.interactor.TrustExtension
-import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
-import com.nilemnod.mangareader.app.domain.ui.UiPreferences
-import com.nilemnod.mangareader.app.domain.ui.UiPreferencesProvider
 import com.nilemnod.mangareader.app.App
 import com.nilemnod.mangareader.app.core.security.SecurityPreferences
 import com.nilemnod.mangareader.app.data.backup.create.BackupCreateWorker
@@ -24,32 +14,42 @@ import com.nilemnod.mangareader.app.data.library.LibraryUpdateWorker
 import com.nilemnod.mangareader.app.data.library.MetadataUpdateWorker
 import com.nilemnod.mangareader.app.data.notification.NotificationReceiver
 import com.nilemnod.mangareader.app.data.updater.AppUpdateChecker
+import com.nilemnod.mangareader.app.domain.base.BasePreferences
+import com.nilemnod.mangareader.app.domain.extension.interactor.TrustExtension
+import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
+import com.nilemnod.mangareader.app.domain.ui.UiPreferences
+import com.nilemnod.mangareader.app.domain.ui.UiPreferencesProvider
 import com.nilemnod.mangareader.app.extension.ExtensionManager
 import com.nilemnod.mangareader.app.extension.util.ExtensionInstallActivity
-import eu.kanade.tachiyomi.network.JavaScriptEngine
-import eu.kanade.tachiyomi.network.NetworkHelper
-import eu.kanade.tachiyomi.network.NetworkPreferences
 import com.nilemnod.mangareader.app.ui.base.delegate.SecureActivityDelegateImpl
 import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
 import com.nilemnod.mangareader.app.ui.webview.WebViewActivity
 import com.nilemnod.mangareader.app.util.CrashLogUtil
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.protobuf.ProtoBuf
 import com.nilemnod.mangareader.core.metro.IsDebugBuild
-import com.nilemnod.mangareader.domain.extension.interactor.GetExtensionStoreCountAsFlow
-import com.nilemnod.mangareader.domain.extension.repository.ExtensionStoreRepository
-import nl.adaptivity.xmlutil.serialization.XML
 import com.nilemnod.mangareader.domain.backup.service.BackupPreferences
 import com.nilemnod.mangareader.domain.category.interactor.GetCategories
 import com.nilemnod.mangareader.domain.category.interactor.ResetCategoryFlags
 import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
+import com.nilemnod.mangareader.domain.extension.interactor.GetExtensionStoreCountAsFlow
+import com.nilemnod.mangareader.domain.extension.repository.ExtensionStoreRepository
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.interactor.GetFavorites
 import com.nilemnod.mangareader.domain.manga.interactor.ResetViewerFlags
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.domain.storage.service.StoragePreferences
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.DependencyGraph
+import dev.zacsweers.metro.Provides
+import dev.zacsweers.metrox.viewmodel.MetroViewModelFactory
+import dev.zacsweers.metrox.viewmodel.ViewModelGraph
+import eu.kanade.tachiyomi.network.JavaScriptEngine
+import eu.kanade.tachiyomi.network.NetworkHelper
+import eu.kanade.tachiyomi.network.NetworkPreferences
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.protobuf.ProtoBuf
+import nl.adaptivity.xmlutil.serialization.XML
 
 @DependencyGraph(
     scope = AppScope::class,

@@ -1,11 +1,11 @@
 package com.nilemnod.mangareader.domain.manga.interactor
 
-import dev.zacsweers.metro.Inject
-import kotlinx.coroutines.flow.Flow
-import logcat.LogPriority
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.repository.MangaRepository
+import dev.zacsweers.metro.Inject
+import kotlinx.coroutines.flow.Flow
+import logcat.LogPriority
 
 @Inject
 class GetManga(

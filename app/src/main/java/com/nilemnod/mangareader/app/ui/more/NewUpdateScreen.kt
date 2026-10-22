@@ -6,10 +6,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
 import com.nilemnod.mangareader.app.presentation.more.NewUpdateScreen
 import com.nilemnod.mangareader.app.presentation.util.Screen
 import com.nilemnod.mangareader.app.util.system.openInBrowser
+import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
 
 class NewUpdateScreen(
     private val versionName: String,

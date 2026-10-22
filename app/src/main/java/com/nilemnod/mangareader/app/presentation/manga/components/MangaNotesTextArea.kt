@@ -39,20 +39,20 @@ import com.mohamedrejeb.richeditor.model.rememberRichTextState
 import com.mohamedrejeb.richeditor.ui.material3.RichTextEditor
 import com.mohamedrejeb.richeditor.ui.material3.RichTextEditorDefaults.richTextEditorColors
 import com.nilemnod.mangareader.app.ui.manga.notes.MangaNotesScreen
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.FormatListBulleted
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.FormatBold
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.FormatItalic
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.FormatListNumbered
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.FormatUnderlined
-import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.components.material.padding
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlin.time.Duration.Companion.seconds
 
 @Composable

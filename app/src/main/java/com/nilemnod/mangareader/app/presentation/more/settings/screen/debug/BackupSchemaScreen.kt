@@ -12,17 +12,17 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.nilemnod.mangareader.app.data.backup.models.Backup
 import com.nilemnod.mangareader.app.presentation.components.AppBar
 import com.nilemnod.mangareader.app.presentation.components.AppBarActions
 import com.nilemnod.mangareader.app.presentation.util.Screen
-import com.nilemnod.mangareader.app.data.backup.models.Backup
 import com.nilemnod.mangareader.app.util.system.copyToClipboard
-import kotlinx.serialization.protobuf.schema.ProtoBufSchemaGenerator
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.ContentCopy
-import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
+import kotlinx.serialization.protobuf.schema.ProtoBufSchemaGenerator
 
 class BackupSchemaScreen : Screen() {
 

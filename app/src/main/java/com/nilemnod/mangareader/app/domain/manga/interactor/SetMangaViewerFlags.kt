@@ -1,10 +1,10 @@
 package com.nilemnod.mangareader.app.domain.manga.interactor
 
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderOrientation
 import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode
 import com.nilemnod.mangareader.domain.manga.model.MangaUpdate
 import com.nilemnod.mangareader.domain.manga.repository.MangaRepository
+import dev.zacsweers.metro.Inject
 
 @Inject
 class SetMangaViewerFlags(

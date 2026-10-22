@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.LocalLocale
 import androidx.core.app.ActivityCompat
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.domain.ui.UiPreferences
 import com.nilemnod.mangareader.app.domain.ui.model.TabletUiMode
 import com.nilemnod.mangareader.app.domain.ui.model.ThemeMode
@@ -22,13 +23,12 @@ import com.nilemnod.mangareader.app.presentation.more.settings.widget.AppThemeMo
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.AppThemePreferenceWidget
 import com.nilemnod.mangareader.app.presentation.util.rememberIs24HourSystem
 import com.nilemnod.mangareader.app.util.system.toast
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toJavaLocalDateTime
-import kotlinx.datetime.toLocalDateTime
-import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.presentation.core.util.collectAsState
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toJavaLocalDateTime
+import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
 
 object SettingsAppearanceScreen : SearchableSettings {

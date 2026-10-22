@@ -16,13 +16,13 @@ import com.nilemnod.mangareader.app.extension.model.InstallStep
 import com.nilemnod.mangareader.app.util.lang.use
 import com.nilemnod.mangareader.app.util.system.getParcelableExtraCompat
 import com.nilemnod.mangareader.app.util.system.getUriSize
+import com.nilemnod.mangareader.core.common.util.system.logcat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import logcat.LogPriority
-import com.nilemnod.mangareader.core.common.util.system.logcat
 
 class PackageInstallerInstaller(private val service: Service) : Installer(service) {
 

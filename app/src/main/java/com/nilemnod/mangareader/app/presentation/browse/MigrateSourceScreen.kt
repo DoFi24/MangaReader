@@ -23,13 +23,13 @@ import com.nilemnod.mangareader.app.presentation.browse.components.BaseSourceIte
 import com.nilemnod.mangareader.app.presentation.browse.components.SourceIcon
 import com.nilemnod.mangareader.app.ui.browse.migration.sources.MigrateSourceViewModel
 import com.nilemnod.mangareader.app.util.system.copyToClipboard
+import com.nilemnod.mangareader.domain.source.model.Source
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.ArrowDownward
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.ArrowUpward
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Numbers
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.SortByAlpha
-import com.nilemnod.mangareader.domain.source.model.Source
-import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.components.Badge
 import com.nilemnod.mangareader.presentation.core.components.BadgeGroup
 import com.nilemnod.mangareader.presentation.core.components.ScrollbarLazyColumn

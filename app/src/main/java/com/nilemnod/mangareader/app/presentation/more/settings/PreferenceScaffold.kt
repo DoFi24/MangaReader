@@ -2,10 +2,10 @@ package com.nilemnod.mangareader.app.presentation.more.settings
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable
-import dev.icerock.moko.resources.StringResource
 import com.nilemnod.mangareader.app.presentation.components.AppBar
 import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
+import dev.icerock.moko.resources.StringResource
 
 @Composable
 fun PreferenceScaffold(

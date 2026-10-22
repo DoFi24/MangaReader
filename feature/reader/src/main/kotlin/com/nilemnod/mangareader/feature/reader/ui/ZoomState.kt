@@ -17,8 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.input.pointer.PointerEventPass
-import androidx.compose.ui.input.pointer.positionChanged
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.input.pointer.positionChanged
 import androidx.compose.ui.unit.IntSize
 import kotlin.math.abs
 import kotlin.math.min

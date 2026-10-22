@@ -1,12 +1,12 @@
 package com.nilemnod.mangareader.data.extension.model
 
 import android.annotation.SuppressLint
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.JsonNames
-import kotlinx.serialization.protobuf.ProtoNumber
 import com.nilemnod.mangareader.data.extension.model.NetworkExtensionStore.ContentWarning
 import com.nilemnod.mangareader.data.extension.model.NetworkExtensionStore.ExtensionList
 import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonNames
+import kotlinx.serialization.protobuf.ProtoNumber
 import com.nilemnod.mangareader.app.extension.model.Extension as AppExtension
 import com.nilemnod.mangareader.domain.extension.model.ContentWarning as DomainContentWarning
 

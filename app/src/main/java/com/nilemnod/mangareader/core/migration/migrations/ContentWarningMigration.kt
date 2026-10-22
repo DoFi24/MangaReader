@@ -1,13 +1,13 @@
 package com.nilemnod.mangareader.core.migration.migrations
 
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.ContributesIntoSet
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
+import com.nilemnod.mangareader.core.common.preference.PreferenceStore
 import com.nilemnod.mangareader.core.migration.Migration
 import com.nilemnod.mangareader.core.migration.MigrationContext
 import com.nilemnod.mangareader.domain.extension.model.ContentWarning
-import com.nilemnod.mangareader.core.common.preference.PreferenceStore
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesIntoSet
+import dev.zacsweers.metro.Inject
 
 @Inject
 @ContributesIntoSet(AppScope::class)

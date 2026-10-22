@@ -1,10 +1,10 @@
 package com.nilemnod.mangareader.app.domain.download.interactor
 
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.data.download.DownloadManager
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.service.SourceManager
+import dev.zacsweers.metro.Inject
 
 @Inject
 class DeleteDownload(

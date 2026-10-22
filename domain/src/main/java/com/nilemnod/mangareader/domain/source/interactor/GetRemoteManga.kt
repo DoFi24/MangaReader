@@ -1,9 +1,9 @@
 package com.nilemnod.mangareader.domain.source.interactor
 
-import dev.zacsweers.metro.Inject
-import eu.kanade.tachiyomi.source.model.FilterList
 import com.nilemnod.mangareader.domain.source.repository.SourcePagingSource
 import com.nilemnod.mangareader.domain.source.repository.SourceRepository
+import dev.zacsweers.metro.Inject
+import eu.kanade.tachiyomi.source.model.FilterList
 
 @Inject
 class GetRemoteManga(

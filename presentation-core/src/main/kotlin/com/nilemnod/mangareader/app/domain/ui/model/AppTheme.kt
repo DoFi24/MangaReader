@@ -1,7 +1,7 @@
 package com.nilemnod.mangareader.app.domain.ui.model
 
-import dev.icerock.moko.resources.StringResource
 import com.nilemnod.mangareader.i18n.MR
+import dev.icerock.moko.resources.StringResource
 
 enum class AppTheme(val titleRes: StringResource?) {
     DEFAULT(MR.strings.label_default),

@@ -3,12 +3,6 @@ package com.nilemnod.mangareader.core.common.preference
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.ContributesBinding
-import dev.zacsweers.metro.Inject
-import dev.zacsweers.metro.SingleIn
-import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.callbackFlow
 import com.nilemnod.mangareader.core.common.preference.AndroidPreference.BooleanPrimitive
 import com.nilemnod.mangareader.core.common.preference.AndroidPreference.FloatPrimitive
 import com.nilemnod.mangareader.core.common.preference.AndroidPreference.IntPrimitive
@@ -18,6 +12,12 @@ import com.nilemnod.mangareader.core.common.preference.AndroidPreference.ObjectA
 import com.nilemnod.mangareader.core.common.preference.AndroidPreference.ObjectSetAsStringSet
 import com.nilemnod.mangareader.core.common.preference.AndroidPreference.StringPrimitive
 import com.nilemnod.mangareader.core.common.preference.AndroidPreference.StringSetPrimitive
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesBinding
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.SingleIn
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.callbackFlow
 
 @SingleIn(AppScope::class)
 @ContributesBinding(AppScope::class)

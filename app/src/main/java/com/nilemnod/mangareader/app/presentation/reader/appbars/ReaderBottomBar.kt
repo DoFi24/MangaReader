@@ -10,12 +10,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderOrientation
 import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
 import com.nilemnod.mangareader.icons.custommaterialsymbols.rounded.CropOff
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Crop
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Settings
-import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 
 @Composable

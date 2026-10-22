@@ -5,8 +5,8 @@ import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.coroutines.mapToOne
 import app.cash.sqldelight.coroutines.mapToOneOrNull
-import kotlinx.coroutines.flow.Flow
 import com.nilemnod.mangareader.core.common.util.lang.pausedWhileUnsubscribed
+import kotlinx.coroutines.flow.Flow
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 

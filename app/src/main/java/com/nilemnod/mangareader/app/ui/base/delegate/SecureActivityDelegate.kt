@@ -8,17 +8,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
-import dev.zacsweers.metro.Inject
-import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.core.security.SecurityPreferences
+import com.nilemnod.mangareader.app.di.appGraph
+import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.ui.security.UnlockActivity
 import com.nilemnod.mangareader.app.util.system.AuthenticatorUtil
 import com.nilemnod.mangareader.app.util.system.AuthenticatorUtil.isAuthenticationSupported
 import com.nilemnod.mangareader.app.util.view.setSecureScreen
+import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import com.nilemnod.mangareader.app.di.appGraph
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 

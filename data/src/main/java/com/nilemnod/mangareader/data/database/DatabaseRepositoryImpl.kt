@@ -2,6 +2,7 @@ package com.nilemnod.mangareader.data.database
 
 import app.cash.sqldelight.db.QueryResult
 import app.cash.sqldelight.db.SqlDriver
+import com.nilemnod.mangareader.domain.database.repository.DatabaseRepository
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 import dev.zacsweers.metro.Inject
@@ -9,7 +10,6 @@ import dev.zacsweers.metro.SingleIn
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.withContext
-import com.nilemnod.mangareader.domain.database.repository.DatabaseRepository
 
 @Inject
 @SingleIn(AppScope::class)

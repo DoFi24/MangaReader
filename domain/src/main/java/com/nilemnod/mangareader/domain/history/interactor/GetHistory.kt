@@ -1,10 +1,10 @@
 package com.nilemnod.mangareader.domain.history.interactor
 
-import dev.zacsweers.metro.Inject
-import kotlinx.coroutines.flow.Flow
 import com.nilemnod.mangareader.domain.history.model.History
 import com.nilemnod.mangareader.domain.history.model.HistoryWithRelations
 import com.nilemnod.mangareader.domain.history.repository.HistoryRepository
+import dev.zacsweers.metro.Inject
+import kotlinx.coroutines.flow.Flow
 
 @Inject
 class GetHistory(

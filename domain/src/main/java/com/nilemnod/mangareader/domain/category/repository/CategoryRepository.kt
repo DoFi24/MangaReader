@@ -1,8 +1,8 @@
 package com.nilemnod.mangareader.domain.category.repository
 
-import kotlinx.coroutines.flow.Flow
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.domain.category.model.NewCategory
+import kotlinx.coroutines.flow.Flow
 
 interface CategoryRepository {
 

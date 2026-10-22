@@ -1,8 +1,6 @@
 package com.nilemnod.mangareader.app.domain.chapter.interactor
 
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.domain.download.interactor.DeleteDownload
-import logcat.LogPriority
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.chapter.model.ChapterUpdate
@@ -10,6 +8,8 @@ import com.nilemnod.mangareader.domain.chapter.repository.ChapterRepository
 import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.repository.MangaRepository
+import dev.zacsweers.metro.Inject
+import logcat.LogPriority
 
 @Inject
 class SetReadStatus(

@@ -2,17 +2,17 @@ package com.nilemnod.mangareader.data.updates
 
 import app.cash.sqldelight.Query
 import app.cash.sqldelight.async.coroutines.awaitAsList
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.ContributesBinding
-import dev.zacsweers.metro.Inject
-import dev.zacsweers.metro.SingleIn
-import kotlinx.coroutines.flow.Flow
 import com.nilemnod.mangareader.core.common.util.lang.toLong
 import com.nilemnod.mangareader.data.Database
 import com.nilemnod.mangareader.data.subscribeToList
 import com.nilemnod.mangareader.domain.manga.model.MangaCover
 import com.nilemnod.mangareader.domain.updates.model.UpdatesWithRelations
 import com.nilemnod.mangareader.domain.updates.repository.UpdatesRepository
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesBinding
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.SingleIn
+import kotlinx.coroutines.flow.Flow
 import kotlin.time.Instant
 
 @Inject

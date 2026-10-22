@@ -12,8 +12,8 @@ import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.semantics.Role
 import coil3.compose.AsyncImage
-import com.nilemnod.mangareader.app.presentation.util.rememberResourceBitmapPainter
 import com.nilemnod.mangareader.app.R
+import com.nilemnod.mangareader.app.presentation.util.rememberResourceBitmapPainter
 
 enum class MangaCover(val ratio: Float) {
     Square(1f / 1f),
