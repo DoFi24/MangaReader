@@ -16,17 +16,11 @@ import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.preference.PreferenceManager
 import coil3.ImageLoader
 import coil3.SingletonImageLoader
-import eu.kanade.tachiyomi.AppInfo
 import coil3.memory.MemoryCache
 import coil3.network.okhttp.OkHttpNetworkFetcherFactory
 import coil3.request.allowRgb565
 import coil3.request.crossfade
 import coil3.util.DebugLogger
-import dev.zacsweers.metro.Inject
-import dev.zacsweers.metro.createGraphFactory
-import com.nilemnod.mangareader.app.domain.base.BasePreferences
-import com.nilemnod.mangareader.app.domain.ui.UiPreferences
-import com.nilemnod.mangareader.app.domain.ui.model.setAppCompatDelegateThemeMode
 import com.nilemnod.mangareader.app.crash.CrashActivity
 import com.nilemnod.mangareader.app.crash.GlobalExceptionHandler
 import com.nilemnod.mangareader.app.data.cache.CoverCache
@@ -40,9 +34,12 @@ import com.nilemnod.mangareader.app.data.coil.MangaCoverFetcher
 import com.nilemnod.mangareader.app.data.coil.MangaCoverKeyer
 import com.nilemnod.mangareader.app.data.coil.MangaKeyer
 import com.nilemnod.mangareader.app.data.notification.Notifications
+import com.nilemnod.mangareader.app.di.AppGraph
+import com.nilemnod.mangareader.app.di.injekt.MetroInjektRegistrar
+import com.nilemnod.mangareader.app.domain.base.BasePreferences
+import com.nilemnod.mangareader.app.domain.ui.UiPreferences
+import com.nilemnod.mangareader.app.domain.ui.model.setAppCompatDelegateThemeMode
 import com.nilemnod.mangareader.app.extension.ExtensionManager
-import eu.kanade.tachiyomi.network.NetworkHelper
-import eu.kanade.tachiyomi.network.NetworkPreferences
 import com.nilemnod.mangareader.app.ui.base.delegate.SecureActivityDelegate
 import com.nilemnod.mangareader.app.util.system.DeviceUtil
 import com.nilemnod.mangareader.app.util.system.WebViewUtil
@@ -50,6 +47,22 @@ import com.nilemnod.mangareader.app.util.system.animatorDurationScale
 import com.nilemnod.mangareader.app.util.system.cancelNotification
 import com.nilemnod.mangareader.app.util.system.isDebugBuildType
 import com.nilemnod.mangareader.app.util.system.notify
+import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.common.preference.Preference
+import com.nilemnod.mangareader.core.common.preference.PreferenceStore
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.core.metro.GraphProvider
+import com.nilemnod.mangareader.core.migration.Migration
+import com.nilemnod.mangareader.core.migration.Migrator
+import com.nilemnod.mangareader.domain.source.service.SourceManager
+import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.presentation.widget.WidgetManager
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.createGraphFactory
+import eu.kanade.tachiyomi.AppInfo
+import eu.kanade.tachiyomi.network.NetworkHelper
+import eu.kanade.tachiyomi.network.NetworkPreferences
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
@@ -57,20 +70,7 @@ import kotlinx.coroutines.flow.onEach
 import logcat.AndroidLogcatLogger
 import logcat.LogPriority
 import logcat.LogcatLogger
-import com.nilemnod.mangareader.app.di.AppGraph
-import com.nilemnod.mangareader.app.di.injekt.MetroInjektRegistrar
-import com.nilemnod.mangareader.core.metro.AppCoroutineScope
-import com.nilemnod.mangareader.core.metro.GraphProvider
-import com.nilemnod.mangareader.core.migration.Migration
-import com.nilemnod.mangareader.core.migration.Migrator
 import org.conscrypt.Conscrypt
-import com.nilemnod.mangareader.core.common.i18n.stringResource
-import com.nilemnod.mangareader.core.common.preference.Preference
-import com.nilemnod.mangareader.core.common.preference.PreferenceStore
-import com.nilemnod.mangareader.core.common.util.system.logcat
-import com.nilemnod.mangareader.domain.source.service.SourceManager
-import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.widget.WidgetManager
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.InjektScope
 import java.security.Security
@@ -86,7 +86,6 @@ class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factor
     @Inject private lateinit var preferenceStore: PreferenceStore
 
     @Inject private lateinit var basePreferences: BasePreferences
-
 
     @Inject private lateinit var networkPreferences: NetworkPreferences
 

@@ -1,8 +1,8 @@
 package com.nilemnod.mangareader.domain.release.interactor
 
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.domain.release.model.Release
 import com.nilemnod.mangareader.domain.release.service.ReleaseService
+import dev.zacsweers.metro.Inject
 
 @Inject
 class GetApplicationRelease(

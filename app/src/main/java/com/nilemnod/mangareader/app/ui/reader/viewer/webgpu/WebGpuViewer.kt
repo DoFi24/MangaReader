@@ -30,7 +30,7 @@ import ca.mpreg.webgpuviewer.transition.TransitionStackUp
 import ca.mpreg.webgpuviewer.viewer.AnimationFrame
 import ca.mpreg.webgpuviewer.viewer.ImagePage
 import ca.mpreg.webgpuviewer.viewer.ImageViewerContinuousState
-import eu.kanade.tachiyomi.source.model.Page
+import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
 import com.nilemnod.mangareader.app.ui.reader.loader.HttpPageLoader
 import com.nilemnod.mangareader.app.ui.reader.model.DownloadStream
@@ -44,6 +44,8 @@ import com.nilemnod.mangareader.app.ui.reader.viewer.Viewer
 import com.nilemnod.mangareader.app.ui.reader.viewer.ViewerNavigation.NavigationRegion
 import com.nilemnod.mangareader.app.util.system.createReaderThemeContext
 import com.nilemnod.mangareader.app.util.system.readerBackgroundColor
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import eu.kanade.tachiyomi.source.model.Page
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
@@ -56,8 +58,6 @@ import kotlinx.coroutines.flow.takeWhile
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import logcat.LogPriority
-import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.core.common.util.system.logcat
 import java.io.FilterInputStream
 import java.lang.ref.WeakReference
 import java.util.TreeSet

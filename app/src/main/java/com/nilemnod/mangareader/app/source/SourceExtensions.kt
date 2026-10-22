@@ -4,9 +4,9 @@ import android.content.Context
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.domain.source.model.StubSource
 import com.nilemnod.mangareader.source.local.isLocal
+import eu.kanade.tachiyomi.source.Source
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
-import eu.kanade.tachiyomi.source.Source
 
 fun Source.getNameForMangaInfo(): String {
     val preferences = Injekt.get<Context>().appGraph.sourcePreferences

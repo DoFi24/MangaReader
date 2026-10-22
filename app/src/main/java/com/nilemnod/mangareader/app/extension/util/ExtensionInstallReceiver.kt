@@ -8,12 +8,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.nilemnod.mangareader.app.BuildConfig
 import com.nilemnod.mangareader.app.extension.model.Extension
+import com.nilemnod.mangareader.core.common.util.system.logcat
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import logcat.LogPriority
-import com.nilemnod.mangareader.core.common.util.system.logcat
 
 /**
  * Broadcast receiver that listens for the system's packages installed, updated or removed, and only

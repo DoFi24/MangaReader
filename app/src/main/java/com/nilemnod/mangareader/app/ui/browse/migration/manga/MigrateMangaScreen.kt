@@ -19,18 +19,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
 import com.nilemnod.mangareader.app.presentation.components.AppBar
 import com.nilemnod.mangareader.app.presentation.manga.components.BaseMangaListItem
 import com.nilemnod.mangareader.app.presentation.util.Screen
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.util.system.toast
-import kotlinx.coroutines.flow.collectLatest
+import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.feature.migration.config.MigrationConfigScreen
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.ArrowForward
-import com.nilemnod.mangareader.domain.manga.model.Manga
-import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.components.FastScrollLazyColumn
 import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
@@ -38,6 +36,8 @@ import com.nilemnod.mangareader.presentation.core.screens.EmptyScreen
 import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
 import com.nilemnod.mangareader.presentation.core.util.selectedBackground
 import com.nilemnod.mangareader.presentation.core.util.shouldExpandFAB
+import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
+import kotlinx.coroutines.flow.collectLatest
 
 data class MigrateMangaScreen(
     private val sourceId: Long,

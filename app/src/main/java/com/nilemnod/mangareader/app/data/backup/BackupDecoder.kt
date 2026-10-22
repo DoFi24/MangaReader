@@ -2,9 +2,11 @@ package com.nilemnod.mangareader.app.data.backup
 
 import android.content.Context
 import android.net.Uri
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.data.backup.models.Backup
 import com.nilemnod.mangareader.app.data.backup.models.BackupManga
+import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.i18n.MR
+import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.serialization.protobuf.ProtoBuf
@@ -12,8 +14,6 @@ import okio.BufferedSource
 import okio.buffer
 import okio.gzip
 import okio.source
-import com.nilemnod.mangareader.core.common.i18n.stringResource
-import com.nilemnod.mangareader.i18n.MR
 import java.io.IOException
 
 @Inject

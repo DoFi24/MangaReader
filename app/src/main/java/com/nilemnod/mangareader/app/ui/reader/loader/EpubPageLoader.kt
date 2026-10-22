@@ -1,8 +1,8 @@
 package com.nilemnod.mangareader.app.ui.reader.loader
 
-import eu.kanade.tachiyomi.source.model.Page
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderPage
 import com.nilemnod.mangareader.core.archive.EpubReader
+import eu.kanade.tachiyomi.source.model.Page
 
 /**
  * Loader used to load a chapter from a .epub file.

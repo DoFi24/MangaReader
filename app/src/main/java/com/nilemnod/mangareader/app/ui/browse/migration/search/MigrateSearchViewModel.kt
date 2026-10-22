@@ -1,6 +1,13 @@
 package com.nilemnod.mangareader.app.ui.browse.migration.search
 
 import androidx.lifecycle.viewModelScope
+import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
+import com.nilemnod.mangareader.app.extension.ExtensionManager
+import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.SearchItemResult
+import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.SearchViewModel
+import com.nilemnod.mangareader.domain.manga.interactor.GetManga
+import com.nilemnod.mangareader.domain.manga.interactor.NetworkToLocalManga
+import com.nilemnod.mangareader.domain.source.service.SourceManager
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Assisted
 import dev.zacsweers.metro.AssistedFactory
@@ -8,15 +15,8 @@ import dev.zacsweers.metro.AssistedInject
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactory
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactoryKey
-import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
-import com.nilemnod.mangareader.app.extension.ExtensionManager
 import eu.kanade.tachiyomi.source.Source
-import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.SearchItemResult
-import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.SearchViewModel
 import kotlinx.coroutines.launch
-import com.nilemnod.mangareader.domain.manga.interactor.GetManga
-import com.nilemnod.mangareader.domain.manga.interactor.NetworkToLocalManga
-import com.nilemnod.mangareader.domain.source.service.SourceManager
 
 @AssistedInject
 class MigrateSearchViewModel(

@@ -20,7 +20,6 @@ import androidx.compose.ui.util.fastForEachIndexed
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import dev.zacsweers.metrox.viewmodel.metroViewModel
 import com.nilemnod.mangareader.app.presentation.category.visualName
 import com.nilemnod.mangareader.app.presentation.components.TabbedDialog
 import com.nilemnod.mangareader.app.presentation.components.TabbedDialogPaddings
@@ -34,6 +33,7 @@ import com.nilemnod.mangareader.presentation.core.components.material.padding
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
 import com.nilemnod.mangareader.presentation.core.util.collectAsState
+import dev.zacsweers.metrox.viewmodel.metroViewModel
 
 class UpcomingScreen : Screen() {
 

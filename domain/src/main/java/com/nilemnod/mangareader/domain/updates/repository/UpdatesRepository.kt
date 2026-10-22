@@ -1,7 +1,7 @@
 package com.nilemnod.mangareader.domain.updates.repository
 
-import kotlinx.coroutines.flow.Flow
 import com.nilemnod.mangareader.domain.updates.model.UpdatesWithRelations
+import kotlinx.coroutines.flow.Flow
 import kotlin.time.Instant
 
 interface UpdatesRepository {

@@ -15,14 +15,12 @@ import coil3.imageLoader
 import coil3.request.ImageRequest
 import coil3.request.transformations
 import coil3.transform.CircleCropTransformation
-import dev.zacsweers.metro.Inject
-import com.nilemnod.mangareader.app.presentation.util.formatChapterNumber
 import com.nilemnod.mangareader.app.R
 import com.nilemnod.mangareader.app.core.security.SecurityPreferences
 import com.nilemnod.mangareader.app.data.download.Downloader
 import com.nilemnod.mangareader.app.data.notification.NotificationReceiver
 import com.nilemnod.mangareader.app.data.notification.Notifications
-import eu.kanade.tachiyomi.source.UnmeteredSource
+import com.nilemnod.mangareader.app.presentation.util.formatChapterNumber
 import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.app.util.lang.chop
 import com.nilemnod.mangareader.app.util.system.cancelNotification
@@ -37,6 +35,8 @@ import com.nilemnod.mangareader.domain.library.model.LibraryManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.i18n.MR
+import dev.zacsweers.metro.Inject
+import eu.kanade.tachiyomi.source.UnmeteredSource
 import java.math.RoundingMode
 import java.text.NumberFormat
 import com.nilemnod.mangareader.icons.materialsymbols.R as MaterialSymbolsR

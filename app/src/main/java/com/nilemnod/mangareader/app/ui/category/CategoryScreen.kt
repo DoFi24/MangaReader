@@ -8,15 +8,15 @@ import androidx.compose.ui.util.fastMap
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import dev.zacsweers.metrox.viewmodel.metroViewModel
 import com.nilemnod.mangareader.app.presentation.category.CategoryScreen
 import com.nilemnod.mangareader.app.presentation.category.components.CategoryCreateDialog
 import com.nilemnod.mangareader.app.presentation.category.components.CategoryDeleteDialog
 import com.nilemnod.mangareader.app.presentation.category.components.CategoryRenameDialog
 import com.nilemnod.mangareader.app.presentation.util.Screen
 import com.nilemnod.mangareader.app.util.system.toast
-import kotlinx.coroutines.flow.collectLatest
 import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
+import dev.zacsweers.metrox.viewmodel.metroViewModel
+import kotlinx.coroutines.flow.collectLatest
 
 class CategoryScreen : Screen() {
 

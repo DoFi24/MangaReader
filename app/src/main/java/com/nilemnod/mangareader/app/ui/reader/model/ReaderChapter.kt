@@ -1,9 +1,9 @@
 package com.nilemnod.mangareader.app.ui.reader.model
 
 import com.nilemnod.mangareader.app.ui.reader.loader.PageLoader
-import kotlinx.coroutines.flow.MutableStateFlow
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
+import kotlinx.coroutines.flow.MutableStateFlow
 
 data class ReaderChapter(private val loadedChapter: Chapter) {
 

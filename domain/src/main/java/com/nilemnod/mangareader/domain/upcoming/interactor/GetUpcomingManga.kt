@@ -1,10 +1,10 @@
 package com.nilemnod.mangareader.domain.upcoming.interactor
 
+import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.manga.repository.MangaRepository
 import dev.zacsweers.metro.Inject
 import eu.kanade.tachiyomi.source.model.SManga
 import kotlinx.coroutines.flow.Flow
-import com.nilemnod.mangareader.domain.manga.model.Manga
-import com.nilemnod.mangareader.domain.manga.repository.MangaRepository
 
 @Inject
 class GetUpcomingManga(

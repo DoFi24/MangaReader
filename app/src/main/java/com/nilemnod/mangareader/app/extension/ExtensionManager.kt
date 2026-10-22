@@ -1,9 +1,6 @@
 package com.nilemnod.mangareader.app.extension
 
 import android.content.Context
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.Inject
-import dev.zacsweers.metro.SingleIn
 import com.nilemnod.mangareader.app.domain.extension.interactor.TrustExtension
 import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.app.extension.api.ExtensionUpdateNotifier
@@ -13,6 +10,16 @@ import com.nilemnod.mangareader.app.extension.util.ExtensionInstallReceiver
 import com.nilemnod.mangareader.app.extension.util.ExtensionInstaller
 import com.nilemnod.mangareader.app.extension.util.ExtensionLoader
 import com.nilemnod.mangareader.app.util.system.toast
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.domain.extension.interactor.UpdateExtensionStores
+import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
+import com.nilemnod.mangareader.domain.extension.repository.ExtensionStoreRepository
+import com.nilemnod.mangareader.domain.source.model.StubSource
+import com.nilemnod.mangareader.i18n.MR
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.SingleIn
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,13 +41,6 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import logcat.LogPriority
-import com.nilemnod.mangareader.core.metro.AppCoroutineScope
-import com.nilemnod.mangareader.domain.extension.interactor.UpdateExtensionStores
-import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
-import com.nilemnod.mangareader.domain.extension.repository.ExtensionStoreRepository
-import com.nilemnod.mangareader.core.common.util.system.logcat
-import com.nilemnod.mangareader.domain.source.model.StubSource
-import com.nilemnod.mangareader.i18n.MR
 import java.util.Locale
 
 /**

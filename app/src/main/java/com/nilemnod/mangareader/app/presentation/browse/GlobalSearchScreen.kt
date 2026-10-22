@@ -10,13 +10,13 @@ import com.nilemnod.mangareader.app.presentation.browse.components.GlobalSearchE
 import com.nilemnod.mangareader.app.presentation.browse.components.GlobalSearchLoadingResultItem
 import com.nilemnod.mangareader.app.presentation.browse.components.GlobalSearchResultItem
 import com.nilemnod.mangareader.app.presentation.browse.components.GlobalSearchToolbar
-import eu.kanade.tachiyomi.source.Source
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.SearchItemResult
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.SearchViewModel
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.SourceFilter
 import com.nilemnod.mangareader.app.util.system.LocaleHelper
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
+import eu.kanade.tachiyomi.source.Source
 
 @Composable
 fun GlobalSearchScreen(

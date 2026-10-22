@@ -1,12 +1,12 @@
 package com.nilemnod.mangareader.core.migration
 
+import com.nilemnod.mangareader.core.common.util.system.logcat
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import logcat.LogPriority
-import com.nilemnod.mangareader.core.common.util.system.logcat
 
 class MigrationJobFactory(
     private val migrationContext: MigrationContext,

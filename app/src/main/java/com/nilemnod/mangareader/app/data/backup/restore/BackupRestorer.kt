@@ -2,9 +2,6 @@ package com.nilemnod.mangareader.app.data.backup.restore
 
 import android.content.Context
 import android.net.Uri
-import dev.zacsweers.metro.Assisted
-import dev.zacsweers.metro.AssistedFactory
-import dev.zacsweers.metro.AssistedInject
 import com.nilemnod.mangareader.app.data.backup.BackupDecoder
 import com.nilemnod.mangareader.app.data.backup.BackupNotifier
 import com.nilemnod.mangareader.app.data.backup.models.BackupCategory
@@ -18,6 +15,14 @@ import com.nilemnod.mangareader.app.data.backup.restore.restorers.MangaRestorer
 import com.nilemnod.mangareader.app.data.backup.restore.restorers.PreferenceRestorer
 import com.nilemnod.mangareader.app.data.download.DownloadCache
 import com.nilemnod.mangareader.app.util.system.createFileInCacheDir
+import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.domain.source.repository.StubSourceRepository
+import com.nilemnod.mangareader.domain.source.service.SourceManager
+import com.nilemnod.mangareader.i18n.MR
+import dev.zacsweers.metro.Assisted
+import dev.zacsweers.metro.AssistedFactory
+import dev.zacsweers.metro.AssistedInject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
@@ -30,11 +35,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.withIndex
 import kotlinx.coroutines.launch
 import logcat.LogPriority
-import com.nilemnod.mangareader.core.common.i18n.stringResource
-import com.nilemnod.mangareader.core.common.util.system.logcat
-import com.nilemnod.mangareader.domain.source.repository.StubSourceRepository
-import com.nilemnod.mangareader.domain.source.service.SourceManager
-import com.nilemnod.mangareader.i18n.MR
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.BitSet

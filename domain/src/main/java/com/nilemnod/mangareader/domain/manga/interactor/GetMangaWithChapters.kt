@@ -1,12 +1,12 @@
 package com.nilemnod.mangareader.domain.manga.interactor
 
-import dev.zacsweers.metro.Inject
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.chapter.repository.ChapterRepository
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.repository.MangaRepository
+import dev.zacsweers.metro.Inject
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 
 @Inject
 class GetMangaWithChapters(

@@ -11,23 +11,23 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import dev.zacsweers.metrox.viewmodel.metroViewModel
+import com.nilemnod.mangareader.app.R
 import com.nilemnod.mangareader.app.presentation.components.TabbedScreen
 import com.nilemnod.mangareader.app.presentation.util.Tab
 import com.nilemnod.mangareader.app.presentation.util.rememberAnimatedVectorPainter
-import com.nilemnod.mangareader.app.R
 import com.nilemnod.mangareader.app.ui.browse.extension.ExtensionsViewModel
 import com.nilemnod.mangareader.app.ui.browse.extension.extensionsTab
 import com.nilemnod.mangareader.app.ui.browse.migration.sources.migrateSourceTab
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.GlobalSearchScreen
 import com.nilemnod.mangareader.app.ui.browse.source.sourcesTab
 import com.nilemnod.mangareader.app.ui.main.MainActivity
+import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.presentation.core.i18n.stringResource
+import dev.zacsweers.metrox.viewmodel.metroViewModel
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
-import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 
 data object BrowseTab : Tab {
 

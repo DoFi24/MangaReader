@@ -7,12 +7,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.presentation.more.onboarding.OnboardingScreen
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.SearchableSettings
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.SettingsDataScreen
 import com.nilemnod.mangareader.app.presentation.util.Screen
 import com.nilemnod.mangareader.app.ui.setting.SettingsScreen
-import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.presentation.core.util.collectAsState
 

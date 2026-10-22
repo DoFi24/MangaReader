@@ -3,21 +3,10 @@ package com.nilemnod.mangareader.app.ui.stats
 import androidx.compose.ui.util.fastDistinctBy
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.ContributesIntoMap
-import dev.zacsweers.metro.Inject
-import dev.zacsweers.metro.binding
-import dev.zacsweers.metrox.viewmodel.ViewModelKey
 import com.nilemnod.mangareader.app.core.util.fastCountNot
+import com.nilemnod.mangareader.app.data.download.DownloadManager
 import com.nilemnod.mangareader.app.presentation.more.stats.StatsScreenState
 import com.nilemnod.mangareader.app.presentation.more.stats.data.StatsData
-import com.nilemnod.mangareader.app.data.download.DownloadManager
-import eu.kanade.tachiyomi.source.model.SManga
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import com.nilemnod.mangareader.domain.history.interactor.GetTotalReadDuration
 import com.nilemnod.mangareader.domain.library.model.LibraryManga
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
@@ -26,6 +15,17 @@ import com.nilemnod.mangareader.domain.library.service.LibraryPreferences.Compan
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences.Companion.MANGA_NON_READ
 import com.nilemnod.mangareader.domain.manga.interactor.GetLibraryManga
 import com.nilemnod.mangareader.source.local.isLocal
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesIntoMap
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.binding
+import dev.zacsweers.metrox.viewmodel.ViewModelKey
+import eu.kanade.tachiyomi.source.model.SManga
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 @Inject
 @ViewModelKey

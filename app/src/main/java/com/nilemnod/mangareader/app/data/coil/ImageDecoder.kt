@@ -14,10 +14,10 @@ import coil3.decode.Decoder
 import coil3.decode.ImageSource
 import coil3.fetch.SourceFetchResult
 import coil3.request.Options
+import com.nilemnod.mangareader.core.common.util.system.ImageUtil
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import okio.BufferedSource
-import com.nilemnod.mangareader.core.common.util.system.ImageUtil
 import kotlin.math.min
 import kotlin.math.sqrt
 

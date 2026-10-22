@@ -1,10 +1,10 @@
 package com.nilemnod.mangareader.data.manga
 
-import eu.kanade.tachiyomi.source.model.UpdateStrategy
-import kotlinx.serialization.json.JsonObject
 import com.nilemnod.mangareader.domain.library.model.LibraryManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaWithChapterCount
+import eu.kanade.tachiyomi.source.model.UpdateStrategy
+import kotlinx.serialization.json.JsonObject
 import kotlin.time.Instant
 
 object MangaMapper {

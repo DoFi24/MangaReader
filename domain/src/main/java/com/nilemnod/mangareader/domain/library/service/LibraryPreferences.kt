@@ -1,8 +1,5 @@
 package com.nilemnod.mangareader.domain.library.service
 
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.Inject
-import dev.zacsweers.metro.SingleIn
 import com.nilemnod.mangareader.core.common.preference.Preference
 import com.nilemnod.mangareader.core.common.preference.PreferenceStore
 import com.nilemnod.mangareader.core.common.preference.TriState
@@ -10,6 +7,9 @@ import com.nilemnod.mangareader.core.common.preference.getEnum
 import com.nilemnod.mangareader.domain.library.model.LibraryDisplayMode
 import com.nilemnod.mangareader.domain.library.model.LibrarySort
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.SingleIn
 
 @Inject
 @SingleIn(AppScope::class)

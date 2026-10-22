@@ -1,16 +1,16 @@
 package com.nilemnod.mangareader.data.source
 
 import androidx.paging.PagingState
+import com.nilemnod.mangareader.domain.manga.interactor.NetworkToLocalManga
+import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.manga.model.toDomainManga
+import com.nilemnod.mangareader.domain.source.repository.SourcePagingSource
 import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.source.model.FilterList
 import eu.kanade.tachiyomi.source.model.MangasPage
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import com.nilemnod.mangareader.domain.manga.model.toDomainManga
-import com.nilemnod.mangareader.domain.manga.interactor.NetworkToLocalManga
-import com.nilemnod.mangareader.domain.manga.model.Manga
-import com.nilemnod.mangareader.domain.source.repository.SourcePagingSource
 
 class SourceSearchPagingSource(
     source: suspend () -> Source,

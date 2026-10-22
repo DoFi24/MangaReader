@@ -15,26 +15,26 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import dev.zacsweers.metrox.viewmodel.metroViewModel
+import com.nilemnod.mangareader.app.R
 import com.nilemnod.mangareader.app.presentation.category.components.ChangeCategoryDialog
 import com.nilemnod.mangareader.app.presentation.history.HistoryScreen
 import com.nilemnod.mangareader.app.presentation.history.components.HistoryDeleteAllDialog
 import com.nilemnod.mangareader.app.presentation.history.components.HistoryDeleteDialog
 import com.nilemnod.mangareader.app.presentation.manga.DuplicateMangaDialog
 import com.nilemnod.mangareader.app.presentation.util.Tab
-import com.nilemnod.mangareader.app.R
 import com.nilemnod.mangareader.app.ui.category.CategoryScreen
 import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
+import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.domain.chapter.model.Chapter
+import com.nilemnod.mangareader.feature.migration.dialog.MigrateMangaDialog
+import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.presentation.core.i18n.stringResource
+import dev.zacsweers.metrox.viewmodel.metroViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
-import com.nilemnod.mangareader.feature.migration.dialog.MigrateMangaDialog
-import com.nilemnod.mangareader.core.common.i18n.stringResource
-import com.nilemnod.mangareader.domain.chapter.model.Chapter
-import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 
 data object HistoryTab : Tab {
 

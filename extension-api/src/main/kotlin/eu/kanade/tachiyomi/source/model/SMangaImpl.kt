@@ -2,8 +2,8 @@
 
 package eu.kanade.tachiyomi.source.model
 
-import kotlinx.serialization.json.JsonObject
 import com.nilemnod.mangareader.core.common.extensions.EMPTY
+import kotlinx.serialization.json.JsonObject
 
 class SMangaImpl : SManga {
 

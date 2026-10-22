@@ -1,7 +1,7 @@
 package com.nilemnod.mangareader.domain.extension.interactor
 
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.domain.extension.repository.ExtensionStoreRepository
+import dev.zacsweers.metro.Inject
 
 @Inject
 class UpdateExtensionStores(

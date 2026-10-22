@@ -5,15 +5,17 @@ import android.content.Intent
 import android.content.pm.PackageInfo
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.extension.installer.Installer
 import com.nilemnod.mangareader.app.extension.model.Extension
 import com.nilemnod.mangareader.app.extension.model.InstallStep
-import eu.kanade.tachiyomi.network.NetworkHelper
-import eu.kanade.tachiyomi.network.await
 import com.nilemnod.mangareader.app.util.storage.getUriCompat
 import com.nilemnod.mangareader.app.util.system.isPackageInstalled
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import dev.zacsweers.metro.Inject
+import eu.kanade.tachiyomi.network.NetworkHelper
+import eu.kanade.tachiyomi.network.await
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -25,10 +27,8 @@ import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runInterruptible
 import logcat.LogPriority
-import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import com.nilemnod.mangareader.core.common.util.system.logcat
 import java.io.File
 import java.util.concurrent.ConcurrentHashMap
 

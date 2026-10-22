@@ -1,10 +1,10 @@
 package com.nilemnod.mangareader.source.local.io
 
 import com.hippo.unifile.UniFile
+import com.nilemnod.mangareader.domain.storage.service.StorageManager
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
-import com.nilemnod.mangareader.domain.storage.service.StorageManager
 
 @Inject
 @SingleIn(AppScope::class)

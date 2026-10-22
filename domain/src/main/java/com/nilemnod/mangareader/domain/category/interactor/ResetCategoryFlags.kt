@@ -1,9 +1,9 @@
 package com.nilemnod.mangareader.domain.category.interactor
 
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.domain.category.repository.CategoryRepository
 import com.nilemnod.mangareader.domain.library.model.plus
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
+import dev.zacsweers.metro.Inject
 
 @Inject
 class ResetCategoryFlags(

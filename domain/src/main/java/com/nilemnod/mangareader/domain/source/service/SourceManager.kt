@@ -1,9 +1,9 @@
 package com.nilemnod.mangareader.domain.source.service
 
+import com.nilemnod.mangareader.domain.source.model.StubSource
 import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.flow.Flow
-import com.nilemnod.mangareader.domain.source.model.StubSource
 
 interface SourceManager {
 

@@ -46,10 +46,7 @@ import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.presentation.components.DownloadDropdownMenu
 import com.nilemnod.mangareader.app.presentation.components.DropdownMenu
 import com.nilemnod.mangareader.app.presentation.manga.DownloadAction
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
 import com.nilemnod.mangareader.icons.custommaterialsymbols.rounded.DonePrevious
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
@@ -62,8 +59,11 @@ import com.nilemnod.mangareader.icons.materialsymbols.rounded.Download
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.MoreVert
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.RemoveDone
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.SwapCalls
-import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.seconds
 
 @Composable

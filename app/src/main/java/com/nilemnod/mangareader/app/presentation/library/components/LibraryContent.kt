@@ -17,12 +17,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import com.nilemnod.mangareader.app.core.preference.PreferenceMutableState
 import com.nilemnod.mangareader.app.ui.library.LibraryItem
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.domain.library.model.LibraryDisplayMode
 import com.nilemnod.mangareader.domain.library.model.LibraryManga
 import com.nilemnod.mangareader.presentation.core.components.material.PullRefresh
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.seconds
 
 @Composable

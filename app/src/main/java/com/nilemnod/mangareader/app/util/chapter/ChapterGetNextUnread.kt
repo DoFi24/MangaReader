@@ -1,7 +1,7 @@
 package com.nilemnod.mangareader.app.util.chapter
 
-import com.nilemnod.mangareader.app.domain.chapter.model.applyFilters
 import com.nilemnod.mangareader.app.data.download.DownloadManager
+import com.nilemnod.mangareader.app.domain.chapter.model.applyFilters
 import com.nilemnod.mangareader.app.ui.manga.ChapterList
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.manga.model.Manga

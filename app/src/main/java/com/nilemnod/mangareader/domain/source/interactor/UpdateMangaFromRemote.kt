@@ -1,18 +1,11 @@
 package com.nilemnod.mangareader.domain.source.interactor
 
-import dev.zacsweers.metro.Inject
+import com.nilemnod.mangareader.app.data.cache.CoverCache
+import com.nilemnod.mangareader.app.data.download.DownloadManager
 import com.nilemnod.mangareader.app.domain.chapter.interactor.SyncChaptersWithSource
 import com.nilemnod.mangareader.app.domain.chapter.model.toSChapter
 import com.nilemnod.mangareader.app.domain.manga.model.hasCustomCover
 import com.nilemnod.mangareader.app.domain.manga.model.toSManga
-import com.nilemnod.mangareader.app.data.cache.CoverCache
-import com.nilemnod.mangareader.app.data.download.DownloadManager
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.model.SManga
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import logcat.LogPriority
-import com.nilemnod.mangareader.domain.source.models.RemoteMangaUpdate
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.chapter.repository.ChapterRepository
@@ -20,8 +13,15 @@ import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaRemoteUpdate
 import com.nilemnod.mangareader.domain.manga.repository.MangaRepository
+import com.nilemnod.mangareader.domain.source.models.RemoteMangaUpdate
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.source.local.isLocal
+import dev.zacsweers.metro.Inject
+import eu.kanade.tachiyomi.source.Source
+import eu.kanade.tachiyomi.source.model.SManga
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import logcat.LogPriority
 import kotlin.time.Clock
 import kotlin.time.Instant
 

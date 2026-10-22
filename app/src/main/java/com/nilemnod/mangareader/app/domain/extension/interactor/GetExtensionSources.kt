@@ -1,8 +1,8 @@
 package com.nilemnod.mangareader.app.domain.extension.interactor
 
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.app.extension.model.Extension
+import dev.zacsweers.metro.Inject
 import eu.kanade.tachiyomi.source.Source
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

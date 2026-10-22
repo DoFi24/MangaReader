@@ -1,9 +1,9 @@
 package com.nilemnod.mangareader.data.extension.model
 
 import android.annotation.SuppressLint
+import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
 
 @SuppressLint("UnsafeOptInUsageError")
 @Serializable

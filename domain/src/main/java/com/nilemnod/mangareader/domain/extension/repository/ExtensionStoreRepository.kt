@@ -1,8 +1,8 @@
 package com.nilemnod.mangareader.domain.extension.repository
 
 import com.nilemnod.mangareader.app.extension.model.Extension
-import kotlinx.coroutines.flow.Flow
 import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
+import kotlinx.coroutines.flow.Flow
 
 interface ExtensionStoreRepository {
     suspend fun insert(indexUrl: String): Result<Unit>

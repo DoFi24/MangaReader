@@ -15,12 +15,12 @@ import com.eygraber.sqldelight.androidx.driver.AndroidxSqliteConnectionFactory
 import com.eygraber.sqldelight.androidx.driver.AndroidxSqliteDatabaseType
 import com.eygraber.sqldelight.androidx.driver.AndroidxSqliteDriver
 import com.eygraber.sqldelight.androidx.driver.FileProvider
+import com.nilemnod.mangareader.data.database.DatabaseRepositoryImpl
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.BindingContainer
 import dev.zacsweers.metro.ContributesTo
 import dev.zacsweers.metro.Provides
 import dev.zacsweers.metro.SingleIn
-import com.nilemnod.mangareader.data.database.DatabaseRepositoryImpl
 
 @ContributesTo(AppScope::class)
 @BindingContainer

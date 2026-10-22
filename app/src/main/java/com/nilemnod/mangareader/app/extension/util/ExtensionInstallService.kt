@@ -5,19 +5,19 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.IBinder
-import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.R
 import com.nilemnod.mangareader.app.data.notification.Notifications
+import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.extension.installer.Installer
 import com.nilemnod.mangareader.app.extension.installer.PackageInstallerInstaller
 import com.nilemnod.mangareader.app.extension.installer.ShizukuInstaller
 import com.nilemnod.mangareader.app.extension.util.ExtensionInstaller.Companion.EXTRA_DOWNLOAD_ID
 import com.nilemnod.mangareader.app.util.system.getSerializableExtraCompat
 import com.nilemnod.mangareader.app.util.system.notificationBuilder
-import logcat.LogPriority
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.i18n.MR
+import logcat.LogPriority
 
 class ExtensionInstallService : Service() {
 

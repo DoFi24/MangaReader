@@ -13,6 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLocale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.domain.ui.UiPreferences
 import com.nilemnod.mangareader.app.presentation.components.AppBar
 import com.nilemnod.mangareader.app.presentation.components.AppBarActions
@@ -23,12 +24,10 @@ import com.nilemnod.mangareader.app.presentation.history.components.HistoryItem
 import com.nilemnod.mangareader.app.presentation.theme.MangaReaderPreviewTheme
 import com.nilemnod.mangareader.app.presentation.util.rememberIs24HourSystem
 import com.nilemnod.mangareader.app.ui.history.HistoryViewModel
-import kotlinx.datetime.LocalDate
-import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.DeleteSweep
 import com.nilemnod.mangareader.domain.history.model.HistoryWithRelations
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
+import com.nilemnod.mangareader.icons.materialsymbols.rounded.DeleteSweep
 import com.nilemnod.mangareader.presentation.core.components.FastScrollLazyColumn
 import com.nilemnod.mangareader.presentation.core.components.ListGroupHeader
 import com.nilemnod.mangareader.presentation.core.components.material.Scaffold
@@ -36,6 +35,7 @@ import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.presentation.core.screens.EmptyScreen
 import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
 import com.nilemnod.mangareader.presentation.core.util.collectAsState
+import kotlinx.datetime.LocalDate
 
 @Composable
 fun HistoryScreen(

@@ -4,6 +4,12 @@ import android.content.Context
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nilemnod.mangareader.app.util.system.openInBrowser
+import com.nilemnod.mangareader.app.util.system.toShareIntent
+import com.nilemnod.mangareader.app.util.system.toWebViewHeaders
+import com.nilemnod.mangareader.app.util.system.toast
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.domain.source.service.SourceManager
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Assisted
 import dev.zacsweers.metro.AssistedFactory
@@ -13,18 +19,12 @@ import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactory
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactoryKey
 import eu.kanade.tachiyomi.network.NetworkHelper
 import eu.kanade.tachiyomi.source.online.HttpSource
-import com.nilemnod.mangareader.app.util.system.openInBrowser
-import com.nilemnod.mangareader.app.util.system.toShareIntent
-import com.nilemnod.mangareader.app.util.system.toWebViewHeaders
-import com.nilemnod.mangareader.app.util.system.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import logcat.LogPriority
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
-import com.nilemnod.mangareader.core.common.util.system.logcat
-import com.nilemnod.mangareader.domain.source.service.SourceManager
 
 @AssistedInject
 class WebViewViewModel(

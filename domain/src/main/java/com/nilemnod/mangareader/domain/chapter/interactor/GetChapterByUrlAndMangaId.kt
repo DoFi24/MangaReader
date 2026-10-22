@@ -1,8 +1,8 @@
 package com.nilemnod.mangareader.domain.chapter.interactor
 
-import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.chapter.repository.ChapterRepository
+import dev.zacsweers.metro.Inject
 
 @Inject
 class GetChapterByUrlAndMangaId(

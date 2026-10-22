@@ -1,11 +1,11 @@
 package com.nilemnod.mangareader.domain.chapter.service
 
+import com.nilemnod.mangareader.domain.chapter.model.Chapter
+import com.nilemnod.mangareader.domain.chapter.service.ChapterRecognition.ChapterNumbering
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.parallel.Execution
 import org.junit.jupiter.api.parallel.ExecutionMode
-import com.nilemnod.mangareader.domain.chapter.model.Chapter
-import com.nilemnod.mangareader.domain.chapter.service.ChapterRecognition.ChapterNumbering
 
 @Execution(ExecutionMode.CONCURRENT)
 class ChapterRecognitionTest {

@@ -10,9 +10,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import dev.icerock.moko.resources.StringResource
 import com.nilemnod.mangareader.presentation.core.components.material.padding
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
+import dev.icerock.moko.resources.StringResource
 
 @Composable
 fun LazyItemScope.SectionCard(

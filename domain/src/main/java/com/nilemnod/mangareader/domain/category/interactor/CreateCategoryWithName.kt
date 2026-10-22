@@ -1,11 +1,11 @@
 package com.nilemnod.mangareader.domain.category.interactor
 
-import dev.zacsweers.metro.Inject
-import logcat.LogPriority
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.domain.category.model.NewCategory
 import com.nilemnod.mangareader.domain.category.repository.CategoryRepository
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
+import dev.zacsweers.metro.Inject
+import logcat.LogPriority
 
 @Inject
 class CreateCategoryWithName(

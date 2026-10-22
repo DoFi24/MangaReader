@@ -20,31 +20,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastForEach
 import androidx.lifecycle.ViewModel
 import cafe.adriel.voyager.core.screen.Screen
+import com.nilemnod.mangareader.app.data.cache.CoverCache
+import com.nilemnod.mangareader.app.data.download.DownloadManager
+import com.nilemnod.mangareader.app.domain.manga.model.hasCustomCover
+import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
+import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.migration.models.MigrationFlag
+import com.nilemnod.mangareader.domain.migration.usecases.MigrateMangaUseCase
+import com.nilemnod.mangareader.feature.common.utils.getLabel
+import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.presentation.core.components.LabeledCheckbox
+import com.nilemnod.mangareader.presentation.core.components.material.padding
+import com.nilemnod.mangareader.presentation.core.i18n.stringResource
+import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.binding
 import dev.zacsweers.metrox.viewmodel.ViewModelKey
 import dev.zacsweers.metrox.viewmodel.metroViewModel
-import com.nilemnod.mangareader.app.domain.manga.model.hasCustomCover
-import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
-import com.nilemnod.mangareader.app.data.cache.CoverCache
-import com.nilemnod.mangareader.app.data.download.DownloadManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import com.nilemnod.mangareader.domain.migration.models.MigrationFlag
-import com.nilemnod.mangareader.domain.migration.usecases.MigrateMangaUseCase
-import com.nilemnod.mangareader.feature.common.utils.getLabel
-import com.nilemnod.mangareader.domain.manga.model.Manga
-import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.components.LabeledCheckbox
-import com.nilemnod.mangareader.presentation.core.components.material.padding
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
-import com.nilemnod.mangareader.presentation.core.screens.LoadingScreen
 
 @Composable
 internal fun Screen.MigrateMangaDialog(

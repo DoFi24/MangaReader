@@ -1,7 +1,5 @@
 package com.nilemnod.mangareader.app.ui.reader
 
-import com.nilemnod.mangareader.app.ui.reader.compose.NewReaderActivity
-import com.nilemnod.mangareader.app.di.appGraph
 import android.annotation.SuppressLint
 import android.app.assist.AssistContent
 import android.content.ClipData
@@ -46,7 +44,12 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.transition.platform.MaterialContainerTransform
-import dev.zacsweers.metro.Inject
+import com.nilemnod.mangareader.app.R
+import com.nilemnod.mangareader.app.data.notification.NotificationReceiver
+import com.nilemnod.mangareader.app.data.notification.Notifications
+import com.nilemnod.mangareader.app.databinding.ReaderActivityBinding
+import com.nilemnod.mangareader.app.di.AppGraph
+import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.presentation.reader.DisplayRefreshHost
 import com.nilemnod.mangareader.app.presentation.reader.OrientationSelectDialog
@@ -57,16 +60,12 @@ import com.nilemnod.mangareader.app.presentation.reader.ReadingModeSelectDialog
 import com.nilemnod.mangareader.app.presentation.reader.appbars.ReaderAppBars
 import com.nilemnod.mangareader.app.presentation.reader.components.ChapterNavigatorType
 import com.nilemnod.mangareader.app.presentation.reader.settings.ReaderSettingsDialog
-import com.nilemnod.mangareader.app.R
-import com.nilemnod.mangareader.app.data.notification.NotificationReceiver
-import com.nilemnod.mangareader.app.data.notification.Notifications
-import com.nilemnod.mangareader.app.databinding.ReaderActivityBinding
-import eu.kanade.tachiyomi.source.online.HttpSource
 import com.nilemnod.mangareader.app.ui.base.activity.BaseActivity
 import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.app.ui.reader.ReaderViewModel.SetAsCoverResult.AddToLibraryFirst
 import com.nilemnod.mangareader.app.ui.reader.ReaderViewModel.SetAsCoverResult.Error
 import com.nilemnod.mangareader.app.ui.reader.ReaderViewModel.SetAsCoverResult.Success
+import com.nilemnod.mangareader.app.ui.reader.compose.NewReaderActivity
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderChapter
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderPage
 import com.nilemnod.mangareader.app.ui.reader.model.ViewerChapters
@@ -83,6 +82,14 @@ import com.nilemnod.mangareader.app.util.system.readerBackgroundColor
 import com.nilemnod.mangareader.app.util.system.toShareIntent
 import com.nilemnod.mangareader.app.util.system.toast
 import com.nilemnod.mangareader.app.util.view.setComposeContent
+import com.nilemnod.mangareader.core.common.Constants
+import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.metro.metroGraph
+import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.presentation.core.util.collectAsState
+import dev.zacsweers.metro.Inject
+import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -94,13 +101,6 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.sample
 import kotlinx.coroutines.launch
 import logcat.LogPriority
-import com.nilemnod.mangareader.app.di.AppGraph
-import com.nilemnod.mangareader.core.metro.metroGraph
-import com.nilemnod.mangareader.core.common.Constants
-import com.nilemnod.mangareader.core.common.i18n.stringResource
-import com.nilemnod.mangareader.core.common.util.system.logcat
-import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.util.collectAsState
 import kotlin.time.Duration.Companion.seconds
 
 class ReaderActivity : BaseActivity() {

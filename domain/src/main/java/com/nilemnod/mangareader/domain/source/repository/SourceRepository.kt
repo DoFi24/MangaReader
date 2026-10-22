@@ -1,11 +1,11 @@
 package com.nilemnod.mangareader.domain.source.repository
 
 import androidx.paging.PagingSource
-import eu.kanade.tachiyomi.source.model.FilterList
-import kotlinx.coroutines.flow.Flow
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.model.Source
 import com.nilemnod.mangareader.domain.source.model.SourceWithCount
+import eu.kanade.tachiyomi.source.model.FilterList
+import kotlinx.coroutines.flow.Flow
 
 typealias SourcePagingSource = PagingSource<Long, Manga>
 

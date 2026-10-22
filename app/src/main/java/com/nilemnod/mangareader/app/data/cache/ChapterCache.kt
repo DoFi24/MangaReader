@@ -3,20 +3,20 @@ package com.nilemnod.mangareader.app.data.cache
 import android.content.Context
 import android.text.format.Formatter
 import com.jakewharton.disklrucache.DiskLruCache
+import com.nilemnod.mangareader.app.ui.reader.model.DownloadStream
+import com.nilemnod.mangareader.app.util.storage.DiskUtil
+import com.nilemnod.mangareader.app.util.storage.saveTo
+import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
 import eu.kanade.tachiyomi.source.model.Page
-import com.nilemnod.mangareader.app.ui.reader.model.DownloadStream
-import com.nilemnod.mangareader.app.util.storage.DiskUtil
-import com.nilemnod.mangareader.app.util.storage.saveTo
 import kotlinx.serialization.json.Json
 import logcat.LogPriority
 import okhttp3.Response
 import okio.buffer
 import okio.sink
-import com.nilemnod.mangareader.core.common.util.system.logcat
-import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import java.io.File
 import java.io.IOException
 

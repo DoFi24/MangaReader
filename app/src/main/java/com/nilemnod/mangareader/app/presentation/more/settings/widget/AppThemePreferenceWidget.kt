@@ -45,9 +45,9 @@ import com.nilemnod.mangareader.app.presentation.manga.components.MangaCover
 import com.nilemnod.mangareader.app.presentation.theme.MangaReaderTheme
 import com.nilemnod.mangareader.app.util.system.DeviceUtil
 import com.nilemnod.mangareader.app.util.system.isDynamicColorAvailable
+import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.CheckCircle
-import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.components.material.padding
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import com.nilemnod.mangareader.presentation.core.util.secondaryItemAlpha

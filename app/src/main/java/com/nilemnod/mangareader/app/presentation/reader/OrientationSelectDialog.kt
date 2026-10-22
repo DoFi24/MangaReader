@@ -12,7 +12,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import dev.icerock.moko.resources.StringResource
 import com.nilemnod.mangareader.app.domain.manga.model.readerOrientation
 import com.nilemnod.mangareader.app.presentation.components.AdaptiveSheet
 import com.nilemnod.mangareader.app.presentation.reader.components.ModeSelectionDialog
@@ -23,6 +22,7 @@ import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.presentation.core.components.SettingsIconGrid
 import com.nilemnod.mangareader.presentation.core.components.material.IconToggleButton
 import com.nilemnod.mangareader.presentation.core.i18n.stringResource
+import dev.icerock.moko.resources.StringResource
 
 private val ReaderOrientationsWithoutDefault = ReaderOrientation.entries - ReaderOrientation.DEFAULT
 

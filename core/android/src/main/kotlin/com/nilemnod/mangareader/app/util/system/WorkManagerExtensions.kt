@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
+import com.nilemnod.mangareader.core.common.util.system.logcat
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import logcat.LogPriority
-import com.nilemnod.mangareader.core.common.util.system.logcat
 import kotlin.time.Duration.Companion.seconds
 
 val Context.workManager: WorkManager
