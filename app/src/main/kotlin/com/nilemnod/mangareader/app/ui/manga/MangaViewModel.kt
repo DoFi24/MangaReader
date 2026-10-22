@@ -12,8 +12,6 @@ import androidx.compose.ui.util.fastMap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nilemnod.mangareader.app.core.preference.asState
-import com.nilemnod.mangareader.app.core.util.addOrRemove
-import com.nilemnod.mangareader.app.core.util.insertSeparators
 import com.nilemnod.mangareader.app.data.cache.CoverCache
 import com.nilemnod.mangareader.app.data.download.DownloadCache
 import com.nilemnod.mangareader.app.data.download.DownloadManager
@@ -40,6 +38,8 @@ import com.nilemnod.mangareader.core.common.util.lang.SubscriberGate
 import com.nilemnod.mangareader.core.common.util.lang.pausedWhileUnsubscribed
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.core.ui.util.addOrRemove
+import com.nilemnod.mangareader.core.ui.util.insertSeparators
 import com.nilemnod.mangareader.domain.category.interactor.GetCategories
 import com.nilemnod.mangareader.domain.category.interactor.SetMangaCategories
 import com.nilemnod.mangareader.domain.category.model.Category

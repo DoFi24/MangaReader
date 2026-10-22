@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.more.stats.data
+package com.nilemnod.mangareader.feature.stats.data
 
 sealed interface StatsData {
 

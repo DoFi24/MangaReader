@@ -1,8 +1,7 @@
-package com.nilemnod.mangareader.app.presentation.more.stats
+package com.nilemnod.mangareader.feature.stats
 
 import androidx.compose.runtime.Immutable
-import com.nilemnod.mangareader.app.presentation.more.stats.data.StatsData
-
+import com.nilemnod.mangareader.feature.stats.data.StatsData
 sealed interface StatsScreenState {
     @Immutable
     data object Loading : StatsScreenState
