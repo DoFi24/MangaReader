@@ -38,6 +38,7 @@ import com.nilemnod.mangareader.app.di.AppGraph
 import com.nilemnod.mangareader.app.di.injekt.MetroInjektRegistrar
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.extension.ExtensionManager
+import com.nilemnod.mangareader.app.navigation.AppNavigation
 import com.nilemnod.mangareader.app.ui.base.delegate.SecureActivityDelegate
 import com.nilemnod.mangareader.app.util.system.cancelNotification
 import com.nilemnod.mangareader.app.util.system.isDebugBuildType
@@ -130,6 +131,8 @@ class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factor
 
         Injekt = InjektScope(MetroInjektRegistrar(application = this, graphProvider = this))
         graph.inject(this)
+
+        AppNavigation.register()
 
         GlobalExceptionHandler.initialize(applicationContext, CrashActivity::class.java)
 

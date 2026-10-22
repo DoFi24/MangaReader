@@ -12,6 +12,8 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.presentation.browse.GlobalSearchScreen
 import com.nilemnod.mangareader.app.ui.browse.source.browse.BrowseSourceScreen
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
+import com.nilemnod.mangareader.core.navigation.SharedScreen
+import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
 import com.nilemnod.mangareader.core.ui.util.Screen
 import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
@@ -43,7 +45,7 @@ class GlobalSearchScreen(
                     is SearchItemResult.Success -> {
                         val manga = result.result.singleOrNull()
                         if (manga != null) {
-                            navigator.replace(MangaScreen(manga.id, true))
+                            navigator.replace(SharedScreen.Manga(manga.id, true).screen())
                         } else {
                             // Backoff to result screen
                             showSingleLoadingScreen = false
@@ -64,8 +66,8 @@ class GlobalSearchScreen(
                 onClickSource = {
                     navigator.push(BrowseSourceScreen(it.id, state.searchQuery))
                 },
-                onClickItem = { navigator.push(MangaScreen(it.id, true)) },
-                onLongClickItem = { navigator.push(MangaScreen(it.id, true)) },
+                onClickItem = { navigator.push(SharedScreen.Manga(it.id, true).screen()) },
+                onLongClickItem = { navigator.push(SharedScreen.Manga(it.id, true).screen()) },
             )
         }
     }

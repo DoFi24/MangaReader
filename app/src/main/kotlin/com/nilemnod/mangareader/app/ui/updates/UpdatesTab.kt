@@ -25,6 +25,10 @@ import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
 import com.nilemnod.mangareader.app.ui.updates.UpdatesViewModel.Event
 import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.navigation.SharedIntent
+import com.nilemnod.mangareader.core.navigation.SharedScreen
+import com.nilemnod.mangareader.core.navigation.intent
+import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.Tab
 import com.nilemnod.mangareader.feature.upcoming.UpcomingScreen
@@ -62,7 +66,7 @@ data object UpdatesTab : Tab {
             state = state,
             snackbarHostState = viewModel.snackbarHostState,
             lastUpdated = viewModel.lastUpdated,
-            onClickCover = { item -> navigator.push(MangaScreen(item.update.mangaId)) },
+            onClickCover = { item -> navigator.push(SharedScreen.Manga(item.update.mangaId).screen()) },
             onSelectAll = viewModel::toggleAllSelection,
             onInvertSelection = viewModel::invertSelection,
             onUpdateLibrary = viewModel::updateLibrary,
@@ -72,7 +76,7 @@ data object UpdatesTab : Tab {
             onMultiDeleteClicked = viewModel::showConfirmDeleteChapters,
             onUpdateSelected = viewModel::toggleSelection,
             onOpenChapter = {
-                val intent = ReaderActivity.newIntent(context, it.update.mangaId, it.update.chapterId)
+                val intent = SharedIntent.Reader(it.update.mangaId, it.update.chapterId).intent(context)
                 context.startActivity(intent)
             },
             onCalendarClicked = { navigator.push(UpcomingScreen()) },

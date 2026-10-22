@@ -22,6 +22,8 @@ import com.nilemnod.mangareader.app.ui.browse.source.browse.SourceFilterDialog
 import com.nilemnod.mangareader.app.ui.home.HomeScreen
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.webview.WebViewScreen
+import com.nilemnod.mangareader.core.navigation.SharedScreen
+import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.components.SearchToolbar
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
@@ -116,7 +118,7 @@ data class MigrateSourceSearchScreen(
                     )
                 },
                 onMangaClick = openMigrateDialog,
-                onMangaLongClick = { navigator.push(MangaScreen(it.id, true)) },
+                onMangaLongClick = { navigator.push(SharedScreen.Manga(it.id, true).screen()) },
             )
         }
 
@@ -136,13 +138,13 @@ data class MigrateSourceSearchScreen(
                     current = currentManga,
                     target = dialog.target,
                     // Initiated from the context of [currentManga] so we show [dialog.target].
-                    onClickTitle = { navigator.push(MangaScreen(dialog.target.id)) },
+                    onClickTitle = { navigator.push(SharedScreen.Manga(dialog.target.id).screen()) },
                     onDismissRequest = onDismissRequest,
                     onComplete = {
                         scope.launch {
                             navigator.popUntilRoot()
                             HomeScreen.openTab(HomeScreen.Tab.Browse())
-                            navigator.push(MangaScreen(dialog.target.id))
+                            navigator.push(SharedScreen.Manga(dialog.target.id).screen())
                         }
                     },
                 )

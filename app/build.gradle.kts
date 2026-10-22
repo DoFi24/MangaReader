@@ -196,6 +196,7 @@ dependencies {
     implementation(projects.core.archive)
     implementation(projects.core.common)
     implementation(projects.core.metro)
+    implementation(projects.core.navigation)
     implementation(projects.core.metadata)
     implementation(projects.extensionApi)
     implementation(projects.source.local)

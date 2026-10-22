@@ -26,6 +26,10 @@ import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
 import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.navigation.SharedIntent
+import com.nilemnod.mangareader.core.navigation.SharedScreen
+import com.nilemnod.mangareader.core.navigation.intent
+import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.Tab
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
@@ -69,7 +73,7 @@ data object HistoryTab : Tab {
             state = state,
             snackbarHostState = snackbarHostState,
             onSearchQueryChange = viewModel::updateSearchQuery,
-            onClickCover = { navigator.push(MangaScreen(it)) },
+            onClickCover = { navigator.push(SharedScreen.Manga(it).screen()) },
             onClickResume = viewModel::getNextChapterForManga,
             onDialogChange = viewModel::setDialog,
             onClickFavorite = viewModel::addFavorite,
@@ -100,7 +104,7 @@ data object HistoryTab : Tab {
                     duplicates = dialog.duplicates,
                     onDismissRequest = onDismissRequest,
                     onConfirm = { viewModel.addFavorite(dialog.manga) },
-                    onOpenManga = { navigator.push(MangaScreen(it.id)) },
+                    onOpenManga = { navigator.push(SharedScreen.Manga(it.id).screen()) },
                     onMigrate = { viewModel.showMigrateDialog(dialog.manga, it) },
                 )
             }
@@ -119,7 +123,7 @@ data object HistoryTab : Tab {
                     current = dialog.current,
                     target = dialog.target,
                     // Initiated from the context of [dialog.target] so we show [dialog.current].
-                    onClickTitle = { navigator.push(MangaScreen(dialog.current.id)) },
+                    onClickTitle = { navigator.push(SharedScreen.Manga(dialog.current.id).screen()) },
                     onDismissRequest = onDismissRequest,
                 )
             }
@@ -153,7 +157,7 @@ data object HistoryTab : Tab {
 
     private suspend fun openChapter(context: Context, chapter: Chapter?) {
         if (chapter != null) {
-            val intent = ReaderActivity.newIntent(context, chapter.mangaId, chapter.id)
+            val intent = SharedIntent.Reader(chapter.mangaId, chapter.id).intent(context)
             context.startActivity(intent)
         } else {
             snackbarHostState.showSnackbar(context.stringResource(MR.strings.no_next_chapter))
