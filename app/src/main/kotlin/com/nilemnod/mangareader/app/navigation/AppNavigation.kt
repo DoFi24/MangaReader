@@ -3,12 +3,12 @@ package com.nilemnod.mangareader.app.navigation
 import cafe.adriel.voyager.core.registry.ScreenRegistry
 import com.nilemnod.mangareader.app.ui.browse.source.browse.BrowseSourceScreen
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.GlobalSearchScreen
-import com.nilemnod.mangareader.app.ui.category.CategoryScreen
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
 import com.nilemnod.mangareader.core.navigation.IntentRegistry
 import com.nilemnod.mangareader.core.navigation.SharedIntent
 import com.nilemnod.mangareader.core.navigation.SharedScreen
+import com.nilemnod.mangareader.feature.categories.CategoryScreen
 
 object AppNavigation {
 

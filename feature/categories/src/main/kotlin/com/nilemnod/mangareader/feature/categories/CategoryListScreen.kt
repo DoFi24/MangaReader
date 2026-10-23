@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.category
+package com.nilemnod.mangareader.feature.categories
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -14,9 +14,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
-import com.nilemnod.mangareader.app.presentation.category.components.CategoryFloatingActionButton
-import com.nilemnod.mangareader.app.presentation.category.components.CategoryListItem
-import com.nilemnod.mangareader.app.ui.category.CategoryScreenState
+import com.nilemnod.mangareader.core.ui.components.AddFloatingActionButton
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.core.ui.components.material.padding
@@ -30,7 +28,7 @@ import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
 
 @Composable
-fun CategoryScreen(
+fun CategoryListScreen(
     state: CategoryScreenState.Success,
     onClickCreate: () -> Unit,
     onClickRename: (Category) -> Unit,
@@ -48,7 +46,7 @@ fun CategoryScreen(
             )
         },
         floatingActionButton = {
-            CategoryFloatingActionButton(
+            AddFloatingActionButton(
                 lazyListState = lazyListState,
                 onCreate = onClickCreate,
             )

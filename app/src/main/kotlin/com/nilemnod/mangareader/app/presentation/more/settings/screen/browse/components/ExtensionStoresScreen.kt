@@ -8,8 +8,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.nilemnod.mangareader.app.presentation.category.components.CategoryFloatingActionButton
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.browse.ExtensionStoreScreenState
+import com.nilemnod.mangareader.core.ui.components.AddFloatingActionButton
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.core.ui.components.material.padding
@@ -50,7 +50,7 @@ fun ExtensionStoresScreen(
             )
         },
         floatingActionButton = {
-            CategoryFloatingActionButton(
+            AddFloatingActionButton(
                 lazyListState = lazyListState,
                 onCreate = onClickCreate,
             )

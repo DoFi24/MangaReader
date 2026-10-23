@@ -35,7 +35,6 @@ import com.nilemnod.mangareader.app.presentation.manga.components.SetIntervalDia
 import com.nilemnod.mangareader.app.source.isLocalOrStub
 import com.nilemnod.mangareader.app.ui.browse.source.browse.BrowseSourceScreen
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.GlobalSearchScreen
-import com.nilemnod.mangareader.app.ui.category.CategoryScreen
 import com.nilemnod.mangareader.app.ui.home.HomeScreen
 import com.nilemnod.mangareader.app.ui.manga.notes.MangaNotesScreen
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
@@ -50,6 +49,7 @@ import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.core.ui.util.isTabletUi
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.feature.categories.CategoryScreen
 import com.nilemnod.mangareader.feature.migration.config.MigrationConfigScreen
 import com.nilemnod.mangareader.feature.migration.dialog.MigrateMangaDialog
 import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel

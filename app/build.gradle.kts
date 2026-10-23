@@ -204,6 +204,7 @@ dependencies {
     implementation(projects.domain)
     implementation(projects.feature.reader)
     implementation(projects.core.ui)
+    implementation(projects.feature.categories)
     implementation(projects.feature.downloads)
     implementation(projects.feature.stats)
     implementation(projects.feature.widget)

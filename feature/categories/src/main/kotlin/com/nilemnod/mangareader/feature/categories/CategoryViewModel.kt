@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.ui.category
+package com.nilemnod.mangareader.feature.categories
 
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
