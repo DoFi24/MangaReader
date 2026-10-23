@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.ui.manga
+package com.nilemnod.mangareader.feature.manga
 
 import android.content.Context
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -20,14 +20,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.presentation.manga.ChapterSettingsDialog
-import com.nilemnod.mangareader.app.presentation.manga.MangaScreen
-import com.nilemnod.mangareader.app.presentation.manga.components.DeleteChaptersDialog
-import com.nilemnod.mangareader.app.presentation.manga.components.MangaCoverDialog
-import com.nilemnod.mangareader.app.presentation.manga.components.ScanlatorFilterDialog
-import com.nilemnod.mangareader.app.presentation.manga.components.SetIntervalDialog
-import com.nilemnod.mangareader.app.ui.manga.notes.MangaNotesScreen
 import com.nilemnod.mangareader.core.android.system.toShareIntent
 import com.nilemnod.mangareader.core.common.util.system.copyToClipboard
 import com.nilemnod.mangareader.core.common.util.system.logcat
@@ -52,7 +44,12 @@ import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.toSourceManga
 import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.api.isLocalOrStub
-import com.nilemnod.mangareader.feature.categories.CategoryScreen
+import com.nilemnod.mangareader.feature.manga.notes.MangaNotesScreen
+import com.nilemnod.mangareader.feature.manga.presentation.ChapterSettingsDialog
+import com.nilemnod.mangareader.feature.manga.presentation.MangaScreen
+import com.nilemnod.mangareader.feature.manga.presentation.components.DeleteChaptersDialog
+import com.nilemnod.mangareader.feature.manga.presentation.components.ScanlatorFilterDialog
+import com.nilemnod.mangareader.feature.manga.presentation.components.SetIntervalDialog
 import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -178,7 +175,7 @@ class MangaScreen(
                 ChangeCategoryDialog(
                     initialSelection = dialog.initialSelection,
                     onDismissRequest = onDismissRequest,
-                    onEditCategories = { navigator.push(CategoryScreen()) },
+                    onEditCategories = { navigator.push(SharedScreen.Category.screen()) },
                     onConfirm = { include, _ ->
                         viewModel.moveMangaToCategoriesAndAddToLibrary(dialog.manga, include)
                     },

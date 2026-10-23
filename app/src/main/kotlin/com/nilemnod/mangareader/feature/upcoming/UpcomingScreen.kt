@@ -20,7 +20,6 @@ import androidx.compose.ui.util.fastForEachIndexed
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.core.common.preference.TriState
 import com.nilemnod.mangareader.core.mangaui.visualName
 import com.nilemnod.mangareader.core.navigation.SharedScreen
@@ -34,6 +33,7 @@ import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
 import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.core.ui.util.collectAsState
+import com.nilemnod.mangareader.feature.manga.MangaScreen
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 

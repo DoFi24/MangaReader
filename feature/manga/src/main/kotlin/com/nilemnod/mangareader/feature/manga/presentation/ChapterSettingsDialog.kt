@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.manga
+package com.nilemnod.mangareader.feature.manga.presentation
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement

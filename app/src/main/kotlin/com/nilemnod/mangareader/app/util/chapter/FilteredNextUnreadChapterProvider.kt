@@ -22,6 +22,8 @@ class FilteredNextUnreadChapterProvider(
 
     override suspend fun get(manga: Manga): Chapter? {
         val chapters = getChaptersByMangaId.await(manga.id, applyScanlatorFilter = true)
-        return withContext(Dispatchers.Default) { chapters.getNextUnread(manga, downloadManager, modePreferences.downloadedOnly.get()) }
+        return withContext(Dispatchers.Default) {
+            chapters.getNextUnread(manga, downloadManager, modePreferences.downloadedOnly.get())
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.manga
+package com.nilemnod.mangareader.feature.manga.presentation
 
 enum class MangaScreenItem {
     INFO_BOX,

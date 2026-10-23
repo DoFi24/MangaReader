@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.ui.manga
+package com.nilemnod.mangareader.feature.manga
 
 import android.content.Context
 import androidx.compose.material3.SnackbarHostState

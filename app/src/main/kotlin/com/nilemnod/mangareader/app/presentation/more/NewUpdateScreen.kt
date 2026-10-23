@@ -18,12 +18,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.nilemnod.mangareader.app.presentation.manga.components.MarkdownRender
 import com.nilemnod.mangareader.app.ui.more.NewUpdateScreenModel
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.screens.InfoScreen
 import com.nilemnod.mangareader.core.ui.theme.MangaReaderPreviewTheme
+import com.nilemnod.mangareader.feature.manga.presentation.components.MarkdownRender
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.OpenInNew

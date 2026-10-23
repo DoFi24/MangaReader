@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.manga
+package com.nilemnod.mangareader.feature.manga.presentation
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.animateFloatAsState
@@ -45,16 +45,6 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.util.fastAll
 import androidx.compose.ui.util.fastAny
 import androidx.compose.ui.util.fastMap
-import com.nilemnod.mangareader.app.presentation.manga.components.ChapterHeader
-import com.nilemnod.mangareader.app.presentation.manga.components.ExpandableMangaDescription
-import com.nilemnod.mangareader.app.presentation.manga.components.MangaActionRow
-import com.nilemnod.mangareader.app.presentation.manga.components.MangaChapterListItem
-import com.nilemnod.mangareader.app.presentation.manga.components.MangaInfoBox
-import com.nilemnod.mangareader.app.presentation.manga.components.MangaToolbar
-import com.nilemnod.mangareader.app.presentation.manga.components.MissingChapterCountListItem
-import com.nilemnod.mangareader.app.source.getNameForMangaInfo
-import com.nilemnod.mangareader.app.ui.manga.ChapterList
-import com.nilemnod.mangareader.app.ui.manga.MangaViewModel
 import com.nilemnod.mangareader.core.common.util.system.copyToClipboard
 import com.nilemnod.mangareader.core.mangaui.ChapterDownloadAction
 import com.nilemnod.mangareader.core.mangaui.DownloadAction
@@ -72,6 +62,15 @@ import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.model.StubSource
+import com.nilemnod.mangareader.feature.manga.ChapterList
+import com.nilemnod.mangareader.feature.manga.MangaViewModel
+import com.nilemnod.mangareader.feature.manga.presentation.components.ChapterHeader
+import com.nilemnod.mangareader.feature.manga.presentation.components.ExpandableMangaDescription
+import com.nilemnod.mangareader.feature.manga.presentation.components.MangaActionRow
+import com.nilemnod.mangareader.feature.manga.presentation.components.MangaChapterListItem
+import com.nilemnod.mangareader.feature.manga.presentation.components.MangaInfoBox
+import com.nilemnod.mangareader.feature.manga.presentation.components.MangaToolbar
+import com.nilemnod.mangareader.feature.manga.presentation.components.MissingChapterCountListItem
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.PlayArrow

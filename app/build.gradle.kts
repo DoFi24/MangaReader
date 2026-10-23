@@ -216,6 +216,7 @@ dependencies {
     implementation(projects.feature.downloads)
     implementation(projects.feature.history)
     implementation(projects.feature.library)
+    implementation(projects.feature.manga)
     implementation(projects.feature.stats)
     implementation(projects.feature.updates)
     implementation(projects.feature.widget)
