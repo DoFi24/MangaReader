@@ -15,8 +15,8 @@ import androidx.paging.compose.LazyPagingItems
 import com.nilemnod.mangareader.app.presentation.browse.components.BrowseSourceComfortableGrid
 import com.nilemnod.mangareader.app.presentation.browse.components.BrowseSourceCompactGrid
 import com.nilemnod.mangareader.app.presentation.browse.components.BrowseSourceList
-import com.nilemnod.mangareader.app.presentation.util.formattedMessage
 import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.mangaui.formattedMessage
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.core.ui.i18n.stringResource

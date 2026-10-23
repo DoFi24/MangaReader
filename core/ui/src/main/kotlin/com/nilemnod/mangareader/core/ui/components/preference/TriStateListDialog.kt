@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.more.settings.widget
+package com.nilemnod.mangareader.core.ui.components.preference
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box

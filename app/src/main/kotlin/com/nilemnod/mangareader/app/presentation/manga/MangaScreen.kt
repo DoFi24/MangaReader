@@ -55,7 +55,7 @@ import com.nilemnod.mangareader.app.presentation.manga.components.MissingChapter
 import com.nilemnod.mangareader.app.source.getNameForMangaInfo
 import com.nilemnod.mangareader.app.ui.manga.ChapterList
 import com.nilemnod.mangareader.app.ui.manga.MangaViewModel
-import com.nilemnod.mangareader.app.util.system.copyToClipboard
+import com.nilemnod.mangareader.core.common.util.system.copyToClipboard
 import com.nilemnod.mangareader.core.mangaui.ChapterDownloadAction
 import com.nilemnod.mangareader.core.mangaui.DownloadAction
 import com.nilemnod.mangareader.core.mangaui.MangaBottomActionMenu

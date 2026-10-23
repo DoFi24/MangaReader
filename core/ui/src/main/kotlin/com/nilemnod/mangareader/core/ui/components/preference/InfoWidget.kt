@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.more.settings.widget
+package com.nilemnod.mangareader.core.ui.components.preference
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,7 +19,7 @@ import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Info
 @Composable
-internal fun InfoWidget(text: String) {
+fun InfoWidget(text: String) {
     Column(
         modifier = Modifier
             .padding(

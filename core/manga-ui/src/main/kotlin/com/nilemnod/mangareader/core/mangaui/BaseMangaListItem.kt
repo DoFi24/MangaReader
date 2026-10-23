@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.manga.components
+package com.nilemnod.mangareader.core.mangaui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -14,7 +14,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.nilemnod.mangareader.core.mangaui.MangaCover
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.domain.manga.model.Manga
 @Composable

@@ -7,6 +7,7 @@ import com.nilemnod.mangareader.domain.manga.model.toDomainManga
 import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.api.FilterList
 import com.nilemnod.mangareader.domain.source.api.MangaListing
+import com.nilemnod.mangareader.domain.source.model.NoResultsException
 import com.nilemnod.mangareader.domain.source.repository.SourcePagingSource
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
@@ -85,5 +86,3 @@ abstract class BaseSourcePagingSource(
         }
     }
 }
-
-class NoResultsException : Exception()

@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.more.settings.widget
+package com.nilemnod.mangareader.core.ui.components.preference
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth

@@ -12,8 +12,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.util.fastMap
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.presentation.more.settings.Preference
-import com.nilemnod.mangareader.app.presentation.more.settings.widget.TriStateListDialog
 import com.nilemnod.mangareader.core.mangaui.visualName
+import com.nilemnod.mangareader.core.ui.components.preference.TriStateListDialog
 import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.collectAsState

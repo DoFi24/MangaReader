@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.presentation.browse.components.BaseSourceItem
 import com.nilemnod.mangareader.app.presentation.browse.components.SourceIcon
 import com.nilemnod.mangareader.app.ui.browse.migration.sources.MigrateSourceViewModel
-import com.nilemnod.mangareader.app.util.system.copyToClipboard
+import com.nilemnod.mangareader.core.common.util.system.copyToClipboard
 import com.nilemnod.mangareader.core.ui.components.Badge
 import com.nilemnod.mangareader.core.ui.components.BadgeGroup
 import com.nilemnod.mangareader.core.ui.components.ScrollbarLazyColumn

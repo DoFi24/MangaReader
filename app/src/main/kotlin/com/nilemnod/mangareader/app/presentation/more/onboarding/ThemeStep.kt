@@ -6,8 +6,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.presentation.more.settings.widget.AppThemeModePreferenceWidget
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.AppThemePreferenceWidget
+import com.nilemnod.mangareader.core.ui.components.preference.AppThemeModePreferenceWidget
 import com.nilemnod.mangareader.core.ui.preference.model.setAppCompatDelegateThemeMode
 import com.nilemnod.mangareader.core.ui.util.collectAsState
 internal class ThemeStep : OnboardingStep {

@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.more.settings.widget
+package com.nilemnod.mangareader.core.ui.components.preference
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.AlertDialog

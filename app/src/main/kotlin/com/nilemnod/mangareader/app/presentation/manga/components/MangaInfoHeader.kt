@@ -73,7 +73,7 @@ import com.mikepenz.markdown.utils.getUnescapedTextInNode
 import com.nilemnod.mangareader.app.R
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.source.getNameForMangaInfo
-import com.nilemnod.mangareader.app.util.system.copyToClipboard
+import com.nilemnod.mangareader.core.common.util.system.copyToClipboard
 import com.nilemnod.mangareader.core.mangaui.DotSeparatorText
 import com.nilemnod.mangareader.core.mangaui.MangaCover
 import com.nilemnod.mangareader.core.ui.components.DropdownMenu

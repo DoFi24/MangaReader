@@ -23,11 +23,11 @@ import com.nilemnod.mangareader.app.data.updater.RELEASE_URL
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.presentation.more.LogoHeader
 import com.nilemnod.mangareader.app.ui.more.NewUpdateScreen
-import com.nilemnod.mangareader.app.util.system.copyToClipboard
 import com.nilemnod.mangareader.app.util.system.isFossBuildType
 import com.nilemnod.mangareader.app.util.system.isNightlyBuildType
 import com.nilemnod.mangareader.app.util.system.updaterEnabled
 import com.nilemnod.mangareader.core.android.lang.toDateTimestampString
+import com.nilemnod.mangareader.core.common.util.system.copyToClipboard
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.core.ui.components.AppBar
