@@ -34,7 +34,6 @@ import com.nilemnod.mangareader.core.ui.components.AdaptiveSheet
 import com.nilemnod.mangareader.core.ui.components.material.Button
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
-import com.nilemnod.mangareader.core.ui.theme.active
 import com.nilemnod.mangareader.core.ui.theme.header
 import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.core.ui.util.fastFilterNot
@@ -228,7 +227,7 @@ private fun MigrationSheetWarningItem(
             Icon(
                 imageVector = CustomMaterialSymbols.EdgeFilled.Warning,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.active,
+                tint = MaterialTheme.colorScheme.primary,
             )
         },
         colors = ListItemDefaults.colors(containerColor = Color.Transparent),

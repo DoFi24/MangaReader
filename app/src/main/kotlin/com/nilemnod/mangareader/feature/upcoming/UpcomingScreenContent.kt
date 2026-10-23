@@ -26,7 +26,6 @@ import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.components.relativeDateText
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
-import com.nilemnod.mangareader.core.ui.theme.active
 import com.nilemnod.mangareader.core.ui.util.isTabletUi
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.feature.upcoming.components.UpcomingItem
@@ -107,7 +106,7 @@ private fun UpcomingToolbar(
                     AppBar.Action(
                         title = stringResource(MR.strings.action_filter),
                         icon = CustomMaterialSymbols.Edge.Filter,
-                        iconTint = if (hasFilters) MaterialTheme.colorScheme.active else LocalContentColor.current,
+                        iconTint = if (hasFilters) MaterialTheme.colorScheme.primary else LocalContentColor.current,
                         onClick = onClickFilter,
                     ),
                 ),

@@ -34,7 +34,6 @@ import com.nilemnod.mangareader.core.ui.components.TabbedDialog
 import com.nilemnod.mangareader.core.ui.components.TabbedDialogPaddings
 import com.nilemnod.mangareader.core.ui.components.TriStateItem
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
-import com.nilemnod.mangareader.core.ui.theme.active
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.downloadedFilter
 import com.nilemnod.mangareader.i18n.MR
@@ -173,7 +172,7 @@ fun ScanlatorFilterItem(
             imageVector = MaterialSymbols.Rounded.Group,
             contentDescription = null,
             tint = if (active) {
-                MaterialTheme.colorScheme.active
+                MaterialTheme.colorScheme.primary
             } else {
                 LocalContentColor.current
             },
