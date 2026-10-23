@@ -18,7 +18,6 @@ import com.nilemnod.mangareader.app.R
 import com.nilemnod.mangareader.app.presentation.updates.UpdateScreen
 import com.nilemnod.mangareader.app.presentation.updates.UpdatesDeleteConfirmationDialog
 import com.nilemnod.mangareader.app.presentation.updates.UpdatesFilterDialog
-import com.nilemnod.mangareader.app.ui.download.DownloadQueueScreen
 import com.nilemnod.mangareader.app.ui.home.HomeScreen
 import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
@@ -31,6 +30,7 @@ import com.nilemnod.mangareader.core.navigation.intent
 import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.Tab
+import com.nilemnod.mangareader.feature.downloads.DownloadQueueScreen
 import com.nilemnod.mangareader.feature.upcoming.UpcomingScreen
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metrox.viewmodel.metroViewModel

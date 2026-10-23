@@ -45,7 +45,6 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.util.fastAll
 import androidx.compose.ui.util.fastAny
 import androidx.compose.ui.util.fastMap
-import com.nilemnod.mangareader.app.data.download.model.Download
 import com.nilemnod.mangareader.app.presentation.manga.components.ChapterDownloadAction
 import com.nilemnod.mangareader.app.presentation.manga.components.ChapterHeader
 import com.nilemnod.mangareader.app.presentation.manga.components.ExpandableMangaDescription
@@ -68,6 +67,7 @@ import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.formatChapterNumber
 import com.nilemnod.mangareader.core.ui.util.shouldExpandFAB
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
+import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.model.StubSource
