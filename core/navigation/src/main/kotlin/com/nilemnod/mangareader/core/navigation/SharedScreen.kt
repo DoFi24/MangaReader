@@ -33,6 +33,10 @@ sealed interface SharedScreen : ScreenProvider {
         val sourceId: Long? = null,
     ) : SharedScreen
 
+    data class SourcePreferences(
+        val sourceId: Long,
+    ) : SharedScreen
+
     data object Category : SharedScreen
 
     data object DownloadQueue : SharedScreen

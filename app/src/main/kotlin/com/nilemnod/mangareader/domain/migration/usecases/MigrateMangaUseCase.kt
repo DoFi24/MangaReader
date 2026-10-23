@@ -13,9 +13,9 @@ import com.nilemnod.mangareader.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaUpdate
 import com.nilemnod.mangareader.domain.migration.models.MigrationFlag
+import com.nilemnod.mangareader.domain.migration.service.MangaMigrator
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.domain.source.service.SourcePreferences
-import com.nilemnod.mangareader.domain.migration.service.MangaMigrator
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 import dev.zacsweers.metro.Inject

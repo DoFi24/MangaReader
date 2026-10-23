@@ -10,8 +10,8 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import java.io.ObjectStreamException
-import java.io.Serializable as JavaSerializable
 import kotlin.time.Instant
+import java.io.Serializable as JavaSerializable
 
 @SuppressLint("UnsafeOptInUsageError")
 @Serializable

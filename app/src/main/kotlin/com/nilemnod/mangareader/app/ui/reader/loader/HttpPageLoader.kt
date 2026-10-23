@@ -234,7 +234,9 @@ internal class HttpPageLoader(
                 val live = page.downloadStream
                 page.status = Page.State.DownloadImage
                 try {
-                    val image = source.openImage(page) { bytesRead, contentLength -> page.updateProgress(bytesRead, contentLength) }
+                    val image = source.openImage(page) { bytesRead, contentLength ->
+                        page.updateProgress(bytesRead, contentLength)
+                    }
                     chapterCache.putImageToCache(imageUrl, image, live)
                     live?.finish()
                 } catch (e: Throwable) {

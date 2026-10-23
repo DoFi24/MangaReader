@@ -32,7 +32,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.ui.browse.BrowseTab
+import com.nilemnod.mangareader.app.ui.browse.extension.ExtensionsBrowseTab
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.more.MoreTab
 import com.nilemnod.mangareader.core.navigation.HomeTab
@@ -43,6 +43,8 @@ import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
 import com.nilemnod.mangareader.core.ui.util.BottomNavController
 import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.core.ui.util.isTabletUi
+import com.nilemnod.mangareader.feature.browse.BrowseTab
+import com.nilemnod.mangareader.feature.browse.BrowseTabs
 import com.nilemnod.mangareader.feature.downloads.DownloadQueueScreen
 import com.nilemnod.mangareader.feature.history.HistoryTab
 import com.nilemnod.mangareader.feature.library.LibraryTab
@@ -149,7 +151,7 @@ object HomeScreen : Screen() {
                             HomeTab.History -> HistoryTab
                             is HomeTab.Browse -> {
                                 if (it.toExtensions) {
-                                    BrowseTab.showExtension()
+                                    BrowseTabs.show(ExtensionsBrowseTab)
                                 }
                                 BrowseTab
                             }

@@ -993,7 +993,11 @@ class MangaViewModel(
         }
     }
 
-    private data class MangaAndChapters(val manga: Manga, val source: ContentSource, val chapters: List<ChapterList.Item>)
+    private data class MangaAndChapters(
+        val manga: Manga,
+        val source: ContentSource,
+        val chapters: List<ChapterList.Item>,
+    )
 
     sealed interface State {
         @Immutable

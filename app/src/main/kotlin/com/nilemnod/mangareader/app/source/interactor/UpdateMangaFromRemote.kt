@@ -15,9 +15,9 @@ import com.nilemnod.mangareader.domain.manga.repository.MangaRepository
 import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.api.SourceManga
 import com.nilemnod.mangareader.domain.source.models.RemoteMangaUpdate
+import com.nilemnod.mangareader.domain.source.service.RemoteMangaUpdater
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.source.local.isLocal
-import com.nilemnod.mangareader.domain.source.service.RemoteMangaUpdater
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 import dev.zacsweers.metro.Inject

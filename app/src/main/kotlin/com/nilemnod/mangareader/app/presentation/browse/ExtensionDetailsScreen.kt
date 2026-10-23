@@ -40,9 +40,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.domain.extension.interactor.ExtensionSourceItem
-import com.nilemnod.mangareader.app.presentation.browse.components.ExtensionIcon
 import com.nilemnod.mangareader.app.presentation.browse.components.ExtensionPill
-import com.nilemnod.mangareader.app.presentation.browse.components.label
 import com.nilemnod.mangareader.app.ui.browse.extension.details.ExtensionDetailsViewModel
 import com.nilemnod.mangareader.core.common.i18n.LocaleHelper
 import com.nilemnod.mangareader.core.common.util.system.copyToClipboard
@@ -56,6 +54,8 @@ import com.nilemnod.mangareader.core.ui.components.preference.TextPreferenceWidg
 import com.nilemnod.mangareader.core.ui.components.preference.TrailingWidgetBuffer
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.domain.extension.model.Extension
+import com.nilemnod.mangareader.feature.browse.presentation.components.ExtensionIcon
+import com.nilemnod.mangareader.feature.browse.presentation.components.label
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Eyeglasses2

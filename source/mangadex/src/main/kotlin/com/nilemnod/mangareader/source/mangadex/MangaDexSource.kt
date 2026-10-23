@@ -102,7 +102,13 @@ class MangaDexSource(
             addQueryParameter("hasAvailableChapters", "true")
             ratings.forEach { addQueryParameter("contentRating[]", it) }
             if (query.isNotBlank()) addQueryParameter("title", query)
-            if (order != RELEVANCE) addQueryParameter("order[$order]", "desc") else addQueryParameter("order[relevance]", "desc")
+            if (order !=
+                RELEVANCE
+            ) {
+                addQueryParameter("order[$order]", "desc")
+            } else {
+                addQueryParameter("order[relevance]", "desc")
+            }
         }.build()
         val result = fetch<MangaListDto>(url)
         return MangaListing(
@@ -244,7 +250,10 @@ class MangaDexSource(
     private fun Response.retryDelay(): Long {
         val resetAt = header("X-RateLimit-Retry-After")?.toLongOrNull()?.let { it * 1000 - System.currentTimeMillis() }
         val retryAfter = header("Retry-After")?.toLongOrNull()?.let { it * 1000 }
-        return (resetAt ?: retryAfter ?: DEFAULT_RATE_LIMIT_DELAY).coerceIn(DEFAULT_RATE_LIMIT_DELAY, MAX_RATE_LIMIT_DELAY)
+        return (resetAt ?: retryAfter ?: DEFAULT_RATE_LIMIT_DELAY).coerceIn(
+            DEFAULT_RATE_LIMIT_DELAY,
+            MAX_RATE_LIMIT_DELAY,
+        )
     }
 
     private class AtHomeNode(val dto: AtHomeDto) {
@@ -314,7 +323,11 @@ class MangaDexSource(
         val title = attributes.title?.takeIf { it.isNotBlank() }
         val name = buildString {
             if (volume != null) append("Vol.$volume ")
-            if (chapter != null) append("Ch.$chapter") else if (title == null) append("Oneshot")
+            if (chapter != null) {
+                append("Ch.$chapter")
+            } else if (title == null) {
+                append("Oneshot")
+            }
             if (title != null) {
                 if (isNotEmpty()) append(" - ")
                 append(title)
@@ -330,7 +343,8 @@ class MangaDexSource(
             name = name,
             chapterNumber = chapter?.toDoubleOrNull() ?: -1.0,
             scanlator = groups,
-            dateUpload = attributes.publishAt?.let { runCatching { Instant.parse(it).toEpochMilliseconds() }.getOrNull() }
+            dateUpload =
+            attributes.publishAt?.let { runCatching { Instant.parse(it).toEpochMilliseconds() }.getOrNull() }
                 ?: 0L,
         )
     }

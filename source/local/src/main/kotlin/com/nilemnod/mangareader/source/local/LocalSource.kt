@@ -306,7 +306,11 @@ class LocalSource(
         fun applyTo(manga: SourceManga): SourceManga = manga.copy(
             author = author ?: manga.author,
             description = description ?: manga.description,
-            thumbnailUrl = if (manga.thumbnailUrl.isNullOrBlank()) coverUrl ?: manga.thumbnailUrl else manga.thumbnailUrl,
+            thumbnailUrl = if (manga.thumbnailUrl.isNullOrBlank()) {
+                coverUrl ?: manga.thumbnailUrl
+            } else {
+                manga.thumbnailUrl
+            },
         )
     }
 
@@ -448,4 +452,3 @@ class LocalSource(
 fun Manga.isLocal(): Boolean = source == LocalSource.ID
 
 fun ContentSource.isLocal(): Boolean = id == LocalSource.ID
-

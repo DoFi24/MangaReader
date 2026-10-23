@@ -13,20 +13,8 @@ import coil3.key.Keyer
 import coil3.request.Options
 import com.nilemnod.mangareader.app.extension.ExtensionManager
 import com.nilemnod.mangareader.app.extension.util.ExtensionLoader
-
-/**
- * The icon of an installed extension, drawn at [density].
- */
-data class InstalledExtensionIcon(
-    val pkgName: String,
-    val versionCode: Long,
-    val density: Int,
-)
-
-/**
- * The icon of the installed extension that provides the source with [sourceId].
- */
-data class InstalledSourceIcon(val sourceId: Long)
+import com.nilemnod.mangareader.core.mangaui.InstalledExtensionIcon
+import com.nilemnod.mangareader.core.mangaui.InstalledSourceIcon
 
 class ExtensionIconFetcher(
     private val context: Context,
