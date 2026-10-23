@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.domain.chapter.interactor
+package com.nilemnod.mangareader.domain.chapter.interactor
 
 import com.nilemnod.mangareader.domain.chapter.repository.ChapterRepository
 import dev.zacsweers.metro.Inject

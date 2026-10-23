@@ -21,15 +21,12 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.domain.manga.model.hasCustomCover
 import com.nilemnod.mangareader.app.presentation.manga.ChapterSettingsDialog
-import com.nilemnod.mangareader.app.presentation.manga.EditCoverAction
 import com.nilemnod.mangareader.app.presentation.manga.MangaScreen
 import com.nilemnod.mangareader.app.presentation.manga.components.DeleteChaptersDialog
 import com.nilemnod.mangareader.app.presentation.manga.components.MangaCoverDialog
 import com.nilemnod.mangareader.app.presentation.manga.components.ScanlatorFilterDialog
 import com.nilemnod.mangareader.app.presentation.manga.components.SetIntervalDialog
-import com.nilemnod.mangareader.app.source.isLocalOrStub
 import com.nilemnod.mangareader.app.ui.home.HomeScreen
 import com.nilemnod.mangareader.app.ui.manga.notes.MangaNotesScreen
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
@@ -40,7 +37,9 @@ import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.core.mangaui.ChangeCategoryDialog
 import com.nilemnod.mangareader.core.mangaui.DuplicateMangaDialog
+import com.nilemnod.mangareader.core.navigation.Content
 import com.nilemnod.mangareader.core.navigation.MangaDestination
+import com.nilemnod.mangareader.core.navigation.SharedDialog
 import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
 import com.nilemnod.mangareader.core.ui.util.AssistContentScreen
 import com.nilemnod.mangareader.core.ui.util.Screen
@@ -49,6 +48,7 @@ import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.toSourceManga
 import com.nilemnod.mangareader.domain.source.api.ContentSource
+import com.nilemnod.mangareader.domain.source.api.isLocalOrStub
 import com.nilemnod.mangareader.feature.browse.migration.config.MigrationConfigScreen
 import com.nilemnod.mangareader.feature.browse.migration.dialog.MigrateMangaDialog
 import com.nilemnod.mangareader.feature.browse.presentation.components.RemoveMangaDialog
@@ -203,7 +203,7 @@ class MangaScreen(
                     onConfirm = { viewModel.toggleFavorite(onRemoved = {}, checkDuplicate = false) },
                     onOpenManga = { navigator.push(MangaScreen(it.id)) },
                     onMigrate = { viewModel.showMigrateDialog(it) },
-                    sourceManager = LocalContext.current.appGraph.sourceManager,
+                    sourceManager = viewModel.sourceManager,
                 )
             }
 
@@ -219,6 +219,7 @@ class MangaScreen(
             MangaViewModel.Dialog.SettingsSheet -> ChapterSettingsDialog(
                 onDismissRequest = onDismissRequest,
                 manga = successState.manga,
+                downloadedOnly = successState.downloadedOnly,
                 onDownloadFilterChanged = viewModel::setDownloadedFilter,
                 onUnreadFilterChanged = viewModel::setUnreadFilter,
                 onBookmarkedFilterChanged = viewModel::setBookmarkedFilter,
@@ -229,36 +230,7 @@ class MangaScreen(
                 scanlatorFilterActive = successState.scanlatorFilterActive,
                 onScanlatorFilterClicked = { showScanlatorsDialog = true },
             )
-            MangaViewModel.Dialog.FullCover -> {
-                val vm =
-                    assistedMetroViewModel<MangaCoverViewModel, MangaCoverViewModel.Factory> {
-                        create(mangaId = mangaId)
-                    }
-                val manga by vm.state.collectAsStateWithLifecycle()
-                if (manga != null) {
-                    val getContent = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) {
-                        if (it == null) return@rememberLauncherForActivityResult
-                        vm.editCover(context, it)
-                    }
-                    MangaCoverDialog(
-                        manga = manga!!,
-                        snackbarHostState = vm.snackbarHostState,
-                        isCustomCover = remember(manga) { manga!!.hasCustomCover() },
-                        onShareClick = { vm.shareCover(context) },
-                        onSaveClick = { vm.saveCover(context) },
-                        onEditClick = {
-                            when (it) {
-                                EditCoverAction.EDIT -> getContent.launch("image/*")
-                                EditCoverAction.DELETE -> vm.deleteCustomCover(context)
-                                EditCoverAction.ADD_TO_LIBRARY -> vm.addToLibraryWarning(context)
-                            }
-                        },
-                        onDismissRequest = onDismissRequest,
-                    )
-                } else {
-                    LoadingScreen(Modifier.systemBarsPadding())
-                }
-            }
+            MangaViewModel.Dialog.FullCover -> SharedDialog.MangaCover(mangaId, onDismissRequest).Content()
             is MangaViewModel.Dialog.SetFetchInterval -> {
                 SetIntervalDialog(
                     interval = dialog.manga.fetchInterval,

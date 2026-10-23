@@ -71,7 +71,6 @@ import com.mikepenz.markdown.model.markdownAnnotator
 import com.mikepenz.markdown.model.markdownAnnotatorConfig
 import com.mikepenz.markdown.utils.getUnescapedTextInNode
 import com.nilemnod.mangareader.app.R
-import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.source.getNameForMangaInfo
 import com.nilemnod.mangareader.core.common.util.system.copyToClipboard
 import com.nilemnod.mangareader.core.mangaui.DotSeparatorText
@@ -82,6 +81,7 @@ import com.nilemnod.mangareader.core.ui.components.material.TextButton
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.preference.appUiPreferences
 import com.nilemnod.mangareader.core.ui.util.clickableNoIndication
 import com.nilemnod.mangareader.core.ui.util.secondaryItemAlpha
 import com.nilemnod.mangareader.domain.manga.model.Manga
@@ -608,7 +608,7 @@ private fun MangaSummary(
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
-    val preferences = remember { context.appGraph.uiPreferences }
+    val preferences = remember { context.appUiPreferences }
     val loadImages = remember { preferences.imagesInDescription.get() }
     val animProgress by animateFloatAsState(
         targetValue = if (expanded) 1f else 0f,

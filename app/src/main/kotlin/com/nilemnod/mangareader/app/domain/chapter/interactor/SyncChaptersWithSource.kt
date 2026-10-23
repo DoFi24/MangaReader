@@ -1,6 +1,5 @@
 package com.nilemnod.mangareader.app.domain.chapter.interactor
 
-import com.nilemnod.mangareader.app.domain.manga.interactor.GetExcludedScanlators
 import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.core.download.DownloadProvider
 import com.nilemnod.mangareader.data.chapter.ChapterSanitizer
@@ -13,6 +12,7 @@ import com.nilemnod.mangareader.domain.chapter.model.toSourceChapter
 import com.nilemnod.mangareader.domain.chapter.repository.ChapterRepository
 import com.nilemnod.mangareader.domain.chapter.service.ChapterRecognition
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
+import com.nilemnod.mangareader.domain.manga.interactor.GetExcludedScanlators
 import com.nilemnod.mangareader.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.toSourceManga

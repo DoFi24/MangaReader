@@ -8,6 +8,7 @@ import com.nilemnod.mangareader.core.common.preference.Preference
 import com.nilemnod.mangareader.core.common.preference.PreferenceStore
 import com.nilemnod.mangareader.core.common.preference.getEnum
 import com.nilemnod.mangareader.core.common.preference.getEnumSet
+import com.nilemnod.mangareader.domain.chapter.service.ChapterPreferences
 import com.nilemnod.mangareader.i18n.MR
 import dev.icerock.moko.resources.StringResource
 import dev.zacsweers.metro.AppScope
@@ -18,6 +19,7 @@ import dev.zacsweers.metro.SingleIn
 @SingleIn(AppScope::class)
 class ReaderPreferences(
     preferenceStore: PreferenceStore,
+    chapterPreferences: ChapterPreferences,
 ) {
 
     // region General
@@ -111,7 +113,7 @@ class ReaderPreferences(
 
     val skipRead: Preference<Boolean> = preferenceStore.getBoolean("skip_read", false)
 
-    val skipFiltered: Preference<Boolean> = preferenceStore.getBoolean("skip_filtered", true)
+    val skipFiltered: Preference<Boolean> = chapterPreferences.skipFiltered
 
     val skipDupe: Preference<Boolean> = preferenceStore.getBoolean("skip_dupe", false)
 
