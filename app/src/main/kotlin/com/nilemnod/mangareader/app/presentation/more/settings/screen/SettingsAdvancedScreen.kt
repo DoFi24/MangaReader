@@ -25,10 +25,8 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.data.library.MetadataUpdateWorker
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
-import com.nilemnod.mangareader.app.presentation.more.settings.Preference
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.advanced.ClearDatabaseScreen
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.debug.DebugInfoScreen
-import com.nilemnod.mangareader.app.ui.more.OnboardingScreen
 import com.nilemnod.mangareader.app.util.system.isReleaseBuildType
 import com.nilemnod.mangareader.app.util.system.isShizukuInstalled
 import com.nilemnod.mangareader.app.util.system.powerManager
@@ -52,6 +50,9 @@ import com.nilemnod.mangareader.core.network.PREF_DOH_SHECAN
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
+import com.nilemnod.mangareader.feature.settings.OnboardingScreen
+import com.nilemnod.mangareader.feature.settings.Preference
+import com.nilemnod.mangareader.feature.settings.screen.SearchableSettings
 import com.nilemnod.mangareader.i18n.MR
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

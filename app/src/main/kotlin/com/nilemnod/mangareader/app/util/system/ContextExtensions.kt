@@ -153,10 +153,3 @@ val Context.isShizukuInstalled: Boolean
     } catch (e: PackageManager.NameNotFoundException) {
         false
     }
-
-fun Context.launchRequestPackageInstallsPermission() {
-    Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES).apply {
-        data = "package:$packageName".toUri()
-        startActivity(this)
-    }
-}

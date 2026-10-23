@@ -209,6 +209,7 @@ dependencies {
     implementation(projects.data)
     implementation(projects.domain)
     implementation(projects.feature.reader)
+    implementation(projects.feature.settings)
     implementation(projects.core.ui)
     implementation(projects.core.mangaUi)
     implementation(projects.feature.browse)

@@ -42,7 +42,7 @@ import com.nilemnod.mangareader.app.presentation.browse.components.ExtensionPill
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.browse.ExtensionStoresScreen
 import com.nilemnod.mangareader.app.ui.browse.extension.ExtensionUiModel
 import com.nilemnod.mangareader.app.ui.browse.extension.ExtensionsViewModel
-import com.nilemnod.mangareader.app.util.system.launchRequestPackageInstallsPermission
+import com.nilemnod.mangareader.core.android.system.launchRequestPackageInstallsPermission
 import com.nilemnod.mangareader.core.common.i18n.LocaleHelper
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.util.system.copyToClipboard

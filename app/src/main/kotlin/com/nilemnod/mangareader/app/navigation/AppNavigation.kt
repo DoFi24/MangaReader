@@ -27,6 +27,7 @@ object AppNavigation {
 
     fun register() {
         BrowseTabs.register(ExtensionsBrowseTab)
+        AppSettingsEntries.register()
         ScreenRegistry {
             register<SharedScreen.Manga> { MangaScreen(it.mangaId, it.fromSource) }
             register<SharedScreen.BrowseSource> { BrowseSourceScreen(it.sourceId, it.listingQuery) }
