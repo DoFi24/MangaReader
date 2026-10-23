@@ -1,10 +1,6 @@
 package com.nilemnod.mangareader.app.util.storage
 
-import android.content.Context
 import java.io.File
-
-val Context.cacheImageDir: File
-    get() = File(cacheDir, "shared_image")
 
 /**
  * Copies this file to the given [target] file while marking the file as read-only.

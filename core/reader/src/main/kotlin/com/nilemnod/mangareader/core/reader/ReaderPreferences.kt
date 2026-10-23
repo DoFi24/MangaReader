@@ -26,6 +26,8 @@ class ReaderPreferences(
 
     val useNewReader: Preference<Boolean> = preferenceStore.getBoolean("pref_use_compose_reader", false)
 
+    val highQualityRenderer: Preference<Boolean> = preferenceStore.getBoolean("pref_high_quality_renderer_key", false)
+
     val loadAheadOnlyOverWifi: Preference<Boolean> = preferenceStore.getBoolean(
         "pref_reader_load_ahead_only_over_wifi",
         true,

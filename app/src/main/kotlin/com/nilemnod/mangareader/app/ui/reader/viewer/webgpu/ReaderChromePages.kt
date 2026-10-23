@@ -32,8 +32,9 @@ import ca.mpreg.webgpuviewer.viewer.ImagePage
 import com.nilemnod.mangareader.app.presentation.reader.ChapterTransition
 import com.nilemnod.mangareader.app.ui.reader.model.ChapterTransition
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderChapter
-import com.nilemnod.mangareader.app.ui.webview.WebViewActivity
 import com.nilemnod.mangareader.core.mangaui.formattedMessage
+import com.nilemnod.mangareader.core.navigation.SharedIntent
+import com.nilemnod.mangareader.core.navigation.intent
 import com.nilemnod.mangareader.core.ui.components.CombinedCircularProgressIndicator
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.theme.MangaReaderTheme
@@ -121,7 +122,7 @@ class ErrorPage internal constructor(
             onOpenInWebView = imageUrl?.let {
                 {
                     val sourceId = viewer.activity.viewModel.manga?.source
-                    context.startActivity(WebViewActivity.newIntent(context, it, sourceId))
+                    context.startActivity(SharedIntent.WebView(it, sourceId).intent(context))
                 }
             },
         )

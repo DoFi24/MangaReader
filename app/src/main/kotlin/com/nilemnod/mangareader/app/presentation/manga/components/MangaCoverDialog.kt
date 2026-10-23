@@ -47,10 +47,10 @@ import coil3.request.CachePolicy
 import coil3.request.ImageRequest
 import coil3.request.SuccessResult
 import coil3.size.Size
-import com.nilemnod.mangareader.app.data.coil.ImageDecoder
-import com.nilemnod.mangareader.app.data.coil.newDecoder
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.ui.reader.viewer.ReaderPageImageView
+import com.nilemnod.mangareader.core.mangaui.coil.ImageDecoder
+import com.nilemnod.mangareader.core.mangaui.coil.newDecoder
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.AppBarActions
 import com.nilemnod.mangareader.core.ui.components.DropdownMenu
@@ -78,7 +78,7 @@ fun MangaCoverDialog(
     onEditClick: ((EditCoverAction) -> Unit)?,
     onDismissRequest: () -> Unit,
 ) {
-    val useNewRenderer = LocalContext.current.appGraph.basePreferences.highQualityRenderer.get()
+    val useNewRenderer = LocalContext.current.appGraph.readerPreferences.highQualityRenderer.get()
     val view = LocalView.current
 
     Dialog(

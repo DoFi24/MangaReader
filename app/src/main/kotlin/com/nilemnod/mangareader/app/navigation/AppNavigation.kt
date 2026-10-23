@@ -1,12 +1,16 @@
 package com.nilemnod.mangareader.app.navigation
 
+import android.content.Intent
 import cafe.adriel.voyager.core.registry.ScreenRegistry
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.about.OpenSourceLicensesScreen
 import com.nilemnod.mangareader.app.ui.browse.extension.ExtensionsBrowseTab
 import com.nilemnod.mangareader.app.ui.browse.extension.details.SourcePreferencesScreen
+import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.app.ui.manga.MangaCoverDialogHost
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
+import com.nilemnod.mangareader.app.ui.webview.WebViewActivity
 import com.nilemnod.mangareader.app.ui.webview.WebViewScreen
+import com.nilemnod.mangareader.core.common.Constants
 import com.nilemnod.mangareader.core.navigation.DialogRegistry
 import com.nilemnod.mangareader.core.navigation.IntentRegistry
 import com.nilemnod.mangareader.core.navigation.SharedDialog
@@ -53,6 +57,16 @@ object AppNavigation {
         }
         IntentRegistry.register<SharedIntent.Reader> { context, intent ->
             ReaderActivity.newIntent(context, intent.mangaId, intent.chapterId)
+        }
+        IntentRegistry.register<SharedIntent.WebView> { context, intent ->
+            WebViewActivity.newIntent(context, intent.url, intent.sourceId, intent.title)
+        }
+        IntentRegistry.register<SharedIntent.Manga> { context, intent ->
+            Intent(context, MainActivity::class.java).apply {
+                action = Constants.SHORTCUT_MANGA
+                putExtra(Constants.MANGA_EXTRA, intent.mangaId)
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            }
         }
     }
 }

@@ -34,12 +34,12 @@ import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView.EASE_IN_OUT
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView.EASE_OUT_QUAD
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView.SCALE_TYPE_CENTER_INSIDE
 import com.github.chrisbanes.photoview.PhotoView
-import com.nilemnod.mangareader.app.data.coil.ImageDecoder
-import com.nilemnod.mangareader.app.data.coil.cropBorders
-import com.nilemnod.mangareader.app.data.coil.webtoonStrips
 import com.nilemnod.mangareader.app.ui.reader.viewer.webtoon.WebtoonStripImageView
 import com.nilemnod.mangareader.app.util.view.isVisibleOnScreen
 import com.nilemnod.mangareader.core.android.system.animatorDurationScale
+import com.nilemnod.mangareader.core.mangaui.coil.ImageDecoder
+import com.nilemnod.mangareader.core.mangaui.coil.cropBorders
+import com.nilemnod.mangareader.core.mangaui.coil.webtoonStrips
 import okio.BufferedSource
 
 /**

@@ -35,8 +35,6 @@ class BasePreferences(
         PRIVATE(MR.strings.ext_installer_private, false),
     }
 
-    val highQualityRenderer: Preference<Boolean> = preferenceStore.getBoolean("pref_high_quality_renderer_key", false)
-
     val installationId: Preference<String> = appStatePreferences.installationId
 
     val skippedAppUpdate: Preference<String> = appStatePreferences.skippedAppUpdate

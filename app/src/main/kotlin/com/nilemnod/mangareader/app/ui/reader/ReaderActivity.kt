@@ -50,7 +50,6 @@ import com.nilemnod.mangareader.app.data.notification.Notifications
 import com.nilemnod.mangareader.app.databinding.ReaderActivityBinding
 import com.nilemnod.mangareader.app.di.AppGraph
 import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.presentation.reader.DisplayRefreshHost
 import com.nilemnod.mangareader.app.presentation.reader.OrientationSelectDialog
 import com.nilemnod.mangareader.app.presentation.reader.ReaderContentOverlay
@@ -61,7 +60,6 @@ import com.nilemnod.mangareader.app.presentation.reader.appbars.ReaderAppBars
 import com.nilemnod.mangareader.app.presentation.reader.components.ChapterNavigatorType
 import com.nilemnod.mangareader.app.presentation.reader.settings.ReaderSettingsDialog
 import com.nilemnod.mangareader.app.ui.base.activity.BaseActivity
-import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.app.ui.reader.ReaderViewModel.SetAsCoverResult.AddToLibraryFirst
 import com.nilemnod.mangareader.app.ui.reader.ReaderViewModel.SetAsCoverResult.Error
 import com.nilemnod.mangareader.app.ui.reader.ReaderViewModel.SetAsCoverResult.Success
@@ -74,20 +72,21 @@ import com.nilemnod.mangareader.app.ui.reader.setting.toViewer
 import com.nilemnod.mangareader.app.ui.reader.viewer.ReaderProgressIndicator
 import com.nilemnod.mangareader.app.ui.reader.viewer.pager.R2LPagerViewer
 import com.nilemnod.mangareader.app.ui.reader.viewer.webgpu.WebGpuViewer
-import com.nilemnod.mangareader.app.ui.webview.WebViewActivity
 import com.nilemnod.mangareader.app.util.system.readerBackgroundColor
 import com.nilemnod.mangareader.app.util.view.setComposeContent
 import com.nilemnod.mangareader.core.android.system.openInBrowser
 import com.nilemnod.mangareader.core.android.system.toShareIntent
-import com.nilemnod.mangareader.core.common.Constants
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.core.metro.metroGraph
+import com.nilemnod.mangareader.core.navigation.SharedIntent
+import com.nilemnod.mangareader.core.navigation.intent
 import com.nilemnod.mangareader.core.reader.ReaderOrientation
 import com.nilemnod.mangareader.core.reader.ReaderPreferences
 import com.nilemnod.mangareader.core.reader.ReadingMode
 import com.nilemnod.mangareader.core.ui.util.collectAsState
+import com.nilemnod.mangareader.domain.base.service.ModePreferences
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.Dispatchers
@@ -124,7 +123,7 @@ class ReaderActivity : BaseActivity() {
 
     @Inject private lateinit var readerPreferences: ReaderPreferences
 
-    @Inject private lateinit var preferences: BasePreferences
+    @Inject private lateinit var preferences: ModePreferences
 
     lateinit var binding: ReaderActivityBinding
 
@@ -574,13 +573,7 @@ class ReaderActivity : BaseActivity() {
 
     private fun openMangaScreen() {
         viewModel.manga?.id?.let { id ->
-            startActivity(
-                Intent(this, MainActivity::class.java).apply {
-                    action = Constants.SHORTCUT_MANGA
-                    putExtra(Constants.MANGA_EXTRA, id)
-                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                },
-            )
+            startActivity(SharedIntent.Manga(id).intent(this))
         }
     }
 
@@ -588,7 +581,7 @@ class ReaderActivity : BaseActivity() {
         val manga = viewModel.manga ?: return
         val source = viewModel.getWebSource() ?: return
         assistUrl?.let {
-            val intent = WebViewActivity.newIntent(this@ReaderActivity, it, source.id, manga.title)
+            val intent = SharedIntent.WebView(it, source.id, manga.title).intent(this@ReaderActivity)
             startActivity(intent)
         }
     }

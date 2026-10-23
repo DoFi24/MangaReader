@@ -11,6 +11,16 @@ sealed interface SharedIntent {
         val mangaId: Long?,
         val chapterId: Long?,
     ) : SharedIntent
+
+    data class WebView(
+        val url: String,
+        val sourceId: Long? = null,
+        val title: String? = null,
+    ) : SharedIntent
+
+    data class Manga(
+        val mangaId: Long,
+    ) : SharedIntent
 }
 
 object IntentRegistry {

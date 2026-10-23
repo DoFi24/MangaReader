@@ -7,7 +7,7 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.view.MotionEvent
 import android.view.View
-import com.nilemnod.mangareader.app.data.coil.ImageDecoder
+import com.nilemnod.mangareader.core.mangaui.coil.ImageDecoder
 import kotlin.math.roundToInt
 
 /**

@@ -17,13 +17,19 @@ import com.nilemnod.mangareader.app.util.system.notificationBuilder
 import com.nilemnod.mangareader.app.util.system.notify
 import com.nilemnod.mangareader.core.android.system.getBitmapOrNull
 import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.feature.reader.SaveImageNotifier
 import com.nilemnod.mangareader.i18n.MR
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesBinding
+import dev.zacsweers.metro.Inject
 import com.nilemnod.mangareader.icons.materialsymbols.R as MaterialSymbolsR
 
 /**
  * Class used to show BigPictureStyle notifications
  */
-class SaveImageNotifier(private val context: Context) {
+@Inject
+@ContributesBinding(AppScope::class)
+class AndroidSaveImageNotifier(private val context: Context) : SaveImageNotifier {
 
     private val notificationBuilder = context.notificationBuilder(Notifications.CHANNEL_COMMON)
     private val notificationId: Int = Notifications.ID_DOWNLOAD_IMAGE
@@ -33,7 +39,7 @@ class SaveImageNotifier(private val context: Context) {
      *
      * @param uri image file containing downloaded page image.
      */
-    fun onComplete(uri: Uri) {
+    override fun onComplete(uri: Uri) {
         val request = ImageRequest.Builder(context)
             .data(uri)
             .memoryCachePolicy(CachePolicy.DISABLED)
@@ -49,7 +55,7 @@ class SaveImageNotifier(private val context: Context) {
     /**
      * Clears the notification message.
      */
-    fun onClear() {
+    override fun onClear() {
         context.cancelNotification(notificationId)
     }
 
@@ -57,7 +63,7 @@ class SaveImageNotifier(private val context: Context) {
      * Called on error while downloading image.
      * @param error string containing error information.
      */
-    fun onError(error: String?) {
+    override fun onError(error: String?) {
         // Create notification
         with(notificationBuilder) {
             setContentTitle(context.stringResource(MR.strings.download_notifier_title_error))

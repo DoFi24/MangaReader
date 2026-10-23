@@ -9,10 +9,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
-import com.nilemnod.mangareader.app.data.saver.Image
-import com.nilemnod.mangareader.app.data.saver.ImageSaver
-import com.nilemnod.mangareader.app.data.saver.Location
-import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.domain.manga.interactor.SetMangaViewerFlags
 import com.nilemnod.mangareader.app.domain.manga.model.readerOrientation
 import com.nilemnod.mangareader.app.domain.manga.model.readingMode
@@ -26,8 +22,7 @@ import com.nilemnod.mangareader.app.ui.reader.model.ViewerChapters
 import com.nilemnod.mangareader.app.ui.reader.viewer.Viewer
 import com.nilemnod.mangareader.app.util.chapter.filterDownloaded
 import com.nilemnod.mangareader.app.util.chapter.removeDuplicates
-import com.nilemnod.mangareader.app.util.editCover
-import com.nilemnod.mangareader.app.util.storage.cacheImageDir
+import com.nilemnod.mangareader.core.android.storage.cacheImageDir
 import com.nilemnod.mangareader.core.android.system.activeNetworkState
 import com.nilemnod.mangareader.core.common.preference.toggle
 import com.nilemnod.mangareader.core.common.storage.DiskUtil
@@ -42,6 +37,11 @@ import com.nilemnod.mangareader.core.reader.ReaderOrientation
 import com.nilemnod.mangareader.core.reader.ReaderPreferences
 import com.nilemnod.mangareader.core.reader.ReadingMode
 import com.nilemnod.mangareader.core.storage.CoverCache
+import com.nilemnod.mangareader.core.storage.editCover
+import com.nilemnod.mangareader.core.storage.saver.Image
+import com.nilemnod.mangareader.core.storage.saver.ImageSaver
+import com.nilemnod.mangareader.core.storage.saver.Location
+import com.nilemnod.mangareader.domain.base.service.ModePreferences
 import com.nilemnod.mangareader.domain.chapter.interactor.GetChaptersByMangaId
 import com.nilemnod.mangareader.domain.chapter.interactor.UpdateChapter
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
@@ -61,6 +61,7 @@ import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.api.Page
 import com.nilemnod.mangareader.domain.source.interactor.GetIncognitoState
 import com.nilemnod.mangareader.domain.source.service.SourceManager
+import com.nilemnod.mangareader.feature.reader.SaveImageNotifier
 import com.nilemnod.mangareader.source.local.image.LocalCoverManager
 import com.nilemnod.mangareader.source.local.isLocal
 import dev.zacsweers.metro.AppScope
@@ -109,7 +110,8 @@ class ReaderViewModel(
     private val downloadProvider: DownloadProvider,
     private val imageSaver: ImageSaver,
     val readerPreferences: ReaderPreferences,
-    private val basePreferences: BasePreferences,
+    private val modePreferences: ModePreferences,
+    private val saveImageNotifier: SaveImageNotifier,
     private val downloadPreferences: DownloadPreferences,
     private val getManga: GetManga,
     private val getChaptersByMangaId: GetChaptersByMangaId,
@@ -282,7 +284,7 @@ class ReaderViewModel(
                 }
             }
             .run {
-                if (basePreferences.downloadedOnly.get()) {
+                if (modePreferences.downloadedOnly.get()) {
                     filterDownloaded(manga, downloadCache)
                 } else {
                     this
@@ -953,7 +955,7 @@ class ReaderViewModel(
         if (page?.status != Page.State.Ready) return
         val manga = manga ?: return
 
-        val notifier = SaveImageNotifier(context)
+        val notifier = saveImageNotifier
         notifier.onClear()
 
         val filename = generateFilename(manga, page)
