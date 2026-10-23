@@ -13,7 +13,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import androidx.paging.filter
 import androidx.paging.map
-import com.nilemnod.mangareader.app.util.removeCovers
+import com.nilemnod.mangareader.source.local.isLocal
 import com.nilemnod.mangareader.core.common.preference.CheckboxState
 import com.nilemnod.mangareader.core.common.preference.mapAsCheckboxState
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
@@ -66,7 +66,7 @@ class BrowseSourceViewModel(
     @Assisted private val sourceId: Long,
     @Assisted listingQuery: String?,
     @AppCoroutineScope private val appScope: CoroutineScope,
-    private val sourceManager: SourceManager,
+    val sourceManager: SourceManager,
     sourcePreferences: SourcePreferences,
     private val libraryPreferences: LibraryPreferences,
     private val coverCache: CoverCache,
@@ -248,7 +248,7 @@ class BrowseSourceViewModel(
     fun changeMangaFavorite(manga: Manga) {
         appScope.launch {
             val update = if (manga.favorite) {
-                manga.removeCovers(coverCache)
+                if (!manga.isLocal()) coverCache.deleteFromCache(manga, true)
                 MangaUpdate(manga.id) { favoriteAt = null }
             } else {
                 setMangaDefaultChapterFlags.await(manga)

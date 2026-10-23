@@ -20,7 +20,6 @@ import com.nilemnod.mangareader.app.presentation.browse.BrowseSourceContent
 import com.nilemnod.mangareader.app.ui.browse.source.browse.BrowseSourceViewModel
 import com.nilemnod.mangareader.app.ui.browse.source.browse.SourceFilterDialog
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
-import com.nilemnod.mangareader.app.ui.webview.WebViewScreen
 import com.nilemnod.mangareader.core.navigation.HomeTab
 import com.nilemnod.mangareader.core.navigation.HomeTabRouter
 import com.nilemnod.mangareader.core.navigation.SharedScreen
@@ -111,11 +110,11 @@ data class MigrateSourceSearchScreen(
                 onWebViewClick = {
                     val web = source?.web ?: return@BrowseSourceContent
                     navigator.push(
-                        WebViewScreen(
+                        SharedScreen.WebView(
                             url = web.homeUrl,
                             initialTitle = source.name,
                             sourceId = source.id,
-                        ),
+                        ).screen(),
                     )
                 },
                 onMangaClick = openMigrateDialog,

@@ -3,14 +3,14 @@ package com.nilemnod.mangareader.feature.migration.list
 import androidx.annotation.FloatRange
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nilemnod.mangareader.app.source.getNameForMangaInfo
-import com.nilemnod.mangareader.app.source.interactor.UpdateMangaFromRemote
+import com.nilemnod.mangareader.domain.source.service.getNameForMangaInfo
+import com.nilemnod.mangareader.domain.source.service.RemoteMangaUpdater
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.domain.chapter.interactor.GetChapterSummaryByMangaId
 import com.nilemnod.mangareader.domain.manga.interactor.GetManga
 import com.nilemnod.mangareader.domain.manga.interactor.NetworkToLocalManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
-import com.nilemnod.mangareader.domain.migration.usecases.MigrateMangaUseCase
+import com.nilemnod.mangareader.domain.migration.service.MangaMigrator
 import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.domain.source.service.SourcePreferences
@@ -53,8 +53,8 @@ class MigrationListViewModel(
     private val getManga: GetManga,
     private val networkToLocalManga: NetworkToLocalManga,
     private val getChapterSummaryByMangaId: GetChapterSummaryByMangaId,
-    private val migrateManga: MigrateMangaUseCase,
-    private val updateMangaFromRemote: UpdateMangaFromRemote,
+    private val migrateManga: MangaMigrator,
+    private val updateMangaFromRemote: RemoteMangaUpdater,
 ) : ViewModel() {
 
     val state: StateFlow<MigrationListViewModel.State>
@@ -91,7 +91,7 @@ class MigrationListViewModel(
                             manga = manga,
                             chapterCount = chapterInfo.chapterCount,
                             latestChapter = chapterInfo.latestChapter,
-                            source = sourceManager.getOrStub(manga.source).getNameForMangaInfo(),
+                            source = sourceManager.getOrStub(manga.source).getNameForMangaInfo(preferences),
                             parentContext = viewModelScope.coroutineContext,
                         )
                     }
@@ -112,7 +112,7 @@ class MigrationListViewModel(
 
     private suspend fun Manga.toSuccessSearchResult(): SearchResult.Success {
         val chapterInfo = getChapterInfo(id)
-        val source = sourceManager.getOrStub(source).getNameForMangaInfo()
+        val source = sourceManager.getOrStub(source).getNameForMangaInfo(preferences)
         return SearchResult.Success(
             manga = this,
             chapterCount = chapterInfo.chapterCount,

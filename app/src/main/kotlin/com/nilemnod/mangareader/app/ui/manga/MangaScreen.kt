@@ -43,6 +43,7 @@ import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.core.mangaui.ChangeCategoryDialog
 import com.nilemnod.mangareader.core.mangaui.DuplicateMangaDialog
+import com.nilemnod.mangareader.core.navigation.MangaDestination
 import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
 import com.nilemnod.mangareader.core.ui.util.AssistContentScreen
 import com.nilemnod.mangareader.core.ui.util.Screen
@@ -63,7 +64,7 @@ import logcat.LogPriority
 class MangaScreen(
     private val mangaId: Long,
     val fromSource: Boolean = false,
-) : Screen(), AssistContentScreen {
+) : Screen(), AssistContentScreen, MangaDestination {
 
     private var assistUrl: String? = null
 

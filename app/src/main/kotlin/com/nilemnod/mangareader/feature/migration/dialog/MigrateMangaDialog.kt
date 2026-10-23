@@ -19,7 +19,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastForEach
 import androidx.lifecycle.ViewModel
-import com.nilemnod.mangareader.app.domain.manga.model.hasCustomCover
 import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.core.storage.CoverCache
 import com.nilemnod.mangareader.core.ui.components.LabeledCheckbox
@@ -28,7 +27,7 @@ import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.migration.models.MigrationFlag
-import com.nilemnod.mangareader.domain.migration.usecases.MigrateMangaUseCase
+import com.nilemnod.mangareader.domain.migration.service.MangaMigrator
 import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.feature.common.utils.getLabel
 import com.nilemnod.mangareader.i18n.MR
@@ -135,7 +134,7 @@ class MigrateDialogViewModel(
     private val sourcePreference: SourcePreferences,
     private val coverCache: CoverCache,
     private val downloadManager: DownloadManager,
-    private val migrateManga: MigrateMangaUseCase,
+    private val migrateManga: MangaMigrator,
 ) : ViewModel() {
 
     val state: StateFlow<MigrateDialogViewModel.State>
@@ -147,7 +146,7 @@ class MigrateDialogViewModel(
                 val applicable = when (it) {
                     MigrationFlag.CHAPTER -> true
                     MigrationFlag.CATEGORY -> true
-                    MigrationFlag.CUSTOM_COVER -> current.hasCustomCover(coverCache)
+                    MigrationFlag.CUSTOM_COVER -> coverCache.hasCustomCover(current.id)
                     MigrationFlag.NOTES -> current.notes.isNotBlank()
                     MigrationFlag.REMOVE_DOWNLOAD -> downloadManager.getDownloadCount(current) > 0
                 }

@@ -64,7 +64,6 @@ import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.binding
 import dev.zacsweers.metrox.viewmodel.ViewModelKey
 import dev.zacsweers.metrox.viewmodel.metroViewModel
-import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -355,9 +354,8 @@ class MigrationConfigScreen(private val mangaIds: Collection<Long>) : Screen() {
             val includedSources = sourcePreferences.migrationSources.get()
             val disabledSources = sourcePreferences.disabledSources.get()
                 .mapNotNull { it.toLongOrNull() }
-            val sources = sourceManager.getAll()
+            val sources = sourceManager.getOnlineSources()
                 .asSequence()
-                .filterIsInstance<HttpSource>()
                 .filter { it.lang in languages }
                 .map {
                     val source = Source(

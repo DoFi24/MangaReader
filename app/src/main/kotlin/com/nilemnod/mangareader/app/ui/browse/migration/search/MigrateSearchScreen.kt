@@ -7,7 +7,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.presentation.browse.MigrateSearchScreen
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.SearchViewModel
-import com.nilemnod.mangareader.app.ui.manga.MangaScreen
+import com.nilemnod.mangareader.core.navigation.MangaDestination
 import com.nilemnod.mangareader.core.navigation.SharedScreen
 import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.util.Screen
@@ -59,7 +59,7 @@ class MigrateSearchScreen(private val mangaId: Long) : Screen() {
                     onClickTitle = { navigator.push(SharedScreen.Manga(dialog.target.id, true).screen()) },
                     onDismissRequest = { viewModel.clearDialog() },
                     onComplete = {
-                        if (navigator.lastItem is MangaScreen) {
+                        if (navigator.lastItem is MangaDestination) {
                             val lastItem = navigator.lastItem
                             navigator.popUntil { navigator.items.contains(lastItem) }
                             navigator.push(SharedScreen.Manga(dialog.target.id).screen())

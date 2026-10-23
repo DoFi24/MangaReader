@@ -30,7 +30,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.presentation.browse.BrowseSourceContent
 import com.nilemnod.mangareader.app.presentation.browse.MissingSourceScreen
 import com.nilemnod.mangareader.app.presentation.browse.components.BrowseSourceToolbar
@@ -38,7 +37,6 @@ import com.nilemnod.mangareader.app.presentation.browse.components.RemoveMangaDi
 import com.nilemnod.mangareader.app.ui.browse.extension.details.SourcePreferencesScreen
 import com.nilemnod.mangareader.app.ui.browse.source.browse.BrowseSourceViewModel.Listing
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
-import com.nilemnod.mangareader.app.ui.webview.WebViewScreen
 import com.nilemnod.mangareader.core.mangaui.ChangeCategoryDialog
 import com.nilemnod.mangareader.core.mangaui.DuplicateMangaDialog
 import com.nilemnod.mangareader.core.navigation.SharedScreen
@@ -112,11 +110,11 @@ data class BrowseSourceScreen(
         val onWebViewClick = f@{
             val web = source.web ?: return@f
             navigator.push(
-                WebViewScreen(
+                SharedScreen.WebView(
                     url = web.homeUrl,
                     initialTitle = source.name,
                     sourceId = source.id,
-                ),
+                ).screen(),
             )
         }
 
@@ -254,7 +252,7 @@ data class BrowseSourceScreen(
                     onConfirm = { viewModel.addFavorite(dialog.manga) },
                     onOpenManga = { navigator.push(SharedScreen.Manga(it.id).screen()) },
                     onMigrate = { viewModel.setDialog(BrowseSourceViewModel.Dialog.Migrate(dialog.manga, it)) },
-                    sourceManager = LocalContext.current.appGraph.sourceManager,
+                    sourceManager = viewModel.sourceManager,
                 )
             }
 

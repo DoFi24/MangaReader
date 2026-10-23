@@ -5,6 +5,7 @@ import com.nilemnod.mangareader.app.ui.browse.source.browse.BrowseSourceScreen
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.GlobalSearchScreen
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
+import com.nilemnod.mangareader.app.ui.webview.WebViewScreen
 import com.nilemnod.mangareader.core.navigation.DialogRegistry
 import com.nilemnod.mangareader.core.navigation.IntentRegistry
 import com.nilemnod.mangareader.core.navigation.SharedDialog
@@ -24,6 +25,7 @@ object AppNavigation {
             register<SharedScreen.BrowseSource> { BrowseSourceScreen(it.sourceId, it.listingQuery) }
             register<SharedScreen.GlobalSearch> { GlobalSearchScreen(it.query, it.extensionFilter) }
             register<SharedScreen.MigrationConfig> { MigrationConfigScreen(it.mangaIds) }
+            register<SharedScreen.WebView> { WebViewScreen(it.url, it.initialTitle, it.sourceId) }
             register<SharedScreen.Category> { CategoryScreen() }
             register<SharedScreen.DownloadQueue> { DownloadQueueScreen }
             register<SharedScreen.Upcoming> { UpcomingScreen() }
