@@ -47,7 +47,10 @@ fun HistoryDeleteDialog(
                 onDelete(removeEverything)
                 onDismissRequest()
             }) {
-                Text(text = stringResource(MR.strings.action_remove))
+                Text(
+                    text = stringResource(MR.strings.action_remove),
+                    color = MaterialTheme.colorScheme.error,
+                )
             }
         },
         dismissButton = {
@@ -76,7 +79,10 @@ fun HistoryDeleteAllDialog(
                 onDelete()
                 onDismissRequest()
             }) {
-                Text(text = stringResource(MR.strings.action_ok))
+                Text(
+                    text = stringResource(MR.strings.action_ok),
+                    color = MaterialTheme.colorScheme.error,
+                )
             }
         },
         dismissButton = {
