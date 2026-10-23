@@ -37,7 +37,6 @@ import com.nilemnod.mangareader.app.presentation.category.components.ChangeCateg
 import com.nilemnod.mangareader.app.presentation.manga.DuplicateMangaDialog
 import com.nilemnod.mangareader.app.ui.browse.extension.details.SourcePreferencesScreen
 import com.nilemnod.mangareader.app.ui.browse.source.browse.BrowseSourceViewModel.Listing
-import com.nilemnod.mangareader.app.ui.category.CategoryScreen
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.webview.WebViewScreen
 import com.nilemnod.mangareader.core.navigation.SharedScreen
@@ -50,6 +49,7 @@ import com.nilemnod.mangareader.core.ui.util.AssistContentScreen
 import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.core.ui.util.collectAsLazyPagingItems
 import com.nilemnod.mangareader.domain.source.model.StubSource
+import com.nilemnod.mangareader.feature.categories.CategoryScreen
 import com.nilemnod.mangareader.feature.migration.dialog.MigrateMangaDialog
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols

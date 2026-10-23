@@ -33,7 +33,6 @@ import com.nilemnod.mangareader.app.presentation.library.components.LibraryConte
 import com.nilemnod.mangareader.app.presentation.library.components.LibraryToolbar
 import com.nilemnod.mangareader.app.presentation.manga.components.LibraryBottomActionMenu
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.GlobalSearchScreen
-import com.nilemnod.mangareader.app.ui.category.CategoryScreen
 import com.nilemnod.mangareader.app.ui.home.HomeScreen
 import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
@@ -52,6 +51,7 @@ import com.nilemnod.mangareader.core.ui.util.Tab
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.domain.library.model.LibraryManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.feature.categories.CategoryScreen
 import com.nilemnod.mangareader.feature.migration.config.MigrationConfigScreen
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols

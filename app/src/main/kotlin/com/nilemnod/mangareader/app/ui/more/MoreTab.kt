@@ -18,11 +18,11 @@ import com.nilemnod.mangareader.app.core.preference.asState
 import com.nilemnod.mangareader.app.data.download.DownloadManager
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.presentation.more.MoreScreen
-import com.nilemnod.mangareader.app.ui.category.CategoryScreen
 import com.nilemnod.mangareader.app.ui.setting.SettingsScreen
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.Tab
 import com.nilemnod.mangareader.core.ui.util.rememberAnimatedVectorPainter
+import com.nilemnod.mangareader.feature.categories.CategoryScreen
 import com.nilemnod.mangareader.feature.downloads.DownloadQueueScreen
 import com.nilemnod.mangareader.feature.stats.StatsScreen
 import com.nilemnod.mangareader.i18n.MR

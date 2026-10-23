@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.category.components
+package com.nilemnod.mangareader.core.ui.components
 
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material3.Icon
@@ -12,7 +12,7 @@ import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Add
 @Composable
-fun CategoryFloatingActionButton(
+fun AddFloatingActionButton(
     lazyListState: LazyListState,
     onCreate: () -> Unit,
     modifier: Modifier = Modifier,

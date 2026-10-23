@@ -21,7 +21,6 @@ import com.nilemnod.mangareader.app.presentation.history.HistoryScreen
 import com.nilemnod.mangareader.app.presentation.history.components.HistoryDeleteAllDialog
 import com.nilemnod.mangareader.app.presentation.history.components.HistoryDeleteDialog
 import com.nilemnod.mangareader.app.presentation.manga.DuplicateMangaDialog
-import com.nilemnod.mangareader.app.ui.category.CategoryScreen
 import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
@@ -33,6 +32,7 @@ import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.Tab
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
+import com.nilemnod.mangareader.feature.categories.CategoryScreen
 import com.nilemnod.mangareader.feature.migration.dialog.MigrateMangaDialog
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metrox.viewmodel.metroViewModel

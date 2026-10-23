@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.ui.category
+package com.nilemnod.mangareader.feature.categories
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -8,10 +8,6 @@ import androidx.compose.ui.util.fastMap
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.presentation.category.CategoryScreen
-import com.nilemnod.mangareader.app.presentation.category.components.CategoryCreateDialog
-import com.nilemnod.mangareader.app.presentation.category.components.CategoryDeleteDialog
-import com.nilemnod.mangareader.app.presentation.category.components.CategoryRenameDialog
 import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
 import com.nilemnod.mangareader.core.ui.util.Screen
@@ -35,7 +31,7 @@ class CategoryScreen : Screen() {
 
         val successState = state as CategoryScreenState.Success
 
-        CategoryScreen(
+        CategoryListScreen(
             state = successState,
             onClickCreate = { viewModel.showDialog(CategoryDialog.Create) },
             onClickRename = { viewModel.showDialog(CategoryDialog.Rename(it)) },
