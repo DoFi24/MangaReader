@@ -1,11 +1,10 @@
-package com.nilemnod.mangareader.app.presentation.components
+package com.nilemnod.mangareader.core.mangaui
 
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.DpOffset
-import com.nilemnod.mangareader.app.presentation.manga.DownloadAction
 import com.nilemnod.mangareader.core.ui.components.DropdownMenu
 import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
 import com.nilemnod.mangareader.core.ui.i18n.stringResource

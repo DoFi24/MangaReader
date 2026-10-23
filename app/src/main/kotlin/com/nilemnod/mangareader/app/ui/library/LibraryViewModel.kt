@@ -5,13 +5,9 @@ import androidx.compose.ui.util.fastFilter
 import androidx.compose.ui.util.fastMap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nilemnod.mangareader.app.core.preference.PreferenceMutableState
-import com.nilemnod.mangareader.app.core.preference.asState
 import com.nilemnod.mangareader.app.data.cache.CoverCache
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
-import com.nilemnod.mangareader.app.domain.chapter.interactor.SetReadStatus
 import com.nilemnod.mangareader.app.presentation.library.components.LibraryToolbarTitle
-import com.nilemnod.mangareader.app.presentation.manga.DownloadAction
 import com.nilemnod.mangareader.app.util.chapter.getNextUnread
 import com.nilemnod.mangareader.app.util.removeCovers
 import com.nilemnod.mangareader.core.common.preference.CheckboxState
@@ -22,7 +18,11 @@ import com.nilemnod.mangareader.core.common.util.lang.pausedWhileUnsubscribed
 import com.nilemnod.mangareader.core.common.util.mutate
 import com.nilemnod.mangareader.core.download.DownloadCache
 import com.nilemnod.mangareader.core.download.DownloadManager
+import com.nilemnod.mangareader.core.download.SetReadStatus
+import com.nilemnod.mangareader.core.mangaui.DownloadAction
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.core.ui.preference.PreferenceMutableState
+import com.nilemnod.mangareader.core.ui.preference.asState
 import com.nilemnod.mangareader.core.ui.util.fastFilterNot
 import com.nilemnod.mangareader.domain.category.interactor.GetCategories
 import com.nilemnod.mangareader.domain.category.interactor.SetMangaCategories

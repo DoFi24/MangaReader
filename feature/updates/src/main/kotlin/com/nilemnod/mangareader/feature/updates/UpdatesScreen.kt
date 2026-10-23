@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.updates
+package com.nilemnod.mangareader.feature.updates
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
@@ -19,10 +19,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastAll
 import androidx.compose.ui.util.fastAny
-import com.nilemnod.mangareader.app.presentation.manga.components.ChapterDownloadAction
-import com.nilemnod.mangareader.app.presentation.manga.components.MangaBottomActionMenu
-import com.nilemnod.mangareader.app.ui.updates.UpdatesItem
-import com.nilemnod.mangareader.app.ui.updates.UpdatesViewModel
+import com.nilemnod.mangareader.core.mangaui.ChapterDownloadAction
+import com.nilemnod.mangareader.core.mangaui.MangaBottomActionMenu
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.AppBarActions
 import com.nilemnod.mangareader.core.ui.components.FastScrollLazyColumn

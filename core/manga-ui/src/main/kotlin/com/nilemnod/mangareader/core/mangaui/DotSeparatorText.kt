@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.manga.components
+package com.nilemnod.mangareader.core.mangaui
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

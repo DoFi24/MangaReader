@@ -1,6 +1,5 @@
-package com.nilemnod.mangareader.app.ui.updates
+package com.nilemnod.mangareader.feature.updates
 
-import android.content.Context
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
@@ -8,20 +7,17 @@ import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.ui.util.fastFilter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nilemnod.mangareader.app.core.preference.asState
-import com.nilemnod.mangareader.app.data.library.LibraryUpdateWorker
-import com.nilemnod.mangareader.app.domain.chapter.interactor.SetReadStatus
-import com.nilemnod.mangareader.app.presentation.manga.components.ChapterDownloadAction
-import com.nilemnod.mangareader.app.presentation.updates.UpdatesUiModel
 import com.nilemnod.mangareader.core.android.lang.toLocalDate
-import com.nilemnod.mangareader.core.android.system.workManager
 import com.nilemnod.mangareader.core.common.preference.TriState
 import com.nilemnod.mangareader.core.common.util.lang.SubscriberGate
 import com.nilemnod.mangareader.core.common.util.lang.pausedWhileUnsubscribed
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.download.DownloadCache
 import com.nilemnod.mangareader.core.download.DownloadManager
+import com.nilemnod.mangareader.core.download.SetReadStatus
+import com.nilemnod.mangareader.core.mangaui.ChapterDownloadAction
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.core.ui.preference.asState
 import com.nilemnod.mangareader.core.ui.util.addOrRemove
 import com.nilemnod.mangareader.core.ui.util.insertSeparators
 import com.nilemnod.mangareader.domain.chapter.interactor.GetChapter
@@ -29,6 +25,7 @@ import com.nilemnod.mangareader.domain.chapter.interactor.UpdateChapter
 import com.nilemnod.mangareader.domain.chapter.model.ChapterUpdate
 import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
+import com.nilemnod.mangareader.domain.library.service.LibraryUpdateLauncher
 import com.nilemnod.mangareader.domain.manga.interactor.GetManga
 import com.nilemnod.mangareader.domain.manga.model.applyFilter
 import com.nilemnod.mangareader.domain.source.service.SourceManager
@@ -70,7 +67,6 @@ import kotlin.time.Duration.Companion.seconds
 @ContributesIntoMap(AppScope::class, binding = binding<ViewModel>())
 class UpdatesViewModel(
     @AppCoroutineScope private val appScope: CoroutineScope,
-    private val context: Context,
     private val sourceManager: SourceManager,
     private val downloadManager: DownloadManager,
     private val downloadCache: DownloadCache,
@@ -80,6 +76,7 @@ class UpdatesViewModel(
     private val getManga: GetManga,
     private val getChapter: GetChapter,
     private val libraryPreferences: LibraryPreferences,
+    private val libraryUpdateLauncher: LibraryUpdateLauncher,
     private val updatesPreferences: UpdatesPreferences,
 ) : ViewModel() {
 
@@ -258,7 +255,7 @@ class UpdatesViewModel(
     }
 
     suspend fun updateLibrary(): Boolean {
-        val started = LibraryUpdateWorker.startNow(context.workManager)
+        val started = libraryUpdateLauncher.startNow()
         _events.send(Event.LibraryUpdateTriggered(started))
         return started
     }

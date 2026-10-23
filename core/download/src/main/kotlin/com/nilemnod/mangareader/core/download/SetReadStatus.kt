@@ -1,6 +1,5 @@
-package com.nilemnod.mangareader.app.domain.chapter.interactor
+package com.nilemnod.mangareader.core.download
 
-import com.nilemnod.mangareader.app.domain.download.interactor.DeleteDownload
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.chapter.model.ChapterUpdate

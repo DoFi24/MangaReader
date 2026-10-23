@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.updates
+package com.nilemnod.mangareader.feature.updates
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text

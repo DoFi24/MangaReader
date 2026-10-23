@@ -15,9 +15,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
-import com.nilemnod.mangareader.app.core.preference.PreferenceMutableState
 import com.nilemnod.mangareader.app.ui.library.LibraryItem
 import com.nilemnod.mangareader.core.ui.components.material.PullRefresh
+import com.nilemnod.mangareader.core.ui.preference.PreferenceMutableState
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.domain.library.model.LibraryDisplayMode
 import com.nilemnod.mangareader.domain.library.model.LibraryManga
