@@ -1,9 +1,7 @@
-package com.nilemnod.mangareader.app.di.injekt
+package com.nilemnod.mangareader.compat.tachiyomi
 
 import android.app.Application
 import android.content.Context
-import com.nilemnod.mangareader.app.di.AppGraph
-import com.nilemnod.mangareader.core.metro.GraphProvider
 import eu.kanade.tachiyomi.network.JavaScriptEngine
 import eu.kanade.tachiyomi.network.NetworkHelper
 import kotlinx.serialization.json.Json
@@ -14,25 +12,29 @@ import uy.kohesive.injekt.api.InjektRegistrar
 import uy.kohesive.injekt.api.InjektionException
 import uy.kohesive.injekt.api.TypeReference
 import java.lang.reflect.Type
+import com.nilemnod.mangareader.core.network.JavaScriptEngine as CoreJavaScriptEngine
+import com.nilemnod.mangareader.core.network.NetworkHelper as CoreNetworkHelper
 
-class MetroInjektRegistrar(
+internal class MetroInjektRegistrar(
     private val application: Application,
-    private val graphProvider: GraphProvider<AppGraph>,
+    private val json: () -> Json,
+    private val protoBuf: () -> ProtoBuf,
+    private val xml: () -> XML,
+    private val networkHelper: () -> CoreNetworkHelper,
+    private val javaScriptEngine: () -> CoreJavaScriptEngine,
 ) : InjektRegistrar {
 
-    private val graph: AppGraph inline get() = graphProvider.graph
+    private val extensionNetworkHelper by lazy { NetworkHelper(networkHelper()) }
 
-    private val extensionNetworkHelper by lazy { NetworkHelper(graph.networkHelper) }
-
-    private val extensionJavaScriptEngine by lazy { JavaScriptEngine(graph.javaScriptEngine) }
+    private val extensionJavaScriptEngine by lazy { JavaScriptEngine(javaScriptEngine()) }
 
     private val bindings = mapOf<Type, () -> Any>(
         Application::class.java to { application },
         Context::class.java to { application },
 
-        Json::class.java to { graph.json },
-        ProtoBuf::class.java to { graph.protoBuf },
-        XML::class.java to { graph.xml },
+        Json::class.java to { json() },
+        ProtoBuf::class.java to { protoBuf() },
+        XML::class.java to { xml() },
 
         NetworkHelper::class.java to { extensionNetworkHelper },
         JavaScriptEngine::class.java to { extensionJavaScriptEngine },

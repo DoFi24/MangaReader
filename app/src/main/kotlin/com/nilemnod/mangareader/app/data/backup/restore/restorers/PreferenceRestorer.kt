@@ -21,7 +21,6 @@ import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import dev.zacsweers.metro.Inject
-import eu.kanade.tachiyomi.source.sourcePreferences
 
 @Inject
 class PreferenceRestorer(
@@ -45,7 +44,7 @@ class PreferenceRestorer(
 
     suspend fun restoreSource(preferences: List<BackupSourcePreferences>) {
         preferences.forEach {
-            val sourcePrefs = AndroidPreferenceStore(sourcePreferences(it.sourceKey))
+            val sourcePrefs = AndroidPreferenceStore(context.getSharedPreferences(it.sourceKey, Context.MODE_PRIVATE))
             restorePreferences(it.prefs, sourcePrefs)
         }
     }

@@ -34,7 +34,6 @@ import com.nilemnod.mangareader.app.data.coil.MangaCoverKeyer
 import com.nilemnod.mangareader.app.data.coil.MangaKeyer
 import com.nilemnod.mangareader.app.data.notification.Notifications
 import com.nilemnod.mangareader.app.di.AppGraph
-import com.nilemnod.mangareader.app.di.injekt.MetroInjektRegistrar
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.extension.ExtensionManager
 import com.nilemnod.mangareader.app.navigation.AppNavigation
@@ -43,6 +42,7 @@ import com.nilemnod.mangareader.app.util.system.cancelNotification
 import com.nilemnod.mangareader.app.util.system.isDebugBuildType
 import com.nilemnod.mangareader.app.util.system.isReleaseBuildType
 import com.nilemnod.mangareader.app.util.system.notify
+import com.nilemnod.mangareader.compat.tachiyomi.TachiyomiCompat
 import com.nilemnod.mangareader.core.android.system.animatorDurationScale
 import com.nilemnod.mangareader.core.common.AppBuild
 import com.nilemnod.mangareader.core.common.i18n.stringResource
@@ -65,7 +65,6 @@ import com.nilemnod.mangareader.feature.widget.WidgetManager
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.createGraphFactory
-import eu.kanade.tachiyomi.AppInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
@@ -74,8 +73,6 @@ import logcat.AndroidLogcatLogger
 import logcat.LogPriority
 import logcat.LogcatLogger
 import org.conscrypt.Conscrypt
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.InjektScope
 import java.security.Security
 import kotlin.concurrent.thread
 import com.nilemnod.mangareader.icons.materialsymbols.R as MaterialSymbolsR
@@ -116,7 +113,6 @@ class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factor
     override fun onCreate() {
         super<Application>.onCreate()
 
-        AppInfo.init(BuildConfig.VERSION_CODE, BuildConfig.VERSION_NAME)
         AppBuild.init(isReleaseBuildType)
 
         // Must run before the graph is built, since injecting dependencies initializes WebView and the
@@ -132,7 +128,16 @@ class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factor
         // The first use of Dispatchers.Main finds its factory with a ServiceLoader, which reads the APK
         thread(name = "MainDispatcherPreload") { Dispatchers.Main }
 
-        Injekt = InjektScope(MetroInjektRegistrar(application = this, graphProvider = this))
+        TachiyomiCompat.install(
+            application = this,
+            versionCode = BuildConfig.VERSION_CODE,
+            versionName = BuildConfig.VERSION_NAME,
+            json = { graph.json },
+            protoBuf = { graph.protoBuf },
+            xml = { graph.xml },
+            networkHelper = { graph.networkHelper },
+            javaScriptEngine = { graph.javaScriptEngine },
+        )
         graph.inject(this)
 
         AppNavigation.register()

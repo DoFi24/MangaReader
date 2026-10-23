@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.nilemnod.mangareader.extensionapi"
+    namespace = "com.nilemnod.mangareader.compat.tachiyomi"
 
     defaultConfig {
         consumerProguardFiles("consumer-proguard.pro")
@@ -27,9 +27,12 @@ dependencies {
     implementation(projects.core.common)
     implementation(projects.core.network)
     implementation(projects.core.metro)
+    implementation(projects.domain)
     implementation(projects.i18n)
 
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.kotlinx.serialization.protobuf)
+    implementation(libs.xmlutil.serialization)
     implementation(libs.injekt)
     implementation(libs.rxJava)
     implementation(libs.jsoup)
@@ -42,4 +45,7 @@ dependencies {
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.runtime)
+
+    testImplementation(libs.bundles.test)
+    testRuntimeOnly(libs.junit.platform.launcher)
 }

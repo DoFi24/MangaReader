@@ -1,5 +1,6 @@
-package com.nilemnod.mangareader.app.source.compat
+package com.nilemnod.mangareader.compat.tachiyomi
 
+import androidx.preference.PreferenceScreen
 import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.api.FilterList
 import com.nilemnod.mangareader.domain.source.api.ImageContent
@@ -9,6 +10,7 @@ import com.nilemnod.mangareader.domain.source.api.Page
 import com.nilemnod.mangareader.domain.source.api.SourceChapter
 import com.nilemnod.mangareader.domain.source.api.SourceHttpException
 import com.nilemnod.mangareader.domain.source.api.SourceManga
+import com.nilemnod.mangareader.domain.source.api.SourceSettings
 import com.nilemnod.mangareader.domain.source.api.UriResolver
 import com.nilemnod.mangareader.domain.source.api.UriType
 import com.nilemnod.mangareader.domain.source.api.WebAccess
@@ -18,10 +20,11 @@ import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.source.UnmeteredSource
 import eu.kanade.tachiyomi.source.online.HttpSource
 import eu.kanade.tachiyomi.source.online.ResolvableSource
+import eu.kanade.tachiyomi.source.preferenceKey
 import eu.kanade.tachiyomi.source.model.Page as NativePage
 import eu.kanade.tachiyomi.source.online.UriType as NativeUriType
 
-class ExtensionContentSource(
+internal class ExtensionContentSource(
     val native: Source,
     override val origin: String?,
 ) : ContentSource {
@@ -38,8 +41,7 @@ class ExtensionContentSource(
     override val supportsLatest: Boolean
         get() = native.supportsLatest
 
-    override val hasSettings: Boolean
-        get() = native is ConfigurableSource
+    override val settings: SourceSettings? = (native as? ConfigurableSource)?.let { ExtensionSourceSettings(it) }
 
     override val resolver: UriResolver? = (native as? ResolvableSource)?.let { ExtensionUriResolver(it) }
 
@@ -134,6 +136,14 @@ class ExtensionContentSource(
     private companion object {
         const val PARTIAL_CONTENT = 206
     }
+}
+
+private class ExtensionSourceSettings(private val source: ConfigurableSource) : SourceSettings {
+
+    override val preferencesName: String
+        get() = source.preferenceKey()
+
+    override fun setupScreen(screen: PreferenceScreen) = source.setupPreferenceScreen(screen)
 }
 
 private class HttpWebAccess(private val source: HttpSource) : WebAccess {

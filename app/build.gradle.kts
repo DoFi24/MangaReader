@@ -201,7 +201,7 @@ dependencies {
     implementation(projects.core.storage)
     implementation(projects.core.network)
     implementation(projects.core.metadata)
-    implementation(projects.extensionApi)
+    implementation(projects.compat.tachiyomi)
     implementation(projects.source.common)
     implementation(projects.source.local)
     implementation(projects.source.mangadex)

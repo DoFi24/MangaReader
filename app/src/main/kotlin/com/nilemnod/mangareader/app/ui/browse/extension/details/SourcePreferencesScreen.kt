@@ -34,15 +34,12 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.data.preference.SharedPreferencesDataStore
 import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.source.compat.ExtensionContentSource
 import com.nilemnod.mangareader.app.widget.AppTextInputEditText.Companion.setIncognito
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
 import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.domain.source.api.ContentSource
-import eu.kanade.tachiyomi.source.ConfigurableSource
-import eu.kanade.tachiyomi.source.sourcePreferences
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -143,16 +140,18 @@ class SourcePreferencesFragment : PreferenceFragmentCompat() {
     private suspend fun populateScreen(): PreferenceScreen {
         val sourceId = requireArguments().getLong(SOURCE_ID)
         val appGraph = requireContext().appGraph
-        val source = (appGraph.sourceManager.getOrStub(sourceId) as? ExtensionContentSource)?.native
+        val settings = appGraph.sourceManager.getOrStub(sourceId).settings
         val basePreferences = appGraph.basePreferences
         val sourceScreen = preferenceManager.createPreferenceScreen(requireContext())
 
-        if (source is ConfigurableSource) {
-            val sourcePreferences = withContext(Dispatchers.IO) { source.sourcePreferences().also { it.all } }
+        if (settings != null) {
+            val sourcePreferences = withContext(Dispatchers.IO) {
+                requireContext().getSharedPreferences(settings.preferencesName, Context.MODE_PRIVATE).also { it.all }
+            }
             val dataStore = SharedPreferencesDataStore(sourcePreferences)
             preferenceManager.preferenceDataStore = dataStore
 
-            source.setupPreferenceScreen(sourceScreen)
+            settings.setupScreen(sourceScreen)
             sourceScreen.forEach { pref ->
                 pref.isIconSpaceReserved = false
                 pref.isSingleLineTitle = false

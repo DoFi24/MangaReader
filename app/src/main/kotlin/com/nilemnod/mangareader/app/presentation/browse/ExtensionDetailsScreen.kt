@@ -61,7 +61,6 @@ import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Eyeglasses2
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Settings
 import dev.icerock.moko.resources.StringResource
-import eu.kanade.tachiyomi.source.ConfigurableSource
 
 @Composable
 fun ExtensionDetailsScreen(
@@ -433,7 +432,7 @@ private fun SourceSwitchPreference(
             Row(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                if (source.source is ConfigurableSource) {
+                if (source.source.hasSettings) {
                     IconButton(onClick = { onClickSourcePreferences(source.source.id) }) {
                         Icon(
                             imageVector = MaterialSymbols.Rounded.Settings,

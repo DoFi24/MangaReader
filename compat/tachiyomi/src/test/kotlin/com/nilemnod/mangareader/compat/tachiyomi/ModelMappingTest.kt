@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.source.compat
+package com.nilemnod.mangareader.compat.tachiyomi
 
 import com.nilemnod.mangareader.domain.source.api.MangaStatus
 import com.nilemnod.mangareader.domain.source.api.SourceChapter

@@ -1,5 +1,6 @@
 package com.nilemnod.mangareader.app.data.backup.create.creators
 
+import android.content.Context
 import com.nilemnod.mangareader.app.data.backup.models.BackupPreference
 import com.nilemnod.mangareader.app.data.backup.models.BackupSourcePreferences
 import com.nilemnod.mangareader.app.data.backup.models.BooleanPreferenceValue
@@ -12,12 +13,10 @@ import com.nilemnod.mangareader.core.common.preference.Preference
 import com.nilemnod.mangareader.core.common.preference.PreferenceStore
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import dev.zacsweers.metro.Inject
-import eu.kanade.tachiyomi.source.ConfigurableSource
-import eu.kanade.tachiyomi.source.preferenceKey
-import eu.kanade.tachiyomi.source.sourcePreferences
 
 @Inject
 class PreferenceBackupCreator(
+    private val context: Context,
     private val sourceManager: SourceManager,
     private val preferenceStore: PreferenceStore,
 ) {
@@ -29,11 +28,11 @@ class PreferenceBackupCreator(
 
     suspend fun createSource(includePrivatePreferences: Boolean): List<BackupSourcePreferences> {
         return sourceManager.getAll()
-            .filterIsInstance<ConfigurableSource>()
+            .mapNotNull { it.settings }
             .map {
                 BackupSourcePreferences(
-                    it.preferenceKey(),
-                    it.sourcePreferences().all.toBackupPreferences()
+                    it.preferencesName,
+                    context.getSharedPreferences(it.preferencesName, Context.MODE_PRIVATE).all.toBackupPreferences()
                         .withPrivatePreferences(includePrivatePreferences),
                 )
             }
