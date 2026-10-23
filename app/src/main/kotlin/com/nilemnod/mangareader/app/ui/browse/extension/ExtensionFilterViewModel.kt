@@ -4,9 +4,9 @@ import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nilemnod.mangareader.app.domain.extension.interactor.GetExtensionLanguages
-import com.nilemnod.mangareader.app.domain.source.interactor.ToggleLanguage
-import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.domain.source.interactor.ToggleLanguage
+import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metro.Inject

@@ -59,7 +59,7 @@ class AndroidSourceManager(
                     builtInSources.forEach { mutableMap[it.id] = it }
                     extensions.forEach { extension ->
                         extension.sources.forEach {
-                            val source = adapterFor(it)
+                            val source = adapterFor(it, extension.pkgName)
                             mutableMap[source.id] = source
                             registerStubSource(StubSource.from(source))
                         }
@@ -106,10 +106,10 @@ class AndroidSourceManager(
         return stubSourcesMap.values.filterNot { it.id in onlineSourceIds }
     }
 
-    private fun adapterFor(source: Source): ExtensionContentSource {
+    private fun adapterFor(source: Source, origin: String): ExtensionContentSource {
         val cached = adapters[source.id]
-        if (cached != null && cached.native === source) return cached
-        return ExtensionContentSource(source).also { adapters[source.id] = it }
+        if (cached != null && cached.native === source && cached.origin == origin) return cached
+        return ExtensionContentSource(source, origin).also { adapters[source.id] = it }
     }
 
     private fun registerStubSource(source: StubSource) {

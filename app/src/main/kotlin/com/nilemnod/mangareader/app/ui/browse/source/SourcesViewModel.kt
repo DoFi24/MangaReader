@@ -3,11 +3,12 @@ package com.nilemnod.mangareader.app.ui.browse.source
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nilemnod.mangareader.app.domain.source.interactor.GetEnabledSources
-import com.nilemnod.mangareader.app.domain.source.interactor.ToggleSource
-import com.nilemnod.mangareader.app.domain.source.interactor.ToggleSourcePin
 import com.nilemnod.mangareader.app.presentation.browse.SourceUiModel
+import com.nilemnod.mangareader.core.common.i18n.LocaleHelper
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.domain.source.interactor.GetEnabledSources
+import com.nilemnod.mangareader.domain.source.interactor.ToggleSource
+import com.nilemnod.mangareader.domain.source.interactor.ToggleSourcePin
 import com.nilemnod.mangareader.domain.source.model.Pin
 import com.nilemnod.mangareader.domain.source.model.Source
 import dev.zacsweers.metro.AppScope
@@ -125,7 +126,7 @@ class SourcesViewModel(
     }
 
     companion object {
-        const val PINNED_KEY = "pinned"
-        const val LAST_USED_KEY = "last_used"
+        const val PINNED_KEY = LocaleHelper.PINNED_KEY
+        const val LAST_USED_KEY = LocaleHelper.LAST_USED_KEY
     }
 }

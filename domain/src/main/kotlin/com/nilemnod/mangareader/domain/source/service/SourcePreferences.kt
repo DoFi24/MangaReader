@@ -1,7 +1,6 @@
-package com.nilemnod.mangareader.app.domain.source.service
+package com.nilemnod.mangareader.domain.source.service
 
-import com.nilemnod.mangareader.app.domain.source.interactor.SetMigrateSorting
-import com.nilemnod.mangareader.app.util.system.LocaleHelper
+import com.nilemnod.mangareader.core.common.i18n.LocaleHelper
 import com.nilemnod.mangareader.core.common.preference.Preference
 import com.nilemnod.mangareader.core.common.preference.PreferenceStore
 import com.nilemnod.mangareader.core.common.preference.getEnum
@@ -10,6 +9,7 @@ import com.nilemnod.mangareader.core.common.preference.getLongArray
 import com.nilemnod.mangareader.domain.extension.model.ContentWarning
 import com.nilemnod.mangareader.domain.library.model.LibraryDisplayMode
 import com.nilemnod.mangareader.domain.migration.models.MigrationFlag
+import com.nilemnod.mangareader.domain.source.interactor.SetMigrateSorting
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn

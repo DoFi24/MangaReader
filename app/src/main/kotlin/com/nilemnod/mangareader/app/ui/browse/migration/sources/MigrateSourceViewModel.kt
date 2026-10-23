@@ -3,12 +3,12 @@ package com.nilemnod.mangareader.app.ui.browse.migration.sources
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nilemnod.mangareader.app.domain.source.interactor.GetSourcesWithFavoriteCount
-import com.nilemnod.mangareader.app.domain.source.interactor.SetMigrateSorting
-import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.core.common.preference.getAndSet
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.domain.source.interactor.GetSourcesWithFavoriteCount
+import com.nilemnod.mangareader.domain.source.interactor.SetMigrateSorting
 import com.nilemnod.mangareader.domain.source.model.Source
+import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metro.Inject

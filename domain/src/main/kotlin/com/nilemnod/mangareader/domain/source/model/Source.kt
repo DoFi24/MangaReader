@@ -23,3 +23,7 @@ data class Source(
         }
     }
 }
+
+const val LOCAL_SOURCE_ID = 0L
+
+fun Source.isLocal(): Boolean = id == LOCAL_SOURCE_ID

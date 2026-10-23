@@ -71,7 +71,6 @@ import com.nilemnod.mangareader.app.data.notification.NotificationReceiver
 import com.nilemnod.mangareader.app.di.AppGraph
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
-import com.nilemnod.mangareader.app.domain.source.interactor.GetIncognitoState
 import com.nilemnod.mangareader.app.extension.ExtensionManager
 import com.nilemnod.mangareader.app.presentation.more.AppMigratingScreen
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.browse.ExtensionStoresScreen
@@ -111,6 +110,7 @@ import com.nilemnod.mangareader.core.ui.util.system.isNavigationBarNeedsScrim
 import com.nilemnod.mangareader.domain.database.repository.DatabaseRepository
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.release.interactor.GetApplicationRelease
+import com.nilemnod.mangareader.domain.source.interactor.GetIncognitoState
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.OpenInNew

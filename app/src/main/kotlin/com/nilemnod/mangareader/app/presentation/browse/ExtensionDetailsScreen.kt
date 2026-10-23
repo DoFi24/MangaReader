@@ -44,8 +44,8 @@ import com.nilemnod.mangareader.app.presentation.browse.components.ExtensionIcon
 import com.nilemnod.mangareader.app.presentation.browse.components.ExtensionPill
 import com.nilemnod.mangareader.app.presentation.browse.components.label
 import com.nilemnod.mangareader.app.ui.browse.extension.details.ExtensionDetailsViewModel
-import com.nilemnod.mangareader.app.util.system.LocaleHelper
 import com.nilemnod.mangareader.app.util.system.copyToClipboard
+import com.nilemnod.mangareader.core.common.i18n.LocaleHelper
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.AppBarActions
 import com.nilemnod.mangareader.core.ui.components.ScrollbarLazyColumn

@@ -16,7 +16,6 @@ import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.domain.manga.interactor.SetMangaViewerFlags
 import com.nilemnod.mangareader.app.domain.manga.model.readerOrientation
 import com.nilemnod.mangareader.app.domain.manga.model.readingMode
-import com.nilemnod.mangareader.app.domain.source.interactor.GetIncognitoState
 import com.nilemnod.mangareader.app.ui.reader.loader.ChapterLoader
 import com.nilemnod.mangareader.app.ui.reader.loader.DownloadPageLoader
 import com.nilemnod.mangareader.app.ui.reader.loader.HttpPageLoader
@@ -60,6 +59,7 @@ import com.nilemnod.mangareader.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.api.Page
+import com.nilemnod.mangareader.domain.source.interactor.GetIncognitoState
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.source.local.image.LocalCoverManager
 import com.nilemnod.mangareader.source.local.isLocal

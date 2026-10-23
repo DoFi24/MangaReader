@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.nilemnod.mangareader.app.domain.source.interactor.SetMigrateSorting
 import com.nilemnod.mangareader.app.presentation.browse.components.BaseSourceItem
 import com.nilemnod.mangareader.app.presentation.browse.components.SourceIcon
 import com.nilemnod.mangareader.app.ui.browse.migration.sources.MigrateSourceViewModel
@@ -35,6 +34,7 @@ import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
 import com.nilemnod.mangareader.core.ui.theme.header
 import com.nilemnod.mangareader.core.ui.util.plus
 import com.nilemnod.mangareader.core.ui.util.secondaryItemAlpha
+import com.nilemnod.mangareader.domain.source.interactor.SetMigrateSorting
 import com.nilemnod.mangareader.domain.source.model.Source
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols

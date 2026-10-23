@@ -35,10 +35,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.app.presentation.browse.components.SourceIcon
 import com.nilemnod.mangareader.app.ui.browse.migration.search.MigrateSearchScreen
-import com.nilemnod.mangareader.app.util.system.LocaleHelper
+import com.nilemnod.mangareader.core.common.i18n.LocaleHelper
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.AppBarActions
 import com.nilemnod.mangareader.core.ui.components.FastScrollLazyColumn
@@ -51,6 +50,7 @@ import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.core.ui.util.shouldExpandFAB
 import com.nilemnod.mangareader.domain.source.model.Source
 import com.nilemnod.mangareader.domain.source.service.SourceManager
+import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.feature.migration.list.MigrationListScreen
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols

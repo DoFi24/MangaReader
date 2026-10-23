@@ -3,11 +3,11 @@ package com.nilemnod.mangareader.app.ui.browse.source
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nilemnod.mangareader.app.domain.source.interactor.GetLanguagesWithSources
-import com.nilemnod.mangareader.app.domain.source.interactor.ToggleLanguage
-import com.nilemnod.mangareader.app.domain.source.interactor.ToggleSource
-import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
+import com.nilemnod.mangareader.domain.source.interactor.GetLanguagesWithSources
+import com.nilemnod.mangareader.domain.source.interactor.ToggleLanguage
+import com.nilemnod.mangareader.domain.source.interactor.ToggleSource
 import com.nilemnod.mangareader.domain.source.model.Source
+import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metro.Inject

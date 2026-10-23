@@ -1,10 +1,10 @@
 package com.nilemnod.mangareader.core.migration.migrations
 
-import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.migration.Migration
 import com.nilemnod.mangareader.core.migration.MigrationContext
 import com.nilemnod.mangareader.domain.extension.repository.ExtensionStoreRepository
+import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoSet
 import dev.zacsweers.metro.Inject

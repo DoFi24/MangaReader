@@ -20,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastForEach
 import androidx.lifecycle.ViewModel
 import com.nilemnod.mangareader.app.domain.manga.model.hasCustomCover
-import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.core.storage.CoverCache
 import com.nilemnod.mangareader.core.ui.components.LabeledCheckbox
@@ -30,6 +29,7 @@ import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.migration.models.MigrationFlag
 import com.nilemnod.mangareader.domain.migration.usecases.MigrateMangaUseCase
+import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.feature.common.utils.getLabel
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metro.AppScope

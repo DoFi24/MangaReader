@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.presentation.browse.components.BaseSourceItem
 import com.nilemnod.mangareader.app.ui.browse.source.SourcesViewModel
 import com.nilemnod.mangareader.app.ui.browse.source.browse.BrowseSourceViewModel.Listing
-import com.nilemnod.mangareader.app.util.system.LocaleHelper
+import com.nilemnod.mangareader.core.common.i18n.LocaleHelper
 import com.nilemnod.mangareader.core.ui.components.ScrollbarLazyColumn
 import com.nilemnod.mangareader.core.ui.components.material.SECONDARY_ALPHA
 import com.nilemnod.mangareader.core.ui.components.material.padding
@@ -32,11 +32,11 @@ import com.nilemnod.mangareader.core.ui.theme.header
 import com.nilemnod.mangareader.core.ui.util.plus
 import com.nilemnod.mangareader.domain.source.model.Pin
 import com.nilemnod.mangareader.domain.source.model.Source
+import com.nilemnod.mangareader.domain.source.model.isLocal
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Keep
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Keep
-import com.nilemnod.mangareader.source.local.isLocal
 
 @Composable
 fun SourcesScreen(

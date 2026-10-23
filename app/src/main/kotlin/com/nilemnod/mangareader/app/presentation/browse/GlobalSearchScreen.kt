@@ -13,7 +13,7 @@ import com.nilemnod.mangareader.app.presentation.browse.components.GlobalSearchT
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.SearchItemResult
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.SearchViewModel
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.SourceFilter
-import com.nilemnod.mangareader.app.util.system.LocaleHelper
+import com.nilemnod.mangareader.core.common.i18n.LocaleHelper
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.api.ContentSource

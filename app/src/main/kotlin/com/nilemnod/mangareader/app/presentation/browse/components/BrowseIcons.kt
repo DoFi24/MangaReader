@@ -20,10 +20,10 @@ import com.nilemnod.mangareader.app.data.coil.InstalledSourceIcon
 import com.nilemnod.mangareader.core.ui.util.rememberCoverErrorPainter
 import com.nilemnod.mangareader.domain.extension.model.Extension
 import com.nilemnod.mangareader.domain.source.model.Source
+import com.nilemnod.mangareader.domain.source.model.isLocal
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Dangerous
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Warning
-import com.nilemnod.mangareader.source.local.isLocal
 
 private val defaultModifier = Modifier
     .height(40.dp)

@@ -27,6 +27,7 @@ import com.nilemnod.mangareader.domain.source.api.Page
 import com.nilemnod.mangareader.domain.source.api.SourceChapter
 import com.nilemnod.mangareader.domain.source.api.SourceFilter
 import com.nilemnod.mangareader.domain.source.api.SourceManga
+import com.nilemnod.mangareader.domain.source.model.LOCAL_SOURCE_ID
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.source.local.image.LocalCoverManager
 import com.nilemnod.mangareader.source.local.io.Archive
@@ -51,10 +52,10 @@ import logcat.LogPriority
 import nl.adaptivity.xmlutil.core.AndroidXmlReader
 import nl.adaptivity.xmlutil.serialization.XML
 import uy.kohesive.injekt.injectLazy
-import com.nilemnod.mangareader.domain.source.model.Source as DomainSource
 import java.io.InputStream
 import java.nio.charset.StandardCharsets
 import kotlin.time.Duration.Companion.days
+import com.nilemnod.mangareader.domain.source.model.Source as DomainSource
 
 @Inject
 @SingleIn(AppScope::class)
@@ -438,7 +439,7 @@ class LocalSource(
     private enum class Order { TITLE, DATE }
 
     companion object {
-        const val ID = 0L
+        const val ID = LOCAL_SOURCE_ID
 
         private val LATEST_THRESHOLD = 7.days.inWholeMilliseconds
     }
@@ -448,4 +449,3 @@ fun Manga.isLocal(): Boolean = source == LocalSource.ID
 
 fun ContentSource.isLocal(): Boolean = id == LocalSource.ID
 
-fun DomainSource.isLocal(): Boolean = id == LocalSource.ID

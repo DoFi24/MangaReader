@@ -3,7 +3,6 @@ package com.nilemnod.mangareader.feature.migration.list
 import androidx.annotation.FloatRange
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.app.source.getNameForMangaInfo
 import com.nilemnod.mangareader.app.source.interactor.UpdateMangaFromRemote
 import com.nilemnod.mangareader.core.common.util.system.logcat
@@ -14,6 +13,7 @@ import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.migration.usecases.MigrateMangaUseCase
 import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.service.SourceManager
+import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.feature.migration.list.models.MigratingManga
 import com.nilemnod.mangareader.feature.migration.list.models.MigratingManga.SearchResult
 import com.nilemnod.mangareader.feature.migration.list.search.SmartSourceSearchEngine

@@ -1,11 +1,11 @@
-package com.nilemnod.mangareader.app.domain.source.interactor
+package com.nilemnod.mangareader.domain.source.interactor
 
-import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.domain.source.model.Pin
 import com.nilemnod.mangareader.domain.source.model.Pins
 import com.nilemnod.mangareader.domain.source.model.Source
+import com.nilemnod.mangareader.domain.source.model.isLocal
 import com.nilemnod.mangareader.domain.source.repository.SourceRepository
-import com.nilemnod.mangareader.source.local.isLocal
+import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine

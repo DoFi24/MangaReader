@@ -45,9 +45,9 @@ import com.nilemnod.mangareader.app.presentation.browse.components.label
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.browse.ExtensionStoresScreen
 import com.nilemnod.mangareader.app.ui.browse.extension.ExtensionUiModel
 import com.nilemnod.mangareader.app.ui.browse.extension.ExtensionsViewModel
-import com.nilemnod.mangareader.app.util.system.LocaleHelper
 import com.nilemnod.mangareader.app.util.system.copyToClipboard
 import com.nilemnod.mangareader.app.util.system.launchRequestPackageInstallsPermission
+import com.nilemnod.mangareader.core.common.i18n.LocaleHelper
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.components.FastScrollLazyColumn
 import com.nilemnod.mangareader.core.ui.components.WarningBanner

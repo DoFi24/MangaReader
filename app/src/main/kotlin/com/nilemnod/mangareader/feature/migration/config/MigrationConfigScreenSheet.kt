@@ -27,7 +27,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.util.fastForEach
-import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.core.common.preference.Preference
 import com.nilemnod.mangareader.core.common.preference.getAndSet
 import com.nilemnod.mangareader.core.common.preference.toggle
@@ -40,6 +39,7 @@ import com.nilemnod.mangareader.core.ui.theme.header
 import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.core.ui.util.fastFilterNot
 import com.nilemnod.mangareader.domain.migration.models.MigrationFlag
+import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.feature.common.utils.getLabel
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols

@@ -5,8 +5,6 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.produceState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
-import com.nilemnod.mangareader.app.extension.ExtensionManager
 import com.nilemnod.mangareader.core.common.preference.toggle
 import com.nilemnod.mangareader.domain.manga.interactor.GetManga
 import com.nilemnod.mangareader.domain.manga.interactor.NetworkToLocalManga
@@ -14,6 +12,7 @@ import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.toDomainManga
 import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.service.SourceManager
+import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.source.local.isLocal
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -32,7 +31,6 @@ abstract class SearchViewModel(
     initialState: State = State(),
     sourcePreferences: SourcePreferences,
     private val sourceManager: SourceManager,
-    private val extensionManager: ExtensionManager,
     private val networkToLocalManga: NetworkToLocalManga,
     private val getManga: GetManga,
     private val preferences: SourcePreferences,
@@ -105,12 +103,7 @@ abstract class SearchViewModel(
             return enabledSources
         }
 
-        val extensionSourceIds = extensionManager.getLoadedExtensions()
-            .filter { it.pkgName == filter }
-            .flatMap { it.sources }
-            .map { it.id }
-            .toSet()
-        return enabledSources.filter { it.id in extensionSourceIds }
+        return enabledSources.filter { it.origin == filter }
     }
 
     fun updateSearchQuery(query: String?) {

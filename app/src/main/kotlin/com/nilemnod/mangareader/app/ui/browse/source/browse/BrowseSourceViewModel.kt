@@ -13,8 +13,6 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import androidx.paging.filter
 import androidx.paging.map
-import com.nilemnod.mangareader.app.domain.source.interactor.GetIncognitoState
-import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.app.util.removeCovers
 import com.nilemnod.mangareader.core.common.preference.CheckboxState
 import com.nilemnod.mangareader.core.common.preference.mapAsCheckboxState
@@ -35,8 +33,10 @@ import com.nilemnod.mangareader.domain.manga.model.MangaWithChapterCount
 import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.api.FilterList
 import com.nilemnod.mangareader.domain.source.api.SourceFilter
+import com.nilemnod.mangareader.domain.source.interactor.GetIncognitoState
 import com.nilemnod.mangareader.domain.source.interactor.GetRemoteManga
 import com.nilemnod.mangareader.domain.source.service.SourceManager
+import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Assisted
 import dev.zacsweers.metro.AssistedFactory
