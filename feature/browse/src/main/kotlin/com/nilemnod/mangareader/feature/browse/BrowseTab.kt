@@ -13,7 +13,6 @@ import com.nilemnod.mangareader.core.ui.components.TabbedScreen
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.SplashReady
 import com.nilemnod.mangareader.core.ui.util.Tab
-import com.nilemnod.mangareader.feature.browse.R
 import com.nilemnod.mangareader.feature.browse.migration.sources.migrateSourceTab
 import com.nilemnod.mangareader.feature.browse.source.globalsearch.GlobalSearchScreen
 import com.nilemnod.mangareader.feature.browse.source.sourcesTab

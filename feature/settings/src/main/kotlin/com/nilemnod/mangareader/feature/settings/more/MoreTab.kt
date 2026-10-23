@@ -19,7 +19,6 @@ import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.preference.asState
 import com.nilemnod.mangareader.core.ui.util.Tab
 import com.nilemnod.mangareader.domain.base.service.ModePreferences
-import com.nilemnod.mangareader.feature.settings.R
 import com.nilemnod.mangareader.feature.settings.SettingsScreen
 import com.nilemnod.mangareader.feature.settings.more.MoreScreen
 import com.nilemnod.mangareader.i18n.MR
