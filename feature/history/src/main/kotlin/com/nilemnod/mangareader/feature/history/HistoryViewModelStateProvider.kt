@@ -10,7 +10,7 @@ import kotlin.time.Clock
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Instant
 
-class HistoryviewModelStateProvider : PreviewParameterProvider<HistoryViewModel.State> {
+class HistoryViewModelStateProvider : PreviewParameterProvider<HistoryViewModel.State> {
 
     private val multiPage = HistoryViewModel.State(
         searchQuery = null,
