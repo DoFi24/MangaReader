@@ -1,6 +1,6 @@
 package com.nilemnod.mangareader.app.util
 
-import com.nilemnod.mangareader.app.data.cache.CoverCache
+import com.nilemnod.mangareader.core.storage.CoverCache
 import com.nilemnod.mangareader.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.source.local.image.LocalCoverManager

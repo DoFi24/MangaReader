@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
-import com.nilemnod.mangareader.app.data.cache.CoverCache
 import com.nilemnod.mangareader.app.data.saver.Image
 import com.nilemnod.mangareader.app.data.saver.ImageSaver
 import com.nilemnod.mangareader.app.data.saver.Location
@@ -43,6 +42,7 @@ import com.nilemnod.mangareader.core.download.DownloadCache
 import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.core.download.DownloadProvider
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.core.storage.CoverCache
 import com.nilemnod.mangareader.domain.chapter.interactor.GetChaptersByMangaId
 import com.nilemnod.mangareader.domain.chapter.interactor.UpdateChapter
 import com.nilemnod.mangareader.domain.chapter.model.Chapter

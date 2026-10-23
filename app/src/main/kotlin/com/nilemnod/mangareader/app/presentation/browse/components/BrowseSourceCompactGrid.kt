@@ -11,8 +11,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import com.nilemnod.mangareader.app.presentation.library.components.CommonMangaItemDefaults
-import com.nilemnod.mangareader.app.presentation.library.components.MangaCompactGridItem
+import com.nilemnod.mangareader.core.mangaui.CommonMangaItemDefaults
+import com.nilemnod.mangareader.core.mangaui.MangaCompactGridItem
 import com.nilemnod.mangareader.core.ui.util.plus
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaCover

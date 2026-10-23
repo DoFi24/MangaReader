@@ -13,13 +13,13 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import androidx.paging.filter
 import androidx.paging.map
-import com.nilemnod.mangareader.app.data.cache.CoverCache
 import com.nilemnod.mangareader.app.domain.source.interactor.GetIncognitoState
 import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.app.util.removeCovers
 import com.nilemnod.mangareader.core.common.preference.CheckboxState
 import com.nilemnod.mangareader.core.common.preference.mapAsCheckboxState
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.core.storage.CoverCache
 import com.nilemnod.mangareader.core.ui.preference.asState
 import com.nilemnod.mangareader.domain.category.interactor.GetCategories
 import com.nilemnod.mangareader.domain.category.interactor.SetMangaCategories

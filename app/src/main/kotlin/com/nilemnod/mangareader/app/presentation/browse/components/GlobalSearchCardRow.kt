@@ -14,8 +14,8 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.nilemnod.mangareader.app.presentation.library.components.CommonMangaItemDefaults
-import com.nilemnod.mangareader.app.presentation.library.components.MangaComfortableGridItem
+import com.nilemnod.mangareader.core.mangaui.CommonMangaItemDefaults
+import com.nilemnod.mangareader.core.mangaui.MangaComfortableGridItem
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.domain.manga.model.Manga

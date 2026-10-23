@@ -23,7 +23,6 @@ import coil3.request.crossfade
 import coil3.util.DebugLogger
 import com.nilemnod.mangareader.app.crash.CrashActivity
 import com.nilemnod.mangareader.app.crash.GlobalExceptionHandler
-import com.nilemnod.mangareader.app.data.cache.CoverCache
 import com.nilemnod.mangareader.app.data.coil.BufferedSourceFetcher
 import com.nilemnod.mangareader.app.data.coil.CoverRequestInterceptor
 import com.nilemnod.mangareader.app.data.coil.ExtensionIconFetcher
@@ -42,8 +41,10 @@ import com.nilemnod.mangareader.app.navigation.AppNavigation
 import com.nilemnod.mangareader.app.ui.base.delegate.SecureActivityDelegate
 import com.nilemnod.mangareader.app.util.system.cancelNotification
 import com.nilemnod.mangareader.app.util.system.isDebugBuildType
+import com.nilemnod.mangareader.app.util.system.isReleaseBuildType
 import com.nilemnod.mangareader.app.util.system.notify
 import com.nilemnod.mangareader.core.android.system.animatorDurationScale
+import com.nilemnod.mangareader.core.common.AppBuild
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.preference.Preference
 import com.nilemnod.mangareader.core.common.preference.PreferenceStore
@@ -56,6 +57,7 @@ import com.nilemnod.mangareader.core.migration.Migration
 import com.nilemnod.mangareader.core.migration.Migrator
 import com.nilemnod.mangareader.core.network.NetworkHelper
 import com.nilemnod.mangareader.core.network.NetworkPreferences
+import com.nilemnod.mangareader.core.storage.CoverCache
 import com.nilemnod.mangareader.core.ui.preference.UiPreferences
 import com.nilemnod.mangareader.core.ui.preference.model.setAppCompatDelegateThemeMode
 import com.nilemnod.mangareader.domain.source.service.SourceManager
@@ -74,9 +76,9 @@ import logcat.LogcatLogger
 import org.conscrypt.Conscrypt
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.InjektScope
-import com.nilemnod.mangareader.icons.materialsymbols.R as MaterialSymbolsR
 import java.security.Security
 import kotlin.concurrent.thread
+import com.nilemnod.mangareader.icons.materialsymbols.R as MaterialSymbolsR
 
 class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factory, GraphProvider<AppGraph> {
 
@@ -115,6 +117,7 @@ class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factor
         super<Application>.onCreate()
 
         AppInfo.init(BuildConfig.VERSION_CODE, BuildConfig.VERSION_NAME)
+        AppBuild.init(isReleaseBuildType)
 
         // Must run before the graph is built, since injecting dependencies initializes WebView and the
         // suffix can't be set once a provider exists in the process. Secondary processes die otherwise.

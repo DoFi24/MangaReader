@@ -1,11 +1,11 @@
 package com.nilemnod.mangareader.domain.migration.usecases
 
-import com.nilemnod.mangareader.app.data.cache.CoverCache
 import com.nilemnod.mangareader.app.domain.manga.model.hasCustomCover
 import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.app.source.interactor.UpdateMangaFromRemote
 import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.core.storage.CoverCache
 import com.nilemnod.mangareader.domain.category.interactor.GetCategories
 import com.nilemnod.mangareader.domain.category.interactor.SetMangaCategories
 import com.nilemnod.mangareader.domain.chapter.interactor.GetChaptersByMangaId
