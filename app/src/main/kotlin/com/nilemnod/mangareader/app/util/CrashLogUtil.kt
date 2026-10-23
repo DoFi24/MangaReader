@@ -5,7 +5,7 @@ import android.os.Build
 import com.nilemnod.mangareader.app.BuildConfig
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.extension.ExtensionManager
-import com.nilemnod.mangareader.app.util.system.createFileInCacheDir
+import com.nilemnod.mangareader.core.android.storage.createFileInCacheDir
 import com.nilemnod.mangareader.core.android.storage.getUriCompat
 import com.nilemnod.mangareader.core.android.system.toShareIntent
 import com.nilemnod.mangareader.core.common.util.system.WebViewUtil

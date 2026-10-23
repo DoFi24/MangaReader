@@ -2,6 +2,7 @@ package com.nilemnod.mangareader.feature.settings
 
 import android.content.Context
 import com.nilemnod.mangareader.core.common.security.SecurityPreferences
+import com.nilemnod.mangareader.core.download.ChapterCache
 import com.nilemnod.mangareader.core.metro.metroGraph
 import com.nilemnod.mangareader.domain.backup.service.BackupPreferences
 import com.nilemnod.mangareader.domain.base.service.AppStatePreferences
@@ -12,6 +13,7 @@ import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
 import com.nilemnod.mangareader.domain.extension.interactor.GetExtensionStoreCountAsFlow
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.library.service.LibraryUpdateLauncher
+import com.nilemnod.mangareader.domain.manga.interactor.GetFavorites
 import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.domain.storage.service.StoragePreferences
 import com.nilemnod.mangareader.feature.settings.about.DebugInfoProvider
@@ -35,6 +37,8 @@ interface SettingsGraph {
     val libraryUpdateLauncher: LibraryUpdateLauncher
     val debugInfoProvider: DebugInfoProvider
     val appUpdateChecker: AppUpdateChecker
+    val chapterCache: ChapterCache
+    val getFavorites: GetFavorites
 }
 
 val Context.settingsGraph: SettingsGraph

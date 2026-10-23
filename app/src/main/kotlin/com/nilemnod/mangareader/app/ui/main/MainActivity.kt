@@ -73,7 +73,6 @@ import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.extension.ExtensionManager
 import com.nilemnod.mangareader.app.presentation.more.AppMigratingScreen
-import com.nilemnod.mangareader.app.presentation.more.settings.screen.data.RestoreBackupScreen
 import com.nilemnod.mangareader.app.ui.base.activity.BaseActivity
 import com.nilemnod.mangareader.app.ui.deeplink.DeepLinkScreen
 import com.nilemnod.mangareader.app.ui.home.HomeScreen
@@ -111,6 +110,7 @@ import com.nilemnod.mangareader.feature.extensions.stores.ExtensionStoresScreen
 import com.nilemnod.mangareader.feature.manga.MangaScreen
 import com.nilemnod.mangareader.feature.settings.OnboardingScreen
 import com.nilemnod.mangareader.feature.settings.SettingsScreen
+import com.nilemnod.mangareader.feature.settings.screen.data.RestoreBackupScreen
 import com.nilemnod.mangareader.feature.settings.settingsGraph
 import com.nilemnod.mangareader.feature.settings.update.NewUpdateScreen
 import com.nilemnod.mangareader.i18n.MR

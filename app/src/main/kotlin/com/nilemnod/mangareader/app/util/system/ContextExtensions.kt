@@ -29,19 +29,9 @@ import com.nilemnod.mangareader.core.ui.util.system.isNightMode
 import com.nilemnod.mangareader.i18n.MR
 import logcat.LogPriority
 import rikka.shizuku.ShizukuProvider
-import java.io.File
 
 val Context.powerManager: PowerManager
     get() = getSystemService()!!
-
-fun Context.createFileInCacheDir(name: String): File {
-    val file = File(externalCacheDir, name)
-    if (file.exists()) {
-        file.delete()
-    }
-    file.createNewFile()
-    return file
-}
 
 private val ReaderGrayBackgroundColor = Color.rgb(0x20, 0x21, 0x25)
 

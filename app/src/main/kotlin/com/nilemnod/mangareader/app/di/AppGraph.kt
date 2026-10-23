@@ -2,8 +2,6 @@ package com.nilemnod.mangareader.app.di
 
 import android.content.Context
 import com.nilemnod.mangareader.app.App
-import com.nilemnod.mangareader.app.data.backup.create.BackupCreateWorker
-import com.nilemnod.mangareader.app.data.backup.restore.BackupRestoreWorker
 import com.nilemnod.mangareader.app.data.download.DownloadWorker
 import com.nilemnod.mangareader.app.data.library.LibraryUpdateWorker
 import com.nilemnod.mangareader.app.data.library.MetadataUpdateWorker
@@ -62,8 +60,6 @@ interface AppGraph : ViewModelGraph, UiPreferencesProvider {
     fun inject(webViewActivity: WebViewActivity)
     fun inject(libraryUpdateWorker: LibraryUpdateWorker)
     fun inject(metadataUpdateWorker: MetadataUpdateWorker)
-    fun inject(backupRestoreWorker: BackupRestoreWorker)
-    fun inject(backupCreateWorker: BackupCreateWorker)
     fun inject(downloadWorker: DownloadWorker)
     fun inject(notificationReceiver: NotificationReceiver)
     fun inject(notificationReceiver: SecureActivityDelegateImpl)

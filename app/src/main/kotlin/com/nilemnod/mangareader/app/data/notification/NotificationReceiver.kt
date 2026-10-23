@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.core.net.toUri
-import com.nilemnod.mangareader.app.data.backup.restore.BackupRestoreWorker
 import com.nilemnod.mangareader.app.data.library.LibraryUpdateWorker
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.ui.main.MainActivity
@@ -16,6 +15,7 @@ import com.nilemnod.mangareader.app.util.system.notificationManager
 import com.nilemnod.mangareader.core.android.system.getParcelableExtraCompat
 import com.nilemnod.mangareader.core.android.system.toShareIntent
 import com.nilemnod.mangareader.core.android.system.workManager
+import com.nilemnod.mangareader.core.backup.restore.BackupRestoreWorker
 import com.nilemnod.mangareader.core.common.Constants
 import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope

@@ -23,7 +23,7 @@ import com.nilemnod.mangareader.app.data.notification.Notifications
 import com.nilemnod.mangareader.app.di.AppGraph
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.source.interactor.UpdateMangaFromRemote
-import com.nilemnod.mangareader.app.util.system.createFileInCacheDir
+import com.nilemnod.mangareader.core.android.storage.createFileInCacheDir
 import com.nilemnod.mangareader.core.android.storage.getUriCompat
 import com.nilemnod.mangareader.core.android.system.isConnectedToWifi
 import com.nilemnod.mangareader.core.android.system.isRunning

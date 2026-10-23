@@ -194,6 +194,7 @@ dependencies {
     implementation(projects.icons.simpleIcons)
     implementation(projects.core.android)
     implementation(projects.core.archive)
+    implementation(projects.core.backup)
     implementation(projects.core.common)
     implementation(projects.core.download)
     implementation(projects.core.metro)
