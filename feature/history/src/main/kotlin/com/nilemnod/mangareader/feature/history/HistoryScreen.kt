@@ -156,7 +156,7 @@ sealed interface HistoryUiModel {
 @PreviewLightDark
 @Composable
 internal fun HistoryScreenPreviews(
-    @PreviewParameter(HistoryviewModelStateProvider::class)
+    @PreviewParameter(HistoryViewModelStateProvider::class)
     historyState: HistoryViewModel.State,
 ) {
     MangaReaderPreviewTheme {
