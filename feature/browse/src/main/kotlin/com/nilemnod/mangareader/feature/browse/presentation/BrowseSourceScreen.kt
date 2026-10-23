@@ -17,9 +17,10 @@ import com.nilemnod.mangareader.core.mangaui.formattedMessage
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.screens.EmptyIllustration
 import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
 import com.nilemnod.mangareader.core.ui.screens.EmptyScreenAction
-import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
+import com.nilemnod.mangareader.core.ui.screens.GridSkeleton
 import com.nilemnod.mangareader.domain.library.model.LibraryDisplayMode
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.api.ContentSource
@@ -70,7 +71,7 @@ fun BrowseSourceContent(
     }
 
     if (mangaList.itemCount == 0 && mangaList.loadState.refresh is LoadState.Loading) {
-        LoadingScreen(Modifier.padding(contentPadding))
+        GridSkeleton(Modifier.padding(contentPadding))
         return
     }
 
@@ -80,6 +81,12 @@ fun BrowseSourceContent(
             message = when (errorState) {
                 is LoadState.Error -> getErrorMessage(errorState)
                 else -> stringResource(MR.strings.no_results_found)
+            },
+            title = stringResource(MR.strings.offline_title).takeIf { errorState is LoadState.Error },
+            illustration = if (errorState is LoadState.Error) {
+                EmptyIllustration.Offline
+            } else {
+                EmptyIllustration.NoResults
             },
             actions = if (source?.isLocal() == true) {
                 emptyList()

@@ -7,25 +7,22 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.core.common.i18n.LocaleHelper
+import com.nilemnod.mangareader.core.ui.components.ListGroupHeader
 import com.nilemnod.mangareader.core.ui.components.ScrollbarLazyColumn
-import com.nilemnod.mangareader.core.ui.components.material.SECONDARY_ALPHA
-import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.components.material.topSmallPaddingValues
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
-import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
-import com.nilemnod.mangareader.core.ui.theme.header
+import com.nilemnod.mangareader.core.ui.screens.ListSkeleton
 import com.nilemnod.mangareader.core.ui.util.plus
 import com.nilemnod.mangareader.domain.source.model.Pin
 import com.nilemnod.mangareader.domain.source.model.Source
@@ -47,9 +44,10 @@ fun SourcesScreen(
     onLongClickItem: (Source) -> Unit,
 ) {
     when {
-        state.isLoading -> LoadingScreen(Modifier.padding(contentPadding))
+        state.isLoading -> ListSkeleton(Modifier.padding(contentPadding))
         state.isEmpty -> EmptyScreen(
-            stringRes = MR.strings.source_empty_screen,
+            stringRes = MR.strings.empty_sources_text,
+            title = stringResource(MR.strings.empty_sources_title),
             modifier = Modifier.padding(contentPadding),
         )
         else -> {
@@ -98,11 +96,9 @@ private fun SourceHeader(
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
-    Text(
+    ListGroupHeader(
         text = LocaleHelper.getSourceDisplayName(language, context),
-        modifier = modifier
-            .padding(horizontal = MaterialTheme.padding.medium, vertical = MaterialTheme.padding.small),
-        style = MaterialTheme.typography.header,
+        modifier = modifier,
     )
 }
 
@@ -121,13 +117,8 @@ private fun SourceItem(
         onLongClickItem = { onLongClickItem(source) },
         action = {
             if (source.supportsLatest) {
-                TextButton(onClick = { onClickItem(source, Listing.Latest) }) {
-                    Text(
-                        text = stringResource(MR.strings.latest),
-                        style = LocalTextStyle.current.copy(
-                            color = MaterialTheme.colorScheme.primary,
-                        ),
-                    )
+                FilledTonalButton(onClick = { onClickItem(source, Listing.Latest) }) {
+                    Text(text = stringResource(MR.strings.latest))
                 }
             }
             SourcePinButton(
@@ -147,9 +138,7 @@ private fun SourcePinButton(
     val tint = if (isPinned) {
         MaterialTheme.colorScheme.primary
     } else {
-        MaterialTheme.colorScheme.onBackground.copy(
-            alpha = SECONDARY_ALPHA,
-        )
+        MaterialTheme.colorScheme.onSurfaceVariant
     }
     val description = if (isPinned) MR.strings.action_unpin else MR.strings.action_pin
     IconButton(onClick = onClick) {

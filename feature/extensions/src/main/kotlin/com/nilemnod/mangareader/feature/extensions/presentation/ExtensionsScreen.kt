@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.items
@@ -17,9 +19,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -52,8 +54,7 @@ import com.nilemnod.mangareader.core.ui.components.material.topSmallPaddingValue
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
 import com.nilemnod.mangareader.core.ui.screens.EmptyScreenAction
-import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
-import com.nilemnod.mangareader.core.ui.theme.header
+import com.nilemnod.mangareader.core.ui.screens.ListSkeleton
 import com.nilemnod.mangareader.core.ui.util.plus
 import com.nilemnod.mangareader.core.ui.util.rememberRequestPackageInstallsPermissionState
 import com.nilemnod.mangareader.domain.extension.model.Extension
@@ -67,7 +68,6 @@ import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
 import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.About
 import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Close
-import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Download
 import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Refresh
 import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Settings
 import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Web
@@ -99,7 +99,7 @@ fun ExtensionScreen(
         enabled = !state.isLoading,
     ) {
         when {
-            state.isLoading -> LoadingScreen(Modifier.padding(contentPadding))
+            state.isLoading -> ListSkeleton(Modifier.padding(contentPadding))
             state.isEmpty -> {
                 val msg = if (!searchQuery.isNullOrEmpty()) {
                     MR.strings.no_results_found
@@ -179,12 +179,14 @@ private fun ExtensionContent(
                         val action: @Composable RowScope.() -> Unit =
                             if (header.textRes == MR.strings.ext_updates_pending) {
                                 {
-                                    Button(onClick = { onClickUpdateAll() }) {
+                                    FilledTonalButton(
+                                        onClick = { onClickUpdateAll() },
+                                        modifier = Modifier.height(32.dp),
+                                        contentPadding = PaddingValues(horizontal = 16.dp),
+                                    ) {
                                         Text(
                                             text = stringResource(MR.strings.ext_update_all),
-                                            style = LocalTextStyle.current.copy(
-                                                color = MaterialTheme.colorScheme.onPrimary,
-                                            ),
+                                            style = MaterialTheme.typography.labelMedium,
                                         )
                                     }
                                 }
@@ -346,7 +348,7 @@ private fun ExtensionItemContent(
             text = extension.name,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.bodyLarge,
         )
 
         if (store != null) {
@@ -370,13 +372,13 @@ private fun ExtensionItemIcon(
     modifier: Modifier = Modifier,
 ) {
     Box(
-        modifier = modifier.size(48.dp),
+        modifier = modifier.size(40.dp),
         contentAlignment = Alignment.Center,
     ) {
         val idle = installStep.isCompleted()
         if (!idle) {
             CircularProgressIndicator(
-                modifier = Modifier.size(48.dp),
+                modifier = Modifier.size(40.dp),
                 strokeWidth = 2.dp,
             )
         }
@@ -494,17 +496,30 @@ private fun ExtensionItemActions(
             }
         }
 
-        val action = when {
-            installStep == InstallStep.Error -> CustomMaterialSymbols.Edge.Refresh to MR.strings.action_retry
-            extension is Extension.Available -> CustomMaterialSymbols.Edge.Download to MR.strings.ext_install
-            extension is Extension.Installed && extension.hasUpdate -> {
-                CustomMaterialSymbols.Edge.Download to MR.strings.ext_update
+        when {
+            installStep == InstallStep.Error -> {
+                IconButton(onClick = { onClickItemAction(extension) }) {
+                    Icon(
+                        imageVector = CustomMaterialSymbols.Edge.Refresh,
+                        contentDescription = stringResource(MR.strings.action_retry),
+                    )
+                }
             }
-            else -> null
-        }
-        action?.let { (icon, label) ->
-            IconButton(onClick = { onClickItemAction(extension) }) {
-                Icon(imageVector = icon, contentDescription = stringResource(label))
+            extension is Extension.Available -> {
+                FilledTonalButton(
+                    onClick = { onClickItemAction(extension) },
+                    modifier = Modifier.padding(end = 8.dp),
+                ) {
+                    Text(text = stringResource(MR.strings.ext_install))
+                }
+            }
+            extension is Extension.Installed && extension.hasUpdate -> {
+                Button(
+                    onClick = { onClickItemAction(extension) },
+                    modifier = Modifier.padding(end = 8.dp),
+                ) {
+                    Text(text = stringResource(MR.strings.ext_update))
+                }
             }
         }
     }
@@ -530,15 +545,16 @@ private fun ExtensionHeader(
     action: @Composable RowScope.() -> Unit = {},
 ) {
     Row(
-        modifier = modifier.padding(horizontal = MaterialTheme.padding.medium),
+        modifier = modifier
+            .heightIn(min = 40.dp)
+            .padding(horizontal = MaterialTheme.padding.medium),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
             text = text,
-            modifier = Modifier
-                .padding(vertical = 8.dp)
-                .weight(1f),
-            style = MaterialTheme.typography.header,
+            modifier = Modifier.weight(1f),
+            style = MaterialTheme.typography.titleSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         action()
     }
