@@ -32,6 +32,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.core.mangaui.ChangeCategoryDialog
 import com.nilemnod.mangareader.core.mangaui.DuplicateMangaDialog
+import com.nilemnod.mangareader.core.mangaui.RemoveMangaDialog
 import com.nilemnod.mangareader.core.navigation.SearchableScreen
 import com.nilemnod.mangareader.core.navigation.SharedScreen
 import com.nilemnod.mangareader.core.navigation.screen
@@ -47,7 +48,6 @@ import com.nilemnod.mangareader.feature.browse.migration.dialog.MigrateMangaDial
 import com.nilemnod.mangareader.feature.browse.presentation.BrowseSourceContent
 import com.nilemnod.mangareader.feature.browse.presentation.MissingSourceScreen
 import com.nilemnod.mangareader.feature.browse.presentation.components.BrowseSourceToolbar
-import com.nilemnod.mangareader.feature.browse.presentation.components.RemoveMangaDialog
 import com.nilemnod.mangareader.feature.browse.source.browse.BrowseSourceViewModel.Listing
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols

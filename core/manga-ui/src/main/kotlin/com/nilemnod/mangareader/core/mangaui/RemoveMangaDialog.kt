@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.feature.browse.presentation.components
+package com.nilemnod.mangareader.core.mangaui
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text

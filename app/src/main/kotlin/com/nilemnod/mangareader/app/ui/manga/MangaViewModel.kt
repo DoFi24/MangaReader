@@ -60,6 +60,8 @@ import com.nilemnod.mangareader.domain.manga.model.downloadedFilter
 import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.service.RemoteMangaUpdater
 import com.nilemnod.mangareader.domain.source.service.SourceManager
+import com.nilemnod.mangareader.domain.source.service.SourcePreferences
+import com.nilemnod.mangareader.domain.source.service.getNameForMangaInfo
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.source.local.isLocal
 import dev.zacsweers.metro.AppScope
@@ -102,6 +104,7 @@ class MangaViewModel(
     private val libraryPreferences: LibraryPreferences,
     chapterPreferences: ChapterPreferences,
     private val modePreferences: ModePreferences,
+    private val sourcePreferences: SourcePreferences,
     private val downloadManager: DownloadManager,
     private val downloadCache: DownloadCache,
     private val getMangaAndChapters: GetMangaWithChapters,
@@ -243,6 +246,7 @@ class MangaViewModel(
             dialog = dialog,
             hideMissingChapters = hideMissingChapters,
             downloadedOnly = modePreferences.downloadedOnly.get(),
+            sourceName = mangaAndChapters.source.getNameForMangaInfo(sourcePreferences),
         )
     }
         // Composition would otherwise build these on first read, on the main thread, for every new state
@@ -1021,6 +1025,7 @@ class MangaViewModel(
             val dialog: Dialog? = null,
             val hideMissingChapters: Boolean = false,
             val downloadedOnly: Boolean = false,
+            val sourceName: String = "",
         ) : State {
             val processedChapters by lazy {
                 chapters.applyFilters(manga).toList()

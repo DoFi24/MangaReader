@@ -34,6 +34,7 @@ import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.core.mangaui.ChangeCategoryDialog
 import com.nilemnod.mangareader.core.mangaui.DuplicateMangaDialog
+import com.nilemnod.mangareader.core.mangaui.RemoveMangaDialog
 import com.nilemnod.mangareader.core.navigation.Content
 import com.nilemnod.mangareader.core.navigation.MangaDestination
 import com.nilemnod.mangareader.core.navigation.SearchableScreen
@@ -51,9 +52,6 @@ import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.toSourceManga
 import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.api.isLocalOrStub
-import com.nilemnod.mangareader.feature.browse.migration.config.MigrationConfigScreen
-import com.nilemnod.mangareader.feature.browse.migration.dialog.MigrateMangaDialog
-import com.nilemnod.mangareader.feature.browse.presentation.components.RemoveMangaDialog
 import com.nilemnod.mangareader.feature.categories.CategoryScreen
 import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
 import kotlinx.coroutines.Dispatchers
@@ -149,7 +147,7 @@ class MangaScreen(
                 successState.manga.favorite
             },
             onMigrateClicked = {
-                navigator.push(MigrationConfigScreen(successState.manga.id))
+                navigator.push(SharedScreen.MigrationConfig(listOf(successState.manga.id)).screen())
             }.takeIf { successState.manga.favorite },
             onEditNotesClicked = { navigator.push(MangaNotesScreen(manga = successState.manga)) },
             onMultiBookmarkClicked = viewModel::bookmarkChapters,
@@ -208,13 +206,13 @@ class MangaScreen(
             }
 
             is MangaViewModel.Dialog.Migrate -> {
-                MigrateMangaDialog(
+                SharedDialog.MigrateManga(
                     current = dialog.current,
                     target = dialog.target,
                     // Initiated from the context of [dialog.target] so we show [dialog.current].
                     onClickTitle = { navigator.push(MangaScreen(dialog.current.id)) },
                     onDismissRequest = onDismissRequest,
-                )
+                ).Content()
             }
             MangaViewModel.Dialog.SettingsSheet -> ChapterSettingsDialog(
                 onDismissRequest = onDismissRequest,
