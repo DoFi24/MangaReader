@@ -6,7 +6,6 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
@@ -66,6 +65,8 @@ import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Close
 import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.MenuDots
 import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Search
 import kotlinx.coroutines.flow.drop
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.heightIn
 
 @Composable
 fun AppBar(
@@ -347,7 +348,7 @@ fun SearchToolbar(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(end = 4.dp)
-                    .height(48.dp)
+                    .heightIn(min = 48.dp)
                     .clip(CircleShape)
                     .background(MaterialTheme.colorScheme.surfaceContainerHigh)
                     .focusRequester(focusRequester)
@@ -377,6 +378,7 @@ fun SearchToolbar(
                             style = MaterialTheme.typography.bodyLarge,
                         )
                     },
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
                     container = {},
                 ),
             )
