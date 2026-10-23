@@ -2,7 +2,9 @@ package com.nilemnod.mangareader.app.source
 
 import com.nilemnod.mangareader.app.extension.ExtensionManager
 import com.nilemnod.mangareader.core.download.DownloadManager
+import com.nilemnod.mangareader.app.source.compat.ExtensionContentSource
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.model.StubSource
 import com.nilemnod.mangareader.domain.source.repository.StubSourceRepository
 import com.nilemnod.mangareader.domain.source.service.SourceManager
@@ -40,6 +42,8 @@ class AndroidSourceManager(
     private val sourcesMapFlow = MutableStateFlow<Map<Long, Source>?>(null)
 
     private val stubSourcesMap = ConcurrentHashMap<Long, StubSource>()
+
+    private val contentCache = ConcurrentHashMap<Long, ExtensionContentSource>()
 
     override val sources: Flow<List<Source>> = sourcesMapFlow
         .filterNotNull()
@@ -93,6 +97,20 @@ class AndroidSourceManager(
 
     override suspend fun getOnlineSources(): List<HttpSource> {
         return sourcesMap().values.filterIsInstance<HttpSource>()
+    }
+
+    override val contentSources: Flow<List<ContentSource>> = sources.map { list -> list.map(::contentFor) }
+
+    override suspend fun content(sourceKey: Long): ContentSource? = get(sourceKey)?.let(::contentFor)
+
+    override suspend fun contentOrStub(sourceKey: Long): ContentSource = contentFor(getOrStub(sourceKey))
+
+    override suspend fun allContent(): List<ContentSource> = getAll().map(::contentFor)
+
+    private fun contentFor(source: Source): ContentSource {
+        val cached = contentCache[source.id]
+        if (cached != null && cached.native === source) return cached
+        return ExtensionContentSource(source).also { contentCache[source.id] = it }
     }
 
     override suspend fun getStubSources(): List<StubSource> {

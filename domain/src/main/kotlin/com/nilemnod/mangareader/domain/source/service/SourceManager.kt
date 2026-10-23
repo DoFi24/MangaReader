@@ -1,5 +1,6 @@
 package com.nilemnod.mangareader.domain.source.service
 
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.model.StubSource
 import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.source.online.HttpSource
@@ -18,4 +19,12 @@ interface SourceManager {
     suspend fun getOnlineSources(): List<HttpSource>
 
     suspend fun getStubSources(): List<StubSource>
+
+    val contentSources: Flow<List<ContentSource>>
+
+    suspend fun content(sourceKey: Long): ContentSource?
+
+    suspend fun contentOrStub(sourceKey: Long): ContentSource
+
+    suspend fun allContent(): List<ContentSource>
 }
