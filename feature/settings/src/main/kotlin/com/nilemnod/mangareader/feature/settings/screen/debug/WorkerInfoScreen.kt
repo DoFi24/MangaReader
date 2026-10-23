@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.more.settings.screen.debug
+package com.nilemnod.mangareader.feature.settings.screen.debug
 
 import android.content.Context
 import android.text.format.DateFormat
@@ -24,7 +24,6 @@ import androidx.work.WorkInfo
 import androidx.work.WorkQuery
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.core.android.lang.toDateTimestampString
 import com.nilemnod.mangareader.core.android.system.workManager
 import com.nilemnod.mangareader.core.common.util.system.copyToClipboard
@@ -137,11 +136,12 @@ class WorkerInfoScreen : Screen() {
     @ContributesIntoMap(AppScope::class)
     class WorkerInfoViewModel(
         context: Context,
+        uiPreferences: UiPreferences,
     ) : ViewModel() {
 
         private val workManager = context.workManager
-        private val dateFormatPref = context.appGraph.uiPreferences.dateFormat
-        private val timeFormatPref = context.appGraph.uiPreferences.timeFormat
+        private val dateFormatPref = uiPreferences.dateFormat
+        private val timeFormatPref = uiPreferences.timeFormat
         private val is24HourSystem = MutableStateFlow(DateFormat.is24HourFormat(context))
 
         private val dateTimeFormatter = combine(

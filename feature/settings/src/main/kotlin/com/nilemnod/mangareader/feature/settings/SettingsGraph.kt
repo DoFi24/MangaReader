@@ -3,7 +3,10 @@ package com.nilemnod.mangareader.feature.settings
 import android.content.Context
 import com.nilemnod.mangareader.core.common.security.SecurityPreferences
 import com.nilemnod.mangareader.core.download.ChapterCache
+import com.nilemnod.mangareader.core.download.DownloadCache
 import com.nilemnod.mangareader.core.metro.metroGraph
+import com.nilemnod.mangareader.core.network.NetworkHelper
+import com.nilemnod.mangareader.core.network.NetworkPreferences
 import com.nilemnod.mangareader.domain.backup.service.BackupPreferences
 import com.nilemnod.mangareader.domain.base.service.AppStatePreferences
 import com.nilemnod.mangareader.domain.base.service.ModePreferences
@@ -14,9 +17,12 @@ import com.nilemnod.mangareader.domain.extension.interactor.GetExtensionStoreCou
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.library.service.LibraryUpdateLauncher
 import com.nilemnod.mangareader.domain.manga.interactor.GetFavorites
+import com.nilemnod.mangareader.domain.manga.interactor.ResetViewerFlags
 import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.domain.storage.service.StoragePreferences
 import com.nilemnod.mangareader.feature.settings.about.DebugInfoProvider
+import com.nilemnod.mangareader.feature.settings.screen.advanced.AdvancedSettingsGroups
+import com.nilemnod.mangareader.feature.settings.screen.advanced.MetadataUpdateLauncher
 import com.nilemnod.mangareader.feature.settings.update.AppUpdateChecker
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesTo
@@ -39,6 +45,12 @@ interface SettingsGraph {
     val appUpdateChecker: AppUpdateChecker
     val chapterCache: ChapterCache
     val getFavorites: GetFavorites
+    val networkPreferences: NetworkPreferences
+    val networkHelper: NetworkHelper
+    val downloadCache: DownloadCache
+    val resetViewerFlags: ResetViewerFlags
+    val metadataUpdateLauncher: MetadataUpdateLauncher
+    val advancedSettingsGroups: AdvancedSettingsGroups
 }
 
 val Context.settingsGraph: SettingsGraph

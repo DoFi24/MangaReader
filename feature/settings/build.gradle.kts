@@ -34,6 +34,7 @@ dependencies {
     implementation(libs.androidx.compose.animationGraphics)
     implementation(libs.androidx.compose.uiUtil)
     implementation(libs.androidx.core)
+    implementation(libs.androidx.profileInstaller)
     implementation(libs.androidx.work)
     implementation(libs.bundles.androidx.lifecycle)
     implementation(libs.bundles.kotlinx.coroutines)
