@@ -63,6 +63,10 @@ gradlePlugin {
             id = libs.plugins.mangareader.compose.get().pluginId
             implementationClass = "PluginComposeAndroid"
         }
+        register("feature") {
+            id = libs.plugins.mangareader.feature.get().pluginId
+            implementationClass = "PluginFeature"
+        }
         register("kotlin-multiplatform") {
             id = libs.plugins.mangareader.kotlin.multiplatform.get().pluginId
             implementationClass = "PluginKotlinMultiplatform"

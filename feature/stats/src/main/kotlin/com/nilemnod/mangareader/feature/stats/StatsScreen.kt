@@ -1,0 +1,47 @@
+package com.nilemnod.mangareader.feature.stats
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
+import com.nilemnod.mangareader.core.ui.components.AppBar
+import com.nilemnod.mangareader.core.ui.components.material.Scaffold
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
+import com.nilemnod.mangareader.core.ui.util.Screen
+import com.nilemnod.mangareader.feature.stats.StatsScreenContent
+import com.nilemnod.mangareader.feature.stats.StatsScreenState
+import com.nilemnod.mangareader.i18n.MR
+import dev.zacsweers.metrox.viewmodel.metroViewModel
+
+class StatsScreen : Screen() {
+
+    @Composable
+    override fun Content() {
+        val navigator = LocalNavigator.currentOrThrow
+
+        val viewModel = metroViewModel<StatsViewModel>()
+        val state by viewModel.state.collectAsState()
+
+        Scaffold(
+            topBar = { scrollBehavior ->
+                AppBar(
+                    title = stringResource(MR.strings.label_stats),
+                    navigateUp = navigator::pop,
+                    scrollBehavior = scrollBehavior,
+                )
+            },
+        ) { paddingValues ->
+            if (state is StatsScreenState.Loading) {
+                LoadingScreen()
+                return@Scaffold
+            }
+
+            StatsScreenContent(
+                state = state as StatsScreenState.Success,
+                paddingValues = paddingValues,
+            )
+        }
+    }
+}

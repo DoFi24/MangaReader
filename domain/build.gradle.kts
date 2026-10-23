@@ -17,19 +17,22 @@ kotlin {
 }
 
 dependencies {
-    implementation(projects.extensionApi)
     implementation(projects.core.common)
     implementation(projects.core.metro)
 
     implementation(libs.metro.runtime)
     implementation(libs.bundles.kotlinx.coroutines)
     implementation(libs.bundles.serialization)
+    api(libs.kotlinx.serialization.json)
+    api(libs.okhttp.core)
+    api(libs.okio)
 
     implementation(libs.kotlinx.datetime)
 
     implementation(libs.unifile)
 
     api(libs.androidx.paging.runtime)
+    api(libs.androidx.preference)
 
     compileOnly(platform(libs.androidx.compose.bom))
     compileOnly(libs.androidx.compose.runtimeAnnotation)

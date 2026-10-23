@@ -28,8 +28,8 @@ android {
     defaultConfig {
         applicationId = "com.nilemnod.mangareader"
 
-        versionCode = 4
-        versionName = "0.0.4"
+        versionCode = 5
+        versionName = "0.0.5"
 
         val updateRepository = providers.gradleProperty("update-repository").getOrElse("")
         buildConfigField("String", "UPDATE_REPOSITORY", "\"$updateRepository\"")
@@ -194,16 +194,35 @@ dependencies {
     implementation(projects.icons.simpleIcons)
     implementation(projects.core.android)
     implementation(projects.core.archive)
+    implementation(projects.core.backup)
     implementation(projects.core.common)
+    implementation(projects.core.download)
     implementation(projects.core.metro)
-    implementation(projects.coreMetadata)
-    implementation(projects.extensionApi)
-    implementation(projects.sourceLocal)
+    implementation(projects.core.navigation)
+    implementation(projects.core.storage)
+    implementation(projects.core.network)
+    implementation(projects.core.metadata)
+    implementation(projects.compat.tachiyomi)
+    implementation(projects.source.common)
+    implementation(projects.source.local)
+    implementation(projects.source.mangadex)
+    implementation(projects.source.pepper)
     implementation(projects.data)
     implementation(projects.domain)
     implementation(projects.feature.reader)
-    implementation(projects.presentationCore)
-    implementation(projects.presentationWidget)
+    implementation(projects.feature.settings)
+    implementation(projects.core.ui)
+    implementation(projects.core.mangaUi)
+    implementation(projects.feature.browse)
+    implementation(projects.feature.categories)
+    implementation(projects.feature.downloads)
+    implementation(projects.feature.extensions)
+    implementation(projects.feature.history)
+    implementation(projects.feature.library)
+    implementation(projects.feature.manga)
+    implementation(projects.feature.stats)
+    implementation(projects.feature.updates)
+    implementation(projects.feature.widget)
 
     // Compose
     implementation(libs.androidx.activity.compose)

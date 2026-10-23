@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.nilemnod.mangareader.app.core.common"
+    namespace = "com.nilemnod.mangareader.core.common"
 }
 
 kotlin {
@@ -32,7 +32,6 @@ dependencies {
     api(libs.okhttp.brotli)
     api(libs.okhttp.dnsOverHttps)
     api(libs.okio)
-
 
     implementation(libs.image.decoder)
 

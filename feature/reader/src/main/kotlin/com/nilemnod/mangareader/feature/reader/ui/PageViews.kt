@@ -22,9 +22,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,12 +44,12 @@ import coil3.request.ImageRequest
 import coil3.request.transformations
 import coil3.size.Size
 import coil3.transform.Transformation
+import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.feature.reader.image.CropBordersTransformation
 import com.nilemnod.mangareader.feature.reader.image.HalfTransformation
 import com.nilemnod.mangareader.feature.reader.model.ReaderPage
 import com.nilemnod.mangareader.feature.reader.settings.PageFit
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.presentation.core.i18n.stringResource
 import kotlinx.coroutines.launch
 
 internal enum class PageHalf { Left, Right }
