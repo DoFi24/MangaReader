@@ -1,5 +1,6 @@
 package com.nilemnod.mangareader.app.ui.reader.model
 
+import com.nilemnod.mangareader.core.download.DownloadStream
 import eu.kanade.tachiyomi.source.model.Page
 import java.io.InputStream
 

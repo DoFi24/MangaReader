@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.data.download
+package com.nilemnod.mangareader.core.download
 
 import android.content.Context
 import com.nilemnod.mangareader.core.common.i18n.stringResource
@@ -42,6 +42,7 @@ import logcat.LogPriority
 @SingleIn(AppScope::class)
 class DownloadManager(
     private val context: Context,
+    private val scheduler: DownloadScheduler,
     private val provider: DownloadProvider,
     private val cache: DownloadCache,
     private val getCategories: GetCategories,
@@ -57,7 +58,7 @@ class DownloadManager(
         get() = downloader.queueState
 
     val isDownloaderRunning
-        get() = DownloadWorker.isRunningFlow(context)
+        get() = scheduler.isRunning
 
     /**
      * Starts the download worker, which runs the downloader.
@@ -65,7 +66,7 @@ class DownloadManager(
     fun startDownloads() {
         if (downloader.isRunning) return
 
-        DownloadWorker.start(context)
+        scheduler.start()
     }
 
     /**

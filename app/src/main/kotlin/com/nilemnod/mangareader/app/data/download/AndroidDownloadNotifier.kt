@@ -15,11 +15,15 @@ import com.nilemnod.mangareader.app.util.system.notify
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.security.SecurityPreferences
 import com.nilemnod.mangareader.core.common.util.lang.chop
+import com.nilemnod.mangareader.core.download.DownloadNotifier
+import com.nilemnod.mangareader.core.download.Downloader
 import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.i18n.MR
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesBinding
 import dev.zacsweers.metro.Inject
-import java.util.regex.Pattern
 import com.nilemnod.mangareader.icons.materialsymbols.R as MaterialSymbolsR
+import java.util.regex.Pattern
 
 /**
  * DownloadNotifier is used to show notifications when downloading one or multiple chapters.
@@ -27,10 +31,11 @@ import com.nilemnod.mangareader.icons.materialsymbols.R as MaterialSymbolsR
  * @param context context of application
  */
 @Inject
-class DownloadNotifier(
+@ContributesBinding(AppScope::class)
+class AndroidDownloadNotifier(
     private val context: Context,
     private val preferences: SecurityPreferences,
-) {
+) : DownloadNotifier {
 
     private val progressNotificationBuilder by lazy {
         context.notificationBuilder(Notifications.CHANNEL_DOWNLOADER_PROGRESS) {
@@ -58,7 +63,7 @@ class DownloadNotifier(
      * Dismiss the downloader's notification. Downloader error notifications use a different id, so
      * those can only be dismissed by the user.
      */
-    fun dismissProgress() {
+    override fun dismissProgress() {
         context.cancelNotification(Notifications.ID_DOWNLOAD_CHAPTER_PROGRESS)
         context.cancelNotification(Notifications.ID_DOWNLOAD_CHAPTER_PAUSED)
     }
@@ -74,7 +79,7 @@ class DownloadNotifier(
      * @param download download object containing download information.
      */
     @Synchronized
-    fun onProgressChange(download: Download) {
+    override fun onProgressChange(download: Download) {
         val now = SystemClock.elapsedRealtime()
         val isComplete = download.downloadedImages == download.pages?.size
         if (!isComplete && now - lastProgressNotificationTime < PROGRESS_NOTIFICATION_INTERVAL_MS) return
@@ -131,7 +136,7 @@ class DownloadNotifier(
     /**
      * Show notification when download is paused.
      */
-    fun onPaused() {
+    override fun onPaused() {
         // The progress id belongs to the download worker's foreground service, which takes the
         // notification with it when the worker stops
         context.notify(
@@ -167,7 +172,7 @@ class DownloadNotifier(
      * Resets the state once downloads are completed.
      */
     @Synchronized
-    fun onComplete() {
+    override fun onComplete() {
         dismissProgress()
 
         // Reset states to default
@@ -182,7 +187,7 @@ class DownloadNotifier(
      * @param mangaId the id of the entry being warned about
      * Only works on Android 8+.
      */
-    fun onWarning(reason: String, timeout: Long? = null, contentIntent: PendingIntent? = null, mangaId: Long? = null) {
+    override fun onWarning(reason: String, timeout: Long?, contentIntent: PendingIntent?, mangaId: Long?) {
         context.notify(
             Notifications.ID_DOWNLOAD_CHAPTER_ERROR,
             Notifications.CHANNEL_DOWNLOADER_ERROR,
@@ -215,7 +220,7 @@ class DownloadNotifier(
      * @param chapter string containing chapter title.
      * @param mangaId the id of the entry that the error occurred on
      */
-    fun onError(error: String? = null, chapter: String? = null, mangaTitle: String? = null, mangaId: Long? = null) {
+    override fun onError(error: String?, chapter: String?, mangaTitle: String?, mangaId: Long?) {
         // Create notification
         context.notify(
             Notifications.ID_DOWNLOAD_CHAPTER_ERROR,

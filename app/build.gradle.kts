@@ -195,6 +195,7 @@ dependencies {
     implementation(projects.core.android)
     implementation(projects.core.archive)
     implementation(projects.core.common)
+    implementation(projects.core.download)
     implementation(projects.core.metro)
     implementation(projects.core.navigation)
     implementation(projects.core.metadata)

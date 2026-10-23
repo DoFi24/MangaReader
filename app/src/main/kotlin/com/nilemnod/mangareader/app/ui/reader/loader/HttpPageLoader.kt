@@ -1,9 +1,9 @@
 package com.nilemnod.mangareader.app.ui.reader.loader
 
-import com.nilemnod.mangareader.app.data.cache.ChapterCache
-import com.nilemnod.mangareader.app.domain.chapter.model.toSChapter
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderChapter
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderPage
+import com.nilemnod.mangareader.core.download.ChapterCache
+import com.nilemnod.mangareader.domain.chapter.model.toSChapter
 import eu.kanade.tachiyomi.source.model.Page
 import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.CancellationException

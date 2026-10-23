@@ -1,7 +1,7 @@
 package com.nilemnod.mangareader.app.source
 
-import com.nilemnod.mangareader.app.data.download.DownloadManager
 import com.nilemnod.mangareader.app.extension.ExtensionManager
+import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.domain.source.model.StubSource
 import com.nilemnod.mangareader.domain.source.repository.StubSourceRepository

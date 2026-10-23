@@ -33,7 +33,6 @@ import ca.mpreg.webgpuviewer.viewer.ImageViewerContinuousState
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
 import com.nilemnod.mangareader.app.ui.reader.loader.HttpPageLoader
-import com.nilemnod.mangareader.app.ui.reader.model.DownloadStream
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderChapter
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderPage
 import com.nilemnod.mangareader.app.ui.reader.model.ViewerChapters
@@ -45,6 +44,7 @@ import com.nilemnod.mangareader.app.ui.reader.viewer.ViewerNavigation.Navigation
 import com.nilemnod.mangareader.app.util.system.createReaderThemeContext
 import com.nilemnod.mangareader.app.util.system.readerBackgroundColor
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.download.DownloadStream
 import eu.kanade.tachiyomi.source.model.Page
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineStart

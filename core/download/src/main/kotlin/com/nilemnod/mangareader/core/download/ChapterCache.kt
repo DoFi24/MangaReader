@@ -1,9 +1,8 @@
-package com.nilemnod.mangareader.app.data.cache
+package com.nilemnod.mangareader.core.download
 
 import android.content.Context
 import android.text.format.Formatter
 import com.jakewharton.disklrucache.DiskLruCache
-import com.nilemnod.mangareader.app.ui.reader.model.DownloadStream
 import com.nilemnod.mangareader.core.android.storage.saveTo
 import com.nilemnod.mangareader.core.common.storage.DiskUtil
 import com.nilemnod.mangareader.core.common.util.system.logcat

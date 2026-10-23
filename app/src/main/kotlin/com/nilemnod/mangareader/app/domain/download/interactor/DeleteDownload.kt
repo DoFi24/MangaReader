@@ -1,6 +1,6 @@
 package com.nilemnod.mangareader.app.domain.download.interactor
 
-import com.nilemnod.mangareader.app.data.download.DownloadManager
+import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.service.SourceManager
