@@ -33,9 +33,10 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.ui.browse.BrowseTab
-import com.nilemnod.mangareader.feature.library.LibraryTab
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.more.MoreTab
+import com.nilemnod.mangareader.core.navigation.HomeTab
+import com.nilemnod.mangareader.core.navigation.HomeTabRouter
 import com.nilemnod.mangareader.core.navigation.SharedScreen
 import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
@@ -44,6 +45,7 @@ import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.core.ui.util.isTabletUi
 import com.nilemnod.mangareader.feature.downloads.DownloadQueueScreen
 import com.nilemnod.mangareader.feature.history.HistoryTab
+import com.nilemnod.mangareader.feature.library.LibraryTab
 import com.nilemnod.mangareader.feature.updates.UpdatesTab
 import com.nilemnod.mangareader.i18n.MR
 import kotlinx.coroutines.channels.Channel
@@ -57,7 +59,6 @@ import soup.compose.material.motion.animation.materialFadeThroughOut
 object HomeScreen : Screen() {
 
     private val librarySearchEvent = Channel<String>()
-    private val openTabEvent = Channel<Tab>()
 
     @Suppress("ConstPropertyName")
     private const val TabFadeDuration = 200
@@ -141,24 +142,24 @@ object HomeScreen : Screen() {
                     }
                 }
                 launch {
-                    openTabEvent.receiveAsFlow().collectLatest {
+                    HomeTabRouter.events.collectLatest {
                         tabNavigator.current = when (it) {
-                            is Tab.Library -> LibraryTab
-                            Tab.Updates -> UpdatesTab
-                            Tab.History -> HistoryTab
-                            is Tab.Browse -> {
+                            is HomeTab.Library -> LibraryTab
+                            HomeTab.Updates -> UpdatesTab
+                            HomeTab.History -> HistoryTab
+                            is HomeTab.Browse -> {
                                 if (it.toExtensions) {
                                     BrowseTab.showExtension()
                                 }
                                 BrowseTab
                             }
-                            is Tab.More -> MoreTab
+                            is HomeTab.More -> MoreTab
                         }
 
-                        if (it is Tab.Library && it.mangaIdToOpen != null) {
-                            navigator.push(SharedScreen.Manga(it.mangaIdToOpen).screen())
+                        if (it is HomeTab.Library) {
+                            it.mangaIdToOpen?.let { id -> navigator.push(SharedScreen.Manga(id).screen()) }
                         }
-                        if (it is Tab.More && it.toDownloads) {
+                        if (it is HomeTab.More && it.toDownloads) {
                             navigator.push(DownloadQueueScreen)
                         }
                     }
@@ -260,19 +261,11 @@ object HomeScreen : Screen() {
         librarySearchEvent.send(query)
     }
 
-    suspend fun openTab(tab: Tab) {
-        openTabEvent.send(tab)
+    suspend fun openTab(tab: HomeTab) {
+        HomeTabRouter.open(tab)
     }
 
     suspend fun showBottomNav(show: Boolean) {
         BottomNavController.show(show)
-    }
-
-    sealed interface Tab {
-        data class Library(val mangaIdToOpen: Long? = null) : Tab
-        data object Updates : Tab
-        data object History : Tab
-        data class Browse(val toExtensions: Boolean = false) : Tab
-        data class More(val toDownloads: Boolean) : Tab
     }
 }

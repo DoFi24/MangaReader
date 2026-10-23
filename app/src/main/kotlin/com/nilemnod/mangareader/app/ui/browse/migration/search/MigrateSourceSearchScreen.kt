@@ -19,9 +19,10 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.presentation.browse.BrowseSourceContent
 import com.nilemnod.mangareader.app.ui.browse.source.browse.BrowseSourceViewModel
 import com.nilemnod.mangareader.app.ui.browse.source.browse.SourceFilterDialog
-import com.nilemnod.mangareader.app.ui.home.HomeScreen
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.webview.WebViewScreen
+import com.nilemnod.mangareader.core.navigation.HomeTab
+import com.nilemnod.mangareader.core.navigation.HomeTabRouter
 import com.nilemnod.mangareader.core.navigation.SharedScreen
 import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.components.SearchToolbar
@@ -143,7 +144,7 @@ data class MigrateSourceSearchScreen(
                     onComplete = {
                         scope.launch {
                             navigator.popUntilRoot()
-                            HomeScreen.openTab(HomeScreen.Tab.Browse())
+                            HomeTabRouter.open(HomeTab.Browse())
                             navigator.push(SharedScreen.Manga(dialog.target.id).screen())
                         }
                     },
