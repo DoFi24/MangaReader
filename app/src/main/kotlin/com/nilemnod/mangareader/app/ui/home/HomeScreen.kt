@@ -13,7 +13,6 @@ import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteItem
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.material3.adaptive.navigationsuite.rememberNavigationSuiteScaffoldState
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -25,7 +24,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -39,6 +37,7 @@ import com.nilemnod.mangareader.core.navigation.SearchableScreen
 import com.nilemnod.mangareader.core.navigation.SharedScreen
 import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
+import com.nilemnod.mangareader.core.ui.theme.Transitions
 import com.nilemnod.mangareader.core.ui.util.BottomNavController
 import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.core.ui.util.isTabletUi
@@ -56,18 +55,15 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import soup.compose.material.motion.animation.materialFadeThroughIn
-import soup.compose.material.motion.animation.materialFadeThroughOut
 
 object HomeScreen : Screen(), SearchableScreen {
 
     private val librarySearchEvent = Channel<String>()
 
     @Suppress("ConstPropertyName")
-    private const val TabFadeDuration = 200
-
-    @Suppress("ConstPropertyName")
     private const val TabNavigatorKey = "HomeTabs"
+
+    private const val MAX_BADGE_COUNT = 99
 
     private val TABS = listOf(
         LibraryTab,
@@ -108,8 +104,8 @@ object HomeScreen : Screen(), SearchableScreen {
                     navigationSuiteType = navigationSuiteType,
                     state = navigationSuiteState,
                     navigationSuiteColors = NavigationSuiteDefaults.colors(
-                        navigationRailContainerColor = MaterialTheme.colorScheme
-                            .surfaceColorAtElevation(3.dp),
+                        navigationBarContainerColor = MaterialTheme.colorScheme.surfaceContainer,
+                        navigationRailContainerColor = MaterialTheme.colorScheme.surface,
                     ),
                     navigationItemVerticalArrangement = Arrangement.Center,
                     navigationItems = {
@@ -119,10 +115,7 @@ object HomeScreen : Screen(), SearchableScreen {
                     AnimatedContent(
                         targetState = tabNavigator.current,
                         transitionSpec = {
-                            materialFadeThroughIn(
-                                initialScale = 1f,
-                                durationMillis = TabFadeDuration,
-                            ) togetherWith materialFadeThroughOut(durationMillis = TabFadeDuration)
+                            Transitions.fadeThroughIn() togetherWith Transitions.fadeThroughOut()
                         },
                         label = "tabContent",
                     ) {
@@ -199,7 +192,7 @@ object HomeScreen : Screen(), SearchableScreen {
             label = {
                 Text(
                     text = tab.options.title,
-                    style = MaterialTheme.typography.labelLarge,
+                    style = MaterialTheme.typography.labelMedium,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
@@ -234,7 +227,10 @@ object HomeScreen : Screen(), SearchableScreen {
         }
         if (count <= 0) return null
         return {
-            Badge {
+            Badge(
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary,
+            ) {
                 val desc = when (tab) {
                     is UpdatesTab -> pluralStringResource(
                         MR.plurals.notification_chapters_generic,
@@ -251,7 +247,7 @@ object HomeScreen : Screen(), SearchableScreen {
                     else -> null
                 }
                 Text(
-                    text = count.toString(),
+                    text = if (count > MAX_BADGE_COUNT) "$MAX_BADGE_COUNT+" else count.toString(),
                     modifier = Modifier.semantics {
                         if (desc != null) contentDescription = desc
                     },

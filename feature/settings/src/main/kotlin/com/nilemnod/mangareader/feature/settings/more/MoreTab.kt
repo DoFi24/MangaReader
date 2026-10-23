@@ -1,11 +1,10 @@
 package com.nilemnod.mangareader.feature.settings.more
 
-import androidx.compose.animation.graphics.res.animatedVectorResource
-import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -19,12 +18,14 @@ import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.preference.asState
 import com.nilemnod.mangareader.core.ui.util.Tab
-import com.nilemnod.mangareader.core.ui.util.rememberAnimatedVectorPainter
 import com.nilemnod.mangareader.domain.base.service.ModePreferences
 import com.nilemnod.mangareader.feature.settings.R
 import com.nilemnod.mangareader.feature.settings.SettingsScreen
 import com.nilemnod.mangareader.feature.settings.more.MoreScreen
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.More
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.More
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metro.Inject
@@ -43,12 +44,12 @@ data object MoreTab : Tab {
         @Composable
         get() {
             val isSelected = LocalTabNavigator.current.current.key == key
-            val enter = AnimatedImageVector.animatedVectorResource(R.drawable.animated_more_enter)
-            val exit = AnimatedImageVector.animatedVectorResource(R.drawable.animated_more_exit)
             return TabOptions(
                 index = 4u,
                 title = stringResource(MR.strings.label_more),
-                icon = rememberAnimatedVectorPainter(enter, exit, isSelected),
+                icon = rememberVectorPainter(
+                    if (isSelected) CustomMaterialSymbols.EdgeFilled.More else CustomMaterialSymbols.Edge.More,
+                ),
             )
         }
 
