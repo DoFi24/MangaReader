@@ -4,8 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
@@ -65,8 +67,6 @@ import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Close
 import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.MenuDots
 import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Search
 import kotlinx.coroutines.flow.drop
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.heightIn
 
 @Composable
 fun AppBar(

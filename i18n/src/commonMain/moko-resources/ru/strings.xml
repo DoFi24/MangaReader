@@ -985,4 +985,5 @@
     <string name="crash_screen_restart">Перезапустить</string>
     <string name="more_group_manage">Управление</string>
     <string name="more_group_app">Приложение</string>
+    <string name="onboarding_action_back">Назад</string>
 </resources>
