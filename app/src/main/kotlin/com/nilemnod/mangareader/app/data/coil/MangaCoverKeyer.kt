@@ -2,8 +2,8 @@ package com.nilemnod.mangareader.app.data.coil
 
 import coil3.key.Keyer
 import coil3.request.Options
-import com.nilemnod.mangareader.app.data.cache.CoverCache
 import com.nilemnod.mangareader.app.domain.manga.model.hasCustomCover
+import com.nilemnod.mangareader.core.storage.CoverCache
 import com.nilemnod.mangareader.domain.manga.model.MangaCover
 import com.nilemnod.mangareader.domain.manga.model.Manga as DomainManga
 

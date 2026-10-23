@@ -21,6 +21,10 @@ sealed interface SharedScreen : ScreenProvider {
         val extensionFilter: String? = null,
     ) : SharedScreen
 
+    data class MigrationConfig(
+        val mangaIds: List<Long>,
+    ) : SharedScreen
+
     data object Category : SharedScreen
 
     data object DownloadQueue : SharedScreen

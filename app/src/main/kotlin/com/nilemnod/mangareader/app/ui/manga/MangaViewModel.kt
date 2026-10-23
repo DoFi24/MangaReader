@@ -11,7 +11,6 @@ import androidx.compose.ui.util.fastFilter
 import androidx.compose.ui.util.fastMap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nilemnod.mangareader.app.data.cache.CoverCache
 import com.nilemnod.mangareader.app.domain.chapter.interactor.GetAvailableScanlators
 import com.nilemnod.mangareader.app.domain.manga.interactor.GetExcludedScanlators
 import com.nilemnod.mangareader.app.domain.manga.interactor.SetExcludedScanlators
@@ -35,6 +34,7 @@ import com.nilemnod.mangareader.core.download.SetReadStatus
 import com.nilemnod.mangareader.core.mangaui.ChapterDownloadAction
 import com.nilemnod.mangareader.core.mangaui.DownloadAction
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.core.storage.CoverCache
 import com.nilemnod.mangareader.core.ui.preference.asState
 import com.nilemnod.mangareader.core.ui.util.addOrRemove
 import com.nilemnod.mangareader.core.ui.util.insertSeparators

@@ -9,7 +9,6 @@ import coil3.asDrawable
 import coil3.imageLoader
 import coil3.request.ImageRequest
 import coil3.size.Size
-import com.nilemnod.mangareader.app.data.cache.CoverCache
 import com.nilemnod.mangareader.app.data.saver.Image
 import com.nilemnod.mangareader.app.data.saver.ImageSaver
 import com.nilemnod.mangareader.app.data.saver.Location
@@ -18,6 +17,7 @@ import com.nilemnod.mangareader.core.android.system.getBitmapOrNull
 import com.nilemnod.mangareader.core.android.system.toShareIntent
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.storage.CoverCache
 import com.nilemnod.mangareader.domain.manga.interactor.GetManga
 import com.nilemnod.mangareader.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.domain.manga.model.Manga

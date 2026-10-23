@@ -33,7 +33,7 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.ui.browse.BrowseTab
-import com.nilemnod.mangareader.app.ui.library.LibraryTab
+import com.nilemnod.mangareader.feature.library.LibraryTab
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.more.MoreTab
 import com.nilemnod.mangareader.core.navigation.SharedScreen

@@ -19,10 +19,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastForEach
 import androidx.lifecycle.ViewModel
-import com.nilemnod.mangareader.app.data.cache.CoverCache
 import com.nilemnod.mangareader.app.domain.manga.model.hasCustomCover
 import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.core.download.DownloadManager
+import com.nilemnod.mangareader.core.storage.CoverCache
 import com.nilemnod.mangareader.core.ui.components.LabeledCheckbox
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.stringResource

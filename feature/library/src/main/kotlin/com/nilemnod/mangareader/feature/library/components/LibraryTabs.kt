@@ -1,0 +1,38 @@
+package com.nilemnod.mangareader.feature.library.components
+
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.PrimaryScrollableTabRow
+import androidx.compose.material3.Tab
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.unit.dp
+import com.nilemnod.mangareader.core.mangaui.visualName
+import com.nilemnod.mangareader.core.ui.components.material.TabText
+import com.nilemnod.mangareader.domain.category.model.Category
+@Composable
+internal fun LibraryTabs(
+    categories: List<Category>,
+    pagerState: PagerState,
+    getItemCountForCategory: (Category) -> Int?,
+    onTabItemClick: (Int) -> Unit,
+) {
+    val currentPageIndex = pagerState.currentPage.coerceAtMost(categories.lastIndex)
+    PrimaryScrollableTabRow(
+        selectedTabIndex = currentPageIndex,
+        edgePadding = 0.dp,
+    ) {
+        categories.forEachIndexed { index, category ->
+            Tab(
+                selected = currentPageIndex == index,
+                onClick = { onTabItemClick(index) },
+                text = {
+                    TabText(
+                        text = category.visualName,
+                        badgeCount = getItemCountForCategory(category),
+                    )
+                },
+                unselectedContentColor = MaterialTheme.colorScheme.onSurface,
+            )
+        }
+    }
+}

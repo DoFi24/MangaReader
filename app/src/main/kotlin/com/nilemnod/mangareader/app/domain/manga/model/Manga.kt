@@ -1,11 +1,11 @@
 package com.nilemnod.mangareader.app.domain.manga.model
 
 import android.content.Context
-import com.nilemnod.mangareader.app.data.cache.CoverCache
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderOrientation
 import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode
 import com.nilemnod.mangareader.core.common.preference.TriState
+import com.nilemnod.mangareader.core.storage.CoverCache
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get

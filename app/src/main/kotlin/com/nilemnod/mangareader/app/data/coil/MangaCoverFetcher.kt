@@ -12,10 +12,10 @@ import coil3.fetch.SourceFetchResult
 import coil3.getOrDefault
 import coil3.request.Options
 import com.hippo.unifile.UniFile
-import com.nilemnod.mangareader.app.data.cache.CoverCache
 import com.nilemnod.mangareader.app.data.coil.MangaCoverFetcher.Companion.USE_CUSTOM_COVER_KEY
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.network.await
+import com.nilemnod.mangareader.core.storage.CoverCache
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaCover
 import com.nilemnod.mangareader.domain.source.api.WebAccess

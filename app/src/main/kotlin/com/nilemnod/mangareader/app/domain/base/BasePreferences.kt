@@ -3,6 +3,7 @@ package com.nilemnod.mangareader.app.domain.base
 import android.content.Context
 import com.nilemnod.mangareader.core.common.preference.Preference
 import com.nilemnod.mangareader.core.common.preference.PreferenceStore
+import com.nilemnod.mangareader.domain.base.service.ModePreferences
 import com.nilemnod.mangareader.i18n.MR
 import dev.icerock.moko.resources.StringResource
 import dev.zacsweers.metro.AppScope
@@ -14,14 +15,12 @@ import dev.zacsweers.metro.SingleIn
 class BasePreferences(
     val context: Context,
     preferenceStore: PreferenceStore,
+    modePreferences: ModePreferences,
 ) {
 
-    val downloadedOnly: Preference<Boolean> = preferenceStore.getBoolean(
-        Preference.appStateKey("pref_downloaded_only"),
-        false,
-    )
+    val downloadedOnly: Preference<Boolean> = modePreferences.downloadedOnly
 
-    val incognitoMode: Preference<Boolean> = preferenceStore.getBoolean(Preference.appStateKey("incognito_mode"), false)
+    val incognitoMode: Preference<Boolean> = modePreferences.incognitoMode
 
     val extensionInstaller: ExtensionInstallerPreference = ExtensionInstallerPreference(context, preferenceStore)
 
