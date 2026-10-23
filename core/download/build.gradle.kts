@@ -23,6 +23,7 @@ dependencies {
     implementation(projects.core.android)
     implementation(projects.core.archive)
     implementation(projects.core.common)
+    implementation(projects.core.network)
     implementation(projects.core.metadata)
     implementation(projects.core.metro)
     implementation(projects.domain)

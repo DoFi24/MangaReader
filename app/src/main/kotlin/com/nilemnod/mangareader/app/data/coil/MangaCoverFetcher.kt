@@ -15,11 +15,11 @@ import com.hippo.unifile.UniFile
 import com.nilemnod.mangareader.app.data.cache.CoverCache
 import com.nilemnod.mangareader.app.data.coil.MangaCoverFetcher.Companion.USE_CUSTOM_COVER_KEY
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.network.await
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaCover
 import com.nilemnod.mangareader.domain.source.api.WebAccess
 import com.nilemnod.mangareader.domain.source.service.SourceManager
-import eu.kanade.tachiyomi.network.await
 import logcat.LogPriority
 import okhttp3.CacheControl
 import okhttp3.Call

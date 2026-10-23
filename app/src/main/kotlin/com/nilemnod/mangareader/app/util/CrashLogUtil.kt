@@ -10,9 +10,9 @@ import com.nilemnod.mangareader.app.util.system.createFileInCacheDir
 import com.nilemnod.mangareader.core.android.system.toShareIntent
 import com.nilemnod.mangareader.core.common.util.system.WebViewUtil
 import com.nilemnod.mangareader.core.common.util.system.toast
+import com.nilemnod.mangareader.core.network.NetworkPreferences
 import com.nilemnod.mangareader.domain.extension.model.Extension
 import dev.zacsweers.metro.Inject
-import eu.kanade.tachiyomi.network.NetworkPreferences
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.TimeZone

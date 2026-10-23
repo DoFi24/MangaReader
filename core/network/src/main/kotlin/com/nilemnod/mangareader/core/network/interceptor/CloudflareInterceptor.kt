@@ -1,4 +1,4 @@
-package eu.kanade.tachiyomi.network.interceptor
+package com.nilemnod.mangareader.core.network.interceptor
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -18,8 +18,8 @@ import com.nilemnod.mangareader.core.common.util.system.isOutdated
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.toWebViewHeaders
 import com.nilemnod.mangareader.core.common.util.system.toast
+import com.nilemnod.mangareader.core.network.AndroidCookieJar
 import com.nilemnod.mangareader.i18n.MR
-import eu.kanade.tachiyomi.network.AndroidCookieJar
 import kotlinx.coroutines.CoroutineScope
 import logcat.LogPriority
 import okhttp3.HttpUrl

@@ -54,6 +54,8 @@ import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.core.metro.GraphProvider
 import com.nilemnod.mangareader.core.migration.Migration
 import com.nilemnod.mangareader.core.migration.Migrator
+import com.nilemnod.mangareader.core.network.NetworkHelper
+import com.nilemnod.mangareader.core.network.NetworkPreferences
 import com.nilemnod.mangareader.core.ui.preference.UiPreferences
 import com.nilemnod.mangareader.core.ui.preference.model.setAppCompatDelegateThemeMode
 import com.nilemnod.mangareader.domain.source.service.SourceManager
@@ -62,8 +64,6 @@ import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.createGraphFactory
 import eu.kanade.tachiyomi.AppInfo
-import eu.kanade.tachiyomi.network.NetworkHelper
-import eu.kanade.tachiyomi.network.NetworkPreferences
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
@@ -74,9 +74,9 @@ import logcat.LogcatLogger
 import org.conscrypt.Conscrypt
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.InjektScope
+import com.nilemnod.mangareader.icons.materialsymbols.R as MaterialSymbolsR
 import java.security.Security
 import kotlin.concurrent.thread
-import com.nilemnod.mangareader.icons.materialsymbols.R as MaterialSymbolsR
 
 class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factory, GraphProvider<AppGraph> {
 

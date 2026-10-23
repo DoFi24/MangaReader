@@ -198,6 +198,7 @@ dependencies {
     implementation(projects.core.download)
     implementation(projects.core.metro)
     implementation(projects.core.navigation)
+    implementation(projects.core.network)
     implementation(projects.core.metadata)
     implementation(projects.extensionApi)
     implementation(projects.source.local)

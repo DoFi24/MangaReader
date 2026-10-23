@@ -26,6 +26,9 @@ import com.nilemnod.mangareader.core.download.ChapterCache
 import com.nilemnod.mangareader.core.download.DownloadCache
 import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.core.metro.IsDebugBuild
+import com.nilemnod.mangareader.core.network.JavaScriptEngine
+import com.nilemnod.mangareader.core.network.NetworkHelper
+import com.nilemnod.mangareader.core.network.NetworkPreferences
 import com.nilemnod.mangareader.core.ui.preference.UiPreferences
 import com.nilemnod.mangareader.core.ui.preference.UiPreferencesProvider
 import com.nilemnod.mangareader.domain.backup.service.BackupPreferences
@@ -44,9 +47,6 @@ import dev.zacsweers.metro.DependencyGraph
 import dev.zacsweers.metro.Provides
 import dev.zacsweers.metrox.viewmodel.MetroViewModelFactory
 import dev.zacsweers.metrox.viewmodel.ViewModelGraph
-import eu.kanade.tachiyomi.network.JavaScriptEngine
-import eu.kanade.tachiyomi.network.NetworkHelper
-import eu.kanade.tachiyomi.network.NetworkPreferences
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.protobuf.ProtoBuf
 import nl.adaptivity.xmlutil.serialization.XML

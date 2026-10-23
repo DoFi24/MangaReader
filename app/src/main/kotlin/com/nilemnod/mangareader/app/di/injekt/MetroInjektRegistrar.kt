@@ -22,6 +22,10 @@ class MetroInjektRegistrar(
 
     private val graph: AppGraph inline get() = graphProvider.graph
 
+    private val extensionNetworkHelper by lazy { NetworkHelper(graph.networkHelper) }
+
+    private val extensionJavaScriptEngine by lazy { JavaScriptEngine(graph.javaScriptEngine) }
+
     private val bindings = mapOf<Type, () -> Any>(
         Application::class.java to { application },
         Context::class.java to { application },
@@ -30,8 +34,8 @@ class MetroInjektRegistrar(
         ProtoBuf::class.java to { graph.protoBuf },
         XML::class.java to { graph.xml },
 
-        NetworkHelper::class.java to { graph.networkHelper },
-        JavaScriptEngine::class.java to { graph.javaScriptEngine },
+        NetworkHelper::class.java to { extensionNetworkHelper },
+        JavaScriptEngine::class.java to { extensionJavaScriptEngine },
     )
 
     override fun <R : Any> getInstance(forType: Type): R = getInstanceOrNull(forType)

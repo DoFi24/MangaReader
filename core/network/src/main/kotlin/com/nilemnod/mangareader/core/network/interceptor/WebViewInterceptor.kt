@@ -1,4 +1,4 @@
-package eu.kanade.tachiyomi.network.interceptor
+package com.nilemnod.mangareader.core.network.interceptor
 
 import android.content.Context
 import android.os.Build

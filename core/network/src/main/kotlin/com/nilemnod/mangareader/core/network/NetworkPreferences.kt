@@ -1,4 +1,4 @@
-package eu.kanade.tachiyomi.network
+package com.nilemnod.mangareader.core.network
 
 import com.nilemnod.mangareader.core.common.preference.Preference
 import com.nilemnod.mangareader.core.common.preference.PreferenceStore

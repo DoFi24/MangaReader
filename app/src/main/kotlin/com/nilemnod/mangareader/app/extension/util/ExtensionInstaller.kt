@@ -12,10 +12,10 @@ import com.nilemnod.mangareader.app.util.storage.getUriCompat
 import com.nilemnod.mangareader.app.util.system.isPackageInstalled
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.core.network.NetworkHelper
+import com.nilemnod.mangareader.core.network.await
 import com.nilemnod.mangareader.domain.extension.model.Extension
 import dev.zacsweers.metro.Inject
-import eu.kanade.tachiyomi.network.NetworkHelper
-import eu.kanade.tachiyomi.network.await
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job

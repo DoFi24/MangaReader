@@ -25,6 +25,7 @@ kotlin {
 
 dependencies {
     implementation(projects.core.common)
+    implementation(projects.core.network)
     implementation(projects.core.metro)
     implementation(projects.i18n)
 

@@ -9,6 +9,7 @@ import com.nilemnod.mangareader.core.android.system.toShareIntent
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.toWebViewHeaders
 import com.nilemnod.mangareader.core.common.util.system.toast
+import com.nilemnod.mangareader.core.network.NetworkHelper
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Assisted
@@ -17,7 +18,6 @@ import dev.zacsweers.metro.AssistedInject
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactory
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactoryKey
-import eu.kanade.tachiyomi.network.NetworkHelper
 import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
