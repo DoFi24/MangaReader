@@ -35,12 +35,13 @@ import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.domain.manga.model.readerOrientation
 import com.nilemnod.mangareader.app.domain.manga.model.readingMode
 import com.nilemnod.mangareader.app.presentation.reader.settings.TapZonesItems
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderOrientation
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderSettingsViewModel
-import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode
 import com.nilemnod.mangareader.core.common.preference.Preference
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.reader.ReaderOrientation
+import com.nilemnod.mangareader.core.reader.ReaderPreferences
+import com.nilemnod.mangareader.core.reader.ReadingMode
+import com.nilemnod.mangareader.core.reader.WebGpuShader
 import com.nilemnod.mangareader.core.ui.components.CheckboxItem
 import com.nilemnod.mangareader.core.ui.components.HeadingItem
 import com.nilemnod.mangareader.core.ui.components.SettingsChipRow

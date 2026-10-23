@@ -7,6 +7,7 @@ import com.nilemnod.mangareader.core.download.DownloadCache
 import com.nilemnod.mangareader.core.metro.metroGraph
 import com.nilemnod.mangareader.core.network.NetworkHelper
 import com.nilemnod.mangareader.core.network.NetworkPreferences
+import com.nilemnod.mangareader.core.reader.ReaderPreferences
 import com.nilemnod.mangareader.domain.backup.service.BackupPreferences
 import com.nilemnod.mangareader.domain.base.service.AppStatePreferences
 import com.nilemnod.mangareader.domain.base.service.ModePreferences
@@ -51,6 +52,7 @@ interface SettingsGraph {
     val resetViewerFlags: ResetViewerFlags
     val metadataUpdateLauncher: MetadataUpdateLauncher
     val advancedSettingsGroups: AdvancedSettingsGroups
+    val readerPreferences: ReaderPreferences
 }
 
 val Context.settingsGraph: SettingsGraph

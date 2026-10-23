@@ -1,6 +1,5 @@
 package com.nilemnod.mangareader.app.ui.reader.viewer.webtoon
 
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
 import com.nilemnod.mangareader.app.ui.reader.viewer.ViewerConfig
 import com.nilemnod.mangareader.app.ui.reader.viewer.ViewerNavigation
 import com.nilemnod.mangareader.app.ui.reader.viewer.navigation.DisabledNavigation
@@ -8,6 +7,7 @@ import com.nilemnod.mangareader.app.ui.reader.viewer.navigation.EdgeNavigation
 import com.nilemnod.mangareader.app.ui.reader.viewer.navigation.KindlishNavigation
 import com.nilemnod.mangareader.app.ui.reader.viewer.navigation.LNavigation
 import com.nilemnod.mangareader.app.ui.reader.viewer.navigation.RightAndLeftNavigation
+import com.nilemnod.mangareader.core.reader.ReaderPreferences
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.drop

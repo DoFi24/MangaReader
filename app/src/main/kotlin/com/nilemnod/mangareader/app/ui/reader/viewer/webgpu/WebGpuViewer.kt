@@ -36,8 +36,6 @@ import com.nilemnod.mangareader.app.ui.reader.loader.HttpPageLoader
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderChapter
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderPage
 import com.nilemnod.mangareader.app.ui.reader.model.ViewerChapters
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences.TransitionAnimation
 import com.nilemnod.mangareader.app.ui.reader.viewer.ReaderPageImageView.ZoomStartPosition
 import com.nilemnod.mangareader.app.ui.reader.viewer.Viewer
 import com.nilemnod.mangareader.app.ui.reader.viewer.ViewerNavigation.NavigationRegion
@@ -45,6 +43,9 @@ import com.nilemnod.mangareader.app.util.system.createReaderThemeContext
 import com.nilemnod.mangareader.app.util.system.readerBackgroundColor
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.download.DownloadStream
+import com.nilemnod.mangareader.core.reader.ReaderPreferences
+import com.nilemnod.mangareader.core.reader.ReaderPreferences.TransitionAnimation
+import com.nilemnod.mangareader.core.reader.WebGpuShader
 import com.nilemnod.mangareader.domain.source.api.Page
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineStart

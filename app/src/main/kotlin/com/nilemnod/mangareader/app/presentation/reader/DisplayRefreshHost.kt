@@ -13,7 +13,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
+import com.nilemnod.mangareader.core.reader.ReaderPreferences
 import com.nilemnod.mangareader.core.ui.util.collectAsState
 import kotlinx.coroutines.delay
 import uy.kohesive.injekt.Injekt

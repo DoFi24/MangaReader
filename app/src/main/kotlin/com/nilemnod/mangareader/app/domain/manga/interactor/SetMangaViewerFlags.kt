@@ -1,7 +1,7 @@
 package com.nilemnod.mangareader.app.domain.manga.interactor
 
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderOrientation
-import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode
+import com.nilemnod.mangareader.core.reader.ReaderOrientation
+import com.nilemnod.mangareader.core.reader.ReadingMode
 import com.nilemnod.mangareader.domain.manga.model.MangaUpdate
 import com.nilemnod.mangareader.domain.manga.repository.MangaRepository
 import dev.zacsweers.metro.Inject

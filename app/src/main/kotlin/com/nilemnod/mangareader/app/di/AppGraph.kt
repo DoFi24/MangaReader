@@ -13,7 +13,6 @@ import com.nilemnod.mangareader.app.extension.util.ExtensionInstallActivity
 import com.nilemnod.mangareader.app.ui.base.delegate.SecureActivityDelegateImpl
 import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
 import com.nilemnod.mangareader.app.ui.webview.WebViewActivity
 import com.nilemnod.mangareader.app.util.CrashLogUtil
 import com.nilemnod.mangareader.core.common.security.SecurityPreferences
@@ -24,6 +23,7 @@ import com.nilemnod.mangareader.core.metro.IsDebugBuild
 import com.nilemnod.mangareader.core.network.JavaScriptEngine
 import com.nilemnod.mangareader.core.network.NetworkHelper
 import com.nilemnod.mangareader.core.network.NetworkPreferences
+import com.nilemnod.mangareader.core.reader.ReaderPreferences
 import com.nilemnod.mangareader.core.storage.CoverCache
 import com.nilemnod.mangareader.core.ui.preference.UiPreferences
 import com.nilemnod.mangareader.core.ui.preference.UiPreferencesProvider

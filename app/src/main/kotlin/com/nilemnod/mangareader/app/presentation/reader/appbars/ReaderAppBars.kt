@@ -35,8 +35,8 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.presentation.reader.components.ChapterNavigator
 import com.nilemnod.mangareader.app.presentation.reader.components.ChapterNavigatorType
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderOrientation
-import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode
+import com.nilemnod.mangareader.core.reader.ReaderOrientation
+import com.nilemnod.mangareader.core.reader.ReadingMode
 import com.nilemnod.mangareader.core.ui.components.material.padding
 private val readerBarsSlideAnimationSpec = tween<IntOffset>(200)
 private val readerBarsFadeAnimationSpec = tween<Float>(150)

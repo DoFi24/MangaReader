@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.ui.reader.setting
+package com.nilemnod.mangareader.core.reader
 
 import android.content.pm.ActivityInfo
 import androidx.compose.ui.graphics.vector.ImageVector

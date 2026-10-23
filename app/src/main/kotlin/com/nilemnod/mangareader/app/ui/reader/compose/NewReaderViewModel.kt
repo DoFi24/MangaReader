@@ -17,7 +17,6 @@ import com.nilemnod.mangareader.app.ui.reader.SaveImageNotifier
 import com.nilemnod.mangareader.app.ui.reader.loader.ChapterLoader
 import com.nilemnod.mangareader.app.ui.reader.loader.DownloadPageLoader
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderChapter
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
 import com.nilemnod.mangareader.app.util.chapter.filterDownloaded
 import com.nilemnod.mangareader.app.util.chapter.removeDuplicates
 import com.nilemnod.mangareader.app.util.storage.cacheImageDir
@@ -31,6 +30,7 @@ import com.nilemnod.mangareader.core.download.DownloadCache
 import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.core.download.DownloadProvider
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.core.reader.ReaderPreferences
 import com.nilemnod.mangareader.domain.chapter.interactor.GetChaptersByMangaId
 import com.nilemnod.mangareader.domain.chapter.interactor.UpdateChapter
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
@@ -79,7 +79,7 @@ import okio.buffer
 import okio.source
 import kotlin.time.Clock
 import kotlin.time.Instant
-import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode as AppReadingMode
+import com.nilemnod.mangareader.core.reader.ReadingMode as AppReadingMode
 import com.nilemnod.mangareader.feature.reader.model.ReaderPage as ComposeReaderPage
 import com.nilemnod.mangareader.feature.reader.settings.ReadingMode as ReaderMode
 

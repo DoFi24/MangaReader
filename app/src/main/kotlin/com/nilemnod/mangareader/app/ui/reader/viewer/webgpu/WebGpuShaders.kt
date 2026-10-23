@@ -5,39 +5,21 @@ import android.net.Uri
 import android.provider.OpenableColumns
 import ca.mpreg.webgpuviewer.renderer.ImageFilterWgsl
 import com.nilemnod.mangareader.core.common.preference.Preference
+import com.nilemnod.mangareader.core.reader.WebGpuShader
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.util.UUID
 
-/** A user's shader: [file] in [WebGpuShaders.dir], shown as [name]. */
-data class WebGpuShader(val file: String, val name: String)
-
 /** Picked shaders are copied in, so they outlive the picker's URI permission. */
 object WebGpuShaders {
     private const val MAX_BYTES = 1 shl 20
-
-    /** What [import] names files; anything else in a preference is not ours to read or delete. */
-    private val FILE = Regex("""[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.wgsl""")
 
     /** Held while files and the preferences naming them change together. */
     private val lock = Any()
 
     private fun dir(context: Context) = File(context.filesDir, "webgpu_shaders")
-
-    fun serialize(shaders: List<WebGpuShader>): String =
-        shaders.joinToString("\n") { "${it.file}\t${it.name}" }
-
-    fun deserialize(text: String): List<WebGpuShader> = text.lineSequence()
-        .mapNotNull { line ->
-            val tab = line.indexOf('\t')
-            if (tab <= 0) return@mapNotNull null
-            val file = line.substring(0, tab)
-            if (FILE.matches(file)) WebGpuShader(file, line.substring(tab + 1)) else null
-        }
-        .distinctBy { it.file }
-        .toList()
 
     /**
      * Copies [uri] in and appends it to [pref]. Throws [IllegalArgumentException], with the reason, if

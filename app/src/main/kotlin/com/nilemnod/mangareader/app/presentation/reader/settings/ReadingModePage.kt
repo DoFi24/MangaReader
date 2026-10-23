@@ -10,13 +10,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import com.nilemnod.mangareader.app.domain.manga.model.readerOrientation
 import com.nilemnod.mangareader.app.domain.manga.model.readingMode
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderOrientation
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderSettingsViewModel
-import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode
 import com.nilemnod.mangareader.app.ui.reader.viewer.webgpu.WebGpuViewer
 import com.nilemnod.mangareader.app.ui.reader.viewer.webgpu.WebGpuViewerSettings
 import com.nilemnod.mangareader.app.ui.reader.viewer.webtoon.WebtoonViewer
+import com.nilemnod.mangareader.core.reader.ReaderOrientation
+import com.nilemnod.mangareader.core.reader.ReaderPreferences
+import com.nilemnod.mangareader.core.reader.ReadingMode
 import com.nilemnod.mangareader.core.ui.components.CheckboxItem
 import com.nilemnod.mangareader.core.ui.components.HeadingItem
 import com.nilemnod.mangareader.core.ui.components.SettingsChipRow
