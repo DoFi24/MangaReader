@@ -7,6 +7,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.feature.settings.about.AboutScreen
 import com.nilemnod.mangareader.feature.settings.screen.SearchableSettings
+import com.nilemnod.mangareader.feature.settings.screen.SettingsAdvancedScreen
 import com.nilemnod.mangareader.feature.settings.screen.SettingsAppearanceScreen
 import com.nilemnod.mangareader.feature.settings.screen.SettingsBrowseScreen
 import com.nilemnod.mangareader.feature.settings.screen.SettingsDataScreen
@@ -15,6 +16,7 @@ import com.nilemnod.mangareader.feature.settings.screen.SettingsLibraryScreen
 import com.nilemnod.mangareader.feature.settings.screen.SettingsSecurityScreen
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
+import com.nilemnod.mangareader.icons.materialsymbols.rounded.Code
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.CollectionsBookmark
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Download
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Explore
@@ -82,6 +84,13 @@ object SettingsEntries {
             subtitleRes = MR.strings.pref_security_summary,
             icon = MaterialSymbols.Rounded.Security,
             screen = SettingsSecurityScreen,
+        ),
+        SettingsEntry(
+            order = ORDER_ADVANCED,
+            titleRes = MR.strings.pref_category_advanced,
+            subtitleRes = MR.strings.pref_advanced_summary,
+            icon = MaterialSymbols.Rounded.Code,
+            screen = SettingsAdvancedScreen,
         ),
         SettingsEntry(
             order = ORDER_ABOUT,

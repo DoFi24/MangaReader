@@ -32,7 +32,7 @@ class CrashLogUtil(
     private val networkPreferences: NetworkPreferences,
 ) : DebugInfoProvider {
 
-    suspend fun dumpLogs(exception: Throwable? = null) = withContext(Dispatchers.IO) {
+    override suspend fun dumpLogs(exception: Throwable?): Unit = withContext(Dispatchers.IO) {
         try {
             val file = context.createFileInCacheDir("mangareader_crash_logs.txt")
 

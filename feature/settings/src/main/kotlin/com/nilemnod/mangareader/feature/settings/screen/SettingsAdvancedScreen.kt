@@ -1,36 +1,23 @@
-package com.nilemnod.mangareader.app.presentation.more.settings.screen
+package com.nilemnod.mangareader.feature.settings.screen
 
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.os.PowerManager
 import android.provider.Settings
 import android.webkit.WebStorage
 import android.webkit.WebView
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.data.library.MetadataUpdateWorker
-import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.domain.base.BasePreferences
-import com.nilemnod.mangareader.app.presentation.more.settings.screen.advanced.ClearDatabaseScreen
-import com.nilemnod.mangareader.app.presentation.more.settings.screen.debug.DebugInfoScreen
-import com.nilemnod.mangareader.app.util.system.isReleaseBuildType
-import com.nilemnod.mangareader.app.util.system.isShizukuInstalled
-import com.nilemnod.mangareader.app.util.system.powerManager
-import com.nilemnod.mangareader.core.android.system.workManager
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.setDefaultSettings
 import com.nilemnod.mangareader.core.common.util.system.toast
@@ -52,7 +39,9 @@ import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.feature.settings.OnboardingScreen
 import com.nilemnod.mangareader.feature.settings.Preference
-import com.nilemnod.mangareader.feature.settings.screen.SearchableSettings
+import com.nilemnod.mangareader.feature.settings.screen.advanced.ClearDatabaseScreen
+import com.nilemnod.mangareader.feature.settings.screen.debug.DebugInfoScreen
+import com.nilemnod.mangareader.feature.settings.settingsGraph
 import com.nilemnod.mangareader.i18n.MR
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -73,11 +62,10 @@ object SettingsAdvancedScreen : SearchableSettings {
         val context = LocalContext.current
         val navigator = LocalNavigator.currentOrThrow
 
-        val graph = remember { context.appGraph }
-        val basePreferences = remember { graph.basePreferences }
+        val graph = remember { context.settingsGraph }
         val networkPreferences = remember { graph.networkPreferences }
         val libraryPreferences = remember { graph.libraryPreferences }
-        val crashLogUtil = remember { graph.crashLogUtil }
+        val debugInfoProvider = remember { graph.debugInfoProvider }
 
         return listOf(
             Preference.PreferenceItem.TextPreference(
@@ -85,7 +73,7 @@ object SettingsAdvancedScreen : SearchableSettings {
                 subtitle = stringResource(MR.strings.pref_dump_crash_logs_summary),
                 onClick = {
                     scope.launch {
-                        crashLogUtil.dumpLogs()
+                        debugInfoProvider.dumpLogs()
                     }
                 },
             ),
@@ -128,8 +116,7 @@ object SettingsAdvancedScreen : SearchableSettings {
             getDataGroup(),
             getNetworkGroup(networkPreferences = networkPreferences),
             getLibraryGroup(libraryPreferences = libraryPreferences),
-            getReaderGroup(basePreferences = basePreferences),
-            getExtensionsGroup(basePreferences = basePreferences),
+            *graph.advancedSettingsGroups.groups().toTypedArray(),
         )
     }
 
@@ -146,7 +133,7 @@ object SettingsAdvancedScreen : SearchableSettings {
                     subtitle = stringResource(MR.strings.pref_disable_battery_optimization_summary),
                     onClick = {
                         val packageName: String = context.packageName
-                        if (!context.powerManager.isIgnoringBatteryOptimizations(packageName)) {
+                        if (!context.getSystemService<PowerManager>()!!.isIgnoringBatteryOptimizations(packageName)) {
                             try {
                                 @SuppressLint("BatteryLife")
                                 val intent = Intent().apply {
@@ -184,7 +171,7 @@ object SettingsAdvancedScreen : SearchableSettings {
                     title = stringResource(MR.strings.pref_invalidate_download_cache),
                     subtitle = stringResource(MR.strings.pref_invalidate_download_cache_summary),
                     onClick = {
-                        context.appGraph.downloadCache.invalidateCache()
+                        context.settingsGraph.downloadCache.invalidateCache()
                         context.toast(MR.strings.download_cache_invalidated)
                     },
                 ),
@@ -202,7 +189,7 @@ object SettingsAdvancedScreen : SearchableSettings {
         networkPreferences: NetworkPreferences,
     ): Preference.PreferenceGroup {
         val context = LocalContext.current
-        val networkHelper = remember { context.appGraph.networkHelper }
+        val networkHelper = remember { context.settingsGraph.networkHelper }
         val scope = rememberCoroutineScope()
 
         val userAgentPref = networkPreferences.defaultUserAgent
@@ -302,14 +289,14 @@ object SettingsAdvancedScreen : SearchableSettings {
             preferenceItems = listOf(
                 Preference.PreferenceItem.TextPreference(
                     title = stringResource(MR.strings.pref_refresh_library_covers),
-                    onClick = { scope.launch { MetadataUpdateWorker.startNow(context.workManager) } },
+                    onClick = { scope.launch { context.settingsGraph.metadataUpdateLauncher.startNow() } },
                 ),
                 Preference.PreferenceItem.TextPreference(
                     title = stringResource(MR.strings.pref_reset_viewer_flags),
                     subtitle = stringResource(MR.strings.pref_reset_viewer_flags_summary),
                     onClick = {
                         scope.launch {
-                            val success = context.appGraph.resetViewerFlags.await()
+                            val success = context.settingsGraph.resetViewerFlags.await()
                             val message = if (success) {
                                 MR.strings.pref_reset_viewer_flags_success
                             } else {
@@ -333,90 +320,6 @@ object SettingsAdvancedScreen : SearchableSettings {
                     preference = libraryPreferences.enableChapterNameHash,
                     title = stringResource(MR.strings.pref_enable_chapter_name_hash),
                     subtitle = stringResource(MR.strings.pref_enable_chapter_name_hash_details),
-                ),
-            ),
-        )
-    }
-
-    @Composable
-    private fun getReaderGroup(
-        basePreferences: BasePreferences,
-    ): Preference.PreferenceGroup {
-        val context = LocalContext.current
-        return Preference.PreferenceGroup(
-            title = stringResource(MR.strings.pref_category_reader),
-            preferenceItems = listOf(
-                Preference.PreferenceItem.SwitchPreference(
-                    preference = basePreferences.highQualityRenderer,
-                    title = stringResource(MR.strings.pref_high_quality_renderer),
-                ),
-            ),
-        )
-    }
-
-    @Composable
-    private fun getExtensionsGroup(
-        basePreferences: BasePreferences,
-    ): Preference.PreferenceGroup {
-        val context = LocalContext.current
-        val uriHandler = LocalUriHandler.current
-        val extensionInstallerPref = basePreferences.extensionInstaller
-        var shizukuMissing by rememberSaveable { mutableStateOf(false) }
-        val trustExtension = remember { context.appGraph.trustExtension }
-
-        if (shizukuMissing) {
-            val dismiss = { shizukuMissing = false }
-            AlertDialog(
-                onDismissRequest = dismiss,
-                title = { Text(text = stringResource(MR.strings.ext_installer_shizuku)) },
-                text = { Text(text = stringResource(MR.strings.ext_installer_shizuku_unavailable_dialog)) },
-                dismissButton = {
-                    TextButton(onClick = dismiss) {
-                        Text(text = stringResource(MR.strings.action_cancel))
-                    }
-                },
-                confirmButton = {
-                    TextButton(
-                        onClick = {
-                            dismiss()
-                            uriHandler.openUri("https://shizuku.rikka.app/download")
-                        },
-                    ) {
-                        Text(text = stringResource(MR.strings.action_ok))
-                    }
-                },
-            )
-        }
-        return Preference.PreferenceGroup(
-            title = stringResource(MR.strings.label_extensions),
-            preferenceItems = listOf(
-                Preference.PreferenceItem.ListPreference(
-                    preference = extensionInstallerPref,
-                    entries = extensionInstallerPref.entries
-                        .filter {
-                            // TODO: allow private option in stable versions once URL handling is more fleshed out
-                            if (isReleaseBuildType) {
-                                it != BasePreferences.ExtensionInstaller.PRIVATE
-                            } else {
-                                true
-                            }
-                        }
-                        .associateWith { stringResource(it.titleRes) },
-                    title = stringResource(MR.strings.ext_installer_pref),
-                    onValueChanged = {
-                        if (it == BasePreferences.ExtensionInstaller.SHIZUKU &&
-                            !context.isShizukuInstalled
-                        ) {
-                            shizukuMissing = true
-                            false
-                        } else {
-                            true
-                        }
-                    },
-                ),
-                Preference.PreferenceItem.TextPreference(
-                    title = stringResource(MR.strings.ext_revoke_trust),
-                    onClick = { trustExtension.revokeAll() },
                 ),
             ),
         )

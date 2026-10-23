@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.more.settings.screen.advanced
+package com.nilemnod.mangareader.feature.settings.screen.advanced
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement

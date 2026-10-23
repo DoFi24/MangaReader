@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.more.settings.screen.debug
+package com.nilemnod.mangareader.feature.settings.screen.debug
 
 import android.os.Build
 import androidx.compose.material3.Icon
@@ -14,7 +14,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.profileinstaller.ProfileVerifier
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.core.common.FeatureFlags
 import com.nilemnod.mangareader.core.common.util.system.DeviceUtil
 import com.nilemnod.mangareader.core.common.util.system.WebViewUtil
@@ -25,7 +24,7 @@ import com.nilemnod.mangareader.core.ui.util.rememberIs24HourSystem
 import com.nilemnod.mangareader.feature.settings.Preference
 import com.nilemnod.mangareader.feature.settings.PreferenceScaffold
 import com.nilemnod.mangareader.feature.settings.about.AboutScreen
-import com.nilemnod.mangareader.feature.settings.screen.debug.BackupSchemaScreen
+import com.nilemnod.mangareader.feature.settings.settingsGraph
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Autorenew
@@ -63,7 +62,7 @@ class DebugInfoScreen : Screen() {
         val scope = rememberCoroutineScope()
         val is24HourSystem = rememberIs24HourSystem()
 
-        val installationIdPref = remember { context.appGraph.basePreferences.installationId }
+        val installationIdPref = remember { context.settingsGraph.appStatePreferences.installationId }
         val installationId by installationIdPref.collectAsState()
 
         return Preference.PreferenceGroup(
