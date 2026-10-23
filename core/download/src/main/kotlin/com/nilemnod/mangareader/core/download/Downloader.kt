@@ -1,10 +1,7 @@
-package com.nilemnod.mangareader.app.data.download
+package com.nilemnod.mangareader.core.download
 
 import android.content.Context
 import com.hippo.unifile.UniFile
-import com.nilemnod.mangareader.app.data.cache.ChapterCache
-import com.nilemnod.mangareader.app.domain.chapter.model.toSChapter
-import com.nilemnod.mangareader.app.domain.manga.model.getComicInfo
 import com.nilemnod.mangareader.core.android.storage.saveTo
 import com.nilemnod.mangareader.core.archive.ZipWriter
 import com.nilemnod.mangareader.core.common.i18n.stringResource
@@ -17,6 +14,7 @@ import com.nilemnod.mangareader.core.metadata.comicinfo.ComicInfo
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.domain.category.interactor.GetCategories
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
+import com.nilemnod.mangareader.domain.chapter.model.toSChapter
 import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
 import com.nilemnod.mangareader.domain.manga.model.Manga

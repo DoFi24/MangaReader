@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.ui.reader.model
+package com.nilemnod.mangareader.core.download
 
 import java.io.IOException
 import java.io.InputStream

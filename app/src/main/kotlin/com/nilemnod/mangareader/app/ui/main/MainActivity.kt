@@ -67,8 +67,6 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.NavigatorDisposeBehavior
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.data.cache.ChapterCache
-import com.nilemnod.mangareader.app.data.download.DownloadCache
 import com.nilemnod.mangareader.app.data.notification.NotificationReceiver
 import com.nilemnod.mangareader.app.di.AppGraph
 import com.nilemnod.mangareader.app.di.appGraph
@@ -93,6 +91,8 @@ import com.nilemnod.mangareader.app.util.view.setComposeContent
 import com.nilemnod.mangareader.core.common.Constants
 import com.nilemnod.mangareader.core.common.util.system.dpToPx
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.download.ChapterCache
+import com.nilemnod.mangareader.core.download.DownloadCache
 import com.nilemnod.mangareader.core.metro.metroGraph
 import com.nilemnod.mangareader.core.migration.Migrator
 import com.nilemnod.mangareader.core.ui.components.AdaptiveSheet

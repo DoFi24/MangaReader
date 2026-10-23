@@ -19,7 +19,6 @@ import androidx.work.WorkManager
 import androidx.work.WorkQuery
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
-import com.nilemnod.mangareader.app.data.download.DownloadManager
 import com.nilemnod.mangareader.app.data.notification.Notifications
 import com.nilemnod.mangareader.app.di.AppGraph
 import com.nilemnod.mangareader.app.di.appGraph
@@ -33,6 +32,7 @@ import com.nilemnod.mangareader.core.android.system.workManager
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.preference.getAndSet
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.core.metro.metroGraph
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.domain.chapter.interactor.FilterChaptersForDownload

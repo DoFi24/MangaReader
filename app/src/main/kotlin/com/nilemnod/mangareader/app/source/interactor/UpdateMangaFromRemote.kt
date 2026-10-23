@@ -1,13 +1,13 @@
 package com.nilemnod.mangareader.app.source.interactor
 
 import com.nilemnod.mangareader.app.data.cache.CoverCache
-import com.nilemnod.mangareader.app.data.download.DownloadManager
 import com.nilemnod.mangareader.app.domain.chapter.interactor.SyncChaptersWithSource
-import com.nilemnod.mangareader.app.domain.chapter.model.toSChapter
 import com.nilemnod.mangareader.app.domain.manga.model.hasCustomCover
 import com.nilemnod.mangareader.app.domain.manga.model.toSManga
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
+import com.nilemnod.mangareader.domain.chapter.model.toSChapter
 import com.nilemnod.mangareader.domain.chapter.repository.ChapterRepository
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.model.Manga

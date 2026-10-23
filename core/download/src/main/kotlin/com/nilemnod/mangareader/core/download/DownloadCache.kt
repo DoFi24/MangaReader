@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.data.download
+package com.nilemnod.mangareader.core.download
 
 import android.content.Context
 import android.util.AtomicFile

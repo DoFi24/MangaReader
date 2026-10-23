@@ -1,15 +1,15 @@
 package com.nilemnod.mangareader.app.ui.reader.loader
 
 import android.content.Context
-import com.nilemnod.mangareader.app.data.cache.ChapterCache
-import com.nilemnod.mangareader.app.data.download.DownloadManager
-import com.nilemnod.mangareader.app.data.download.DownloadProvider
-import com.nilemnod.mangareader.app.domain.chapter.model.toSChapter
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderChapter
 import com.nilemnod.mangareader.core.archive.archiveReader
 import com.nilemnod.mangareader.core.archive.epubReader
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.download.ChapterCache
+import com.nilemnod.mangareader.core.download.DownloadManager
+import com.nilemnod.mangareader.core.download.DownloadProvider
+import com.nilemnod.mangareader.domain.chapter.model.toSChapter
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.model.StubSource
 import com.nilemnod.mangareader.i18n.MR

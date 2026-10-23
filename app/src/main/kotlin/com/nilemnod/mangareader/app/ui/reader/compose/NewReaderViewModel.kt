@@ -7,10 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
-import com.nilemnod.mangareader.app.data.cache.ChapterCache
-import com.nilemnod.mangareader.app.data.download.DownloadCache
-import com.nilemnod.mangareader.app.data.download.DownloadManager
-import com.nilemnod.mangareader.app.data.download.DownloadProvider
 import com.nilemnod.mangareader.app.data.saver.Image
 import com.nilemnod.mangareader.app.data.saver.ImageSaver
 import com.nilemnod.mangareader.app.data.saver.Location
@@ -31,6 +27,10 @@ import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.storage.DiskUtil
 import com.nilemnod.mangareader.core.common.util.lang.byteSize
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.download.ChapterCache
+import com.nilemnod.mangareader.core.download.DownloadCache
+import com.nilemnod.mangareader.core.download.DownloadManager
+import com.nilemnod.mangareader.core.download.DownloadProvider
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.domain.chapter.interactor.GetChaptersByMangaId
 import com.nilemnod.mangareader.domain.chapter.interactor.UpdateChapter
@@ -77,11 +77,11 @@ import logcat.LogPriority
 import okio.BufferedSource
 import okio.buffer
 import okio.source
-import kotlin.time.Clock
-import kotlin.time.Instant
 import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode as AppReadingMode
 import com.nilemnod.mangareader.feature.reader.model.ReaderPage as ComposeReaderPage
 import com.nilemnod.mangareader.feature.reader.settings.ReadingMode as ReaderMode
+import kotlin.time.Clock
+import kotlin.time.Instant
 
 @AssistedInject
 class NewReaderViewModel(

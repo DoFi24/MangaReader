@@ -15,10 +15,10 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.nilemnod.mangareader.app.R
 import com.nilemnod.mangareader.app.core.preference.asState
-import com.nilemnod.mangareader.app.data.download.DownloadManager
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.presentation.more.MoreScreen
 import com.nilemnod.mangareader.app.ui.setting.SettingsScreen
+import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.Tab
 import com.nilemnod.mangareader.core.ui.util.rememberAnimatedVectorPainter

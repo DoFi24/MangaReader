@@ -4,10 +4,7 @@ import android.content.Context
 import com.nilemnod.mangareader.app.App
 import com.nilemnod.mangareader.app.data.backup.create.BackupCreateWorker
 import com.nilemnod.mangareader.app.data.backup.restore.BackupRestoreWorker
-import com.nilemnod.mangareader.app.data.cache.ChapterCache
 import com.nilemnod.mangareader.app.data.cache.CoverCache
-import com.nilemnod.mangareader.app.data.download.DownloadCache
-import com.nilemnod.mangareader.app.data.download.DownloadManager
 import com.nilemnod.mangareader.app.data.download.DownloadWorker
 import com.nilemnod.mangareader.app.data.library.LibraryUpdateWorker
 import com.nilemnod.mangareader.app.data.library.MetadataUpdateWorker
@@ -25,6 +22,9 @@ import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
 import com.nilemnod.mangareader.app.ui.webview.WebViewActivity
 import com.nilemnod.mangareader.app.util.CrashLogUtil
 import com.nilemnod.mangareader.core.common.security.SecurityPreferences
+import com.nilemnod.mangareader.core.download.ChapterCache
+import com.nilemnod.mangareader.core.download.DownloadCache
+import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.core.metro.IsDebugBuild
 import com.nilemnod.mangareader.core.ui.preference.UiPreferences
 import com.nilemnod.mangareader.core.ui.preference.UiPreferencesProvider

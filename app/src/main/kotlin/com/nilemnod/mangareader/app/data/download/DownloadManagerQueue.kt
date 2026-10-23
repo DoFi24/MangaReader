@@ -1,5 +1,6 @@
 package com.nilemnod.mangareader.app.data.download
 
+import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.feature.downloads.DownloadQueue
 import dev.zacsweers.metro.AppScope
