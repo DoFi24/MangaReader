@@ -18,6 +18,7 @@ import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.i18n.MR
 import logcat.LogPriority
+import com.nilemnod.mangareader.core.ui.R as UiR
 
 class ExtensionInstallService : Service() {
 
@@ -25,7 +26,7 @@ class ExtensionInstallService : Service() {
 
     override fun onCreate() {
         val notification = notificationBuilder(Notifications.CHANNEL_EXTENSIONS_UPDATE) {
-            setSmallIcon(R.drawable.ic_app)
+            setSmallIcon(UiR.drawable.ic_app)
             setAutoCancel(false)
             setOngoing(true)
             setShowWhen(false)

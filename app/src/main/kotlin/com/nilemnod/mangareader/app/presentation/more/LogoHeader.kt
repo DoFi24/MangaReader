@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.R
+import com.nilemnod.mangareader.core.ui.R as UiR
 
 @Composable
 fun LogoHeader(
@@ -24,7 +25,7 @@ fun LogoHeader(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Icon(
-            painter = painterResource(R.drawable.ic_app),
+            painter = painterResource(UiR.drawable.ic_app),
             contentDescription = null,
             tint = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier

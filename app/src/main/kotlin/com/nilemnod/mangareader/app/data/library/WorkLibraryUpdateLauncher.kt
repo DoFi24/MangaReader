@@ -17,4 +17,8 @@ class WorkLibraryUpdateLauncher(
     override suspend fun startNow(category: Category?): Boolean {
         return LibraryUpdateWorker.startNow(context.workManager, category)
     }
+
+    override fun schedule(interval: Int?) {
+        LibraryUpdateWorker.setupTask(context, interval)
+    }
 }

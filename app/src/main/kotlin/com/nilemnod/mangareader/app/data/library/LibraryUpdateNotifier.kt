@@ -38,6 +38,7 @@ import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metro.Inject
 import java.math.RoundingMode
 import java.text.NumberFormat
+import com.nilemnod.mangareader.core.ui.R as UiR
 import com.nilemnod.mangareader.icons.materialsymbols.R as MaterialSymbolsR
 
 @Inject
@@ -166,7 +167,7 @@ class LibraryUpdateNotifier(
         ) {
             setContentTitle(context.pluralStringResource(MR.plurals.notification_update_error, failed, failed))
             setContentText(context.stringResource(MR.strings.action_show_errors))
-            setSmallIcon(R.drawable.ic_app)
+            setSmallIcon(UiR.drawable.ic_app)
 
             setContentIntent(NotificationReceiver.openErrorLogPendingActivity(context, uri))
         }
@@ -206,7 +207,7 @@ class LibraryUpdateNotifier(
                 }
             }
 
-            setSmallIcon(R.drawable.ic_app)
+            setSmallIcon(UiR.drawable.ic_app)
             setLargeIcon(notificationBitmap)
 
             setGroup(Notifications.GROUP_NEW_CHAPTERS)
@@ -240,7 +241,7 @@ class LibraryUpdateNotifier(
             setContentText(description)
             setStyle(NotificationCompat.BigTextStyle().bigText(description))
 
-            setSmallIcon(R.drawable.ic_app)
+            setSmallIcon(UiR.drawable.ic_app)
 
             if (icon != null) {
                 setLargeIcon(icon)

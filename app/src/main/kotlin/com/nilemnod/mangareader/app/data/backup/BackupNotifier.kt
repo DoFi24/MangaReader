@@ -19,6 +19,7 @@ import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metro.Inject
 import java.io.File
 import kotlin.time.Duration.Companion.milliseconds
+import com.nilemnod.mangareader.core.ui.R as UiR
 import com.nilemnod.mangareader.icons.materialsymbols.R as MaterialSymbolsR
 
 @Inject
@@ -30,7 +31,7 @@ class BackupNotifier(
         Notifications.CHANNEL_BACKUP_RESTORE_PROGRESS,
     ) {
         setLargeIcon(BitmapFactory.decodeResource(context.resources, R.mipmap.ic_launcher))
-        setSmallIcon(R.drawable.ic_app)
+        setSmallIcon(UiR.drawable.ic_app)
         setAutoCancel(false)
         setOngoing(true)
         setOnlyAlertOnce(true)
@@ -40,7 +41,7 @@ class BackupNotifier(
         Notifications.CHANNEL_BACKUP_RESTORE_COMPLETE,
     ) {
         setLargeIcon(BitmapFactory.decodeResource(context.resources, R.mipmap.ic_launcher))
-        setSmallIcon(R.drawable.ic_app)
+        setSmallIcon(UiR.drawable.ic_app)
         setAutoCancel(false)
     }
 
