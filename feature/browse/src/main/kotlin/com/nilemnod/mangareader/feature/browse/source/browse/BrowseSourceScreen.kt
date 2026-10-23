@@ -32,6 +32,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.core.mangaui.ChangeCategoryDialog
 import com.nilemnod.mangareader.core.mangaui.DuplicateMangaDialog
+import com.nilemnod.mangareader.core.navigation.SearchableScreen
 import com.nilemnod.mangareader.core.navigation.SharedScreen
 import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
@@ -64,7 +65,7 @@ import kotlinx.coroutines.launch
 data class BrowseSourceScreen(
     val sourceId: Long,
     private val listingQuery: String?,
-) : Screen(), AssistContentScreen {
+) : Screen(), AssistContentScreen, SearchableScreen {
 
     private var assistUrl: String? = null
 
@@ -296,8 +297,8 @@ data class BrowseSourceScreen(
         }
     }
 
-    suspend fun search(query: String) = queryEvent.send(SearchType.Text(query))
-    suspend fun searchGenre(name: String) = queryEvent.send(SearchType.Genre(name))
+    override suspend fun search(query: String) = queryEvent.send(SearchType.Text(query))
+    override suspend fun searchGenre(name: String) = queryEvent.send(SearchType.Genre(name))
 
     companion object {
         private val queryEvent = Channel<SearchType>()

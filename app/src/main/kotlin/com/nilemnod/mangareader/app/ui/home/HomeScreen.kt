@@ -37,6 +37,7 @@ import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.more.MoreTab
 import com.nilemnod.mangareader.core.navigation.HomeTab
 import com.nilemnod.mangareader.core.navigation.HomeTabRouter
+import com.nilemnod.mangareader.core.navigation.SearchableScreen
 import com.nilemnod.mangareader.core.navigation.SharedScreen
 import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
@@ -58,7 +59,7 @@ import kotlinx.coroutines.launch
 import soup.compose.material.motion.animation.materialFadeThroughIn
 import soup.compose.material.motion.animation.materialFadeThroughOut
 
-object HomeScreen : Screen() {
+object HomeScreen : Screen(), SearchableScreen {
 
     private val librarySearchEvent = Channel<String>()
 
@@ -259,7 +260,7 @@ object HomeScreen : Screen() {
         }
     }
 
-    suspend fun search(query: String) {
+    override suspend fun search(query: String) {
         librarySearchEvent.send(query)
     }
 

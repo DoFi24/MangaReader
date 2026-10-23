@@ -27,10 +27,7 @@ import com.nilemnod.mangareader.app.presentation.manga.components.DeleteChapters
 import com.nilemnod.mangareader.app.presentation.manga.components.MangaCoverDialog
 import com.nilemnod.mangareader.app.presentation.manga.components.ScanlatorFilterDialog
 import com.nilemnod.mangareader.app.presentation.manga.components.SetIntervalDialog
-import com.nilemnod.mangareader.app.ui.home.HomeScreen
 import com.nilemnod.mangareader.app.ui.manga.notes.MangaNotesScreen
-import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
-import com.nilemnod.mangareader.app.ui.webview.WebViewScreen
 import com.nilemnod.mangareader.core.android.system.toShareIntent
 import com.nilemnod.mangareader.core.common.util.system.copyToClipboard
 import com.nilemnod.mangareader.core.common.util.system.logcat
@@ -39,7 +36,12 @@ import com.nilemnod.mangareader.core.mangaui.ChangeCategoryDialog
 import com.nilemnod.mangareader.core.mangaui.DuplicateMangaDialog
 import com.nilemnod.mangareader.core.navigation.Content
 import com.nilemnod.mangareader.core.navigation.MangaDestination
+import com.nilemnod.mangareader.core.navigation.SearchableScreen
 import com.nilemnod.mangareader.core.navigation.SharedDialog
+import com.nilemnod.mangareader.core.navigation.SharedIntent
+import com.nilemnod.mangareader.core.navigation.SharedScreen
+import com.nilemnod.mangareader.core.navigation.intent
+import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
 import com.nilemnod.mangareader.core.ui.util.AssistContentScreen
 import com.nilemnod.mangareader.core.ui.util.Screen
@@ -52,8 +54,6 @@ import com.nilemnod.mangareader.domain.source.api.isLocalOrStub
 import com.nilemnod.mangareader.feature.browse.migration.config.MigrationConfigScreen
 import com.nilemnod.mangareader.feature.browse.migration.dialog.MigrateMangaDialog
 import com.nilemnod.mangareader.feature.browse.presentation.components.RemoveMangaDialog
-import com.nilemnod.mangareader.feature.browse.source.browse.BrowseSourceScreen
-import com.nilemnod.mangareader.feature.browse.source.globalsearch.GlobalSearchScreen
 import com.nilemnod.mangareader.feature.categories.CategoryScreen
 import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
 import kotlinx.coroutines.Dispatchers
@@ -257,7 +257,7 @@ class MangaScreen(
     }
 
     private fun openChapter(context: Context, chapter: Chapter) {
-        context.startActivity(ReaderActivity.newIntent(context, chapter.mangaId, chapter.id))
+        context.startActivity(SharedIntent.Reader(chapter.mangaId, chapter.id).intent(context))
     }
 
     private fun getMangaUrl(manga_: Manga?, source_: ContentSource?): String? {
@@ -274,11 +274,11 @@ class MangaScreen(
     private fun openMangaInWebView(navigator: Navigator, manga_: Manga?, source_: ContentSource?) {
         getMangaUrl(manga_, source_)?.let { url ->
             navigator.push(
-                WebViewScreen(
+                SharedScreen.WebView(
                     url = url,
                     initialTitle = manga_?.title,
                     sourceId = source_?.id,
-                ),
+                ).screen(),
             )
         }
     }
@@ -301,7 +301,7 @@ class MangaScreen(
      */
     private suspend fun performSearch(navigator: Navigator, query: String, global: Boolean) {
         if (global) {
-            navigator.push(GlobalSearchScreen(query))
+            navigator.push(SharedScreen.GlobalSearch(query).screen())
             return
         }
 
@@ -309,15 +309,10 @@ class MangaScreen(
             return
         }
 
-        when (val previousController = navigator.items[navigator.size - 2]) {
-            is HomeScreen -> {
-                navigator.pop()
-                previousController.search(query)
-            }
-            is BrowseSourceScreen -> {
-                navigator.pop()
-                previousController.search(query)
-            }
+        val previousController = navigator.items[navigator.size - 2]
+        if (previousController is SearchableScreen) {
+            navigator.pop()
+            previousController.search(query)
         }
     }
 
@@ -332,7 +327,7 @@ class MangaScreen(
         }
 
         val previousController = navigator.items[navigator.size - 2]
-        if (previousController is BrowseSourceScreen && source.web != null) {
+        if (previousController is SearchableScreen && source.web != null) {
             navigator.pop()
             previousController.searchGenre(genreName)
         } else {
