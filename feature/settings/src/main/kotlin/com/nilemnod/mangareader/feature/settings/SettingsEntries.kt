@@ -9,6 +9,7 @@ import com.nilemnod.mangareader.feature.settings.about.AboutScreen
 import com.nilemnod.mangareader.feature.settings.screen.SearchableSettings
 import com.nilemnod.mangareader.feature.settings.screen.SettingsAppearanceScreen
 import com.nilemnod.mangareader.feature.settings.screen.SettingsBrowseScreen
+import com.nilemnod.mangareader.feature.settings.screen.SettingsDataScreen
 import com.nilemnod.mangareader.feature.settings.screen.SettingsDownloadScreen
 import com.nilemnod.mangareader.feature.settings.screen.SettingsLibraryScreen
 import com.nilemnod.mangareader.feature.settings.screen.SettingsSecurityScreen
@@ -20,6 +21,7 @@ import com.nilemnod.mangareader.icons.materialsymbols.rounded.Explore
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Info
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Palette
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Security
+import com.nilemnod.mangareader.icons.materialsymbols.rounded.Storage
 import dev.icerock.moko.resources.StringResource
 import java.util.concurrent.CopyOnWriteArrayList
 
@@ -65,6 +67,14 @@ object SettingsEntries {
             subtitleRes = MR.strings.pref_browse_summary,
             icon = MaterialSymbols.Rounded.Explore,
             screen = SettingsBrowseScreen,
+        ),
+        SettingsEntry(
+            order = ORDER_DATA,
+            titleRes = MR.strings.label_data_storage,
+            subtitleRes = MR.strings.pref_backup_summary,
+            icon = MaterialSymbols.Rounded.Storage,
+            screen = SettingsDataScreen,
+            destination = SettingsScreen.Destination.DataAndStorage.id,
         ),
         SettingsEntry(
             order = ORDER_SECURITY,

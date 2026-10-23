@@ -25,6 +25,7 @@ import com.nilemnod.mangareader.core.ui.util.rememberIs24HourSystem
 import com.nilemnod.mangareader.feature.settings.Preference
 import com.nilemnod.mangareader.feature.settings.PreferenceScaffold
 import com.nilemnod.mangareader.feature.settings.about.AboutScreen
+import com.nilemnod.mangareader.feature.settings.screen.debug.BackupSchemaScreen
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Autorenew

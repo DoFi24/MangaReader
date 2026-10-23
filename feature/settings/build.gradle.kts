@@ -18,6 +18,7 @@ kotlin {
 
 dependencies {
     implementation(projects.core.android)
+    implementation(projects.core.backup)
     implementation(projects.core.common)
     implementation(projects.core.download)
     implementation(projects.core.mangaUi)
@@ -33,6 +34,7 @@ dependencies {
     implementation(libs.androidx.compose.animationGraphics)
     implementation(libs.androidx.compose.uiUtil)
     implementation(libs.androidx.core)
+    implementation(libs.androidx.work)
     implementation(libs.bundles.androidx.lifecycle)
     implementation(libs.bundles.kotlinx.coroutines)
     implementation(libs.bundles.markdown)

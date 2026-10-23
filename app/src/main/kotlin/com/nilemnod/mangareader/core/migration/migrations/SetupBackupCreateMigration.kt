@@ -1,7 +1,7 @@
 package com.nilemnod.mangareader.core.migration.migrations
 
 import android.content.Context
-import com.nilemnod.mangareader.app.data.backup.create.BackupCreateWorker
+import com.nilemnod.mangareader.core.backup.create.BackupCreateWorker
 import com.nilemnod.mangareader.core.migration.Migration
 import com.nilemnod.mangareader.core.migration.MigrationContext
 import dev.zacsweers.metro.AppScope
