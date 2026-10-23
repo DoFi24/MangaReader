@@ -207,6 +207,7 @@ dependencies {
     implementation(projects.core.mangaUi)
     implementation(projects.feature.categories)
     implementation(projects.feature.downloads)
+    implementation(projects.feature.history)
     implementation(projects.feature.stats)
     implementation(projects.feature.widget)
 

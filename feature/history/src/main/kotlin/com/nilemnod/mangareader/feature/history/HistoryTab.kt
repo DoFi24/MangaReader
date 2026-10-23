@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.ui.history
+package com.nilemnod.mangareader.feature.history
 
 import android.content.Context
 import androidx.compose.animation.graphics.res.animatedVectorResource
@@ -8,6 +8,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -15,26 +16,20 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import com.nilemnod.mangareader.app.R
-import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.presentation.history.HistoryScreen
-import com.nilemnod.mangareader.app.presentation.history.components.HistoryDeleteAllDialog
-import com.nilemnod.mangareader.app.presentation.history.components.HistoryDeleteDialog
-import com.nilemnod.mangareader.app.ui.main.MainActivity
-import com.nilemnod.mangareader.app.ui.manga.MangaScreen
-import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.mangaui.ChangeCategoryDialog
 import com.nilemnod.mangareader.core.mangaui.DuplicateMangaDialog
+import com.nilemnod.mangareader.core.navigation.Content
+import com.nilemnod.mangareader.core.navigation.SharedDialog
 import com.nilemnod.mangareader.core.navigation.SharedIntent
 import com.nilemnod.mangareader.core.navigation.SharedScreen
 import com.nilemnod.mangareader.core.navigation.intent
 import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.util.SplashReady
 import com.nilemnod.mangareader.core.ui.util.Tab
+import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
-import com.nilemnod.mangareader.feature.categories.CategoryScreen
-import com.nilemnod.mangareader.feature.migration.dialog.MigrateMangaDialog
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 import kotlinx.coroutines.channels.Channel
@@ -69,9 +64,11 @@ data object HistoryTab : Tab {
         val context = LocalContext.current
         val viewModel = metroViewModel<HistoryViewModel>()
         val state by viewModel.state.collectAsStateWithLifecycle()
+        val timeFormat by remember { viewModel.uiPreferences.timeFormat }.collectAsState()
 
         HistoryScreen(
             state = state,
+            timeFormat = timeFormat,
             snackbarHostState = snackbarHostState,
             onSearchQueryChange = viewModel::updateSearchQuery,
             onClickCover = { navigator.push(SharedScreen.Manga(it).screen()) },
@@ -107,34 +104,34 @@ data object HistoryTab : Tab {
                     onConfirm = { viewModel.addFavorite(dialog.manga) },
                     onOpenManga = { navigator.push(SharedScreen.Manga(it.id).screen()) },
                     onMigrate = { viewModel.showMigrateDialog(dialog.manga, it) },
-                    sourceManager = LocalContext.current.appGraph.sourceManager,
+                    sourceManager = viewModel.sourceManager,
                 )
             }
             is HistoryViewModel.Dialog.ChangeCategory -> {
                 ChangeCategoryDialog(
                     initialSelection = dialog.initialSelection,
                     onDismissRequest = onDismissRequest,
-                    onEditCategories = { navigator.push(CategoryScreen()) },
+                    onEditCategories = { navigator.push(SharedScreen.Category.screen()) },
                     onConfirm = { include, _ ->
                         viewModel.moveMangaToCategoriesAndAddToLibrary(dialog.manga, include)
                     },
                 )
             }
             is HistoryViewModel.Dialog.Migrate -> {
-                MigrateMangaDialog(
+                SharedDialog.MigrateManga(
                     current = dialog.current,
                     target = dialog.target,
                     // Initiated from the context of [dialog.target] so we show [dialog.current].
                     onClickTitle = { navigator.push(SharedScreen.Manga(dialog.current.id).screen()) },
                     onDismissRequest = onDismissRequest,
-                )
+                ).Content()
             }
             null -> {}
         }
 
         LaunchedEffect(state.list) {
             if (state.list != null) {
-                (context as? MainActivity)?.ready = true
+                (context as? SplashReady)?.ready = true
             }
         }
 

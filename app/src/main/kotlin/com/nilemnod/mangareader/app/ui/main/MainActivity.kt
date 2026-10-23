@@ -105,6 +105,7 @@ import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.AssistContentScreen
 import com.nilemnod.mangareader.core.ui.util.DefaultNavigatorScreenTransition
+import com.nilemnod.mangareader.core.ui.util.SplashReady
 import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.core.ui.util.system.isNavigationBarNeedsScrim
 import com.nilemnod.mangareader.domain.database.repository.DatabaseRepository
@@ -136,7 +137,7 @@ import kotlin.time.Instant
 import kotlin.time.TimeSource
 import kotlin.time.times
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(), SplashReady {
 
     private val graph: AppGraph by lazy { metroGraph() }
 
@@ -157,7 +158,7 @@ class MainActivity : BaseActivity() {
     @Inject private lateinit var extensionManager: ExtensionManager
 
     // To be checked by splash screen. If true then splash screen will be removed.
-    var ready = false
+    override var ready = false
 
     private var navigator: Navigator? = null
 
