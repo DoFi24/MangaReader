@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.feature.manga.presentation.components
+package com.nilemnod.mangareader.core.mangaui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues

@@ -1,22 +1,10 @@
 package com.nilemnod.mangareader.app.util.storage
 
 import android.content.Context
-import android.net.Uri
-import androidx.core.content.FileProvider
-import com.nilemnod.mangareader.app.BuildConfig
 import java.io.File
 
 val Context.cacheImageDir: File
     get() = File(cacheDir, "shared_image")
-
-/**
- * Returns the uri of a file
- *
- * @param context context of application
- */
-fun File.getUriCompat(context: Context): Uri {
-    return FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", this)
-}
 
 /**
  * Copies this file to the given [target] file while marking the file as read-only.

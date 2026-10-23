@@ -71,8 +71,12 @@ import com.mikepenz.markdown.model.markdownAnnotator
 import com.mikepenz.markdown.model.markdownAnnotatorConfig
 import com.mikepenz.markdown.utils.getUnescapedTextInNode
 import com.nilemnod.mangareader.core.common.util.system.copyToClipboard
+import com.nilemnod.mangareader.core.mangaui.DISALLOWED_MARKDOWN_TYPES
 import com.nilemnod.mangareader.core.mangaui.DotSeparatorText
+import com.nilemnod.mangareader.core.mangaui.MARKDOWN_INLINE_IMAGE_TAG
 import com.nilemnod.mangareader.core.mangaui.MangaCover
+import com.nilemnod.mangareader.core.mangaui.MarkdownRender
+import com.nilemnod.mangareader.core.mangaui.getMarkdownLinkStyle
 import com.nilemnod.mangareader.core.ui.components.DropdownMenu
 import com.nilemnod.mangareader.core.ui.components.material.DISABLED_ALPHA
 import com.nilemnod.mangareader.core.ui.components.material.TextButton

@@ -1,6 +1,7 @@
 package com.nilemnod.mangareader.app.navigation
 
 import cafe.adriel.voyager.core.registry.ScreenRegistry
+import com.nilemnod.mangareader.app.presentation.more.settings.screen.about.OpenSourceLicensesScreen
 import com.nilemnod.mangareader.app.ui.browse.extension.ExtensionsBrowseTab
 import com.nilemnod.mangareader.app.ui.browse.extension.details.SourcePreferencesScreen
 import com.nilemnod.mangareader.app.ui.manga.MangaCoverDialogHost
@@ -40,6 +41,7 @@ object AppNavigation {
             register<SharedScreen.Category> { CategoryScreen() }
             register<SharedScreen.DownloadQueue> { DownloadQueueScreen }
             register<SharedScreen.Upcoming> { UpcomingScreen() }
+            register<SharedScreen.OpenSourceLicenses> { OpenSourceLicensesScreen() }
         }
         DialogRegistry.register<SharedDialog.MangaCover> { MangaCoverDialogHost(it.mangaId, it.onDismissRequest) }
         DialogRegistry.register<SharedDialog.MigrateManga> {

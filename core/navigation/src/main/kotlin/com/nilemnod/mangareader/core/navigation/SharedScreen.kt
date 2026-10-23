@@ -48,6 +48,8 @@ sealed interface SharedScreen : ScreenProvider {
     data object DownloadQueue : SharedScreen
 
     data object Upcoming : SharedScreen
+
+    data object OpenSourceLicenses : SharedScreen
 }
 
 fun SharedScreen.screen(): Screen = ScreenRegistry.get(this)

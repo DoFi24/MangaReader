@@ -40,7 +40,6 @@ import com.nilemnod.mangareader.app.navigation.AppNavigation
 import com.nilemnod.mangareader.app.ui.base.delegate.SecureActivityDelegate
 import com.nilemnod.mangareader.app.util.system.cancelNotification
 import com.nilemnod.mangareader.app.util.system.isDebugBuildType
-import com.nilemnod.mangareader.app.util.system.isReleaseBuildType
 import com.nilemnod.mangareader.app.util.system.notify
 import com.nilemnod.mangareader.compat.tachiyomi.TachiyomiCompat
 import com.nilemnod.mangareader.core.android.system.animatorDurationScale
@@ -113,7 +112,19 @@ class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factor
     override fun onCreate() {
         super<Application>.onCreate()
 
-        AppBuild.init(isReleaseBuildType)
+        AppBuild.init(
+            AppBuild.Info(
+                applicationId = BuildConfig.APPLICATION_ID,
+                versionName = BuildConfig.VERSION_NAME,
+                versionCode = BuildConfig.VERSION_CODE,
+                buildType = BuildConfig.BUILD_TYPE,
+                isDebug = BuildConfig.DEBUG,
+                commitSha = BuildConfig.COMMIT_SHA,
+                commitCount = BuildConfig.COMMIT_COUNT,
+                buildTime = BuildConfig.BUILD_TIME,
+                updateRepository = BuildConfig.UPDATE_REPOSITORY,
+            ),
+        )
 
         // Must run before the graph is built, since injecting dependencies initializes WebView and the
         // suffix can't be set once a provider exists in the process. Secondary processes die otherwise.

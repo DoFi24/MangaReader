@@ -14,6 +14,8 @@ import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.library.service.LibraryUpdateLauncher
 import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.domain.storage.service.StoragePreferences
+import com.nilemnod.mangareader.feature.settings.about.DebugInfoProvider
+import com.nilemnod.mangareader.feature.settings.update.AppUpdateChecker
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesTo
 
@@ -31,6 +33,8 @@ interface SettingsGraph {
     val resetCategoryFlags: ResetCategoryFlags
     val getExtensionStoreCountAsFlow: GetExtensionStoreCountAsFlow
     val libraryUpdateLauncher: LibraryUpdateLauncher
+    val debugInfoProvider: DebugInfoProvider
+    val appUpdateChecker: AppUpdateChecker
 }
 
 val Context.settingsGraph: SettingsGraph
