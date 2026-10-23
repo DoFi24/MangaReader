@@ -11,7 +11,6 @@ dependencies {
     implementation(projects.core.metro)
     implementation(projects.core.navigation)
     implementation(projects.domain)
-    implementation(projects.extensionApi)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.animation)

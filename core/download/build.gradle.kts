@@ -27,7 +27,6 @@ dependencies {
     implementation(projects.core.metadata)
     implementation(projects.core.metro)
     implementation(projects.domain)
-    implementation(projects.extensionApi)
     implementation(projects.i18n)
 
     implementation(libs.androidx.core)

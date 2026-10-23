@@ -7,7 +7,6 @@ dependencies {
     implementation(projects.core.common)
     implementation(projects.core.metro)
     implementation(projects.domain)
-    implementation(projects.extensionApi)
     implementation(projects.source.local)
 
     implementation(libs.bundles.androidx.lifecycle)

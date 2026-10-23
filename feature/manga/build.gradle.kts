@@ -25,7 +25,6 @@ dependencies {
     implementation(projects.core.navigation)
     implementation(projects.core.storage)
     implementation(projects.domain)
-    implementation(projects.extensionApi)
     implementation(projects.source.local)
 
     implementation(libs.androidx.activity.compose)

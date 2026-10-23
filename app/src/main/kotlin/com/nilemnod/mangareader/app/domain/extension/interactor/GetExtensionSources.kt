@@ -1,9 +1,9 @@
 package com.nilemnod.mangareader.app.domain.extension.interactor
 
 import com.nilemnod.mangareader.domain.extension.model.Extension
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import dev.zacsweers.metro.Inject
-import eu.kanade.tachiyomi.source.Source
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -18,7 +18,7 @@ class GetExtensionSources(
             isMultiSource && extension.sources.map { it.name }.distinct().size == 1
 
         return preferences.disabledSources.changes().map { disabledSources ->
-            fun Source.isEnabled() = id.toString() !in disabledSources
+            fun ContentSource.isEnabled() = id.toString() !in disabledSources
 
             extension.sources
                 .map { source ->
@@ -33,7 +33,7 @@ class GetExtensionSources(
 }
 
 data class ExtensionSourceItem(
-    val source: Source,
+    val source: ContentSource,
     val enabled: Boolean,
     val labelAsName: Boolean,
 )

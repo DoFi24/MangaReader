@@ -36,7 +36,6 @@ import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.FilterList
 import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
-import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.launch
 
 data class MigrateSourceSearchScreen(

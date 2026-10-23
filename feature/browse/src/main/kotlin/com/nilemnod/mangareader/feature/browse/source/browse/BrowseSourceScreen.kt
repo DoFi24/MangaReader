@@ -55,7 +55,6 @@ import com.nilemnod.mangareader.icons.materialsymbols.rounded.FilterList
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Verified
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Favorite
 import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
-import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collectLatest
