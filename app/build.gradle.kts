@@ -28,8 +28,8 @@ android {
     defaultConfig {
         applicationId = "com.nilemnod.mangareader"
 
-        versionCode = 4
-        versionName = "0.0.4"
+        versionCode = 5
+        versionName = "0.0.5"
 
         val updateRepository = providers.gradleProperty("update-repository").getOrElse("")
         buildConfigField("String", "UPDATE_REPOSITORY", "\"$updateRepository\"")
