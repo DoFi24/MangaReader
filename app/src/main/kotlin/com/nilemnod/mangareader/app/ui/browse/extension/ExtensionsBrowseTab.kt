@@ -5,6 +5,8 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nilemnod.mangareader.feature.browse.BrowseTabContribution
 import com.nilemnod.mangareader.feature.browse.BrowseTabSlot
+import com.nilemnod.mangareader.feature.extensions.ui.ExtensionsViewModel
+import com.nilemnod.mangareader.feature.extensions.ui.extensionsTab
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 
 object ExtensionsBrowseTab : BrowseTabContribution {

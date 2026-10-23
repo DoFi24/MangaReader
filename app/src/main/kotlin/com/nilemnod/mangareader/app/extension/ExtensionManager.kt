@@ -1,9 +1,9 @@
 package com.nilemnod.mangareader.app.extension
 
 import android.content.Context
+import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.domain.extension.interactor.TrustExtension
 import com.nilemnod.mangareader.app.extension.api.ExtensionUpdateNotifier
-import com.nilemnod.mangareader.app.extension.model.InstallStep
 import com.nilemnod.mangareader.app.extension.util.ExtensionInstallReceiver
 import com.nilemnod.mangareader.app.extension.util.ExtensionInstaller
 import com.nilemnod.mangareader.app.extension.util.ExtensionLoader
@@ -13,11 +13,14 @@ import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.domain.extension.interactor.UpdateExtensionStores
 import com.nilemnod.mangareader.domain.extension.model.Extension
 import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
+import com.nilemnod.mangareader.domain.extension.model.InstallStep
 import com.nilemnod.mangareader.domain.extension.repository.ExtensionStoreRepository
+import com.nilemnod.mangareader.domain.extension.service.ExtensionService
 import com.nilemnod.mangareader.domain.source.model.StubSource
 import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesBinding
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
 import kotlinx.coroutines.CompletableDeferred
@@ -52,16 +55,18 @@ import java.util.Locale
  */
 @Inject
 @SingleIn(AppScope::class)
+@ContributesBinding(AppScope::class)
 class ExtensionManager(
     @AppCoroutineScope private val scope: CoroutineScope,
     private val context: Context,
     private val preferences: SourcePreferences,
+    basePreferences: BasePreferences,
     private val trustExtension: TrustExtension,
     private val extensionStoreRepository: ExtensionStoreRepository,
     private val updateExtensionStores: UpdateExtensionStores,
     private val installer: ExtensionInstaller,
     private val extensionUpdateNotifier: ExtensionUpdateNotifier,
-) {
+) : ExtensionService {
 
     private val initialized = CompletableDeferred<Unit>()
 
@@ -72,14 +77,14 @@ class ExtensionManager(
     private var stores = emptyList<ExtensionStore>()
 
     private val loadedExtensionMapFlow = MutableStateFlow(emptyMap<String, Extension.Loaded>())
-    val loadedExtensionsFlow = loadedExtensionMapFlow.mapExtensionsWhenInitialized()
+    override val loadedExtensionsFlow = loadedExtensionMapFlow.mapExtensionsWhenInitialized()
 
     // Every store's listing, since more than one store can list the same extension
     private val availableExtensionListFlow = MutableStateFlow(emptyList<Extension.Available>())
 
     // Stores sharing a signing key serve the same apks, so only the newest of their listings is shown. Stores
     // with different keys offer different apks, each installable, so each keeps its own.
-    val availableExtensionsFlow = availableExtensionListFlow
+    override val availableExtensionsFlow: StateFlow<List<Extension.Available>> = availableExtensionListFlow
         .map { extensions ->
             extensions
                 .groupBy { it.pkgName to it.store.signingKey }
@@ -91,7 +96,7 @@ class ExtensionManager(
         .stateIn(scope, SharingStarted.Lazily, emptyList())
 
     private val notLoadedExtensionMapFlow = MutableStateFlow(emptyMap<String, Extension.NotLoaded>())
-    val notLoadedExtensionsFlow = notLoadedExtensionMapFlow.mapExtensionsWhenInitialized()
+    override val notLoadedExtensionsFlow = notLoadedExtensionMapFlow.mapExtensionsWhenInitialized()
 
     init {
         scope.launch(Dispatchers.IO) {
@@ -114,6 +119,9 @@ class ExtensionManager(
             extensionStoreRepository.getAllAsFlow().collect(::assignStores)
         }
     }
+
+    override val installerRequiresSystemPermission: Flow<Boolean> = basePreferences.extensionInstaller.changes()
+        .map { it.requiresSystemPermission }
 
     private var subLanguagesEnabledOnFirstRun = preferences.enabledLanguages.isSet()
 
@@ -184,7 +192,7 @@ class ExtensionManager(
     /**
      * Finds the available extensions in the stores and updates [availableExtensionListFlow].
      */
-    suspend fun findAvailableExtensions() {
+    override suspend fun findAvailableExtensions() {
         val extensions: List<Extension.Available> = try {
             fetchExtensions()
         } catch (e: Exception) {
@@ -269,7 +277,7 @@ class ExtensionManager(
      *
      * @param extension The extension to be installed.
      */
-    fun installExtension(extension: Extension.Available): Flow<InstallStep> {
+    override fun installExtension(extension: Extension.Available): Flow<InstallStep> {
         return installer.downloadAndInstall(extension)
     }
 
@@ -280,13 +288,13 @@ class ExtensionManager(
      *
      * @param extension The extension to be updated.
      */
-    fun updateExtension(extension: Extension.Installed): Flow<InstallStep> {
+    override fun updateExtension(extension: Extension.Installed): Flow<InstallStep> {
         val update = extension.findUpdate(availableExtensionListFlow.value) ?: return emptyFlow()
         val isUpdateForPrivatelyInstalled = !extension.isShared
         return installer.downloadAndInstall(update, isUpdateForPrivatelyInstalled)
     }
 
-    fun cancelInstallUpdateExtension(extension: Extension) {
+    override fun cancelInstallUpdateExtension(extension: Extension) {
         installer.cancelInstall(extension.pkgName)
     }
 
@@ -308,7 +316,7 @@ class ExtensionManager(
      *
      * @param extension The extension to uninstall.
      */
-    fun uninstallExtension(extension: Extension.Installed) {
+    override fun uninstallExtension(extension: Extension.Installed) {
         installer.uninstallApk(extension.pkgName)
     }
 
@@ -318,7 +326,7 @@ class ExtensionManager(
      *
      * @param extension the extension to trust
      */
-    fun trust(extension: Extension.NotLoaded) {
+    override fun trust(extension: Extension.NotLoaded) {
         val reason = extension.reason as? Extension.NotLoaded.Reason.Untrusted ?: return
         notLoadedExtensionMapFlow.value[extension.pkgName] ?: return
 

@@ -18,6 +18,7 @@ import com.hippo.unifile.UniFile
 import com.nilemnod.mangareader.app.R
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.ui.base.delegate.ThemingDelegate
+import com.nilemnod.mangareader.core.android.system.isPackageInstalled
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.util.lang.truncateCenter
 import com.nilemnod.mangareader.core.common.util.system.DeviceUtil
@@ -32,39 +33,6 @@ import java.io.File
 
 val Context.powerManager: PowerManager
     get() = getSystemService()!!
-
-fun Context.openInBrowser(url: String, forceDefaultBrowser: Boolean = false) {
-    this.openInBrowser(url.toUri(), forceDefaultBrowser)
-}
-
-fun Context.openInBrowser(uri: Uri, forceDefaultBrowser: Boolean = false) {
-    try {
-        val intent = Intent(Intent.ACTION_VIEW, uri).apply {
-            // Force default browser so that verified extensions don't re-open Tachiyomi
-            if (forceDefaultBrowser) {
-                defaultBrowserPackageName()?.let { setPackage(it) }
-            }
-        }
-        startActivity(intent)
-    } catch (e: Exception) {
-        toast(e.message)
-    }
-}
-
-private fun Context.defaultBrowserPackageName(): String? {
-    val browserIntent = Intent(Intent.ACTION_VIEW, "http://".toUri())
-    val resolveInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        packageManager.resolveActivity(
-            browserIntent,
-            PackageManager.ResolveInfoFlags.of(PackageManager.MATCH_DEFAULT_ONLY.toLong()),
-        )
-    } else {
-        packageManager.resolveActivity(browserIntent, PackageManager.MATCH_DEFAULT_ONLY)
-    }
-    return resolveInfo
-        ?.activityInfo?.packageName
-        ?.takeUnless { it in DeviceUtil.invalidDefaultBrowsers }
-}
 
 fun Context.createFileInCacheDir(name: String): File {
     val file = File(externalCacheDir, name)
@@ -130,18 +98,6 @@ fun Context.createReaderThemeContext(): Context {
  */
 fun Context.getUriSize(uri: Uri): Long? {
     return UniFile.fromUri(this, uri)?.length()?.takeIf { it >= 0 }
-}
-
-/**
- * Returns true if [packageName] is installed.
- */
-fun Context.isPackageInstalled(packageName: String): Boolean {
-    return try {
-        packageManager.getApplicationInfo(packageName, 0)
-        true
-    } catch (e: PackageManager.NameNotFoundException) {
-        false
-    }
 }
 
 val Context.hasMiuiPackageInstaller get() = isPackageInstalled("com.miui.packageinstaller")

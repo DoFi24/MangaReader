@@ -32,6 +32,7 @@ import androidx.lifecycle.viewModelScope
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.core.common.util.system.toast
+import com.nilemnod.mangareader.core.mangaui.SourceIcon
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.AppBarActions
@@ -48,7 +49,6 @@ import com.nilemnod.mangareader.domain.manga.repository.MangaRepository
 import com.nilemnod.mangareader.domain.source.interactor.GetSourcesWithNonLibraryManga
 import com.nilemnod.mangareader.domain.source.model.Source
 import com.nilemnod.mangareader.domain.source.model.SourceWithCount
-import com.nilemnod.mangareader.feature.browse.presentation.components.SourceIcon
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.FlipToBack

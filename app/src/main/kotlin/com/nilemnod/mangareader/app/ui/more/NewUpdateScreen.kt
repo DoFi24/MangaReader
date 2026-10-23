@@ -7,7 +7,7 @@ import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.presentation.more.NewUpdateScreen
-import com.nilemnod.mangareader.app.util.system.openInBrowser
+import com.nilemnod.mangareader.core.android.system.openInBrowser
 import com.nilemnod.mangareader.core.ui.util.Screen
 import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
 

@@ -215,6 +215,7 @@ dependencies {
     implementation(projects.feature.browse)
     implementation(projects.feature.categories)
     implementation(projects.feature.downloads)
+    implementation(projects.feature.extensions)
     implementation(projects.feature.history)
     implementation(projects.feature.library)
     implementation(projects.feature.manga)
