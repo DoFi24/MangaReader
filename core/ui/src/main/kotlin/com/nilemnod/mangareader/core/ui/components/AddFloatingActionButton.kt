@@ -9,8 +9,8 @@ import androidx.compose.ui.Modifier
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.shouldExpandFAB
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Add
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Add
 @Composable
 fun AddFloatingActionButton(
     lazyListState: LazyListState,
@@ -19,7 +19,7 @@ fun AddFloatingActionButton(
 ) {
     SmallExtendedFloatingActionButton(
         text = { Text(text = stringResource(MR.strings.action_add)) },
-        icon = { Icon(imageVector = MaterialSymbols.Rounded.Add, contentDescription = null) },
+        icon = { Icon(imageVector = CustomMaterialSymbols.Edge.Add, contentDescription = null) },
         onClick = onCreate,
         expanded = lazyListState.shouldExpandFAB(),
         modifier = modifier,

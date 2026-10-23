@@ -19,11 +19,12 @@ import com.nilemnod.mangareader.core.ui.components.AdaptiveSheet
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Share
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.ContentCopy
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Photo
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Save
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Share
 @Composable
 fun ReaderPageActionsDialog(
     onDismissRequest: () -> Unit,
@@ -56,7 +57,7 @@ fun ReaderPageActionsDialog(
             ActionButton(
                 modifier = Modifier.weight(1f),
                 title = stringResource(MR.strings.action_share),
-                icon = MaterialSymbols.Rounded.Share,
+                icon = CustomMaterialSymbols.Edge.Share,
                 onClick = {
                     onShare(false)
                     onDismissRequest()

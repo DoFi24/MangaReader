@@ -23,7 +23,7 @@ import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.preference.UiPreferences
 import com.nilemnod.mangareader.core.ui.preference.model.TimeFormat
 import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
-import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
+import com.nilemnod.mangareader.core.ui.screens.ListSkeleton
 import com.nilemnod.mangareader.core.ui.theme.MangaReaderPreviewTheme
 import com.nilemnod.mangareader.core.ui.util.rememberIs24HourSystem
 import com.nilemnod.mangareader.domain.history.model.HistoryWithRelations
@@ -69,17 +69,20 @@ fun HistoryScreen(
     ) { contentPadding ->
         state.list.let {
             if (it == null) {
-                LoadingScreen(Modifier.padding(contentPadding))
+                ListSkeleton(Modifier.padding(contentPadding))
             } else if (it.isEmpty()) {
-                val msg = if (!state.searchQuery.isNullOrEmpty()) {
-                    MR.strings.no_results_found
+                if (!state.searchQuery.isNullOrEmpty()) {
+                    EmptyScreen(
+                        stringRes = MR.strings.no_results_found,
+                        modifier = Modifier.padding(contentPadding),
+                    )
                 } else {
-                    MR.strings.information_no_recent_manga
+                    EmptyScreen(
+                        stringRes = MR.strings.empty_history_text,
+                        title = stringResource(MR.strings.empty_history_title),
+                        modifier = Modifier.padding(contentPadding),
+                    )
                 }
-                EmptyScreen(
-                    stringRes = msg,
-                    modifier = Modifier.padding(contentPadding),
-                )
             } else {
                 HistoryScreenContent(
                     history = it,

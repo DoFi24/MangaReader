@@ -17,10 +17,11 @@ import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.domain.library.model.LibraryDisplayMode
 import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.ViewGrid
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.ViewList
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.automirroredroundedfilled.ViewList
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.ViewCompact
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.ViewModule
 import com.nilemnod.mangareader.source.local.LocalSource
 import com.nilemnod.mangareader.source.local.isLocal
 
@@ -58,8 +59,8 @@ fun BrowseSourceToolbar(
                         AppBar.Action(
                             title = stringResource(MR.strings.action_display_mode),
                             icon = when (displayMode) {
-                                LibraryDisplayMode.List -> MaterialSymbols.AutoMirroredRoundedFilled.ViewList
-                                LibraryDisplayMode.ComfortableGrid -> MaterialSymbols.RoundedFilled.ViewModule
+                                LibraryDisplayMode.List -> CustomMaterialSymbols.EdgeFilled.ViewList
+                                LibraryDisplayMode.ComfortableGrid -> CustomMaterialSymbols.EdgeFilled.ViewGrid
                                 LibraryDisplayMode.CompactGrid,
                                 LibraryDisplayMode.CoverOnlyGrid,
                                 -> MaterialSymbols.RoundedFilled.ViewCompact

@@ -18,9 +18,10 @@ import com.nilemnod.mangareader.core.ui.util.rememberCoverErrorPainter
 import com.nilemnod.mangareader.domain.extension.model.Extension
 import com.nilemnod.mangareader.domain.source.model.Source
 import com.nilemnod.mangareader.domain.source.model.isLocal
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Warning
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Dangerous
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Warning
 
 private val defaultModifier = Modifier
     .height(40.dp)
@@ -34,7 +35,7 @@ fun SourceIcon(
     when {
         source.isStub -> {
             Image(
-                imageVector = MaterialSymbols.RoundedFilled.Warning,
+                imageVector = CustomMaterialSymbols.EdgeFilled.Warning,
                 contentDescription = null,
                 colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.error),
                 modifier = modifier.then(defaultModifier),

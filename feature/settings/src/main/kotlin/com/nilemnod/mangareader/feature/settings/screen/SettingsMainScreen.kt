@@ -34,17 +34,8 @@ import com.nilemnod.mangareader.core.ui.util.LocalBackPress
 import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.feature.settings.SettingsEntries
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.ChromeReaderMode
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Code
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.CollectionsBookmark
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Download
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Explore
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Info
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Palette
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Search
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Security
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Storage
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Search
 import dev.icerock.moko.resources.StringResource
 import cafe.adriel.voyager.core.screen.Screen as VoyagerScreen
 
@@ -90,7 +81,7 @@ object SettingsMainScreen : Screen() {
                             listOf(
                                 AppBar.Action(
                                     title = stringResource(MR.strings.action_search),
-                                    icon = MaterialSymbols.Rounded.Search,
+                                    icon = CustomMaterialSymbols.Edge.Search,
                                     onClick = { navigator.navigate(SettingsSearchScreen(), twoPane) },
                                 ),
                             ),

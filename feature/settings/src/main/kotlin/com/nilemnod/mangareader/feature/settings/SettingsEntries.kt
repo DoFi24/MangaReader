@@ -16,16 +16,17 @@ import com.nilemnod.mangareader.feature.settings.screen.SettingsLibraryScreen
 import com.nilemnod.mangareader.feature.settings.screen.SettingsReaderScreen
 import com.nilemnod.mangareader.feature.settings.screen.SettingsSecurityScreen
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.About
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Appearance
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Browse
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Download
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Library
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.ReaderLtr
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Security
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Storage
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.ChromeReaderMode
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Code
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.CollectionsBookmark
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Download
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Explore
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Info
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Palette
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Security
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Storage
 import dev.icerock.moko.resources.StringResource
 import java.util.concurrent.CopyOnWriteArrayList
 
@@ -48,42 +49,42 @@ object SettingsEntries {
             order = ORDER_APPEARANCE,
             titleRes = MR.strings.pref_category_appearance,
             subtitleRes = MR.strings.pref_appearance_summary,
-            icon = MaterialSymbols.Rounded.Palette,
+            icon = CustomMaterialSymbols.Edge.Appearance,
             screen = SettingsAppearanceScreen,
         ),
         SettingsEntry(
             order = ORDER_LIBRARY,
             titleRes = MR.strings.pref_category_library,
             subtitleRes = MR.strings.pref_library_summary,
-            icon = MaterialSymbols.Rounded.CollectionsBookmark,
+            icon = CustomMaterialSymbols.Edge.Library,
             screen = SettingsLibraryScreen,
         ),
         SettingsEntry(
             order = ORDER_READER,
             titleRes = MR.strings.pref_category_reader,
             subtitleRes = MR.strings.pref_reader_summary,
-            icon = MaterialSymbols.AutoMirroredRounded.ChromeReaderMode,
+            icon = CustomMaterialSymbols.Edge.ReaderLtr,
             screen = SettingsReaderScreen,
         ),
         SettingsEntry(
             order = ORDER_DOWNLOADS,
             titleRes = MR.strings.pref_category_downloads,
             subtitleRes = MR.strings.pref_downloads_summary,
-            icon = MaterialSymbols.Rounded.Download,
+            icon = CustomMaterialSymbols.Edge.Download,
             screen = SettingsDownloadScreen,
         ),
         SettingsEntry(
             order = ORDER_BROWSE,
             titleRes = MR.strings.browse,
             subtitleRes = MR.strings.pref_browse_summary,
-            icon = MaterialSymbols.Rounded.Explore,
+            icon = CustomMaterialSymbols.Edge.Browse,
             screen = SettingsBrowseScreen,
         ),
         SettingsEntry(
             order = ORDER_DATA,
             titleRes = MR.strings.label_data_storage,
             subtitleRes = MR.strings.pref_backup_summary,
-            icon = MaterialSymbols.Rounded.Storage,
+            icon = CustomMaterialSymbols.Edge.Storage,
             screen = SettingsDataScreen,
             destination = SettingsScreen.Destination.DataAndStorage.id,
         ),
@@ -91,7 +92,7 @@ object SettingsEntries {
             order = ORDER_SECURITY,
             titleRes = MR.strings.pref_category_security,
             subtitleRes = MR.strings.pref_security_summary,
-            icon = MaterialSymbols.Rounded.Security,
+            icon = CustomMaterialSymbols.Edge.Security,
             screen = SettingsSecurityScreen,
         ),
         SettingsEntry(
@@ -108,7 +109,7 @@ object SettingsEntries {
                 val context = LocalContext.current
                 "${stringResource(MR.strings.app_name)} ${AboutScreen.getVersionName(context, withBuildDate = false)}"
             },
-            icon = MaterialSymbols.Rounded.Info,
+            icon = CustomMaterialSymbols.Edge.About,
             screen = AboutScreen,
             destination = SettingsScreen.Destination.About.id,
         ),

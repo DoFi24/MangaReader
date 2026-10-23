@@ -53,11 +53,12 @@ import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.feature.browse.migration.list.MigrationListScreen
 import com.nilemnod.mangareader.feature.browse.migration.search.MigrateSearchScreen
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.DragHandle
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.SelectAll
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.ArrowForward
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Deselect
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.DragHandle
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.SelectAll
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metro.Inject
@@ -125,7 +126,7 @@ class MigrationConfigScreen(private val mangaIds: Collection<Long>) : Screen() {
                             listOf(
                                 AppBar.Action(
                                     title = stringResource(MR.strings.migrationConfigScreen_selectAllLabel),
-                                    icon = MaterialSymbols.Rounded.SelectAll,
+                                    icon = CustomMaterialSymbols.Edge.SelectAll,
                                     onClick = { viewModel.toggleSelection(Model.SelectionConfig.All) },
                                 ),
                                 AppBar.Action(
@@ -279,7 +280,7 @@ class MigrationConfigScreen(private val mangaIds: Collection<Long>) : Screen() {
             trailingContent = if (dragEnabled) {
                 {
                     Icon(
-                        imageVector = MaterialSymbols.Rounded.DragHandle,
+                        imageVector = CustomMaterialSymbols.Edge.DragHandle,
                         contentDescription = null,
                         modifier = with(scope) {
                             Modifier.draggableHandle()

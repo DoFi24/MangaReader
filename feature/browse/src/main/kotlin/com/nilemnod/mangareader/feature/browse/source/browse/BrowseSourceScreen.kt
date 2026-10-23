@@ -50,10 +50,11 @@ import com.nilemnod.mangareader.feature.browse.presentation.MissingSourceScreen
 import com.nilemnod.mangareader.feature.browse.presentation.components.BrowseSourceToolbar
 import com.nilemnod.mangareader.feature.browse.source.browse.BrowseSourceViewModel.Listing
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Filter
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Favorite
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.FilterList
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Verified
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Favorite
 import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
@@ -152,7 +153,7 @@ data class BrowseSourceScreen(
                             },
                             leadingIcon = {
                                 Icon(
-                                    imageVector = MaterialSymbols.RoundedFilled.Favorite,
+                                    imageVector = CustomMaterialSymbols.EdgeFilled.Favorite,
                                     contentDescription = null,
                                     modifier = Modifier
                                         .size(FilterChipDefaults.IconSize),
@@ -188,7 +189,7 @@ data class BrowseSourceScreen(
                                 onClick = viewModel::openFilterSheet,
                                 leadingIcon = {
                                     Icon(
-                                        imageVector = MaterialSymbols.Rounded.FilterList,
+                                        imageVector = CustomMaterialSymbols.Edge.Filter,
                                         contentDescription = null,
                                         modifier = Modifier
                                             .size(FilterChipDefaults.IconSize),

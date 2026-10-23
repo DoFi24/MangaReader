@@ -51,9 +51,9 @@ import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.domain.source.api.Page
 import com.nilemnod.mangareader.feature.downloads.DownloadQueueSection
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.DragHandle
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.MoreVert
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.DragHandle
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.MenuDots
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
@@ -375,7 +375,7 @@ private fun ReorderableCollectionItemScope.DownloadQueueItem(
 @Composable
 private fun ReorderableCollectionItemScope.DragHandle(onDragStarted: () -> Unit, onDragStopped: () -> Unit) {
     Icon(
-        imageVector = MaterialSymbols.Rounded.DragHandle,
+        imageVector = CustomMaterialSymbols.Edge.DragHandle,
         contentDescription = null,
         modifier = Modifier
             .draggableHandle(
@@ -400,7 +400,7 @@ private fun DownloadQueueItemMenu(
     Box {
         IconButton(onClick = { expanded = true }) {
             Icon(
-                imageVector = MaterialSymbols.Rounded.MoreVert,
+                imageVector = CustomMaterialSymbols.Edge.MenuDots,
                 contentDescription = stringResource(MR.strings.action_menu),
             )
         }

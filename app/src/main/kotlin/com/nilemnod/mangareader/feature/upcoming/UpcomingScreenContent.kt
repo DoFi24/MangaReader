@@ -32,8 +32,8 @@ import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.feature.upcoming.components.UpcomingItem
 import com.nilemnod.mangareader.feature.upcoming.components.calendar.Calendar
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.FilterList
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Filter
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.YearMonth
@@ -106,7 +106,7 @@ private fun UpcomingToolbar(
                 listOf(
                     AppBar.Action(
                         title = stringResource(MR.strings.action_filter),
-                        icon = MaterialSymbols.Rounded.FilterList,
+                        icon = CustomMaterialSymbols.Edge.Filter,
                         iconTint = if (hasFilters) MaterialTheme.colorScheme.active else LocalContentColor.current,
                         onClick = onClickFilter,
                     ),

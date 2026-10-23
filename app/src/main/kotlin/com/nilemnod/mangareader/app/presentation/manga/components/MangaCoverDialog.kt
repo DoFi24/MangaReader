@@ -59,11 +59,12 @@ import com.nilemnod.mangareader.core.ui.util.clickableNoIndication
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.feature.reader.legacy.viewer.ReaderPageImageView
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Close
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Share
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Close
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Edit
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Save
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Share
 import com.nilemnod.mangareader.source.local.isLocal
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -101,7 +102,7 @@ fun MangaCoverDialog(
                     ActionsPill {
                         IconButton(onClick = onDismissRequest) {
                             Icon(
-                                imageVector = MaterialSymbols.Rounded.Close,
+                                imageVector = CustomMaterialSymbols.Edge.Close,
                                 contentDescription = stringResource(MR.strings.action_close),
                             )
                         }
@@ -112,7 +113,7 @@ fun MangaCoverDialog(
                             actions = listOf(
                                 AppBar.Action(
                                     title = stringResource(MR.strings.action_share),
-                                    icon = MaterialSymbols.Rounded.Share,
+                                    icon = CustomMaterialSymbols.Edge.Share,
                                     onClick = onShareClick,
                                 ),
                                 AppBar.Action(

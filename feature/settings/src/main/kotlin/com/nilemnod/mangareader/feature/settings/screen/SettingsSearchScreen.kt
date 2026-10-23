@@ -55,8 +55,8 @@ import com.nilemnod.mangareader.core.ui.util.runOnEnterKeyPressed
 import com.nilemnod.mangareader.feature.settings.Preference
 import com.nilemnod.mangareader.feature.settings.SettingsEntries
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Close
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Close
 import kotlinx.coroutines.flow.collectLatest
 import cafe.adriel.voyager.core.screen.Screen as VoyagerScreen
 
@@ -131,7 +131,7 @@ class SettingsSearchScreen : Screen() {
                             if (textFieldState.text.isNotEmpty()) {
                                 IconButton(onClick = { textFieldState.clearText() }) {
                                     Icon(
-                                        imageVector = MaterialSymbols.Rounded.Close,
+                                        imageVector = CustomMaterialSymbols.Edge.Close,
                                         contentDescription = null,
                                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                                     )

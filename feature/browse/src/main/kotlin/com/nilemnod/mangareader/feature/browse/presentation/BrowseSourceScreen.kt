@@ -27,9 +27,9 @@ import com.nilemnod.mangareader.feature.browse.presentation.components.BrowseSou
 import com.nilemnod.mangareader.feature.browse.presentation.components.BrowseSourceCompactGrid
 import com.nilemnod.mangareader.feature.browse.presentation.components.BrowseSourceList
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Public
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Refresh
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Refresh
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Web
 import com.nilemnod.mangareader.source.local.LocalSource
 import com.nilemnod.mangareader.source.local.isLocal
 import kotlinx.coroutines.flow.StateFlow
@@ -87,12 +87,12 @@ fun BrowseSourceContent(
                 listOf(
                     EmptyScreenAction(
                         stringRes = MR.strings.action_retry,
-                        icon = MaterialSymbols.Rounded.Refresh,
+                        icon = CustomMaterialSymbols.Edge.Refresh,
                         onClick = mangaList::refresh,
                     ),
                     EmptyScreenAction(
                         stringRes = MR.strings.action_open_in_web_view,
-                        icon = MaterialSymbols.Rounded.Public,
+                        icon = CustomMaterialSymbols.Edge.Web,
                         onClick = onWebViewClick,
                     ),
                 )

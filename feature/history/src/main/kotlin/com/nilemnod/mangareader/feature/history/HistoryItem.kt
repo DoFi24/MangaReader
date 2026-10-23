@@ -1,11 +1,12 @@
 package com.nilemnod.mangareader.feature.history
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -15,7 +16,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -28,13 +28,13 @@ import com.nilemnod.mangareader.core.ui.theme.MangaReaderPreviewTheme
 import com.nilemnod.mangareader.core.ui.util.formatChapterNumber
 import com.nilemnod.mangareader.domain.history.model.HistoryWithRelations
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Delete
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Favorite
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Delete
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Favorite
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
-private val HistoryItemHeight = 96.dp
+private val HistoryItemHeight = 72.dp
 
 @Composable
 fun HistoryItem(
@@ -50,11 +50,11 @@ fun HistoryItem(
         modifier = modifier
             .clickable(onClick = onClickResume)
             .height(HistoryItemHeight)
-            .padding(horizontal = MaterialTheme.padding.medium, vertical = MaterialTheme.padding.small),
+            .padding(start = MaterialTheme.padding.medium, end = 4.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         MangaCover.Book(
-            modifier = Modifier.fillMaxHeight(),
+            modifier = Modifier.size(width = 42.dp, height = 56.dp),
             data = history.coverData,
             onClick = onClickCover,
         )
@@ -62,14 +62,13 @@ fun HistoryItem(
             modifier = Modifier
                 .weight(1f)
                 .padding(start = MaterialTheme.padding.medium, end = MaterialTheme.padding.small),
+            verticalArrangement = Arrangement.spacedBy(2.dp),
         ) {
-            val textStyle = MaterialTheme.typography.bodyMedium
             Text(
                 text = history.title,
-                fontWeight = FontWeight.SemiBold,
-                maxLines = 2,
+                maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                style = textStyle,
+                style = MaterialTheme.typography.bodyLarge,
             )
             val readAt = remember(timeFormatter, history.readAt) {
                 history.readAt?.toTimestampString(timeFormatter) ?: ""
@@ -84,26 +83,28 @@ fun HistoryItem(
                 } else {
                     readAt
                 },
-                modifier = Modifier.padding(top = 4.dp),
-                style = textStyle,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }
 
         if (!history.coverData.isMangaFavorite) {
             IconButton(onClick = onClickFavorite) {
                 Icon(
-                    imageVector = MaterialSymbols.Rounded.Favorite,
+                    imageVector = CustomMaterialSymbols.Edge.Favorite,
                     contentDescription = stringResource(MR.strings.add_to_library),
-                    tint = MaterialTheme.colorScheme.onSurface,
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
         }
 
         IconButton(onClick = onClickDelete) {
             Icon(
-                imageVector = MaterialSymbols.Rounded.Delete,
+                imageVector = CustomMaterialSymbols.Edge.Delete,
                 contentDescription = stringResource(MR.strings.action_delete),
-                tint = MaterialTheme.colorScheme.onSurface,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }
     }

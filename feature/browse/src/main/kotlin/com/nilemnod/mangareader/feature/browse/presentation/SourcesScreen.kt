@@ -34,9 +34,9 @@ import com.nilemnod.mangareader.feature.browse.presentation.components.BaseSourc
 import com.nilemnod.mangareader.feature.browse.source.SourcesViewModel
 import com.nilemnod.mangareader.feature.browse.source.browse.BrowseSourceViewModel.Listing
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Keep
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Keep
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Pin
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Pin
 
 @Composable
 fun SourcesScreen(
@@ -143,7 +143,7 @@ private fun SourcePinButton(
     isPinned: Boolean,
     onClick: () -> Unit,
 ) {
-    val icon = if (isPinned) MaterialSymbols.RoundedFilled.Keep else MaterialSymbols.Rounded.Keep
+    val icon = if (isPinned) CustomMaterialSymbols.EdgeFilled.Pin else CustomMaterialSymbols.Edge.Pin
     val tint = if (isPinned) {
         MaterialTheme.colorScheme.primary
     } else {

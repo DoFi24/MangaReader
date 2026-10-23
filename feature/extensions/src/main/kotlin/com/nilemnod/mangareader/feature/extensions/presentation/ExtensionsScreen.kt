@@ -64,13 +64,14 @@ import com.nilemnod.mangareader.feature.extensions.stores.ExtensionStoresScreen
 import com.nilemnod.mangareader.feature.extensions.ui.ExtensionUiModel
 import com.nilemnod.mangareader.feature.extensions.ui.ExtensionsViewModel
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.About
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Close
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Download
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Refresh
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Settings
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Web
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Close
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Download
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Info
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Public
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Refresh
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Settings
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.VerifiedUser
 import dev.icerock.moko.resources.StringResource
 
@@ -111,7 +112,7 @@ fun ExtensionScreen(
                     actions = listOf(
                         EmptyScreenAction(
                             stringRes = MR.strings.extensionStores,
-                            icon = MaterialSymbols.Rounded.Settings,
+                            icon = CustomMaterialSymbols.Edge.Settings,
                             onClick = { navigator.push(ExtensionStoresScreen()) },
                         ),
                     ),
@@ -468,7 +469,7 @@ private fun ExtensionItemActions(
         if (!installStep.isCompleted()) {
             IconButton(onClick = { onClickItemCancel(extension) }) {
                 Icon(
-                    imageVector = MaterialSymbols.Rounded.Close,
+                    imageVector = CustomMaterialSymbols.Edge.Close,
                     contentDescription = stringResource(MR.strings.action_cancel),
                 )
             }
@@ -477,14 +478,14 @@ private fun ExtensionItemActions(
 
         val secondaryAction = when (extension) {
             is Extension.Available -> {
-                (MaterialSymbols.Rounded.Public to MR.strings.action_open_in_web_view)
+                (CustomMaterialSymbols.Edge.Web to MR.strings.action_open_in_web_view)
                     .takeIf { extension.sources.isNotEmpty() }
             }
-            is Extension.Loaded -> MaterialSymbols.Rounded.Settings to MR.strings.action_settings
+            is Extension.Loaded -> CustomMaterialSymbols.Edge.Settings to MR.strings.action_settings
             is Extension.NotLoaded -> if (extension.reason is Extension.NotLoaded.Reason.Untrusted) {
                 MaterialSymbols.Rounded.VerifiedUser to MR.strings.ext_trust
             } else {
-                MaterialSymbols.Rounded.Info to MR.strings.ext_not_loaded_details
+                CustomMaterialSymbols.Edge.About to MR.strings.ext_not_loaded_details
             }
         }
         secondaryAction?.let { (icon, label) ->
@@ -494,10 +495,10 @@ private fun ExtensionItemActions(
         }
 
         val action = when {
-            installStep == InstallStep.Error -> MaterialSymbols.Rounded.Refresh to MR.strings.action_retry
-            extension is Extension.Available -> MaterialSymbols.Rounded.Download to MR.strings.ext_install
+            installStep == InstallStep.Error -> CustomMaterialSymbols.Edge.Refresh to MR.strings.action_retry
+            extension is Extension.Available -> CustomMaterialSymbols.Edge.Download to MR.strings.ext_install
             extension is Extension.Installed && extension.hasUpdate -> {
-                MaterialSymbols.Rounded.Download to MR.strings.ext_update
+                CustomMaterialSymbols.Edge.Download to MR.strings.ext_update
             }
             else -> null
         }

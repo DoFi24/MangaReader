@@ -20,8 +20,9 @@ import com.nilemnod.mangareader.feature.stats.components.StatsItem
 import com.nilemnod.mangareader.feature.stats.components.StatsOverviewItem
 import com.nilemnod.mangareader.feature.stats.data.StatsData
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Library
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.CollectionsBookmark
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.LocalLibrary
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Schedule
 import kotlin.time.DurationUnit
@@ -66,7 +67,7 @@ private fun LazyItemScope.OverviewSection(
             StatsOverviewItem(
                 title = data.libraryMangaCount.toString(),
                 subtitle = stringResource(MR.strings.in_library),
-                icon = MaterialSymbols.Rounded.CollectionsBookmark,
+                icon = CustomMaterialSymbols.Edge.Library,
             )
             StatsOverviewItem(
                 title = readDurationString,

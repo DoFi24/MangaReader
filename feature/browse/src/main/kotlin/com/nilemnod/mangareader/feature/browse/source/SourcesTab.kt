@@ -15,8 +15,9 @@ import com.nilemnod.mangareader.feature.browse.presentation.SourcesScreen
 import com.nilemnod.mangareader.feature.browse.source.browse.BrowseSourceScreen
 import com.nilemnod.mangareader.feature.browse.source.globalsearch.GlobalSearchScreen
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Filter
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.FilterList
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.TravelExplore
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -38,7 +39,7 @@ fun Screen.sourcesTab(): TabContent {
             ),
             AppBar.Action(
                 title = stringResource(MR.strings.action_filter),
-                icon = MaterialSymbols.Rounded.FilterList,
+                icon = CustomMaterialSymbols.Edge.Filter,
                 onClick = { navigator.push(SourcesFilterScreen()) },
             ),
         ),

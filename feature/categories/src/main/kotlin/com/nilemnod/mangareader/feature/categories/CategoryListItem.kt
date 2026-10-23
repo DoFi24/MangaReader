@@ -16,9 +16,10 @@ import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Delete
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.DragHandle
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Delete
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.DragHandle
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Edit
 import sh.calvin.reorderable.ReorderableCollectionItemScope
 
@@ -42,7 +43,7 @@ fun ReorderableCollectionItemScope.CategoryListItem(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
-                imageVector = MaterialSymbols.Rounded.DragHandle,
+                imageVector = CustomMaterialSymbols.Edge.DragHandle,
                 contentDescription = null,
                 modifier = Modifier
                     .padding(MaterialTheme.padding.medium)
@@ -60,7 +61,7 @@ fun ReorderableCollectionItemScope.CategoryListItem(
             }
             IconButton(onClick = onDelete) {
                 Icon(
-                    imageVector = MaterialSymbols.Rounded.Delete,
+                    imageVector = CustomMaterialSymbols.Edge.Delete,
                     contentDescription = stringResource(MR.strings.action_delete),
                 )
             }

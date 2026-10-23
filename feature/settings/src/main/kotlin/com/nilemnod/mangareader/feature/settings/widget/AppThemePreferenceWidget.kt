@@ -51,8 +51,8 @@ import com.nilemnod.mangareader.core.ui.preference.model.AppTheme
 import com.nilemnod.mangareader.core.ui.theme.MangaReaderTheme
 import com.nilemnod.mangareader.core.ui.util.secondaryItemAlpha
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.CheckCircle
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Downloaded
 @Composable
 internal fun AppThemePreferenceWidget(
     value: AppTheme,
@@ -172,7 +172,7 @@ fun AppThemePreviewItem(
             ) {
                 if (selected) {
                     Icon(
-                        imageVector = MaterialSymbols.RoundedFilled.CheckCircle,
+                        imageVector = CustomMaterialSymbols.EdgeFilled.Downloaded,
                         contentDescription = stringResource(MR.strings.selected),
                         tint = MaterialTheme.colorScheme.primary,
                     )
