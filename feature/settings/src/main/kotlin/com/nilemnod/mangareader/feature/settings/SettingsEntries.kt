@@ -2,8 +2,10 @@ package com.nilemnod.mangareader.feature.settings
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.core.screen.Screen
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.feature.settings.about.AboutScreen
 import com.nilemnod.mangareader.feature.settings.screen.SearchableSettings
 import com.nilemnod.mangareader.feature.settings.screen.SettingsAppearanceScreen
 import com.nilemnod.mangareader.feature.settings.screen.SettingsBrowseScreen
@@ -15,6 +17,7 @@ import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.CollectionsBookmark
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Download
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Explore
+import com.nilemnod.mangareader.icons.materialsymbols.rounded.Info
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Palette
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Security
 import dev.icerock.moko.resources.StringResource
@@ -69,6 +72,17 @@ object SettingsEntries {
             subtitleRes = MR.strings.pref_security_summary,
             icon = MaterialSymbols.Rounded.Security,
             screen = SettingsSecurityScreen,
+        ),
+        SettingsEntry(
+            order = ORDER_ABOUT,
+            titleRes = MR.strings.pref_category_about,
+            formatSubtitle = {
+                val context = LocalContext.current
+                "${stringResource(MR.strings.app_name)} ${AboutScreen.getVersionName(context, withBuildDate = false)}"
+            },
+            icon = MaterialSymbols.Rounded.Info,
+            screen = AboutScreen,
+            destination = SettingsScreen.Destination.About.id,
         ),
     )
 

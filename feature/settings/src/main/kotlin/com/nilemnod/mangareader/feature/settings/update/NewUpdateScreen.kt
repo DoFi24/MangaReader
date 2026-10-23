@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.ui.more
+package com.nilemnod.mangareader.feature.settings.update
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -6,7 +6,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.presentation.more.NewUpdateScreen
 import com.nilemnod.mangareader.core.android.system.openInBrowser
 import com.nilemnod.mangareader.core.ui.util.Screen
 import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
@@ -29,7 +28,7 @@ class NewUpdateScreen(
 
         val state by viewModel.state.collectAsState()
 
-        NewUpdateScreen(
+        NewUpdateContent(
             versionName = versionName,
             stage = state.stage,
             downloadProgress = { state.downloadProgress },

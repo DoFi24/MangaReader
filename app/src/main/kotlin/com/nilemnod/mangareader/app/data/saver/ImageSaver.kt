@@ -12,7 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.contentValuesOf
 import androidx.core.net.toUri
 import com.nilemnod.mangareader.app.util.storage.cacheImageDir
-import com.nilemnod.mangareader.app.util.storage.getUriCompat
+import com.nilemnod.mangareader.core.android.storage.getUriCompat
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.storage.DiskUtil
 import com.nilemnod.mangareader.core.common.util.system.ImageUtil

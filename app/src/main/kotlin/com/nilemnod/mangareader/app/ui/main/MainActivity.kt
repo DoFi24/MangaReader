@@ -77,10 +77,9 @@ import com.nilemnod.mangareader.app.presentation.more.settings.screen.data.Resto
 import com.nilemnod.mangareader.app.ui.base.activity.BaseActivity
 import com.nilemnod.mangareader.app.ui.deeplink.DeepLinkScreen
 import com.nilemnod.mangareader.app.ui.home.HomeScreen
-import com.nilemnod.mangareader.app.ui.more.NewUpdateScreen
 import com.nilemnod.mangareader.app.util.system.isBenchmarkBuildType
-import com.nilemnod.mangareader.app.util.system.updaterEnabled
 import com.nilemnod.mangareader.app.util.view.setComposeContent
+import com.nilemnod.mangareader.core.common.AppBuild
 import com.nilemnod.mangareader.core.common.Constants
 import com.nilemnod.mangareader.core.common.util.system.dpToPx
 import com.nilemnod.mangareader.core.common.util.system.logcat
@@ -112,6 +111,8 @@ import com.nilemnod.mangareader.feature.extensions.stores.ExtensionStoresScreen
 import com.nilemnod.mangareader.feature.manga.MangaScreen
 import com.nilemnod.mangareader.feature.settings.OnboardingScreen
 import com.nilemnod.mangareader.feature.settings.SettingsScreen
+import com.nilemnod.mangareader.feature.settings.settingsGraph
+import com.nilemnod.mangareader.feature.settings.update.NewUpdateScreen
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.OpenInNew
@@ -370,7 +371,7 @@ class MainActivity : BaseActivity(), SplashReady {
 
         // App updates
         LaunchedEffect(Unit) {
-            if (!updaterEnabled) return@LaunchedEffect
+            if (!AppBuild.updaterEnabled) return@LaunchedEffect
             var lastCheck: Long? = null
             // The app can stay open for days now, so a cold start alone rarely checks.
             // Elapsed realtime keeps counting while the device sleeps, unlike the monotonic clock.
@@ -381,7 +382,7 @@ class MainActivity : BaseActivity(), SplashReady {
                     }
                     lastCheck = SystemClock.elapsedRealtime()
                     try {
-                        val result = context.appGraph.updateChecker.checkForUpdate()
+                        val result = context.settingsGraph.appUpdateChecker.checkForUpdate()
                         if (
                             result is GetApplicationRelease.Result.NewUpdate &&
                             result.release.version != preferences.skippedAppUpdate.get() &&

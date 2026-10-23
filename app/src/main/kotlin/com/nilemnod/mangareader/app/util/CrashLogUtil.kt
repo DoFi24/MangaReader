@@ -5,13 +5,16 @@ import android.os.Build
 import com.nilemnod.mangareader.app.BuildConfig
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.extension.ExtensionManager
-import com.nilemnod.mangareader.app.util.storage.getUriCompat
 import com.nilemnod.mangareader.app.util.system.createFileInCacheDir
+import com.nilemnod.mangareader.core.android.storage.getUriCompat
 import com.nilemnod.mangareader.core.android.system.toShareIntent
 import com.nilemnod.mangareader.core.common.util.system.WebViewUtil
 import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.core.network.NetworkPreferences
 import com.nilemnod.mangareader.domain.extension.model.Extension
+import com.nilemnod.mangareader.feature.settings.about.DebugInfoProvider
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesBinding
 import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -21,12 +24,13 @@ import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
 
 @Inject
+@ContributesBinding(AppScope::class)
 class CrashLogUtil(
     private val context: Context,
     private val extensionManager: ExtensionManager,
     private val preferences: BasePreferences,
     private val networkPreferences: NetworkPreferences,
-) {
+) : DebugInfoProvider {
 
     suspend fun dumpLogs(exception: Throwable? = null) = withContext(Dispatchers.IO) {
         try {
@@ -46,7 +50,7 @@ class CrashLogUtil(
         }
     }
 
-    fun getDebugInfo(): String {
+    override fun getDebugInfo(): String {
         val now = Clock.System.now()
         val tz = TimeZone.currentSystemDefault()
         return """

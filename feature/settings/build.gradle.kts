@@ -35,6 +35,7 @@ dependencies {
     implementation(libs.androidx.core)
     implementation(libs.bundles.androidx.lifecycle)
     implementation(libs.bundles.kotlinx.coroutines)
+    implementation(libs.bundles.markdown)
     implementation(libs.bundles.voyager)
     implementation(libs.composeMaterialMotion)
     implementation(libs.kotlinx.datetime)

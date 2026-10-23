@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.more
+package com.nilemnod.mangareader.feature.settings.update
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,12 +18,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.nilemnod.mangareader.app.ui.more.NewUpdateScreenModel
+import com.nilemnod.mangareader.core.mangaui.MarkdownRender
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.screens.InfoScreen
 import com.nilemnod.mangareader.core.ui.theme.MangaReaderPreviewTheme
-import com.nilemnod.mangareader.feature.manga.presentation.components.MarkdownRender
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.OpenInNew
@@ -32,7 +31,7 @@ import com.nilemnod.mangareader.icons.materialsymbols.rounded.Verified
 import org.intellij.markdown.flavours.gfm.GFMFlavourDescriptor
 
 @Composable
-fun NewUpdateScreen(
+fun NewUpdateContent(
     versionName: String,
     changelogInfo: String,
     stage: NewUpdateScreenModel.Stage,
@@ -117,9 +116,9 @@ fun NewUpdateScreen(
 
 @PreviewLightDark
 @Composable
-private fun NewUpdateScreenPreview() {
+private fun NewUpdateContentPreview() {
     MangaReaderPreviewTheme {
-        NewUpdateScreen(
+        NewUpdateContent(
             versionName = "v0.99.9",
             changelogInfo = """
                 ## Yay

@@ -8,7 +8,6 @@ import com.nilemnod.mangareader.app.data.download.DownloadWorker
 import com.nilemnod.mangareader.app.data.library.LibraryUpdateWorker
 import com.nilemnod.mangareader.app.data.library.MetadataUpdateWorker
 import com.nilemnod.mangareader.app.data.notification.NotificationReceiver
-import com.nilemnod.mangareader.app.data.updater.AppUpdateChecker
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.domain.extension.interactor.TrustExtension
 import com.nilemnod.mangareader.app.extension.ExtensionManager
@@ -88,8 +87,6 @@ interface AppGraph : ViewModelGraph, UiPreferencesProvider {
     val crashLogUtil: CrashLogUtil
 
     val downloadManager: DownloadManager
-
-    val updateChecker: AppUpdateChecker
 
     val trustExtension: TrustExtension
     val extensionStoreRepository: ExtensionStoreRepository

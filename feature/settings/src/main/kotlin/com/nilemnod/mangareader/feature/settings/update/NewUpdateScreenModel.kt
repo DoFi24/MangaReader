@@ -1,13 +1,11 @@
-package com.nilemnod.mangareader.app.ui.more
+package com.nilemnod.mangareader.feature.settings.update
 
 import android.content.Context
 import android.content.Intent
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nilemnod.mangareader.app.domain.base.BasePreferences
-import com.nilemnod.mangareader.app.extension.util.ExtensionInstaller
-import com.nilemnod.mangareader.app.util.storage.getUriCompat
+import com.nilemnod.mangareader.core.android.storage.getUriCompat
 import com.nilemnod.mangareader.core.android.storage.saveTo
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.network.GET
@@ -15,6 +13,7 @@ import com.nilemnod.mangareader.core.network.NetworkHelper
 import com.nilemnod.mangareader.core.network.ProgressListener
 import com.nilemnod.mangareader.core.network.awaitSuccess
 import com.nilemnod.mangareader.core.network.newCachelessCallWithProgress
+import com.nilemnod.mangareader.domain.base.service.AppStatePreferences
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Assisted
 import dev.zacsweers.metro.AssistedFactory
@@ -39,7 +38,7 @@ class NewUpdateScreenModel(
     @Assisted private val downloadLink: String,
     private val context: Context,
     private val network: NetworkHelper,
-    private val preferences: BasePreferences,
+    private val appStatePreferences: AppStatePreferences,
 ) : ViewModel() {
 
     val state: StateFlow<NewUpdateScreenModel.State>
@@ -100,12 +99,12 @@ class NewUpdateScreenModel(
 
     fun skipUpdate(versionName: String) {
         downloadJob?.cancel()
-        preferences.skippedAppUpdate.set(versionName)
+        appStatePreferences.skippedAppUpdate.set(versionName)
     }
 
     fun installUpdate() {
         val intent = Intent(Intent.ACTION_VIEW).apply {
-            setDataAndType(apkFile.getUriCompat(context), ExtensionInstaller.APK_MIME)
+            setDataAndType(apkFile.getUriCompat(context), APK_MIME)
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION
         }
         context.startActivity(intent)
@@ -125,3 +124,5 @@ class NewUpdateScreenModel(
         Failed,
     }
 }
+
+private const val APK_MIME = "application/vnd.android.package-archive"

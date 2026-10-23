@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.more.settings.screen.about
+package com.nilemnod.mangareader.feature.settings.about
 
 import android.content.Context
 import android.text.format.DateFormat
@@ -18,28 +18,27 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.BuildConfig
-import com.nilemnod.mangareader.app.data.updater.RELEASE_URL
-import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.ui.more.NewUpdateScreen
-import com.nilemnod.mangareader.app.util.system.isFossBuildType
-import com.nilemnod.mangareader.app.util.system.isNightlyBuildType
-import com.nilemnod.mangareader.app.util.system.updaterEnabled
 import com.nilemnod.mangareader.core.android.lang.toDateTimestampString
+import com.nilemnod.mangareader.core.common.AppBuild
 import com.nilemnod.mangareader.core.common.util.system.copyToClipboard
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.toast
+import com.nilemnod.mangareader.core.navigation.SharedScreen
+import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.ScrollbarLazyColumn
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.core.ui.components.preference.TextPreferenceWidget
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.preference.UiPreferences
+import com.nilemnod.mangareader.core.ui.preference.appUiPreferences
 import com.nilemnod.mangareader.core.ui.util.LocalBackPress
 import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.core.ui.util.rememberIs24HourSystem
 import com.nilemnod.mangareader.domain.release.interactor.GetApplicationRelease
 import com.nilemnod.mangareader.feature.settings.more.LogoHeader
+import com.nilemnod.mangareader.feature.settings.settingsGraph
+import com.nilemnod.mangareader.feature.settings.update.NewUpdateScreen
 import com.nilemnod.mangareader.i18n.MR
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -47,8 +46,6 @@ import kotlinx.coroutines.withContext
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import logcat.LogPriority
-import uy.kohesive.injekt.Injekt
-import uy.kohesive.injekt.api.get
 import java.util.Locale
 import kotlin.time.Instant
 
@@ -62,7 +59,7 @@ object AboutScreen : Screen() {
         val handleBack = LocalBackPress.current
         val navigator = LocalNavigator.currentOrThrow
         var isCheckingUpdates by remember { mutableStateOf(false) }
-        val crashLogUtil = remember { context.appGraph.crashLogUtil }
+        val debugInfoProvider = remember { context.settingsGraph.debugInfoProvider }
         val is24HourSystem = rememberIs24HourSystem()
 
         Scaffold(
@@ -88,15 +85,15 @@ object AboutScreen : Screen() {
                         title = stringResource(MR.strings.version),
                         // Keyed on the system 12/24h setting, which can change while the app is backgrounded.
                         // Date/time prefs only change in Appearance, which recreates this screen on return.
-                        subtitle = remember(is24HourSystem) { getVersionName(withBuildDate = true) },
+                        subtitle = remember(is24HourSystem) { getVersionName(context, withBuildDate = true) },
                         onPreferenceClick = {
-                            val deviceInfo = crashLogUtil.getDebugInfo()
+                            val deviceInfo = debugInfoProvider.getDebugInfo()
                             context.copyToClipboard("Debug information", deviceInfo)
                         },
                     )
                 }
 
-                if (updaterEnabled) {
+                if (AppBuild.updaterEnabled) {
                     item {
                         TextPreferenceWidget(
                             title = stringResource(MR.strings.check_for_updates),
@@ -135,11 +132,11 @@ object AboutScreen : Screen() {
                     }
                 }
 
-                if (!BuildConfig.DEBUG && updaterEnabled) {
+                if (!AppBuild.isDebug && AppBuild.updaterEnabled) {
                     item {
                         TextPreferenceWidget(
                             title = stringResource(MR.strings.whats_new),
-                            onPreferenceClick = { uriHandler.openUri(RELEASE_URL) },
+                            onPreferenceClick = { uriHandler.openUri(AppBuild.releaseUrl) },
                         )
                     }
                 }
@@ -147,7 +144,7 @@ object AboutScreen : Screen() {
                 item {
                     TextPreferenceWidget(
                         title = stringResource(MR.strings.licenses),
-                        onPreferenceClick = { navigator.push(OpenSourceLicensesScreen()) },
+                        onPreferenceClick = { navigator.push(SharedScreen.OpenSourceLicenses.screen()) },
                     )
                 }
             }
@@ -162,7 +159,7 @@ object AboutScreen : Screen() {
         onAvailableUpdate: (GetApplicationRelease.Result.NewUpdate) -> Unit,
         onFinish: () -> Unit,
     ) {
-        val updateChecker = context.appGraph.updateChecker
+        val updateChecker = context.settingsGraph.appUpdateChecker
         withContext(Dispatchers.Main) {
             try {
                 when (val result = updateChecker.checkForUpdate(forceCheck = true)) {
@@ -185,31 +182,31 @@ object AboutScreen : Screen() {
         }
     }
 
-    fun getVersionName(withBuildDate: Boolean): String {
+    fun getVersionName(context: Context, withBuildDate: Boolean): String {
         return when {
-            BuildConfig.DEBUG -> {
-                "Debug ${BuildConfig.COMMIT_SHA}".let {
+            AppBuild.isDebug -> {
+                "Debug ${AppBuild.info.commitSha}".let {
                     if (withBuildDate) {
-                        "$it (${getFormattedBuildTime()})"
+                        "$it (${getFormattedBuildTime(context)})"
                     } else {
                         it
                     }
                 }
             }
-            isNightlyBuildType -> {
-                "Nightly r${BuildConfig.COMMIT_COUNT}".let {
+            AppBuild.isNightly -> {
+                "Nightly r${AppBuild.info.commitCount}".let {
                     if (withBuildDate) {
-                        "$it (${BuildConfig.COMMIT_SHA}, ${getFormattedBuildTime()})"
+                        "$it (${AppBuild.info.commitSha}, ${getFormattedBuildTime(context)})"
                     } else {
-                        "$it (${BuildConfig.COMMIT_SHA})"
+                        "$it (${AppBuild.info.commitSha})"
                     }
                 }
             }
             else -> {
-                val channel = if (isFossBuildType) "FOSS" else "Stable"
-                "$channel v${BuildConfig.VERSION_NAME}".let {
+                val channel = if (AppBuild.isFoss) "FOSS" else "Stable"
+                "$channel v${AppBuild.versionName}".let {
                     if (withBuildDate) {
-                        "$it (${getFormattedBuildTime()})"
+                        "$it (${getFormattedBuildTime(context)})"
                     } else {
                         it
                     }
@@ -218,11 +215,10 @@ object AboutScreen : Screen() {
         }
     }
 
-    internal fun getFormattedBuildTime(): String {
+    fun getFormattedBuildTime(context: Context): String {
         return try {
-            val context = Injekt.get<Context>()
-            val uiPreferences = context.appGraph.uiPreferences
-            Instant.parse(BuildConfig.BUILD_TIME)
+            val uiPreferences = context.appUiPreferences
+            Instant.parse(AppBuild.info.buildTime)
                 .toLocalDateTime(TimeZone.currentSystemDefault())
                 .toDateTimestampString(
                     UiPreferences.dateTimeFormat(
@@ -233,7 +229,7 @@ object AboutScreen : Screen() {
                     ),
                 )
         } catch (_: Exception) {
-            BuildConfig.BUILD_TIME
+            AppBuild.info.buildTime
         }
     }
 }

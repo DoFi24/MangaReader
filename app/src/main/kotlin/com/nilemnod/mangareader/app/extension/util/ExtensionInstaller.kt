@@ -7,7 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.extension.installer.Installer
-import com.nilemnod.mangareader.app.util.storage.getUriCompat
+import com.nilemnod.mangareader.core.android.storage.getUriCompat
 import com.nilemnod.mangareader.core.android.system.isPackageInstalled
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
