@@ -36,6 +36,18 @@ valkyrie {
             sourceFolder = "rounded"
             autoMirror = false
         }
+
+        nested {
+            name = "Edge"
+            sourceFolder = "edge"
+            autoMirror = false
+        }
+
+        nested {
+            name = "EdgeFilled"
+            sourceFolder = "edgeFilled"
+            autoMirror = false
+        }
     }
 }
 
