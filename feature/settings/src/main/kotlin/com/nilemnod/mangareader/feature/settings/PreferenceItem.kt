@@ -1,0 +1,177 @@
+package com.nilemnod.mangareader.feature.settings
+
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
+import com.nilemnod.mangareader.core.ui.components.BaseSliderItem
+import com.nilemnod.mangareader.core.ui.components.preference.EditTextPreferenceWidget
+import com.nilemnod.mangareader.core.ui.components.preference.InfoWidget
+import com.nilemnod.mangareader.core.ui.components.preference.ListPreferenceWidget
+import com.nilemnod.mangareader.core.ui.components.preference.LocalPreferenceHighlighted
+import com.nilemnod.mangareader.core.ui.components.preference.MultiSelectListPreferenceWidget
+import com.nilemnod.mangareader.core.ui.components.preference.PrefsHorizontalPadding
+import com.nilemnod.mangareader.core.ui.components.preference.PrefsVerticalPadding
+import com.nilemnod.mangareader.core.ui.components.preference.SwitchPreferenceWidget
+import com.nilemnod.mangareader.core.ui.components.preference.TextPreferenceWidget
+import com.nilemnod.mangareader.core.ui.components.preference.TitleFontSize
+import com.nilemnod.mangareader.core.ui.util.collectAsState
+import com.nilemnod.mangareader.i18n.MR
+import kotlinx.coroutines.launch
+
+@Composable
+fun StatusWrapper(
+    item: Preference.PreferenceItem<*, *>,
+    highlightKey: String?,
+    content: @Composable () -> Unit,
+) {
+    val enabled = item.visible
+    val highlighted = item.title == highlightKey
+    AnimatedVisibility(
+        visible = enabled,
+        enter = expandVertically() + fadeIn(),
+        exit = shrinkVertically() + fadeOut(),
+        content = {
+            CompositionLocalProvider(
+                LocalPreferenceHighlighted provides highlighted,
+                content = content,
+            )
+        },
+    )
+}
+
+@Composable
+internal fun PreferenceItem(
+    item: Preference.PreferenceItem<*, *>,
+    highlightKey: String?,
+) {
+    val scope = rememberCoroutineScope()
+    StatusWrapper(
+        item = item,
+        highlightKey = highlightKey,
+    ) {
+        when (item) {
+            is Preference.PreferenceItem.SwitchPreference -> {
+                val value by item.preference.collectAsState()
+                SwitchPreferenceWidget(
+                    title = item.title,
+                    subtitle = item.subtitle,
+                    icon = item.icon,
+                    checked = value,
+                    onCheckedChanged = { newValue ->
+                        scope.launch {
+                            if (item.onValueChanged(newValue)) {
+                                item.preference.set(newValue)
+                            }
+                        }
+                    },
+                )
+            }
+            is Preference.PreferenceItem.SliderPreference -> {
+                val value by item.preference.collectAsState()
+                BaseSliderItem(
+                    value = value,
+                    valueRange = item.valueRange,
+                    steps = item.steps,
+                    title = item.title,
+                    subtitle = item.subtitle,
+                    valueString = item.valueText(value),
+                    onChange = { newValue ->
+                        scope.launch {
+                            if (item.onValueChanged(newValue)) {
+                                item.preference.set(newValue)
+                            }
+                        }
+                    },
+                    titleStyle = MaterialTheme.typography.titleLarge.copy(fontSize = TitleFontSize),
+                    modifier = Modifier.padding(
+                        horizontal = PrefsHorizontalPadding,
+                        vertical = PrefsVerticalPadding,
+                    ),
+                )
+            }
+            is Preference.PreferenceItem.ListPreference<*> -> {
+                val value by item.preference.collectAsState()
+                ListPreferenceWidget(
+                    value = value,
+                    title = item.title,
+                    subtitle = item.internalSubtitleProvider(value, item.entries),
+                    icon = item.icon,
+                    entries = item.entries,
+                    onValueChange = { newValue ->
+                        scope.launch {
+                            if (item.internalOnValueChanged(newValue!!)) {
+                                item.internalSet(newValue)
+                            }
+                        }
+                    },
+                )
+            }
+            is Preference.PreferenceItem.BasicListPreference -> {
+                ListPreferenceWidget(
+                    value = item.value,
+                    title = item.title,
+                    subtitle = item.subtitleProvider(item.value, item.entries),
+                    icon = item.icon,
+                    entries = item.entries,
+                    onValueChange = { scope.launch { item.onValueChanged(it) } },
+                )
+            }
+            is Preference.PreferenceItem.MultiSelectListPreference<*> -> {
+                val values by item.preference.collectAsState()
+                MultiSelectListPreferenceWidget(
+                    values = values,
+                    title = item.title,
+                    subtitle = item.internalSubtitleProvider(values, item.entries),
+                    icon = item.icon,
+                    entries = item.entries,
+                    onValuesChange = { newValues ->
+                        scope.launch {
+                            if (item.internalOnValueChanged(newValues)) {
+                                item.internalSet(newValues)
+                            }
+                        }
+                    },
+                )
+            }
+            is Preference.PreferenceItem.TextPreference -> {
+                TextPreferenceWidget(
+                    title = item.title,
+                    subtitle = item.subtitle,
+                    icon = item.icon,
+                    widget = item.widget,
+                    onPreferenceClick = item.onClick,
+                )
+            }
+            is Preference.PreferenceItem.EditTextPreference -> {
+                val values by item.preference.collectAsState()
+                EditTextPreferenceWidget(
+                    title = item.title,
+                    subtitle = item.subtitle,
+                    icon = item.icon,
+                    value = values,
+                    onConfirm = {
+                        val accepted = item.onValueChanged(it)
+                        if (accepted) item.preference.set(it)
+                        accepted
+                    },
+                )
+            }
+            is Preference.PreferenceItem.InfoPreference -> {
+                InfoWidget(text = item.title)
+            }
+            is Preference.PreferenceItem.CustomPreference -> {
+                item.content()
+            }
+        }
+    }
+}

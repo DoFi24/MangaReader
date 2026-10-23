@@ -15,8 +15,6 @@ import androidx.profileinstaller.ProfileVerifier
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.presentation.more.settings.Preference
-import com.nilemnod.mangareader.app.presentation.more.settings.PreferenceScaffold
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.about.AboutScreen
 import com.nilemnod.mangareader.core.common.FeatureFlags
 import com.nilemnod.mangareader.core.common.util.system.DeviceUtil
@@ -25,6 +23,8 @@ import com.nilemnod.mangareader.core.common.util.system.copyToClipboard
 import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.core.ui.util.rememberIs24HourSystem
+import com.nilemnod.mangareader.feature.settings.Preference
+import com.nilemnod.mangareader.feature.settings.PreferenceScaffold
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Autorenew

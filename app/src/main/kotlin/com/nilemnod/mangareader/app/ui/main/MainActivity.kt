@@ -79,8 +79,6 @@ import com.nilemnod.mangareader.app.ui.base.activity.BaseActivity
 import com.nilemnod.mangareader.app.ui.deeplink.DeepLinkScreen
 import com.nilemnod.mangareader.app.ui.home.HomeScreen
 import com.nilemnod.mangareader.app.ui.more.NewUpdateScreen
-import com.nilemnod.mangareader.app.ui.more.OnboardingScreen
-import com.nilemnod.mangareader.app.ui.setting.SettingsScreen
 import com.nilemnod.mangareader.app.util.system.isBenchmarkBuildType
 import com.nilemnod.mangareader.app.util.system.updaterEnabled
 import com.nilemnod.mangareader.app.util.view.setComposeContent
@@ -112,6 +110,8 @@ import com.nilemnod.mangareader.domain.source.interactor.GetIncognitoState
 import com.nilemnod.mangareader.feature.browse.source.browse.BrowseSourceScreen
 import com.nilemnod.mangareader.feature.browse.source.globalsearch.GlobalSearchScreen
 import com.nilemnod.mangareader.feature.manga.MangaScreen
+import com.nilemnod.mangareader.feature.settings.OnboardingScreen
+import com.nilemnod.mangareader.feature.settings.SettingsScreen
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.OpenInNew

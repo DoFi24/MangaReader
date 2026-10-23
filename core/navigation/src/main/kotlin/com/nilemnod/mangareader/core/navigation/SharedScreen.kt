@@ -37,6 +37,12 @@ sealed interface SharedScreen : ScreenProvider {
         val sourceId: Long,
     ) : SharedScreen
 
+    data class ExtensionStores(
+        val repoUrl: String? = null,
+    ) : SharedScreen
+
+    data object Stats : SharedScreen
+
     data object Category : SharedScreen
 
     data object DownloadQueue : SharedScreen

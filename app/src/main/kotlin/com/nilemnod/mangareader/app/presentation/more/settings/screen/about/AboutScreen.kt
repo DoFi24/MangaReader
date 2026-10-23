@@ -21,7 +21,6 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.BuildConfig
 import com.nilemnod.mangareader.app.data.updater.RELEASE_URL
 import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.presentation.more.LogoHeader
 import com.nilemnod.mangareader.app.ui.more.NewUpdateScreen
 import com.nilemnod.mangareader.app.util.system.isFossBuildType
 import com.nilemnod.mangareader.app.util.system.isNightlyBuildType
@@ -40,6 +39,7 @@ import com.nilemnod.mangareader.core.ui.util.LocalBackPress
 import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.core.ui.util.rememberIs24HourSystem
 import com.nilemnod.mangareader.domain.release.interactor.GetApplicationRelease
+import com.nilemnod.mangareader.feature.settings.more.LogoHeader
 import com.nilemnod.mangareader.i18n.MR
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -1,6 +1,7 @@
 package com.nilemnod.mangareader.app.navigation
 
 import cafe.adriel.voyager.core.registry.ScreenRegistry
+import com.nilemnod.mangareader.app.presentation.more.settings.screen.browse.ExtensionStoresScreen
 import com.nilemnod.mangareader.app.ui.browse.extension.ExtensionsBrowseTab
 import com.nilemnod.mangareader.app.ui.browse.extension.details.SourcePreferencesScreen
 import com.nilemnod.mangareader.app.ui.manga.MangaCoverDialogHost
@@ -19,18 +20,22 @@ import com.nilemnod.mangareader.feature.browse.source.globalsearch.GlobalSearchS
 import com.nilemnod.mangareader.feature.categories.CategoryScreen
 import com.nilemnod.mangareader.feature.downloads.DownloadQueueScreen
 import com.nilemnod.mangareader.feature.manga.MangaScreen
+import com.nilemnod.mangareader.feature.stats.StatsScreen
 import com.nilemnod.mangareader.feature.upcoming.UpcomingScreen
 
 object AppNavigation {
 
     fun register() {
         BrowseTabs.register(ExtensionsBrowseTab)
+        AppSettingsEntries.register()
         ScreenRegistry {
             register<SharedScreen.Manga> { MangaScreen(it.mangaId, it.fromSource) }
             register<SharedScreen.BrowseSource> { BrowseSourceScreen(it.sourceId, it.listingQuery) }
             register<SharedScreen.GlobalSearch> { GlobalSearchScreen(it.query, it.extensionFilter) }
             register<SharedScreen.MigrationConfig> { MigrationConfigScreen(it.mangaIds) }
             register<SharedScreen.WebView> { WebViewScreen(it.url, it.initialTitle, it.sourceId) }
+            register<SharedScreen.ExtensionStores> { ExtensionStoresScreen(it.repoUrl) }
+            register<SharedScreen.Stats> { StatsScreen() }
             register<SharedScreen.SourcePreferences> { SourcePreferencesScreen(it.sourceId) }
             register<SharedScreen.Category> { CategoryScreen() }
             register<SharedScreen.DownloadQueue> { DownloadQueueScreen }

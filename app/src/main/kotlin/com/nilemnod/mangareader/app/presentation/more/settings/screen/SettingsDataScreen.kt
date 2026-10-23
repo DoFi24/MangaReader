@@ -42,7 +42,6 @@ import com.nilemnod.mangareader.app.data.backup.restore.BackupRestoreWorker
 import com.nilemnod.mangareader.app.data.export.LibraryExporter
 import com.nilemnod.mangareader.app.data.export.LibraryExporter.ExportOptions
 import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.presentation.more.settings.Preference
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.data.CreateBackupScreen
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.data.RestoreBackupScreen
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.data.StorageInfo
@@ -61,6 +60,10 @@ import com.nilemnod.mangareader.core.ui.util.relativeTimeSpanString
 import com.nilemnod.mangareader.domain.backup.service.BackupPreferences
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.storage.service.StoragePreferences
+import com.nilemnod.mangareader.feature.settings.Preference
+import com.nilemnod.mangareader.feature.settings.screen.SearchableSettings
+import com.nilemnod.mangareader.feature.settings.screen.storageLocationPicker
+import com.nilemnod.mangareader.feature.settings.screen.storageLocationText
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import kotlinx.coroutines.CancellationException
@@ -91,55 +94,6 @@ object SettingsDataScreen : SearchableSettings {
             getDataGroup(),
             getExportGroup(),
         )
-    }
-
-    @Composable
-    fun storageLocationPicker(
-        storageDirPref: com.nilemnod.mangareader.core.common.preference.Preference<String>,
-    ): ManagedActivityResultLauncher<Uri?, Uri?> {
-        val context = LocalContext.current
-
-        return rememberLauncherForActivityResult(
-            contract = ActivityResultContracts.OpenDocumentTree(),
-        ) { uri ->
-            if (uri != null) {
-                val flags = Intent.FLAG_GRANT_READ_URI_PERMISSION or
-                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION
-
-                // For some reason InkBook devices do not implement the SAF properly. Persistable URI grants do not
-                // work. However, simply retrieving the URI and using it works fine for these devices. Access is not
-                // revoked after the app is closed or the device is restarted.
-                // This also holds for some Samsung devices. Thus, we simply execute inside of a try-catch block and
-                // ignore the exception if it is thrown.
-                try {
-                    context.contentResolver.takePersistableUriPermission(uri, flags)
-                } catch (e: SecurityException) {
-                    logcat(LogPriority.ERROR, e)
-                    context.toast(MR.strings.file_picker_uri_permission_unsupported)
-                }
-
-                UniFile.fromUri(context, uri)?.let {
-                    storageDirPref.set(it.uri.toString())
-                }
-            }
-        }
-    }
-
-    @Composable
-    fun storageLocationText(
-        storageDirPref: com.nilemnod.mangareader.core.common.preference.Preference<String>,
-    ): String {
-        val context = LocalContext.current
-        val storageDir by storageDirPref.collectAsState()
-
-        if (storageDir == storageDirPref.defaultValue()) {
-            return stringResource(MR.strings.no_location_set)
-        }
-
-        return remember(storageDir) {
-            val file = UniFile.fromUri(context, storageDir.toUri())
-            file?.displayablePath
-        } ?: stringResource(MR.strings.invalid_location, storageDir)
     }
 
     @Composable
