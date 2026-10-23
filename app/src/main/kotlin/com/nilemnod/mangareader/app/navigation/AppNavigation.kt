@@ -7,7 +7,6 @@ import com.nilemnod.mangareader.app.ui.browse.extension.ExtensionsBrowseTab
 import com.nilemnod.mangareader.app.ui.browse.extension.details.SourcePreferencesScreen
 import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.app.ui.manga.MangaCoverDialogHost
-import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
 import com.nilemnod.mangareader.app.ui.webview.WebViewActivity
 import com.nilemnod.mangareader.app.ui.webview.WebViewScreen
 import com.nilemnod.mangareader.core.common.Constants
@@ -25,6 +24,7 @@ import com.nilemnod.mangareader.feature.categories.CategoryScreen
 import com.nilemnod.mangareader.feature.downloads.DownloadQueueScreen
 import com.nilemnod.mangareader.feature.extensions.stores.ExtensionStoresScreen
 import com.nilemnod.mangareader.feature.manga.MangaScreen
+import com.nilemnod.mangareader.feature.reader.legacy.ReaderActivity
 import com.nilemnod.mangareader.feature.stats.StatsScreen
 import com.nilemnod.mangareader.feature.upcoming.UpcomingScreen
 
