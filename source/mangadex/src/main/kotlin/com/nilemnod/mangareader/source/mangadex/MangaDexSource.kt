@@ -1,8 +1,9 @@
 package com.nilemnod.mangareader.source.mangadex
 
 import com.nilemnod.mangareader.core.network.GET
+import com.nilemnod.mangareader.core.network.HttpException
 import com.nilemnod.mangareader.core.network.NetworkHelper
-import com.nilemnod.mangareader.core.network.awaitSuccess
+import com.nilemnod.mangareader.core.network.await
 import com.nilemnod.mangareader.domain.source.api.FilterList
 import com.nilemnod.mangareader.domain.source.api.ImageContent
 import com.nilemnod.mangareader.domain.source.api.MangaListing
@@ -21,8 +22,11 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
+import okhttp3.Headers
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrl
+import okhttp3.Response
+import java.io.IOException
 import kotlin.time.Instant
 
 class MangaDexSource(
@@ -45,7 +49,15 @@ class MangaDexSource(
 
     private val requestMutex = Mutex()
 
+    private val nodeMutex = Mutex()
+
+    private val nodes = object : LinkedHashMap<String, AtHomeNode>(16, 0.75f, true) {
+        override fun removeEldestEntry(eldest: MutableMap.MutableEntry<String, AtHomeNode>): Boolean = size > MAX_NODES
+    }
+
     private var lastRequestAt = 0L
+
+    override fun headersBuilder(): Headers.Builder = Headers.Builder().add("User-Agent", USER_AGENT)
 
     override fun mangaUrl(manga: SourceManga): String = "$baseUrl/title/${manga.url}"
 
@@ -143,13 +155,13 @@ class MangaDexSource(
     }
 
     override suspend fun pages(chapter: SourceChapter): List<Page> {
-        val server = fetch<AtHomeDto>(API.endpoint("/at-home/server/${chapter.url}").build())
-        return server.chapter.data.mapIndexed { index, file ->
-            val saver = server.chapter.dataSaver.getOrNull(index).orEmpty()
+        val node = node(chapter.url)
+        return node.chapter.data.mapIndexed { index, file ->
+            val saver = node.chapter.dataSaver.getOrNull(index).orEmpty()
             Page(
                 index,
                 url = "${chapter.url}/$file/$saver",
-                imageUrl = "${server.baseUrl}/data/${server.chapter.hash}/$file",
+                imageUrl = node.imageUrl(file, saver, useSaver = false),
             )
         }
     }
@@ -159,38 +171,98 @@ class MangaDexSource(
         resumeFrom: Long,
         onProgress: (bytesRead: Long, contentLength: Long) -> Unit,
     ): ImageContent {
+        val parts = page.url.split('/', limit = 3).takeIf { it.size == 3 }
         var attempt = 0
         while (true) {
+            if (parts != null) adoptNode(page, parts)
             try {
                 return super.openImage(page, resumeFrom, onProgress)
             } catch (e: SourceHttpException) {
-                // Image nodes answer 404 or 5xx while they warm up their cache, so move to another node
                 val retryable = e.code == HTTP_NOT_FOUND || e.code >= HTTP_SERVER_ERROR
                 if (!retryable || ++attempt >= IMAGE_ATTEMPTS) throw e
                 delay(IMAGE_RETRY_DELAY * attempt)
-                if (attempt >= 2) refreshNode(page, useSaver = attempt % 2 == 0)
+                if (parts != null) refreshNode(page, parts, useSaver = attempt % 2 == 0)
             }
         }
     }
 
-    private suspend fun refreshNode(page: Page, useSaver: Boolean) {
-        val parts = page.url.split('/', limit = 3).takeIf { it.size == 3 } ?: return
+    private suspend fun adoptNode(page: Page, parts: List<String>) {
         val (chapterId, file, saver) = parts
-        val server = fetch<AtHomeDto>(API.endpoint("/at-home/server/$chapterId").build())
-        page.imageUrl = if (useSaver && saver.isNotEmpty()) {
-            "${server.baseUrl}/data-saver/${server.chapter.hash}/$saver"
-        } else {
-            "${server.baseUrl}/data/${server.chapter.hash}/$file"
+        val node = cachedNode(chapterId) ?: return
+        val current = page.imageUrl.orEmpty()
+        if (current.startsWith("${node.baseUrl}/")) return
+        page.imageUrl = node.imageUrl(file, saver, useSaver = "/data-saver/" in current)
+    }
+
+    private suspend fun refreshNode(page: Page, parts: List<String>, useSaver: Boolean) {
+        val (chapterId, file, saver) = parts
+        val failedBase = page.imageUrl.orEmpty().substringBefore("/data")
+        val node = try {
+            node(chapterId, failedBase)
+        } catch (e: HttpException) {
+            return
+        } catch (e: IOException) {
+            return
         }
+        page.imageUrl = node.imageUrl(file, saver, useSaver)
+    }
+
+    private suspend fun cachedNode(chapterId: String): AtHomeNode? = nodeMutex.withLock {
+        nodes[chapterId]?.takeIf { it.isFresh() }
+    }
+
+    private suspend fun node(chapterId: String, failedBase: String? = null): AtHomeNode = nodeMutex.withLock {
+        val cached = nodes[chapterId]
+        val reusable = cached != null && cached.isFresh() &&
+            (cached.baseUrl != failedBase || System.currentTimeMillis() - cached.fetchedAt < NODE_MIN_REFRESH)
+        if (cached != null && reusable) return@withLock cached
+        val loaded = AtHomeNode(fetch<AtHomeDto>(API.endpoint("/at-home/server/$chapterId").build()))
+        nodes[chapterId] = loaded
+        loaded
     }
 
     private suspend inline fun <reified T> fetch(url: HttpUrl): T {
-        throttle()
-        return withContext(Dispatchers.IO) {
-            client.newCall(GET(url, headers)).awaitSuccess().use { response ->
-                json.decodeFromString<T>(response.body.string())
+        var attempt = 0
+        while (true) {
+            throttle()
+            val response = withContext(Dispatchers.IO) { client.newCall(GET(url, headers)).await() }
+            if (response.code == HTTP_TOO_MANY_REQUESTS && ++attempt < RATE_LIMIT_ATTEMPTS) {
+                val wait = response.retryDelay()
+                response.close()
+                delay(wait)
+                continue
+            }
+            return withContext(Dispatchers.IO) {
+                response.use {
+                    if (!it.isSuccessful) throw HttpException(it.code)
+                    json.decodeFromString<T>(it.body.string())
+                }
             }
         }
+    }
+
+    private fun Response.retryDelay(): Long {
+        val resetAt = header("X-RateLimit-Retry-After")?.toLongOrNull()?.let { it * 1000 - System.currentTimeMillis() }
+        val retryAfter = header("Retry-After")?.toLongOrNull()?.let { it * 1000 }
+        return (resetAt ?: retryAfter ?: DEFAULT_RATE_LIMIT_DELAY).coerceIn(DEFAULT_RATE_LIMIT_DELAY, MAX_RATE_LIMIT_DELAY)
+    }
+
+    private class AtHomeNode(val dto: AtHomeDto) {
+
+        val fetchedAt: Long = System.currentTimeMillis()
+
+        val baseUrl: String get() = dto.baseUrl
+
+        val chapter: AtHomeChapterDto get() = dto.chapter
+
+        fun isFresh(): Boolean = System.currentTimeMillis() - fetchedAt < NODE_TTL
+
+        fun imageUrl(file: String, saver: String, useSaver: Boolean): String =
+            if (useSaver && saver.isNotEmpty()) {
+                "$baseUrl/data-saver/${chapter.hash}/$saver"
+            } else {
+                "$baseUrl/data/${chapter.hash}/$file"
+            }
     }
 
     private suspend fun throttle() {
@@ -265,13 +337,21 @@ class MangaDexSource(
 
     private companion object {
         const val NAME = "MangaDex"
+        const val USER_AGENT = "MangaReader/0.1 (personal reader)"
         const val COVERS = "https://uploads.mangadex.org/covers"
         const val PAGE_SIZE = 20
         const val FEED_PAGE_SIZE = 500
         const val MIN_REQUEST_INTERVAL = 250L
-        const val IMAGE_ATTEMPTS = 6
+        const val IMAGE_ATTEMPTS = 4
         const val IMAGE_RETRY_DELAY = 1000L
+        const val RATE_LIMIT_ATTEMPTS = 4
+        const val DEFAULT_RATE_LIMIT_DELAY = 2000L
+        const val MAX_RATE_LIMIT_DELAY = 30_000L
+        const val NODE_TTL = 10 * 60 * 1000L
+        const val NODE_MIN_REFRESH = 5000L
+        const val MAX_NODES = 32
         const val HTTP_NOT_FOUND = 404
+        const val HTTP_TOO_MANY_REQUESTS = 429
         const val HTTP_SERVER_ERROR = 500
 
         const val SORT = "Sort by"
