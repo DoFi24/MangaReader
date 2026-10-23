@@ -32,8 +32,8 @@ import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.presentation.manga.components.ChapterDownloadAction
 import com.nilemnod.mangareader.app.presentation.manga.components.ChapterDownloadIndicator
 import com.nilemnod.mangareader.app.presentation.manga.components.DotSeparatorText
-import com.nilemnod.mangareader.app.presentation.manga.components.MangaCover
 import com.nilemnod.mangareader.app.ui.updates.UpdatesItem
+import com.nilemnod.mangareader.core.mangaui.MangaCover
 import com.nilemnod.mangareader.core.ui.components.ListGroupHeader
 import com.nilemnod.mangareader.core.ui.components.material.DISABLED_ALPHA
 import com.nilemnod.mangareader.core.ui.components.material.padding

@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.core.preference
+package com.nilemnod.mangareader.core.mangaui
 
 import androidx.compose.ui.state.ToggleableState
 import com.nilemnod.mangareader.core.common.preference.CheckboxState

@@ -12,7 +12,6 @@ import com.nilemnod.mangareader.app.data.download.DownloadCache
 import com.nilemnod.mangareader.app.data.download.DownloadManager
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.domain.chapter.interactor.SetReadStatus
-import com.nilemnod.mangareader.app.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.app.presentation.library.components.LibraryToolbarTitle
 import com.nilemnod.mangareader.app.presentation.manga.DownloadAction
 import com.nilemnod.mangareader.app.util.chapter.getNextUnread
@@ -39,6 +38,7 @@ import com.nilemnod.mangareader.domain.library.model.search.QueryNode
 import com.nilemnod.mangareader.domain.library.model.sort
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.interactor.GetLibraryManga
+import com.nilemnod.mangareader.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaUpdate
 import com.nilemnod.mangareader.domain.manga.model.applyFilter

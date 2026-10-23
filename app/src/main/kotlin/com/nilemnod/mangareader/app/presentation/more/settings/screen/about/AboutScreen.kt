@@ -22,7 +22,6 @@ import com.nilemnod.mangareader.app.BuildConfig
 import com.nilemnod.mangareader.app.data.updater.RELEASE_URL
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.presentation.more.LogoHeader
-import com.nilemnod.mangareader.app.presentation.more.settings.widget.TextPreferenceWidget
 import com.nilemnod.mangareader.app.ui.more.NewUpdateScreen
 import com.nilemnod.mangareader.app.util.system.copyToClipboard
 import com.nilemnod.mangareader.app.util.system.isFossBuildType
@@ -34,6 +33,7 @@ import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.ScrollbarLazyColumn
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
+import com.nilemnod.mangareader.core.ui.components.preference.TextPreferenceWidget
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.preference.UiPreferences
 import com.nilemnod.mangareader.core.ui.util.LocalBackPress

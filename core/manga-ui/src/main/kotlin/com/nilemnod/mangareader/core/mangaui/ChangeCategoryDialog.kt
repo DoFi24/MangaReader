@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.category.components
+package com.nilemnod.mangareader.core.mangaui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -21,8 +21,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.nilemnod.mangareader.app.core.preference.asToggleableState
-import com.nilemnod.mangareader.app.presentation.category.visualName
 import com.nilemnod.mangareader.core.common.preference.CheckboxState
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.stringResource

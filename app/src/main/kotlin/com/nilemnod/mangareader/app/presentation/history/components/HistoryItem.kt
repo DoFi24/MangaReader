@@ -20,8 +20,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import com.nilemnod.mangareader.app.presentation.manga.components.MangaCover
 import com.nilemnod.mangareader.core.android.lang.toTimestampString
+import com.nilemnod.mangareader.core.mangaui.MangaCover
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.theme.MangaReaderPreviewTheme

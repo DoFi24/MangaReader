@@ -40,8 +40,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
-import com.nilemnod.mangareader.app.R
-import com.nilemnod.mangareader.app.presentation.manga.components.MangaCover
+import com.nilemnod.mangareader.core.mangaui.MangaCover
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.AppBarActions
 import com.nilemnod.mangareader.core.ui.components.Badge
@@ -53,7 +52,7 @@ import com.nilemnod.mangareader.core.ui.components.material.topSmallPaddingValue
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.formatChapterNumber
 import com.nilemnod.mangareader.core.ui.util.plus
-import com.nilemnod.mangareader.core.ui.util.rememberResourceBitmapPainter
+import com.nilemnod.mangareader.core.ui.util.rememberCoverErrorPainter
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.feature.migration.list.models.MigratingManga
 import com.nilemnod.mangareader.i18n.MR
@@ -282,7 +281,7 @@ fun MigrationListItemResult(
                         .padding(4.dp),
                 ) {
                     Image(
-                        painter = rememberResourceBitmapPainter(id = R.drawable.cover_error),
+                        painter = rememberCoverErrorPainter(),
                         contentDescription = null,
                         modifier = Modifier
                             .fillMaxWidth()

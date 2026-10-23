@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.category
+package com.nilemnod.mangareader.core.mangaui
 
 import android.content.Context
 import androidx.compose.runtime.Composable

@@ -20,9 +20,9 @@ import androidx.compose.ui.util.fastForEachIndexed
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.presentation.category.visualName
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.core.common.preference.TriState
+import com.nilemnod.mangareader.core.mangaui.visualName
 import com.nilemnod.mangareader.core.navigation.SharedScreen
 import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.components.SettingsItemsPaddings

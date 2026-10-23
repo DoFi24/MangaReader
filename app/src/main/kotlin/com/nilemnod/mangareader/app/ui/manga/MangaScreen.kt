@@ -20,12 +20,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.domain.manga.model.hasCustomCover
 import com.nilemnod.mangareader.app.domain.manga.model.toSManga
 import com.nilemnod.mangareader.app.presentation.browse.components.RemoveMangaDialog
-import com.nilemnod.mangareader.app.presentation.category.components.ChangeCategoryDialog
 import com.nilemnod.mangareader.app.presentation.manga.ChapterSettingsDialog
-import com.nilemnod.mangareader.app.presentation.manga.DuplicateMangaDialog
 import com.nilemnod.mangareader.app.presentation.manga.EditCoverAction
 import com.nilemnod.mangareader.app.presentation.manga.MangaScreen
 import com.nilemnod.mangareader.app.presentation.manga.components.DeleteChaptersDialog
@@ -43,6 +42,8 @@ import com.nilemnod.mangareader.app.util.system.copyToClipboard
 import com.nilemnod.mangareader.core.android.system.toShareIntent
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.toast
+import com.nilemnod.mangareader.core.mangaui.ChangeCategoryDialog
+import com.nilemnod.mangareader.core.mangaui.DuplicateMangaDialog
 import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
 import com.nilemnod.mangareader.core.ui.util.AssistContentScreen
 import com.nilemnod.mangareader.core.ui.util.Screen
@@ -202,6 +203,7 @@ class MangaScreen(
                     onConfirm = { viewModel.toggleFavorite(onRemoved = {}, checkDuplicate = false) },
                     onOpenManga = { navigator.push(MangaScreen(it.id)) },
                     onMigrate = { viewModel.showMigrateDialog(it) },
+                    sourceManager = LocalContext.current.appGraph.sourceManager,
                 )
             }
 

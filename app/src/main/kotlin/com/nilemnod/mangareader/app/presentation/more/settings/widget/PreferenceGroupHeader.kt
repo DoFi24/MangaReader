@@ -9,6 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.nilemnod.mangareader.core.ui.components.preference.PrefsHorizontalPadding
+import com.nilemnod.mangareader.core.ui.components.preference.highlightBackground
 
 @Composable
 fun PreferenceGroupHeader(title: String, highlighted: Boolean = false) {

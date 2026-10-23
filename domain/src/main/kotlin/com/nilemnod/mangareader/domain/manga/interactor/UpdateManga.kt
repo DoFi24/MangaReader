@@ -1,6 +1,5 @@
-package com.nilemnod.mangareader.app.domain.manga.interactor
+package com.nilemnod.mangareader.domain.manga.interactor
 
-import com.nilemnod.mangareader.domain.manga.interactor.FetchInterval
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaUpdate
 import com.nilemnod.mangareader.domain.manga.repository.MangaRepository
