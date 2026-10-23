@@ -96,7 +96,7 @@ class BrowseSourceViewModel(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val source = sourceManager.contentOrStub(sourceId)
+            val source = sourceManager.getOrStub(sourceId)
 
             state.update {
                 var query: String? = null

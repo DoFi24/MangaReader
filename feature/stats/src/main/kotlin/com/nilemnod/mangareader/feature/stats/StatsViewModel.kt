@@ -11,6 +11,7 @@ import com.nilemnod.mangareader.domain.library.service.LibraryPreferences.Compan
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences.Companion.MANGA_NON_COMPLETED
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences.Companion.MANGA_NON_READ
 import com.nilemnod.mangareader.domain.manga.interactor.GetLibraryManga
+import com.nilemnod.mangareader.domain.source.api.MangaStatus
 import com.nilemnod.mangareader.feature.stats.StatsScreenState
 import com.nilemnod.mangareader.feature.stats.data.StatsData
 import com.nilemnod.mangareader.source.local.isLocal
@@ -19,7 +20,6 @@ import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.binding
 import dev.zacsweers.metrox.viewmodel.ViewModelKey
-import eu.kanade.tachiyomi.source.model.SManga
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -48,7 +48,7 @@ class StatsViewModel(
             val overviewStatData = StatsData.Overview(
                 libraryMangaCount = distinctLibraryManga.size,
                 completedMangaCount = distinctLibraryManga.count {
-                    it.manga.status.toInt() == SManga.COMPLETED && it.unreadCount == 0L
+                    it.manga.status == MangaStatus.COMPLETED.code && it.unreadCount == 0L
                 },
                 totalReadDuration = getTotalReadDuration.await(),
             )
@@ -86,7 +86,7 @@ class StatsViewModel(
             included && !excluded
         }
             .fastCountNot {
-                (MANGA_NON_COMPLETED in updateRestrictions && it.manga.status.toInt() == SManga.COMPLETED) ||
+                (MANGA_NON_COMPLETED in updateRestrictions && it.manga.status == MangaStatus.COMPLETED.code) ||
                     (MANGA_HAS_UNREAD in updateRestrictions && it.unreadCount != 0L) ||
                     (MANGA_NON_READ in updateRestrictions && it.totalChapters > 0 && !it.hasStarted)
             }

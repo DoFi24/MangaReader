@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import androidx.compose.runtime.Immutable
 import com.nilemnod.mangareader.core.common.extensions.EMPTY
 import com.nilemnod.mangareader.core.common.preference.TriState
+import com.nilemnod.mangareader.domain.source.api.MangaStatus
 import com.nilemnod.mangareader.domain.source.api.UpdateStrategy
-import eu.kanade.tachiyomi.source.model.SManga
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
@@ -44,7 +44,7 @@ data class Manga(
         get() = favoriteAt != null
 
     val expectedNextUpdate: Instant?
-        get() = nextUpdate?.takeIf { status != SManga.COMPLETED.toLong() }
+        get() = nextUpdate?.takeIf { status != MangaStatus.COMPLETED.code }
 
     val sorting: Long
         get() = chapterFlags and CHAPTER_SORTING_MASK

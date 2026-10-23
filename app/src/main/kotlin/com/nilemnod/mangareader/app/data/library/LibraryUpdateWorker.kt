@@ -51,12 +51,12 @@ import com.nilemnod.mangareader.domain.manga.interactor.FetchInterval
 import com.nilemnod.mangareader.domain.manga.interactor.GetLibraryManga
 import com.nilemnod.mangareader.domain.manga.interactor.GetManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.source.api.MangaStatus
 import com.nilemnod.mangareader.domain.source.api.UpdateStrategy
 import com.nilemnod.mangareader.domain.source.model.SourceNotInstalledException
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metro.Inject
-import eu.kanade.tachiyomi.source.model.SManga
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -199,7 +199,7 @@ class LibraryUpdateWorker(private val context: Context, workerParams: WorkerPara
                         false
                     }
 
-                    MANGA_NON_COMPLETED in restrictions && it.manga.status.toInt() == SManga.COMPLETED -> {
+                    MANGA_NON_COMPLETED in restrictions && it.manga.status == MangaStatus.COMPLETED.code -> {
                         skippedUpdates.add(it.manga to context.stringResource(MR.strings.skipped_reason_completed))
                         false
                     }
@@ -350,7 +350,7 @@ class LibraryUpdateWorker(private val context: Context, workerParams: WorkerPara
      * @return a pair of the inserted and removed chapters.
      */
     private suspend fun updateManga(manga: Manga, fetchWindow: ClosedRange<Instant>): List<Chapter> {
-        val source = sourceManager.contentOrStub(manga.source)
+        val source = sourceManager.getOrStub(manga.source)
 
         val update = updateMangaFromRemote(
             source = source,
@@ -407,7 +407,7 @@ class LibraryUpdateWorker(private val context: Context, workerParams: WorkerPara
                     errors.groupBy({ it.second }, { it.first }).forEach { (error, mangas) ->
                         out.write("\n! ${error}\n")
                         mangas.groupBy { it.source }.forEach { (srcId, mangas) ->
-                            val source = sourceManager.contentOrStub(srcId)
+                            val source = sourceManager.getOrStub(srcId)
                             out.write("  # $source\n")
                             mangas.forEach { manga ->
                                 out.write("    - ${manga.title}\n")

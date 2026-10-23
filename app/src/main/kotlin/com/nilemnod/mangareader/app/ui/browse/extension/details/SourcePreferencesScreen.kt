@@ -55,7 +55,7 @@ class SourcePreferencesScreen(val sourceId: Long) : Screen() {
         val navigator = LocalNavigator.currentOrThrow
 
         val source by produceState<ContentSource?>(initialValue = null) {
-            value = context.appGraph.sourceManager.contentOrStub(sourceId)
+            value = context.appGraph.sourceManager.getOrStub(sourceId)
         }
 
         if (source == null) {
@@ -143,7 +143,7 @@ class SourcePreferencesFragment : PreferenceFragmentCompat() {
     private suspend fun populateScreen(): PreferenceScreen {
         val sourceId = requireArguments().getLong(SOURCE_ID)
         val appGraph = requireContext().appGraph
-        val source = (appGraph.sourceManager.contentOrStub(sourceId) as? ExtensionContentSource)?.native
+        val source = (appGraph.sourceManager.getOrStub(sourceId) as? ExtensionContentSource)?.native
         val basePreferences = appGraph.basePreferences
         val sourceScreen = preferenceManager.createPreferenceScreen(requireContext())
 

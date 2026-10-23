@@ -28,7 +28,7 @@ class SourceRepositoryImpl(
 ) : SourceRepository {
 
     override fun getSources(): Flow<List<DomainSource>> {
-        return sourceManager.contentSources.map { sources ->
+        return sourceManager.sources.map { sources ->
             sources.map {
                 mapSourceToDomainSource(it).copy(
                     supportsLatest = it.supportsLatest,
@@ -38,7 +38,7 @@ class SourceRepositoryImpl(
     }
 
     override fun getOnlineSources(): Flow<List<DomainSource>> {
-        return sourceManager.contentSources.map { sources ->
+        return sourceManager.sources.map { sources ->
             sources
                 .filter { it.web != null }
                 .map(::mapSourceToDomainSource)
@@ -49,12 +49,12 @@ class SourceRepositoryImpl(
         val sourceIdWithFavoriteCountFlow = database.mangaQueries
             .getSourceIdWithFavoriteCount()
             .subscribeToList()
-        return combine(sourceIdWithFavoriteCountFlow, sourceManager.contentSources) { sourceIdWithFavoriteCount, _ ->
+        return combine(sourceIdWithFavoriteCountFlow, sourceManager.sources) { sourceIdWithFavoriteCount, _ ->
             sourceIdWithFavoriteCount
         }
             .map {
                 it.map { (sourceId, count) ->
-                    val source = sourceManager.contentOrStub(sourceId)
+                    val source = sourceManager.getOrStub(sourceId)
                     val domainSource = mapSourceToDomainSource(source).copy(
                         isStub = source.isStub,
                     )
@@ -69,7 +69,7 @@ class SourceRepositoryImpl(
             .subscribeToList()
             .map { sourceId ->
                 sourceId.map { (sourceId, count) ->
-                    val source = sourceManager.contentOrStub(sourceId)
+                    val source = sourceManager.getOrStub(sourceId)
                     val domainSource = mapSourceToDomainSource(source).copy(
                         isStub = source.isStub,
                     )
@@ -84,7 +84,7 @@ class SourceRepositoryImpl(
         filterList: FilterList,
     ): SourcePagingSource {
         return SourceSearchPagingSource(
-            { sourceManager.contentOrStub(sourceId) },
+            { sourceManager.getOrStub(sourceId) },
             query,
             filterList,
             networkToLocalManga,
@@ -92,11 +92,11 @@ class SourceRepositoryImpl(
     }
 
     override fun getPopular(sourceId: Long): SourcePagingSource {
-        return SourcePopularPagingSource({ sourceManager.contentOrStub(sourceId) }, networkToLocalManga)
+        return SourcePopularPagingSource({ sourceManager.getOrStub(sourceId) }, networkToLocalManga)
     }
 
     override fun getLatest(sourceId: Long): SourcePagingSource {
-        return SourceLatestPagingSource({ sourceManager.contentOrStub(sourceId) }, networkToLocalManga)
+        return SourceLatestPagingSource({ sourceManager.getOrStub(sourceId) }, networkToLocalManga)
     }
 
     private fun mapSourceToDomainSource(source: ContentSource): DomainSource = DomainSource(

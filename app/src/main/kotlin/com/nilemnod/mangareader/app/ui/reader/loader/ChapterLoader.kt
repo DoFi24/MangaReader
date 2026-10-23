@@ -1,7 +1,6 @@
 package com.nilemnod.mangareader.app.ui.reader.loader
 
 import android.content.Context
-import com.nilemnod.mangareader.app.source.asLocalSource
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderChapter
 import com.nilemnod.mangareader.core.archive.archiveReader
 import com.nilemnod.mangareader.core.archive.epubReader
@@ -10,12 +9,12 @@ import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.download.ChapterCache
 import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.core.download.DownloadProvider
-import com.nilemnod.mangareader.domain.chapter.model.toSChapter
+import com.nilemnod.mangareader.domain.chapter.model.toSourceChapter
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.source.local.LocalSource
 import com.nilemnod.mangareader.source.local.io.Format
-import com.nilemnod.mangareader.source.local.isLocal
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -98,7 +97,7 @@ class ChapterLoader(
                 downloadManager,
                 downloadProvider,
             )
-            source.isLocal() -> source.asLocalSource().getFormat(chapter.chapter.toSChapter()).let { format ->
+            source is LocalSource -> source.getFormat(chapter.chapter.toSourceChapter()).let { format ->
                 when (format) {
                     is Format.Directory -> DirectoryPageLoader(format.file)
                     is Format.Archive -> ArchivePageLoader(format.file.archiveReader(context))

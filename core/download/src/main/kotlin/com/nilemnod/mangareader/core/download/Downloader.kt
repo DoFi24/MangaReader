@@ -348,7 +348,7 @@ class Downloader(
     suspend fun queueChapters(manga: Manga, chapters: List<Chapter>, autoStart: Boolean): Boolean {
         if (chapters.isEmpty()) return false
 
-        val source = sourceManager.content(manga.source)?.takeIf { it.web != null } ?: return false
+        val source = sourceManager.get(manga.source)?.takeIf { it.web != null } ?: return false
         val wasEmpty = queueState.value.isEmpty()
         val chaptersToQueue = withContext(Dispatchers.IO) {
             val downloadedChapterIds = provider.findDownloadedChapterIds(chapters, manga, source)

@@ -42,6 +42,7 @@ import com.nilemnod.mangareader.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaUpdate
 import com.nilemnod.mangareader.domain.manga.model.applyFilter
+import com.nilemnod.mangareader.domain.source.api.MangaStatus
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.feature.library.matches
 import com.nilemnod.mangareader.source.local.isLocal
@@ -50,7 +51,6 @@ import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.binding
 import dev.zacsweers.metrox.viewmodel.ViewModelKey
-import eu.kanade.tachiyomi.source.model.SManga
 import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -223,7 +223,7 @@ class LibraryViewModel(
         }
 
         val filterFnCompleted: (LibraryItem) -> Boolean = {
-            applyFilter(filterCompleted) { it.libraryManga.manga.status.toInt() == SManga.COMPLETED }
+            applyFilter(filterCompleted) { it.libraryManga.manga.status == MangaStatus.COMPLETED.code }
         }
 
         val filterFnIntervalCustom: (LibraryItem) -> Boolean = {
@@ -358,7 +358,7 @@ class LibraryViewModel(
         ) { libraryManga, preferences, _ ->
             val sources = libraryManga
                 .mapTo(mutableSetOf()) { it.manga.source }
-                .associateWith { sourceManager.contentOrStub(it) }
+                .associateWith { sourceManager.getOrStub(it) }
             val downloadCounts = downloadManager.getDownloadCounts(libraryManga.map { it.manga })
             libraryManga.map { manga ->
                 val source = sources.getValue(manga.manga.source)
@@ -493,7 +493,7 @@ class LibraryViewModel(
 
             if (deleteChapters) {
                 mangas.forEach { manga ->
-                    val source = sourceManager.content(manga.source)?.takeIf { it.web != null }
+                    val source = sourceManager.get(manga.source)?.takeIf { it.web != null }
                     if (source != null) {
                         downloadManager.deleteManga(manga, source)
                     }

@@ -9,7 +9,6 @@ import com.nilemnod.mangareader.source.local.io.LocalSourceFileSystem
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
-import eu.kanade.tachiyomi.source.model.SManga
 import java.io.InputStream
 
 private const val DEFAULT_COVER_NAME = "cover.jpg"
@@ -30,16 +29,16 @@ class LocalCoverManager(
     }
 
     fun update(
-        manga: SManga,
+        mangaUrl: String,
         inputStream: InputStream,
     ): UniFile? {
-        val directory = fileSystem.getMangaDirectory(manga.url)
+        val directory = fileSystem.getMangaDirectory(mangaUrl)
         if (directory == null) {
             inputStream.close()
             return null
         }
 
-        val targetFile = find(manga.url) ?: directory.createFile(DEFAULT_COVER_NAME)!!
+        val targetFile = find(mangaUrl) ?: directory.createFile(DEFAULT_COVER_NAME)!!
 
         inputStream.use { input ->
             targetFile.openOutputStream().use { output ->
@@ -49,7 +48,6 @@ class LocalCoverManager(
 
         DiskUtil.createNoMediaFile(directory, context)
 
-        manga.thumbnail_url = targetFile.uri.toString()
         return targetFile
     }
 }

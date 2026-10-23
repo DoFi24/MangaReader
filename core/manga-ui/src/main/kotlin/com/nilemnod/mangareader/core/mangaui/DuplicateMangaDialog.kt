@@ -125,7 +125,7 @@ fun DuplicateMangaDialog(
                 ) {
                     DuplicateMangaListItem(
                         duplicate = it,
-                        getSource = { sourceManager.contentOrStub(it.manga.source) },
+                        getSource = { sourceManager.getOrStub(it.manga.source) },
                         onMigrate = { onMigrate(it.manga) },
                         onDismissRequest = onDismissRequest,
                         onOpenManga = { onOpenManga(it.manga) },

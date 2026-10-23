@@ -110,18 +110,18 @@ data class BrowseSourceScreen(
         val snackbarHostState = remember { SnackbarHostState() }
 
         val onWebViewClick = f@{
-            val httpSource = source as? HttpSource ?: return@f
+            val web = source.web ?: return@f
             navigator.push(
                 WebViewScreen(
-                    url = httpSource.getHomeUrl(),
-                    initialTitle = httpSource.name,
-                    sourceId = httpSource.id,
+                    url = web.homeUrl,
+                    initialTitle = source.name,
+                    sourceId = source.id,
                 ),
             )
         }
 
         LaunchedEffect(source) {
-            assistUrl = (source as? HttpSource)?.getHomeUrl()
+            assistUrl = source.web?.homeUrl
         }
 
         Scaffold(

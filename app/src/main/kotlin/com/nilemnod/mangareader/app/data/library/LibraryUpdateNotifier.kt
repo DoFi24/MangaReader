@@ -36,7 +36,6 @@ import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metro.Inject
-import eu.kanade.tachiyomi.source.UnmeteredSource
 import com.nilemnod.mangareader.icons.materialsymbols.R as MaterialSymbolsR
 import java.math.RoundingMode
 import java.text.NumberFormat
@@ -130,7 +129,7 @@ class LibraryUpdateNotifier(
     suspend fun showQueueSizeWarningNotificationIfNeeded(mangaToUpdate: List<LibraryManga>) {
         val maxUpdatesFromSource = mangaToUpdate
             .groupBy { it.manga.source }
-            .filter { (sourceId, _) -> sourceManager.content(sourceId) !is UnmeteredSource }
+            .filter { (sourceId, _) -> sourceManager.get(sourceId)?.isUnmetered != true }
             .maxOfOrNull { it.value.size } ?: 0
 
         if (maxUpdatesFromSource <= MANGA_PER_SOURCE_QUEUE_WARNING_THRESHOLD) {

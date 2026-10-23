@@ -245,7 +245,7 @@ class DownloadCache(
             // Retrieve the cached source directory or cache a new one
             var sourceDir = rootDownloadsDir.sourceDirs[manga.source]
             if (sourceDir == null) {
-                val source = sourceManager.content(manga.source) ?: return
+                val source = sourceManager.get(manga.source) ?: return
                 val sourceUniFile = provider.findSourceDir(source) ?: return
                 sourceDir = SourceDirectory(sourceUniFile)
                 rootDownloadsDir.sourceDirs += manga.source to sourceDir
@@ -453,7 +453,7 @@ class DownloadCache(
     }
 
     private suspend fun getSources(): List<ContentSource> {
-        return sourceManager.getOnlineContent() + sourceManager.getStubContent()
+        return sourceManager.getOnlineSources() + sourceManager.getStubSources()
     }
 
     private fun notifyChanges() {

@@ -91,7 +91,7 @@ class MigrationListViewModel(
                             manga = manga,
                             chapterCount = chapterInfo.chapterCount,
                             latestChapter = chapterInfo.latestChapter,
-                            source = sourceManager.contentOrStub(manga.source).getNameForMangaInfo(),
+                            source = sourceManager.getOrStub(manga.source).getNameForMangaInfo(),
                             parentContext = viewModelScope.coroutineContext,
                         )
                     }
@@ -112,7 +112,7 @@ class MigrationListViewModel(
 
     private suspend fun Manga.toSuccessSearchResult(): SearchResult.Success {
         val chapterInfo = getChapterInfo(id)
-        val source = sourceManager.contentOrStub(source).getNameForMangaInfo()
+        val source = sourceManager.getOrStub(source).getNameForMangaInfo()
         return SearchResult.Success(
             manga = this,
             chapterCount = chapterInfo.chapterCount,
@@ -126,7 +126,7 @@ class MigrationListViewModel(
         val deepSearchMode = preferences.migrationDeepSearchMode.get()
 
         val sources = preferences.migrationSources.get()
-            .mapNotNull { sourceManager.content(it) }
+            .mapNotNull { sourceManager.get(it) }
 
         for (manga in mangas) {
             if (!currentCoroutineContext().isActive) break
@@ -237,7 +237,7 @@ class MigrationListViewModel(
             val result = migratingManga.migrationScope.async {
                 val manga = getManga.await(target) ?: return@async null
                 try {
-                    val source = sourceManager.content(manga.source)!!
+                    val source = sourceManager.get(manga.source)!!
                     updateMangaFromRemote(source = source, manga = manga, fetchChapters = true).getOrThrow().manga
                 } catch (_: Exception) {
                     null

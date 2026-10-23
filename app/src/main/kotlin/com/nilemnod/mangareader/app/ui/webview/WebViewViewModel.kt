@@ -47,7 +47,7 @@ class WebViewViewModel(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val source = sourceId?.let { sourceManager.content(it)?.takeIf { it.web != null } }
+            val source = sourceId?.let { sourceManager.get(it)?.takeIf { it.web != null } }
             headers.value = try {
                 source?.web?.headers?.toHeaders()?.toWebViewHeaders().orEmpty()
             } catch (e: Exception) {

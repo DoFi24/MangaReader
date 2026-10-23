@@ -41,7 +41,7 @@ class UpdateMangaFromRemote(
         manualFetch: Boolean = false,
         fetchWindow: ClosedRange<Instant>? = null,
     ): Result<RemoteMangaUpdate> {
-        val source = sourceManager.contentOrStub(manga.source)
+        val source = sourceManager.getOrStub(manga.source)
         return invoke(
             source = source,
             manga = manga,

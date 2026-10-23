@@ -46,7 +46,7 @@ class DeepLinkViewModel(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val source = sourceManager.allContent()
+            val source = sourceManager.getAll()
                 .firstOrNull { it.resolver?.uriType(query).let { type -> type != null && type != UriType.Unknown } }
             val resolver = source?.resolver
 

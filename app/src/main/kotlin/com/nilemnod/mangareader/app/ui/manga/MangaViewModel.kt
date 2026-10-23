@@ -202,7 +202,7 @@ class MangaViewModel(
     ) { (manga, chapters), _, _ ->
         MangaAndChapters(
             manga = manga,
-            source = sourceManager.contentOrStub(manga.source),
+            source = sourceManager.getOrStub(manga.source),
             chapters = chapters.toChapterListItems(manga),
         )
     }
@@ -313,7 +313,7 @@ class MangaViewModel(
     ) {
         try {
             val update = updateMangaFromRemote(
-                source = sourceManager.contentOrStub(manga.source),
+                source = sourceManager.getOrStub(manga.source),
                 manga = manga,
                 fetchDetails = fetchDetails,
                 fetchChapters = fetchChapters,

@@ -355,7 +355,7 @@ class MigrationConfigScreen(private val mangaIds: Collection<Long>) : Screen() {
             val includedSources = sourcePreferences.migrationSources.get()
             val disabledSources = sourcePreferences.disabledSources.get()
                 .mapNotNull { it.toLongOrNull() }
-            val sources = sourceManager.allContent()
+            val sources = sourceManager.getAll()
                 .asSequence()
                 .filterIsInstance<HttpSource>()
                 .filter { it.lang in languages }

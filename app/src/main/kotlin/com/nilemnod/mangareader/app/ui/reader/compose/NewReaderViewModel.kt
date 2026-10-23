@@ -170,7 +170,7 @@ class NewReaderViewModel(
     private suspend fun initialize() {
         try {
             val manga = getManga.await(mangaId) ?: error("Requested manga of id $mangaId not found")
-            val source = sourceManager.contentOrStub(manga.source)
+            val source = sourceManager.getOrStub(manga.source)
             incognito = getIncognitoState.await(manga.source)
             this.manga = manga
             loader = ChapterLoader(

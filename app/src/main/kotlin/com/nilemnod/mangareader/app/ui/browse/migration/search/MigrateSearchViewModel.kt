@@ -65,6 +65,6 @@ class MigrateSearchViewModel(
     }
 
     override suspend fun getEnabledSources(): List<ContentSource> {
-        return migrationSources.mapNotNull { sourceManager.content(it) }
+        return migrationSources.mapNotNull { sourceManager.get(it) }
     }
 }

@@ -12,7 +12,6 @@ import com.nilemnod.mangareader.domain.source.api.SourceManga
 import com.nilemnod.mangareader.domain.source.api.UriResolver
 import com.nilemnod.mangareader.domain.source.api.UriType
 import com.nilemnod.mangareader.domain.source.api.WebAccess
-import com.nilemnod.mangareader.domain.source.model.StubSource
 import eu.kanade.tachiyomi.network.HttpException
 import eu.kanade.tachiyomi.source.ConfigurableSource
 import eu.kanade.tachiyomi.source.Source
@@ -42,9 +41,6 @@ class ExtensionContentSource(
         get() = native is ConfigurableSource
 
     override val resolver: UriResolver? = (native as? ResolvableSource)?.let { ExtensionUriResolver(it) }
-
-    override val isStub: Boolean
-        get() = native is StubSource
 
     override val isUnmetered: Boolean
         get() = native is UnmeteredSource

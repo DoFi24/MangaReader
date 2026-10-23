@@ -1,6 +1,7 @@
 package com.nilemnod.mangareader.core.metadata.comicinfo
 
-import eu.kanade.tachiyomi.source.model.SManga
+import com.nilemnod.mangareader.domain.source.api.MangaStatus
+import com.nilemnod.mangareader.domain.source.api.SourceManga
 import kotlinx.serialization.Serializable
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
@@ -8,14 +9,14 @@ import nl.adaptivity.xmlutil.serialization.XmlValue
 
 const val COMIC_INFO_FILE = "ComicInfo.xml"
 
-fun SManga.getComicInfo() = ComicInfo(
+fun SourceManga.toComicInfo() = ComicInfo(
     series = ComicInfo.Series(title),
     summary = description?.let { ComicInfo.Summary(it) },
     writer = author?.let { ComicInfo.Writer(it) },
     penciller = artist?.let { ComicInfo.Penciller(it) },
-    genre = genre?.let { ComicInfo.Genre(it) },
+    genre = genres.takeIf { it.isNotEmpty() }?.let { ComicInfo.Genre(it.joinToString()) },
     publishingStatus = ComicInfo.PublishingStatusTachiyomi(
-        ComicInfoPublishingStatus.toComicInfoValue(status.toLong()),
+        ComicInfoPublishingStatus.toComicInfoValue(status.code),
     ),
     title = null,
     number = null,
@@ -33,12 +34,8 @@ fun SManga.getComicInfo() = ComicInfo(
     source = null,
 )
 
-fun SManga.copyFromComicInfo(comicInfo: ComicInfo) {
-    comicInfo.series?.let { title = it.value }
-    comicInfo.writer?.let { author = it.value }
-    comicInfo.summary?.let { description = it.value }
-
-    listOfNotNull(
+fun SourceManga.copyFromComicInfo(comicInfo: ComicInfo): SourceManga {
+    val genres = listOfNotNull(
         comicInfo.genre?.value,
         comicInfo.tags?.value,
         comicInfo.categories?.value,
@@ -46,9 +43,12 @@ fun SManga.copyFromComicInfo(comicInfo: ComicInfo) {
         .distinct()
         .joinToString(", ") { it.trim() }
         .takeIf { it.isNotEmpty() }
-        ?.let { genre = it }
+        ?.split(", ")
+        ?.map { it.trim() }
+        ?.filterNot { it.isBlank() }
+        ?.distinct()
 
-    listOfNotNull(
+    val artist = listOfNotNull(
         comicInfo.penciller?.value,
         comicInfo.inker?.value,
         comicInfo.colorist?.value,
@@ -59,9 +59,15 @@ fun SManga.copyFromComicInfo(comicInfo: ComicInfo) {
         .distinct()
         .joinToString(", ") { it.trim() }
         .takeIf { it.isNotEmpty() }
-        ?.let { artist = it }
 
-    status = ComicInfoPublishingStatus.toSMangaValue(comicInfo.publishingStatus?.value)
+    return copy(
+        title = comicInfo.series?.value ?: title,
+        author = comicInfo.writer?.value ?: author,
+        description = comicInfo.summary?.value ?: description,
+        genres = genres ?: this.genres,
+        artist = artist ?: this.artist,
+        status = ComicInfoPublishingStatus.toMangaStatus(comicInfo.publishingStatus?.value),
+    )
 }
 
 // https://anansi-project.github.io/docs/comicinfo/schemas/v2.0
@@ -184,19 +190,23 @@ enum class ComicInfoPublishingStatus(
     val comicInfoValue: String,
     val sMangaModelValue: Int,
 ) {
-    ONGOING("Ongoing", SManga.ONGOING),
-    COMPLETED("Completed", SManga.COMPLETED),
-    LICENSED("Licensed", SManga.LICENSED),
-    PUBLISHING_FINISHED("Publishing finished", SManga.PUBLISHING_FINISHED),
-    CANCELLED("Cancelled", SManga.CANCELLED),
-    ON_HIATUS("On hiatus", SManga.ON_HIATUS),
-    UNKNOWN("Unknown", SManga.UNKNOWN),
+    ONGOING("Ongoing", MangaStatus.ONGOING.code.toInt()),
+    COMPLETED("Completed", MangaStatus.COMPLETED.code.toInt()),
+    LICENSED("Licensed", MangaStatus.LICENSED.code.toInt()),
+    PUBLISHING_FINISHED("Publishing finished", MangaStatus.PUBLISHING_FINISHED.code.toInt()),
+    CANCELLED("Cancelled", MangaStatus.CANCELLED.code.toInt()),
+    ON_HIATUS("On hiatus", MangaStatus.ON_HIATUS.code.toInt()),
+    UNKNOWN("Unknown", MangaStatus.UNKNOWN.code.toInt()),
     ;
 
     companion object {
         fun toComicInfoValue(value: Long): String {
             return entries.firstOrNull { it.sMangaModelValue == value.toInt() }?.comicInfoValue
                 ?: UNKNOWN.comicInfoValue
+        }
+
+        fun toMangaStatus(value: String?): MangaStatus {
+            return MangaStatus.fromCode(toSMangaValue(value).toLong())
         }
 
         fun toSMangaValue(value: String?): Int {

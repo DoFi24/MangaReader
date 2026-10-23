@@ -113,7 +113,7 @@ class DownloadManager(
     private suspend fun downloadFromChapterId(chapterId: Long): Download? {
         val chapter = getChapter.await(chapterId) ?: return null
         val manga = getManga.await(chapter.mangaId) ?: return null
-        val source = sourceManager.content(manga.source)?.takeIf { it.web != null } ?: return null
+        val source = sourceManager.get(manga.source)?.takeIf { it.web != null } ?: return null
 
         return Download(source, manga, chapter)
     }
@@ -326,7 +326,7 @@ class DownloadManager(
     suspend fun deletePendingChapters() {
         val pendingChapters = pendingDeleter.getPendingChapters()
         for ((manga, chapters) in pendingChapters) {
-            val source = sourceManager.content(manga.source) ?: continue
+            val source = sourceManager.get(manga.source) ?: continue
             deleteChapters(chapters, manga, source)
         }
     }
@@ -364,7 +364,7 @@ class DownloadManager(
      * @param newTitle the new manga title.
      */
     suspend fun renameManga(manga: Manga, newTitle: String) = withContext(Dispatchers.IO) {
-        val source = sourceManager.contentOrStub(manga.source)
+        val source = sourceManager.getOrStub(manga.source)
         val oldFolder = provider.findMangaDir(manga.title, source) ?: return@withContext
         val newName = provider.getMangaDirName(newTitle)
 

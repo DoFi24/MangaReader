@@ -108,12 +108,12 @@ data class MigrateSourceSearchScreen(
                 snackbarHostState = snackbarHostState,
                 contentPadding = paddingValues,
                 onWebViewClick = {
-                    val httpSource = source as? HttpSource ?: return@BrowseSourceContent
+                    val web = source?.web ?: return@BrowseSourceContent
                     navigator.push(
                         WebViewScreen(
-                            url = httpSource.getHomeUrl(),
-                            initialTitle = httpSource.name,
-                            sourceId = httpSource.id,
+                            url = web.homeUrl,
+                            initialTitle = source.name,
+                            sourceId = source.id,
                         ),
                     )
                 },

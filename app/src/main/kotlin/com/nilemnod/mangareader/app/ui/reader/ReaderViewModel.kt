@@ -47,7 +47,7 @@ import com.nilemnod.mangareader.domain.chapter.interactor.GetChaptersByMangaId
 import com.nilemnod.mangareader.domain.chapter.interactor.UpdateChapter
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.chapter.model.ChapterUpdate
-import com.nilemnod.mangareader.domain.chapter.model.toSChapter
+import com.nilemnod.mangareader.domain.chapter.model.toSourceChapter
 import com.nilemnod.mangareader.domain.chapter.service.getChapterSort
 import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
@@ -344,7 +344,7 @@ class ReaderViewModel(
         withContext(Dispatchers.IO) {
             try {
                 val manga = getManga.await(mangaId) ?: error("Requested manga of id $mangaId not found")
-                val source = sourceManager.contentOrStub(manga.source)
+                val source = sourceManager.getOrStub(manga.source)
                 incognitoMode = getIncognitoState.await(manga.source)
                 mutableState.update { it.copy(manga = manga, source = source) }
                 if (chapterId == -1L) chapterId = initialChapterId
@@ -776,14 +776,16 @@ class ReaderViewModel(
         return state.value.currentChapter
     }
 
-    fun getSource() = state.value.source as? HttpSource
+    fun getWebSource() = state.value.source?.takeIf { it.web != null }
+
+    fun getWebAccess() = state.value.source?.web
 
     fun getChapterUrl(): String? {
-        val sChapter = getCurrentChapter()?.chapter?.toSChapter() ?: return null
-        val source = getSource() ?: return null
+        val sourceChapter = getCurrentChapter()?.chapter?.toSourceChapter() ?: return null
+        val web = getWebAccess() ?: return null
 
         return try {
-            source.getChapterUrl(sChapter)
+            web.chapterUrl(sourceChapter)
         } catch (e: Exception) {
             logcat(LogPriority.ERROR, e)
             null

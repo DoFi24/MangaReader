@@ -11,7 +11,7 @@ class SourcesBackupCreator(
 ) {
 
     suspend operator fun invoke(sourceIds: Set<Long>): List<BackupSource> {
-        return sourceIds.map { sourceManager.contentOrStub(it).toBackupSource() }
+        return sourceIds.map { sourceManager.getOrStub(it).toBackupSource() }
     }
 }
 

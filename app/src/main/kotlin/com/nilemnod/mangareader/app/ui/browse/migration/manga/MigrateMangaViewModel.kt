@@ -51,7 +51,7 @@ class MigrateMangaViewModel(
     private val _events: Channel<MigrationMangaEvent> = Channel()
     val events: Flow<MigrationMangaEvent> = _events.receiveAsFlow()
 
-    private val source = viewModelScope.async { sourceManager.contentOrStub(sourceId) }
+    private val source = viewModelScope.async { sourceManager.getOrStub(sourceId) }
 
     private val selection = MutableStateFlow(emptySet<Long>())
 
