@@ -28,11 +28,11 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
-import com.nilemnod.mangareader.app.data.download.model.Download
 import com.nilemnod.mangareader.core.ui.components.DropdownMenu
 import com.nilemnod.mangareader.core.ui.components.material.IconButtonTokens
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.secondaryItemAlpha
+import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
 import com.nilemnod.mangareader.icons.custommaterialsymbols.rounded.DownloadArrow

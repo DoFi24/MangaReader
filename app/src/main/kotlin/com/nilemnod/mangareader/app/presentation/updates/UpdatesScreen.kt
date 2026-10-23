@@ -19,7 +19,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastAll
 import androidx.compose.ui.util.fastAny
-import com.nilemnod.mangareader.app.data.download.model.Download
 import com.nilemnod.mangareader.app.presentation.manga.components.ChapterDownloadAction
 import com.nilemnod.mangareader.app.presentation.manga.components.MangaBottomActionMenu
 import com.nilemnod.mangareader.app.ui.updates.UpdatesItem
@@ -33,6 +32,7 @@ import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
 import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
 import com.nilemnod.mangareader.core.ui.theme.active
+import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.CalendarMonth

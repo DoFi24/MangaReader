@@ -11,7 +11,6 @@ import androidx.lifecycle.viewModelScope
 import com.nilemnod.mangareader.app.core.preference.asState
 import com.nilemnod.mangareader.app.data.download.DownloadCache
 import com.nilemnod.mangareader.app.data.download.DownloadManager
-import com.nilemnod.mangareader.app.data.download.model.Download
 import com.nilemnod.mangareader.app.data.library.LibraryUpdateWorker
 import com.nilemnod.mangareader.app.domain.chapter.interactor.SetReadStatus
 import com.nilemnod.mangareader.app.presentation.manga.components.ChapterDownloadAction
@@ -28,6 +27,7 @@ import com.nilemnod.mangareader.core.ui.util.insertSeparators
 import com.nilemnod.mangareader.domain.chapter.interactor.GetChapter
 import com.nilemnod.mangareader.domain.chapter.interactor.UpdateChapter
 import com.nilemnod.mangareader.domain.chapter.model.ChapterUpdate
+import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.interactor.GetManga
 import com.nilemnod.mangareader.domain.manga.model.applyFilter

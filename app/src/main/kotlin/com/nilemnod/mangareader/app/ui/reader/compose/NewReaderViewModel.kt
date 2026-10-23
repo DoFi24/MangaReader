@@ -11,7 +11,6 @@ import com.nilemnod.mangareader.app.data.cache.ChapterCache
 import com.nilemnod.mangareader.app.data.download.DownloadCache
 import com.nilemnod.mangareader.app.data.download.DownloadManager
 import com.nilemnod.mangareader.app.data.download.DownloadProvider
-import com.nilemnod.mangareader.app.data.download.model.Download
 import com.nilemnod.mangareader.app.data.saver.Image
 import com.nilemnod.mangareader.app.data.saver.ImageSaver
 import com.nilemnod.mangareader.app.data.saver.Location
@@ -38,6 +37,7 @@ import com.nilemnod.mangareader.domain.chapter.interactor.UpdateChapter
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.chapter.model.ChapterUpdate
 import com.nilemnod.mangareader.domain.chapter.service.getChapterSort
+import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
 import com.nilemnod.mangareader.domain.history.interactor.GetNextChapters
 import com.nilemnod.mangareader.domain.history.interactor.UpsertHistory

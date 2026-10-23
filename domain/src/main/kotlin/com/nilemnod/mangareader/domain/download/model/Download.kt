@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.data.download.model
+package com.nilemnod.mangareader.domain.download.model
 
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.manga.model.Manga

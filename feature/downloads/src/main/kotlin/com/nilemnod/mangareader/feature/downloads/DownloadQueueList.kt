@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.download
+package com.nilemnod.mangareader.feature.downloads
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.MutatePriority
@@ -43,12 +43,12 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.nilemnod.mangareader.app.data.download.model.Download
-import com.nilemnod.mangareader.app.ui.download.DownloadQueueSection
 import com.nilemnod.mangareader.core.ui.components.DropdownMenu
 import com.nilemnod.mangareader.core.ui.components.ListGroupHeader
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.domain.download.model.Download
+import com.nilemnod.mangareader.feature.downloads.DownloadQueueSection
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.DragHandle
