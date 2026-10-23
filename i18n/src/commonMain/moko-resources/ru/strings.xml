@@ -223,10 +223,10 @@
     <string name="other_source">Другое</string>
     <string name="action_global_search_hint">Искать глобально…</string>
     <string name="latest">Последние</string>
-    <string name="browse">Поисковик</string>
+    <string name="browse">Обзор</string>
     <string name="channel_common">Общий</string>
     <string name="information_empty_category">Нет категорий в библиотеке. Нажмите кнопку «Добавить», чтобы создать категорию для организации вашей библиотеки.</string>
-    <string name="label_migration">Перенос</string>
+    <string name="label_migration">Миграция</string>
     <string name="label_extensions">Расширения</string>
     <string name="label_extension_info">Информация о расширении</string>
     <string name="ext_update">Обновить</string>
@@ -287,7 +287,7 @@
     <string name="logout">Выйти</string>
     <string name="logout_success">Вы успешно вышли</string>
     <string name="paused">На паузе</string>
-    <string name="label_more">Больше</string>
+    <string name="label_more">Ещё</string>
     <string name="action_sort_latest_chapter">Последняя глава</string>
     <string name="action_view_chapters">Просмотреть главы</string>
     <string name="action_cancel_all">Отменить всё</string>
@@ -962,4 +962,25 @@
     <string name="follow_language">Как на устройстве</string>
     <string name="time_24_hours">24 часа</string>
     <string name="time_12_hours">12 часов</string>
+    <string name="empty_library_title">Библиотека пуста</string>
+    <string name="empty_library_text">Добавляйте мангу из обзора, и она появится здесь.</string>
+    <string name="action_open_browse">Открыть обзор</string>
+    <string name="empty_updates_title">Новых глав нет</string>
+    <string name="empty_updates_text">Обновите библиотеку, чтобы проверить новые главы.</string>
+    <string name="empty_history_title">История пуста</string>
+    <string name="empty_history_text">Здесь появятся главы, которые вы открывали.</string>
+    <string name="offline_title">Нет соединения</string>
+    <string name="empty_sources_title">Источников нет</string>
+    <string name="empty_sources_text">Установите расширение, чтобы добавить источники.</string>
+    <string name="action_to_extensions">К расширениям</string>
+    <string name="library_update_progress">Обновление библиотеки: %1$d из %2$d</string>
+    <string name="reader_transition_finished">Прочитано</string>
+    <string name="reader_transition_next">Далее</string>
+    <string name="reader_transition_previous">Ранее</string>
+    <string name="reader_continue_reading">Читать дальше</string>
+    <string name="reader_back_to_page">Вернуться на страницу %1$d</string>
+    <string name="continue_reading_chapter">Продолжить · %1$s</string>
+    <string name="start_reading_chapter">Начать · %1$s</string>
+    <string name="add_note">Добавить заметку</string>
+    <string name="crash_screen_restart">Перезапустить</string>
 </resources>

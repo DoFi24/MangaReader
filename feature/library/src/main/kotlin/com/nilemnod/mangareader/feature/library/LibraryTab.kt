@@ -25,6 +25,8 @@ import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.mangaui.ChangeCategoryDialog
 import com.nilemnod.mangareader.core.mangaui.LibraryBottomActionMenu
+import com.nilemnod.mangareader.core.navigation.HomeTab
+import com.nilemnod.mangareader.core.navigation.HomeTabRouter
 import com.nilemnod.mangareader.core.navigation.SharedIntent
 import com.nilemnod.mangareader.core.navigation.SharedScreen
 import com.nilemnod.mangareader.core.navigation.intent
@@ -32,7 +34,8 @@ import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
-import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
+import com.nilemnod.mangareader.core.ui.screens.EmptyScreenAction
+import com.nilemnod.mangareader.core.ui.screens.GridSkeleton
 import com.nilemnod.mangareader.core.ui.util.BottomNavController
 import com.nilemnod.mangareader.core.ui.util.SplashReady
 import com.nilemnod.mangareader.core.ui.util.Tab
@@ -43,10 +46,9 @@ import com.nilemnod.mangareader.feature.library.components.LibraryContent
 import com.nilemnod.mangareader.feature.library.components.LibraryToolbar
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Browse
 import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Library
 import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Library
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.Help
 import com.nilemnod.mangareader.source.local.isLocal
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 import kotlinx.coroutines.channels.Channel
@@ -154,12 +156,20 @@ data object LibraryTab : Tab {
         ) { contentPadding ->
             when {
                 state.isLoading -> {
-                    LoadingScreen(Modifier.padding(contentPadding))
+                    GridSkeleton(Modifier.padding(contentPadding))
                 }
                 state.searchQuery.isNullOrEmpty() && !state.hasActiveFilters && state.isLibraryEmpty -> {
                     EmptyScreen(
-                        stringRes = MR.strings.information_empty_library,
+                        stringRes = MR.strings.empty_library_text,
+                        title = stringResource(MR.strings.empty_library_title),
                         modifier = Modifier.padding(contentPadding),
+                        actions = listOf(
+                            EmptyScreenAction(
+                                stringRes = MR.strings.action_open_browse,
+                                icon = CustomMaterialSymbols.Edge.Browse,
+                                onClick = { scope.launch { HomeTabRouter.open(HomeTab.Browse()) } },
+                            ),
+                        ),
                     )
                 }
                 else -> {

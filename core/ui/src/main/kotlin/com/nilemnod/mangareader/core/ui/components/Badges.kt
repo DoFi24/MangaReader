@@ -1,9 +1,12 @@
 package com.nilemnod.mangareader.core.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.foundation.text.appendInlineContent
 import androidx.compose.material3.Icon
@@ -13,22 +16,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.PlaceholderVerticalAlign
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun BadgeGroup(
     modifier: Modifier = Modifier,
-    shape: Shape = MaterialTheme.shapes.extraSmall,
     content: @Composable RowScope.() -> Unit,
 ) {
-    Row(modifier = modifier.clip(shape)) {
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy(2.dp),
+    ) {
         content()
     }
 }
@@ -37,20 +41,22 @@ fun BadgeGroup(
 fun Badge(
     text: String,
     modifier: Modifier = Modifier,
-    color: Color = MaterialTheme.colorScheme.secondary,
-    textColor: Color = MaterialTheme.colorScheme.onSecondary,
-    shape: Shape = RectangleShape,
+    color: Color = MaterialTheme.colorScheme.primary,
+    textColor: Color = MaterialTheme.colorScheme.onPrimary,
+    shape: Shape = MaterialTheme.shapes.extraSmall,
 ) {
     Text(
         text = text,
         modifier = modifier
             .clip(shape)
             .background(color)
-            .padding(horizontal = 3.dp, vertical = 1.dp),
+            .heightIn(min = BadgeHeight)
+            .widthIn(min = BadgeHeight)
+            .padding(horizontal = 6.dp, vertical = 2.dp),
         color = textColor,
-        fontWeight = FontWeight.Medium,
         maxLines = 1,
-        style = MaterialTheme.typography.bodySmall,
+        textAlign = TextAlign.Center,
+        style = MaterialTheme.typography.labelSmall,
     )
 }
 
@@ -58,9 +64,9 @@ fun Badge(
 fun Badge(
     imageVector: ImageVector,
     modifier: Modifier = Modifier,
-    color: Color = MaterialTheme.colorScheme.secondary,
-    iconColor: Color = MaterialTheme.colorScheme.onSecondary,
-    shape: Shape = RectangleShape,
+    color: Color = MaterialTheme.colorScheme.primary,
+    iconColor: Color = MaterialTheme.colorScheme.onPrimary,
+    shape: Shape = MaterialTheme.shapes.extraSmall,
 ) {
     val iconContentPlaceholder = "[icon]"
     val text = buildAnnotatedString {
@@ -71,8 +77,8 @@ fun Badge(
             iconContentPlaceholder,
             InlineTextContent(
                 Placeholder(
-                    width = MaterialTheme.typography.bodySmall.fontSize,
-                    height = MaterialTheme.typography.bodySmall.fontSize,
+                    width = MaterialTheme.typography.labelSmall.fontSize,
+                    height = MaterialTheme.typography.labelSmall.fontSize,
                     placeholderVerticalAlign = PlaceholderVerticalAlign.Center,
                 ),
             ) {
@@ -91,10 +97,12 @@ fun Badge(
         modifier = modifier
             .clip(shape)
             .background(color)
-            .padding(horizontal = 3.dp, vertical = 1.dp),
+            .heightIn(min = BadgeHeight)
+            .padding(horizontal = 4.dp, vertical = 2.dp),
         color = iconColor,
-        fontWeight = FontWeight.Medium,
         maxLines = 1,
-        style = MaterialTheme.typography.bodySmall,
+        style = MaterialTheme.typography.labelSmall,
     )
 }
+
+private val BadgeHeight = 20.dp

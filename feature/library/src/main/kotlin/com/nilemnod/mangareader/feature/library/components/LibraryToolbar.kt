@@ -1,6 +1,5 @@
 package com.nilemnod.mangareader.feature.library.components
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
@@ -16,13 +15,14 @@ import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.AppBarActions
 import com.nilemnod.mangareader.core.ui.components.Pill
 import com.nilemnod.mangareader.core.ui.components.SearchToolbar
+import com.nilemnod.mangareader.core.ui.components.SelectionTitle
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
-import com.nilemnod.mangareader.core.ui.theme.active
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.FilterList
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.FlipToBack
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.SelectAll
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Filter
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.InvertSelection
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.SelectAll
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Filter
 @Composable
 fun LibraryToolbar(
     hasActiveFilters: Boolean,
@@ -70,7 +70,6 @@ private fun LibraryRegularToolbar(
     onClickOpenRandomManga: () -> Unit,
     scrollBehavior: TopAppBarScrollBehavior?,
 ) {
-    val pillAlpha = if (isSystemInDarkTheme()) 0.12f else 0.08f
     SearchToolbar(
         titleContent = {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -83,8 +82,9 @@ private fun LibraryRegularToolbar(
                 if (title.numberOfManga != null) {
                     Pill(
                         text = "${title.numberOfManga}",
-                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = pillAlpha),
-                        fontSize = 14.sp,
+                        color = MaterialTheme.colorScheme.secondaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                        fontSize = 12.sp,
                     )
                 }
             }
@@ -92,12 +92,16 @@ private fun LibraryRegularToolbar(
         searchQuery = searchQuery,
         onChangeSearchQuery = onSearchQueryChange,
         actions = {
-            val filterTint = if (hasFilters) MaterialTheme.colorScheme.active else LocalContentColor.current
+            val filterTint = if (hasFilters) MaterialTheme.colorScheme.primary else LocalContentColor.current
             AppBarActions(
                 listOf(
                     AppBar.Action(
                         title = stringResource(MR.strings.action_filter),
-                        icon = MaterialSymbols.Rounded.FilterList,
+                        icon = if (hasFilters) {
+                            CustomMaterialSymbols.EdgeFilled.Filter
+                        } else {
+                            CustomMaterialSymbols.Edge.Filter
+                        },
                         iconTint = filterTint,
                         onClick = onClickFilter,
                     ),
@@ -128,18 +132,18 @@ private fun LibrarySelectionToolbar(
     onClickInvertSelection: () -> Unit,
 ) {
     AppBar(
-        titleContent = { Text(text = "$selectedCount") },
+        titleContent = { SelectionTitle(selectedCount) },
         actions = {
             AppBarActions(
                 listOf(
                     AppBar.Action(
                         title = stringResource(MR.strings.action_select_all),
-                        icon = MaterialSymbols.Rounded.SelectAll,
+                        icon = CustomMaterialSymbols.Edge.SelectAll,
                         onClick = onClickSelectAll,
                     ),
                     AppBar.Action(
                         title = stringResource(MR.strings.action_select_inverse),
-                        icon = MaterialSymbols.Rounded.FlipToBack,
+                        icon = CustomMaterialSymbols.Edge.InvertSelection,
                         onClick = onClickInvertSelection,
                     ),
                 ),

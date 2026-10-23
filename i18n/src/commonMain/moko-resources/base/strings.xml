@@ -1119,4 +1119,25 @@
     <string name="donationCampaign.paragraph3">Regardless, Mihon will continue to be maintained by me and the volunteers, and it will stay open source.</string>
     <string name="donationCampaign.contactPlatform">Discord</string>
     <string name="donationCampaign.dismiss">Dismiss</string>
+    <string name="empty_library_title">Library is empty</string>
+    <string name="empty_library_text">Add manga from Browse and it will show up here.</string>
+    <string name="action_open_browse">Open Browse</string>
+    <string name="empty_updates_title">No new chapters</string>
+    <string name="empty_updates_text">Update your library to check for new chapters.</string>
+    <string name="empty_history_title">History is empty</string>
+    <string name="empty_history_text">Chapters you open will appear here.</string>
+    <string name="offline_title">No connection</string>
+    <string name="empty_sources_title">No sources</string>
+    <string name="empty_sources_text">Install an extension to add sources.</string>
+    <string name="action_to_extensions">Go to extensions</string>
+    <string name="library_update_progress">Updating library: %1$d of %2$d</string>
+    <string name="reader_transition_finished">Finished</string>
+    <string name="reader_transition_next">Next</string>
+    <string name="reader_transition_previous">Previous</string>
+    <string name="reader_continue_reading">Continue reading</string>
+    <string name="reader_back_to_page">Back to page %1$d</string>
+    <string name="continue_reading_chapter">Continue · %1$s</string>
+    <string name="start_reading_chapter">Start · %1$s</string>
+    <string name="add_note">Add a note</string>
+    <string name="crash_screen_restart">Restart</string>
 </resources>

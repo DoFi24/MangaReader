@@ -1,10 +1,14 @@
 package com.nilemnod.mangareader.core.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.TextFieldLineLimits
@@ -26,7 +30,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.rememberTooltipState
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -38,6 +41,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -50,18 +54,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.clearFocusOnSoftKeyboardHide
 import com.nilemnod.mangareader.core.ui.util.runOnEnterKeyPressed
 import com.nilemnod.mangareader.core.ui.util.secondaryItemAlpha
 import com.nilemnod.mangareader.core.ui.util.showSoftKeyboard
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.ArrowBack
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Close
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.MoreVert
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Search
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Back
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Close
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.MenuDots
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Search
 import kotlinx.coroutines.flow.drop
 
 @Composable
@@ -93,7 +96,7 @@ fun AppBar(
         backgroundColor = backgroundColor,
         titleContent = {
             if (isActionMode) {
-                AppBarTitle(actionModeCounter.toString())
+                SelectionTitle(actionModeCounter)
             } else {
                 AppBarTitle(title, subtitle = subtitle)
             }
@@ -139,7 +142,7 @@ fun AppBar(
                 if (isActionMode) {
                     IconButton(onClick = onCancelActionMode) {
                         Icon(
-                            imageVector = MaterialSymbols.Rounded.Close,
+                            imageVector = CustomMaterialSymbols.Edge.Close,
                             contentDescription = stringResource(MR.strings.action_cancel),
                         )
                     }
@@ -154,13 +157,36 @@ fun AppBar(
             title = titleContent,
             actions = actions,
             colors = TopAppBarDefaults.topAppBarColors(
-                containerColor = backgroundColor ?: MaterialTheme.colorScheme.surfaceColorAtElevation(
-                    elevation = if (isActionMode) 3.dp else 0.dp,
-                ),
+                containerColor = backgroundColor ?: if (isActionMode) {
+                    MaterialTheme.colorScheme.surfaceContainerHigh
+                } else {
+                    MaterialTheme.colorScheme.surface
+                },
+                scrolledContainerColor = backgroundColor ?: if (isActionMode) {
+                    MaterialTheme.colorScheme.surfaceContainerHigh
+                } else {
+                    MaterialTheme.colorScheme.surfaceContainer
+                },
+                navigationIconContentColor = MaterialTheme.colorScheme.onSurface,
+                titleContentColor = MaterialTheme.colorScheme.onSurface,
+                actionIconContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
             ),
             scrollBehavior = scrollBehavior,
         )
     }
+}
+
+@Composable
+fun SelectionTitle(
+    count: Int,
+    modifier: Modifier = Modifier,
+) {
+    Text(
+        text = "${stringResource(MR.strings.selected)}: $count",
+        modifier = modifier,
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis,
+    )
 }
 
 @Composable
@@ -237,7 +263,7 @@ fun AppBarActions(
                 onClick = { showMenu = !showMenu },
             ) {
                 Icon(
-                    MaterialSymbols.Rounded.MoreVert,
+                    CustomMaterialSymbols.Edge.MenuDots,
                     contentDescription = stringResource(MR.strings.action_menu_overflow_description),
                 )
             }
@@ -320,14 +346,16 @@ fun SearchToolbar(
                 state = searchFieldState,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(end = 4.dp)
+                    .height(48.dp)
+                    .clip(CircleShape)
+                    .background(MaterialTheme.colorScheme.surfaceContainerHigh)
                     .focusRequester(focusRequester)
                     .runOnEnterKeyPressed(action = searchAndClearFocus)
                     .showSoftKeyboard(remember { searchQuery.isEmpty() })
                     .clearFocusOnSoftKeyboardHide(),
-                textStyle = MaterialTheme.typography.titleMedium.copy(
-                    color = MaterialTheme.colorScheme.onBackground,
-                    fontWeight = FontWeight.Normal,
-                    fontSize = 18.sp,
+                textStyle = MaterialTheme.typography.bodyLarge.copy(
+                    color = MaterialTheme.colorScheme.onSurface,
                 ),
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
                 onKeyboardAction = { searchAndClearFocus() },
@@ -346,10 +374,7 @@ fun SearchToolbar(
                             text = (placeholderText ?: stringResource(MR.strings.action_search_hint)),
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
-                            style = MaterialTheme.typography.titleMedium.copy(
-                                fontSize = 18.sp,
-                                fontWeight = FontWeight.Normal,
-                            ),
+                            style = MaterialTheme.typography.bodyLarge,
                         )
                     },
                     container = {},
@@ -378,7 +403,7 @@ fun SearchToolbar(
                             onClick = onClick,
                         ) {
                             Icon(
-                                MaterialSymbols.Rounded.Search,
+                                CustomMaterialSymbols.Edge.Search,
                                 contentDescription = stringResource(MR.strings.action_search),
                             )
                         }
@@ -402,7 +427,7 @@ fun SearchToolbar(
                             },
                         ) {
                             Icon(
-                                MaterialSymbols.Rounded.Close,
+                                CustomMaterialSymbols.Edge.Close,
                                 contentDescription = stringResource(MR.strings.action_reset),
                             )
                         }
@@ -423,7 +448,7 @@ fun UpIcon(
     navigationIcon: ImageVector? = null,
 ) {
     val icon = navigationIcon
-        ?: MaterialSymbols.AutoMirroredRounded.ArrowBack
+        ?: CustomMaterialSymbols.Edge.Back
     Icon(
         imageVector = icon,
         contentDescription = stringResource(MR.strings.action_bar_up_description),
