@@ -3,11 +3,11 @@ package com.nilemnod.mangareader.core.reader
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
-import com.nilemnod.mangareader.icons.custommaterialsymbols.rounded.ReaderLeftToRight
-import com.nilemnod.mangareader.icons.custommaterialsymbols.rounded.ReaderLongStrip
-import com.nilemnod.mangareader.icons.custommaterialsymbols.rounded.ReaderLongStripGaps
-import com.nilemnod.mangareader.icons.custommaterialsymbols.rounded.ReaderRightToLeft
-import com.nilemnod.mangareader.icons.custommaterialsymbols.rounded.ReaderVertical
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.ReaderLongStrip
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.ReaderLongStripGaps
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.ReaderLtr
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.ReaderRtl
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.ReaderVertical
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.MobileGear
 import dev.icerock.moko.resources.StringResource
@@ -22,35 +22,35 @@ enum class ReadingMode(
     DEFAULT(MR.strings.label_default, MaterialSymbols.Rounded.MobileGear, 0x00000000),
     LEFT_TO_RIGHT(
         MR.strings.left_to_right_viewer,
-        CustomMaterialSymbols.Rounded.ReaderLeftToRight,
+        CustomMaterialSymbols.Edge.ReaderLtr,
         0x00000001,
         Direction.Horizontal,
         ViewerType.Pager,
     ),
     RIGHT_TO_LEFT(
         MR.strings.right_to_left_viewer,
-        CustomMaterialSymbols.Rounded.ReaderRightToLeft,
+        CustomMaterialSymbols.Edge.ReaderRtl,
         0x00000002,
         Direction.Horizontal,
         ViewerType.Pager,
     ),
     VERTICAL(
         MR.strings.vertical_viewer,
-        CustomMaterialSymbols.Rounded.ReaderVertical,
+        CustomMaterialSymbols.Edge.ReaderVertical,
         0x00000003,
         Direction.Vertical,
         ViewerType.Pager,
     ),
     WEBTOON(
         MR.strings.webtoon_viewer,
-        CustomMaterialSymbols.Rounded.ReaderLongStrip,
+        CustomMaterialSymbols.Edge.ReaderLongStrip,
         0x00000004,
         Direction.Vertical,
         ViewerType.Webtoon,
     ),
     CONTINUOUS_VERTICAL(
         MR.strings.vertical_plus_viewer,
-        CustomMaterialSymbols.Rounded.ReaderLongStripGaps,
+        CustomMaterialSymbols.Edge.ReaderLongStripGaps,
         0x00000005,
         Direction.Vertical,
         ViewerType.Webtoon,

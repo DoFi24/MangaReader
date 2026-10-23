@@ -27,8 +27,8 @@ import androidx.compose.ui.util.fastForEachIndexed
 import com.nilemnod.mangareader.core.ui.components.material.TabText
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.MoreVert
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.MenuDots
 import kotlinx.coroutines.launch
 
 object TabbedDialogPaddings {
@@ -63,7 +63,8 @@ fun TabbedDialog(
                             selected = pagerState.currentPage == index,
                             onClick = { scope.launch { pagerState.animateScrollToPage(index) } },
                             text = { TabText(text = tab) },
-                            unselectedContentColor = MaterialTheme.colorScheme.onSurface,
+                            selectedContentColor = MaterialTheme.colorScheme.primary,
+                            unselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                     }
                 }
@@ -89,7 +90,7 @@ private fun MoreMenu(
     Box(modifier = Modifier.wrapContentSize(Alignment.TopStart)) {
         IconButton(onClick = { expanded = true }) {
             Icon(
-                imageVector = MaterialSymbols.Rounded.MoreVert,
+                imageVector = CustomMaterialSymbols.Edge.MenuDots,
                 contentDescription = stringResource(MR.strings.label_more),
             )
         }

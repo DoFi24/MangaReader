@@ -3,6 +3,7 @@ package com.nilemnod.mangareader.core.ui.components
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.AnchoredDraggableDefaults
 import androidx.compose.foundation.gestures.AnchoredDraggableState
@@ -11,14 +12,18 @@ import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.anchoredDraggable
 import androidx.compose.foundation.gestures.animateTo
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredWidthIn
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.ZeroCornerSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -43,6 +48,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
+import com.nilemnod.mangareader.core.ui.theme.Motion
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filter
@@ -178,16 +184,26 @@ fun AdaptiveSheet(
                         enabled = enableImplicitDismiss,
                         flingBehavior = flingBehavior,
                     )
-                    .navigationBarsPadding()
                     .statusBarsPadding(),
-                shape = MaterialTheme.shapes.extraLarge,
+                shape = MaterialTheme.shapes.extraLarge.copy(bottomStart = ZeroCornerSize, bottomEnd = ZeroCornerSize),
                 color = MaterialTheme.colorScheme.surfaceContainerHigh,
                 content = {
                     BackHandler(
                         enabled = enableImplicitDismiss && anchoredDraggableState.targetValue == 0,
                         onBack = internalOnDismissRequest,
                     )
-                    content()
+                    Column(
+                        modifier = Modifier.navigationBarsPadding(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .padding(top = 12.dp, bottom = 8.dp)
+                                .size(width = 32.dp, height = 4.dp)
+                                .background(MaterialTheme.colorScheme.outline, CircleShape),
+                        )
+                        content()
+                    }
                 },
             )
 
@@ -257,4 +273,4 @@ private fun <T> AnchoredDraggableState<T>.preUpPostDownNestedScrollConnection(
     private fun Offset.toFloat(): Float = this.y
 }
 
-private val sheetAnimationSpec = tween<Float>(durationMillis = 350)
+private val sheetAnimationSpec = tween<Float>(durationMillis = Motion.SLOW, easing = Motion.EmphasizedDecelerate)

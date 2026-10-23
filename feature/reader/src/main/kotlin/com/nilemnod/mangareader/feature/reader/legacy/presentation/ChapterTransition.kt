@@ -3,45 +3,36 @@ package com.nilemnod.mangareader.feature.reader.legacy.presentation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.text.InlineTextContent
-import androidx.compose.foundation.text.appendInlineContent
+import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.Placeholder
-import androidx.compose.ui.text.PlaceholderVerticalAlign
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.theme.MangaReaderPreviewTheme
-import com.nilemnod.mangareader.core.ui.util.secondaryItemAlpha
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.chapter.service.calculateChapterGap
 import com.nilemnod.mangareader.feature.reader.legacy.model.ChapterTransition
 import com.nilemnod.mangareader.feature.reader.legacy.model.ReaderChapter
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Info
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.CheckCircle
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Warning
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.About
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Downloaded
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Warning
 @Composable
 fun ChapterTransition(
     transition: ChapterTransition,
@@ -58,6 +49,7 @@ fun ChapterTransition(
                     topLabel = stringResource(MR.strings.transition_previous),
                     topChapter = goingToChapter,
                     topChapterDownloaded = goingToChapterDownloaded,
+                    topHighlighted = true,
                     bottomLabel = stringResource(MR.strings.transition_current),
                     bottomChapter = currChapter,
                     bottomChapterDownloaded = currChapterDownloaded,
@@ -70,6 +62,7 @@ fun ChapterTransition(
                     topLabel = stringResource(MR.strings.transition_finished),
                     topChapter = currChapter,
                     topChapterDownloaded = currChapterDownloaded,
+                    topHighlighted = false,
                     bottomLabel = stringResource(MR.strings.transition_next),
                     bottomChapter = goingToChapter,
                     bottomChapterDownloaded = goingToChapterDownloaded,
@@ -86,6 +79,7 @@ private fun TransitionText(
     topLabel: String,
     topChapter: Chapter?,
     topChapterDownloaded: Boolean,
+    topHighlighted: Boolean,
     bottomLabel: String,
     bottomChapter: Chapter?,
     bottomChapterDownloaded: Boolean,
@@ -94,8 +88,9 @@ private fun TransitionText(
 ) {
     Column(
         modifier = Modifier
-            .widthIn(max = 460.dp)
+            .widthIn(max = 420.dp)
             .fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         if (topChapter != null) {
             ChapterText(
@@ -103,13 +98,12 @@ private fun TransitionText(
                 name = topChapter.name,
                 scanlator = topChapter.scanlator,
                 downloaded = topChapterDownloaded,
+                highlighted = topHighlighted,
             )
-
-            Spacer(Modifier.height(VerticalSpacerSize))
         } else {
             NoChapterNotification(
                 text = fallbackLabel,
-                modifier = Modifier.align(Alignment.CenterHorizontally),
+                modifier = Modifier.fillMaxWidth(),
             )
         }
 
@@ -117,22 +111,21 @@ private fun TransitionText(
             if (chapterGap > 0) {
                 ChapterGapWarning(
                     gapCount = chapterGap,
-                    modifier = Modifier.align(Alignment.CenterHorizontally),
+                    modifier = Modifier.fillMaxWidth(),
                 )
             }
-
-            Spacer(Modifier.height(VerticalSpacerSize))
 
             ChapterText(
                 header = bottomLabel,
                 name = bottomChapter.name,
                 scanlator = bottomChapter.scanlator,
                 downloaded = bottomChapterDownloaded,
+                highlighted = !topHighlighted,
             )
         } else {
             NoChapterNotification(
                 text = fallbackLabel,
-                modifier = Modifier.align(Alignment.CenterHorizontally),
+                modifier = Modifier.fillMaxWidth(),
             )
         }
     }
@@ -143,18 +136,18 @@ private fun NoChapterNotification(
     text: String,
     modifier: Modifier = Modifier,
 ) {
-    OutlinedCard(
+    Card(
         modifier = modifier,
+        shape = MaterialTheme.shapes.medium,
         colors = CardColor,
     ) {
         Row(
-            modifier = Modifier
-                .padding(horizontal = 16.dp, vertical = 12.dp),
+            modifier = Modifier.padding(16.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
-                imageVector = MaterialSymbols.Rounded.Info,
+                imageVector = CustomMaterialSymbols.Edge.About,
                 tint = MaterialTheme.colorScheme.primary,
                 contentDescription = null,
             )
@@ -172,17 +165,18 @@ private fun ChapterGapWarning(
     gapCount: Int,
     modifier: Modifier = Modifier,
 ) {
-    OutlinedCard(
+    Card(
         modifier = modifier,
+        shape = MaterialTheme.shapes.medium,
         colors = CardColor,
     ) {
         Row(
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
+            modifier = Modifier.padding(16.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
-                imageVector = MaterialSymbols.RoundedFilled.Warning,
+                imageVector = CustomMaterialSymbols.EdgeFilled.Warning,
                 tint = MaterialTheme.colorScheme.error,
                 contentDescription = null,
             )
@@ -196,81 +190,82 @@ private fun ChapterGapWarning(
 }
 
 @Composable
-private fun ChapterHeaderText(
-    text: String,
-    modifier: Modifier = Modifier,
-) {
-    Text(
-        text = text,
-        modifier = modifier,
-        style = MaterialTheme.typography.titleMedium,
-    )
-}
-
-@Composable
 private fun ChapterText(
     header: String,
     name: String,
     scanlator: String?,
     downloaded: Boolean,
+    highlighted: Boolean,
 ) {
-    Column {
-        ChapterHeaderText(
-            text = header,
-            modifier = Modifier.padding(bottom = 4.dp),
-        )
-
-        Text(
-            text = buildAnnotatedString {
-                if (downloaded) {
-                    appendInlineContent(DOWNLOADED_ICON_ID)
-                    append(' ')
-                }
-                append(name)
-            },
-            fontSize = 20.sp,
-            maxLines = 5,
-            overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.titleLarge,
-            inlineContent = mapOf(
-                DOWNLOADED_ICON_ID to InlineTextContent(
-                    Placeholder(
-                        width = 22.sp,
-                        height = 22.sp,
-                        placeholderVerticalAlign = PlaceholderVerticalAlign.Center,
-                    ),
-                ) {
-                    Icon(
-                        imageVector = MaterialSymbols.RoundedFilled.CheckCircle,
-                        contentDescription = stringResource(MR.strings.label_downloaded),
-                    )
-                },
-            ),
-        )
-
-        scanlator?.let {
-            Text(
-                text = it,
-                modifier = Modifier
-                    .secondaryItemAlpha()
-                    .padding(top = 2.dp),
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.bodySmall,
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = MaterialTheme.shapes.medium,
+        colors = if (highlighted) {
+            CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
             )
+        } else {
+            CardColor
+        },
+    ) {
+        Row(
+            modifier = Modifier.padding(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            if (downloaded && !highlighted) {
+                Icon(
+                    imageVector = CustomMaterialSymbols.EdgeFilled.Downloaded,
+                    contentDescription = stringResource(MR.strings.label_downloaded),
+                    tint = MaterialTheme.colorScheme.tertiary,
+                )
+            }
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = header.uppercase(),
+                    style = MaterialTheme.typography.labelMedium,
+                    color = if (highlighted) LocalContentColor.current else MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                Text(
+                    text = name,
+                    maxLines = 5,
+                    overflow = TextOverflow.Ellipsis,
+                    style = if (highlighted) {
+                        MaterialTheme.typography.titleLarge
+                    } else {
+                        MaterialTheme.typography.bodyLarge
+                    },
+                )
+                val details = listOfNotNull(
+                    stringResource(MR.strings.label_downloaded).takeIf { downloaded && highlighted },
+                    scanlator?.takeIf { it.isNotBlank() },
+                ).joinToString(" · ")
+                if (details.isNotEmpty()) {
+                    Text(
+                        text = details,
+                        modifier = Modifier.padding(top = 2.dp),
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = if (highlighted) {
+                            LocalContentColor.current
+                        } else {
+                            MaterialTheme.colorScheme.onSurfaceVariant
+                        },
+                    )
+                }
+            }
         }
     }
 }
 
 private val CardColor: CardColors
     @Composable
-    get() = CardDefaults.outlinedCardColors(
-        containerColor = Color.Transparent,
+    get() = CardDefaults.cardColors(
+        containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
         contentColor = MaterialTheme.colorScheme.onSurface,
     )
-
-private val VerticalSpacerSize = 24.dp
-private const val DOWNLOADED_ICON_ID = "downloaded"
 
 private fun previewChapter(name: String, scanlator: String, chapterNumber: Double) = Chapter.create().copy(
     id = 0L,
