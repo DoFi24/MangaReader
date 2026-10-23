@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.manga.components
+package com.nilemnod.mangareader.core.mangaui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
@@ -43,8 +43,6 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
-import com.nilemnod.mangareader.app.presentation.components.DownloadDropdownMenu
-import com.nilemnod.mangareader.app.presentation.manga.DownloadAction
 import com.nilemnod.mangareader.core.ui.components.DropdownMenu
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR

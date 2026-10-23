@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.updates
+package com.nilemnod.mangareader.feature.updates
 
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
@@ -29,10 +29,9 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.nilemnod.mangareader.app.presentation.manga.components.ChapterDownloadAction
-import com.nilemnod.mangareader.app.presentation.manga.components.ChapterDownloadIndicator
-import com.nilemnod.mangareader.app.presentation.manga.components.DotSeparatorText
-import com.nilemnod.mangareader.app.ui.updates.UpdatesItem
+import com.nilemnod.mangareader.core.mangaui.ChapterDownloadAction
+import com.nilemnod.mangareader.core.mangaui.ChapterDownloadIndicator
+import com.nilemnod.mangareader.core.mangaui.DotSeparatorText
 import com.nilemnod.mangareader.core.mangaui.MangaCover
 import com.nilemnod.mangareader.core.ui.components.ListGroupHeader
 import com.nilemnod.mangareader.core.ui.components.material.DISABLED_ALPHA

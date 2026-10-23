@@ -11,7 +11,9 @@ import com.nilemnod.mangareader.core.navigation.SharedDialog
 import com.nilemnod.mangareader.core.navigation.SharedIntent
 import com.nilemnod.mangareader.core.navigation.SharedScreen
 import com.nilemnod.mangareader.feature.categories.CategoryScreen
+import com.nilemnod.mangareader.feature.downloads.DownloadQueueScreen
 import com.nilemnod.mangareader.feature.migration.dialog.MigrateMangaDialog
+import com.nilemnod.mangareader.feature.upcoming.UpcomingScreen
 
 object AppNavigation {
 
@@ -21,6 +23,8 @@ object AppNavigation {
             register<SharedScreen.BrowseSource> { BrowseSourceScreen(it.sourceId, it.listingQuery) }
             register<SharedScreen.GlobalSearch> { GlobalSearchScreen(it.query, it.extensionFilter) }
             register<SharedScreen.Category> { CategoryScreen() }
+            register<SharedScreen.DownloadQueue> { DownloadQueueScreen }
+            register<SharedScreen.Upcoming> { UpcomingScreen() }
         }
         DialogRegistry.register<SharedDialog.MigrateManga> {
             MigrateMangaDialog(

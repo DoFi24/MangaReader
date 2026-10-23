@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.domain.download.interactor
+package com.nilemnod.mangareader.core.download
 
 import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.domain.chapter.model.Chapter

@@ -210,6 +210,7 @@ dependencies {
     implementation(projects.feature.downloads)
     implementation(projects.feature.history)
     implementation(projects.feature.stats)
+    implementation(projects.feature.updates)
     implementation(projects.feature.widget)
 
     // Compose

@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.ui.updates
+package com.nilemnod.mangareader.feature.updates
 
 import androidx.lifecycle.ViewModel
 import com.nilemnod.mangareader.core.common.preference.Preference

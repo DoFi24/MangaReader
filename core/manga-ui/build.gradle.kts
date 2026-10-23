@@ -14,6 +14,7 @@ dependencies {
     implementation(projects.domain)
     implementation(projects.extensionApi)
     implementation(projects.i18n)
+    implementation(projects.icons.customMaterialSymbols)
     implementation(projects.icons.materialSymbols)
 
     implementation(libs.androidx.compose.foundation)

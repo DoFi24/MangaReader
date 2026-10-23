@@ -36,14 +36,15 @@ import com.nilemnod.mangareader.app.ui.browse.BrowseTab
 import com.nilemnod.mangareader.app.ui.library.LibraryTab
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.more.MoreTab
-import com.nilemnod.mangareader.app.ui.updates.UpdatesTab
 import com.nilemnod.mangareader.core.navigation.SharedScreen
 import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
+import com.nilemnod.mangareader.core.ui.util.BottomNavController
 import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.core.ui.util.isTabletUi
 import com.nilemnod.mangareader.feature.downloads.DownloadQueueScreen
 import com.nilemnod.mangareader.feature.history.HistoryTab
+import com.nilemnod.mangareader.feature.updates.UpdatesTab
 import com.nilemnod.mangareader.i18n.MR
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collectLatest
@@ -57,7 +58,6 @@ object HomeScreen : Screen() {
 
     private val librarySearchEvent = Channel<String>()
     private val openTabEvent = Channel<Tab>()
-    private val showBottomNavEvent = Channel<Boolean>()
 
     @Suppress("ConstPropertyName")
     private const val TabFadeDuration = 200
@@ -91,7 +91,7 @@ object HomeScreen : Screen() {
                 val navigationSuiteState = rememberNavigationSuiteScaffoldState()
                 LaunchedEffect(navigationSuiteState, tabletUi) {
                     if (tabletUi) navigationSuiteState.show()
-                    showBottomNavEvent.receiveAsFlow().collectLatest { show ->
+                    BottomNavController.visibility.collectLatest { show ->
                         if (tabletUi || show) {
                             navigationSuiteState.show()
                         } else {
@@ -265,7 +265,7 @@ object HomeScreen : Screen() {
     }
 
     suspend fun showBottomNav(show: Boolean) {
-        showBottomNavEvent.send(show)
+        BottomNavController.show(show)
     }
 
     sealed interface Tab {

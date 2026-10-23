@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.updates
+package com.nilemnod.mangareader.feature.updates
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -22,7 +22,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEachIndexed
-import com.nilemnod.mangareader.app.ui.updates.UpdatesSettingsViewModel
 import com.nilemnod.mangareader.core.common.preference.TriState
 import com.nilemnod.mangareader.core.common.preference.getAndSet
 import com.nilemnod.mangareader.core.mangaui.visualName

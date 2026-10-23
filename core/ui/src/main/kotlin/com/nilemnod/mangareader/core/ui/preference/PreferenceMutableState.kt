@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.core.preference
+package com.nilemnod.mangareader.core.ui.preference
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf

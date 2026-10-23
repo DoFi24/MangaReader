@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.ui.updates
+package com.nilemnod.mangareader.feature.updates
 
 import androidx.compose.animation.graphics.res.animatedVectorResource
 import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
@@ -14,24 +14,16 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import com.nilemnod.mangareader.app.R
-import com.nilemnod.mangareader.app.presentation.updates.UpdateScreen
-import com.nilemnod.mangareader.app.presentation.updates.UpdatesDeleteConfirmationDialog
-import com.nilemnod.mangareader.app.presentation.updates.UpdatesFilterDialog
-import com.nilemnod.mangareader.app.ui.home.HomeScreen
-import com.nilemnod.mangareader.app.ui.main.MainActivity
-import com.nilemnod.mangareader.app.ui.manga.MangaScreen
-import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
-import com.nilemnod.mangareader.app.ui.updates.UpdatesViewModel.Event
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.navigation.SharedIntent
 import com.nilemnod.mangareader.core.navigation.SharedScreen
 import com.nilemnod.mangareader.core.navigation.intent
 import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.util.BottomNavController
+import com.nilemnod.mangareader.core.ui.util.SplashReady
 import com.nilemnod.mangareader.core.ui.util.Tab
-import com.nilemnod.mangareader.feature.downloads.DownloadQueueScreen
-import com.nilemnod.mangareader.feature.upcoming.UpcomingScreen
+import com.nilemnod.mangareader.feature.updates.UpdatesViewModel.Event
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -51,7 +43,7 @@ data object UpdatesTab : Tab {
         }
 
     override suspend fun onReselect(navigator: Navigator) {
-        navigator.push(DownloadQueueScreen)
+        navigator.push(SharedScreen.DownloadQueue.screen())
     }
 
     @Composable
@@ -79,7 +71,7 @@ data object UpdatesTab : Tab {
                 val intent = SharedIntent.Reader(it.update.mangaId, it.update.chapterId).intent(context)
                 context.startActivity(intent)
             },
-            onCalendarClicked = { navigator.push(UpcomingScreen()) },
+            onCalendarClicked = { navigator.push(SharedScreen.Upcoming.screen()) },
             onFilterClicked = viewModel::showFilterDialog,
             hasActiveFilters = state.hasActiveFilters,
         )
@@ -120,12 +112,12 @@ data object UpdatesTab : Tab {
         }
 
         LaunchedEffect(state.selectionMode) {
-            HomeScreen.showBottomNav(!state.selectionMode)
+            BottomNavController.show(!state.selectionMode)
         }
 
         LaunchedEffect(state.isLoading) {
             if (!state.isLoading) {
-                (context as? MainActivity)?.ready = true
+                (context as? SplashReady)?.ready = true
             }
         }
         DisposableEffect(Unit) {
