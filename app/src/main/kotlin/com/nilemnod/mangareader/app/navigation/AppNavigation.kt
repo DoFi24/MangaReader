@@ -1,7 +1,6 @@
 package com.nilemnod.mangareader.app.navigation
 
 import cafe.adriel.voyager.core.registry.ScreenRegistry
-import com.nilemnod.mangareader.app.presentation.more.settings.screen.browse.ExtensionStoresScreen
 import com.nilemnod.mangareader.app.ui.browse.extension.ExtensionsBrowseTab
 import com.nilemnod.mangareader.app.ui.browse.extension.details.SourcePreferencesScreen
 import com.nilemnod.mangareader.app.ui.manga.MangaCoverDialogHost
@@ -19,6 +18,7 @@ import com.nilemnod.mangareader.feature.browse.source.browse.BrowseSourceScreen
 import com.nilemnod.mangareader.feature.browse.source.globalsearch.GlobalSearchScreen
 import com.nilemnod.mangareader.feature.categories.CategoryScreen
 import com.nilemnod.mangareader.feature.downloads.DownloadQueueScreen
+import com.nilemnod.mangareader.feature.extensions.stores.ExtensionStoresScreen
 import com.nilemnod.mangareader.feature.manga.MangaScreen
 import com.nilemnod.mangareader.feature.stats.StatsScreen
 import com.nilemnod.mangareader.feature.upcoming.UpcomingScreen

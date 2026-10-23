@@ -19,6 +19,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.core.common.util.system.copyToClipboard
+import com.nilemnod.mangareader.core.mangaui.SourceIcon
 import com.nilemnod.mangareader.core.ui.components.Badge
 import com.nilemnod.mangareader.core.ui.components.BadgeGroup
 import com.nilemnod.mangareader.core.ui.components.ScrollbarLazyColumn
@@ -35,7 +36,6 @@ import com.nilemnod.mangareader.domain.source.interactor.SetMigrateSorting
 import com.nilemnod.mangareader.domain.source.model.Source
 import com.nilemnod.mangareader.feature.browse.migration.sources.MigrateSourceViewModel
 import com.nilemnod.mangareader.feature.browse.presentation.components.BaseSourceItem
-import com.nilemnod.mangareader.feature.browse.presentation.components.SourceIcon
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.ArrowDownward

@@ -36,6 +36,7 @@ import com.nilemnod.mangareader.domain.category.interactor.ResetCategoryFlags
 import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
 import com.nilemnod.mangareader.domain.extension.interactor.GetExtensionStoreCountAsFlow
 import com.nilemnod.mangareader.domain.extension.repository.ExtensionStoreRepository
+import com.nilemnod.mangareader.domain.extension.service.ExtensionSourceLoader
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.interactor.GetFavorites
 import com.nilemnod.mangareader.domain.manga.interactor.ResetViewerFlags
@@ -95,6 +96,8 @@ interface AppGraph : ViewModelGraph, UiPreferencesProvider {
 
     val sourceManager: SourceManager
     val extensionManager: ExtensionManager
+    val extensionSourceLoader: ExtensionSourceLoader
+
     val chapterCache: ChapterCache
     val coverCache: CoverCache
     val downloadCache: DownloadCache

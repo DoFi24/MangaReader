@@ -5,8 +5,8 @@ import android.net.Uri
 import androidx.annotation.CallSuper
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.extension.ExtensionManager
-import com.nilemnod.mangareader.app.extension.model.InstallStep
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.domain.extension.model.InstallStep
 import logcat.LogPriority
 import java.util.Collections
 import java.util.concurrent.CopyOnWriteArraySet

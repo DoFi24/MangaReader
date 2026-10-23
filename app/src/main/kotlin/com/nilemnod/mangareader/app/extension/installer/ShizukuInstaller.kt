@@ -13,11 +13,11 @@ import android.content.pm.PackageManager
 import android.os.IBinder
 import androidx.core.content.ContextCompat
 import com.nilemnod.mangareader.app.BuildConfig
-import com.nilemnod.mangareader.app.extension.model.InstallStep
 import com.nilemnod.mangareader.app.shizuku.IShellInterface
 import com.nilemnod.mangareader.app.shizuku.ShellInterface
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.toast
+import com.nilemnod.mangareader.domain.extension.model.InstallStep
 import com.nilemnod.mangareader.i18n.MR
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -7,14 +7,14 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.extension.installer.Installer
-import com.nilemnod.mangareader.app.extension.model.InstallStep
 import com.nilemnod.mangareader.app.util.storage.getUriCompat
-import com.nilemnod.mangareader.app.util.system.isPackageInstalled
+import com.nilemnod.mangareader.core.android.system.isPackageInstalled
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.core.network.NetworkHelper
 import com.nilemnod.mangareader.core.network.await
 import com.nilemnod.mangareader.domain.extension.model.Extension
+import com.nilemnod.mangareader.domain.extension.model.InstallStep
 import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope

@@ -10,8 +10,11 @@ interface ContentSource {
 
     val supportsLatest: Boolean
 
+    val settings: SourceSettings?
+        get() = null
+
     val hasSettings: Boolean
-        get() = false
+        get() = settings != null
 
     val resolver: UriResolver?
         get() = null

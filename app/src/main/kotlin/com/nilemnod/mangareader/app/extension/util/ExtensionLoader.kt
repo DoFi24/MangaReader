@@ -8,7 +8,6 @@ import android.os.Build
 import androidx.core.content.pm.PackageInfoCompat
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.domain.extension.interactor.TrustExtension
-import com.nilemnod.mangareader.app.source.compat.ExtensionContentSource
 import com.nilemnod.mangareader.app.util.storage.copyAndSetReadOnlyTo
 import com.nilemnod.mangareader.core.common.util.lang.Hash
 import com.nilemnod.mangareader.core.common.util.system.logcat
@@ -16,8 +15,6 @@ import com.nilemnod.mangareader.data.dalvik.DelegateLastClassLoaderCompat
 import com.nilemnod.mangareader.domain.extension.model.ContentWarning
 import com.nilemnod.mangareader.domain.extension.model.Extension
 import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.SourceFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -401,31 +398,15 @@ internal object ExtensionLoader {
             return notLoaded(Extension.NotLoaded.Reason.Malformed, libVersion)
         }
 
-        val sources = sourceClasses
-            .split(";")
-            .map {
-                val sourceClass = it.trim()
-                if (sourceClass.startsWith(".")) {
-                    pkgInfo.packageName + sourceClass
-                } else {
-                    sourceClass
-                }
-            }
-            .flatMap {
-                try {
-                    when (val obj = Class.forName(it, false, classLoader).getDeclaredConstructor().newInstance()) {
-                        is Source -> listOf(obj)
-                        is SourceFactory -> obj.createSources()
-                        else -> throw Exception("Unknown source class type: ${obj.javaClass}")
-                    }
-                } catch (e: Throwable) {
-                    logcat(LogPriority.ERROR, e) { "Extension load error: $extName ($it)" }
-                    return notLoaded(
-                        Extension.NotLoaded.Reason.Failed(e.rootMessage, e.stackTraceToString()),
-                        libVersion,
-                    )
-                }
-            }
+        val sources = try {
+            context.appGraph.extensionSourceLoader.load(classLoader, pkgName, sourceClasses)
+        } catch (e: Throwable) {
+            logcat(LogPriority.ERROR, e) { "Extension load error: $extName ($sourceClasses)" }
+            return notLoaded(
+                Extension.NotLoaded.Reason.Failed(e.rootMessage, e.stackTraceToString()),
+                libVersion,
+            )
+        }
 
         val langs = sources.map { it.lang }.toSet()
         val lang = when (langs.size) {
@@ -442,7 +423,7 @@ internal object ExtensionLoader {
             libVersion = libVersion,
             lang = lang,
             contentWarning = contentWarning,
-            sources = sources.map { ExtensionContentSource(it, pkgName) },
+            sources = sources,
             pkgFactory = metaData.getString(METADATA_SOURCE_FACTORY),
             isShared = extensionInfo.isShared,
             signatures = signatures,

@@ -5,10 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.extension.ExtensionManager
-import com.nilemnod.mangareader.app.extension.model.InstallStep
 import com.nilemnod.mangareader.app.util.system.hasMiuiPackageInstaller
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.toast
+import com.nilemnod.mangareader.domain.extension.model.InstallStep
 import dev.zacsweers.metro.Inject
 import logcat.LogPriority
 import kotlin.time.Duration.Companion.seconds

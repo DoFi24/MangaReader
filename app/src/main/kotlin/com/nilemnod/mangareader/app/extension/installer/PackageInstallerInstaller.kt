@@ -12,11 +12,11 @@ import android.content.pm.PackageInstaller
 import android.os.Build
 import androidx.core.content.ContextCompat
 import androidx.core.content.IntentSanitizer
-import com.nilemnod.mangareader.app.extension.model.InstallStep
 import com.nilemnod.mangareader.app.util.system.getUriSize
 import com.nilemnod.mangareader.core.android.lang.use
 import com.nilemnod.mangareader.core.android.system.getParcelableExtraCompat
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.domain.extension.model.InstallStep
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
