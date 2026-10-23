@@ -12,7 +12,7 @@ import com.nilemnod.mangareader.app.ui.reader.viewer.webtoon.WebtoonViewer
 import com.nilemnod.mangareader.core.reader.ReadingMode
 
 fun ReadingMode.Companion.toViewer(preference: Int?, activity: ReaderActivity): Viewer {
-    if (activity.appGraph.basePreferences.highQualityRenderer.get()) {
+    if (activity.appGraph.readerPreferences.highQualityRenderer.get()) {
         return when (fromPreference(preference)) {
             ReadingMode.LEFT_TO_RIGHT -> WebGpuViewer(activity, isReversed = false, isVertical = false)
             ReadingMode.RIGHT_TO_LEFT -> WebGpuViewer(activity, isReversed = true, isVertical = false)

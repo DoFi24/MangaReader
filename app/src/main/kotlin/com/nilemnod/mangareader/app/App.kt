@@ -26,7 +26,6 @@ import com.nilemnod.mangareader.app.crash.GlobalExceptionHandler
 import com.nilemnod.mangareader.app.data.coil.BufferedSourceFetcher
 import com.nilemnod.mangareader.app.data.coil.CoverRequestInterceptor
 import com.nilemnod.mangareader.app.data.coil.ExtensionIconFetcher
-import com.nilemnod.mangareader.app.data.coil.ImageDecoder
 import com.nilemnod.mangareader.app.data.coil.InstalledExtensionIconKeyer
 import com.nilemnod.mangareader.app.data.coil.InstalledSourceIconKeyer
 import com.nilemnod.mangareader.app.data.coil.MangaCoverFetcher
@@ -50,6 +49,7 @@ import com.nilemnod.mangareader.core.common.preference.PreferenceStore
 import com.nilemnod.mangareader.core.common.util.system.DeviceUtil
 import com.nilemnod.mangareader.core.common.util.system.WebViewUtil
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.mangaui.coil.ImageDecoder
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.core.metro.GraphProvider
 import com.nilemnod.mangareader.core.migration.Migration

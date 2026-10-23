@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.data.saver
+package com.nilemnod.mangareader.core.storage.saver
 
 import android.content.ContentUris
 import android.content.Context
@@ -11,7 +11,7 @@ import android.webkit.MimeTypeMap
 import androidx.annotation.RequiresApi
 import androidx.core.content.contentValuesOf
 import androidx.core.net.toUri
-import com.nilemnod.mangareader.app.util.storage.cacheImageDir
+import com.nilemnod.mangareader.core.android.storage.cacheImageDir
 import com.nilemnod.mangareader.core.android.storage.getUriCompat
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.storage.DiskUtil

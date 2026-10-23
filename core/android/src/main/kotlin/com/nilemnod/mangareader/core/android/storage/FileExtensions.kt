@@ -18,3 +18,6 @@ fun Context.createFileInCacheDir(name: String): File {
     file.createNewFile()
     return file
 }
+
+val Context.cacheImageDir: File
+    get() = File(cacheDir, "shared_image")

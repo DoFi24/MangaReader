@@ -14,6 +14,7 @@ import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.domain.extension.interactor.TrustExtension
 import com.nilemnod.mangareader.app.util.system.isReleaseBuildType
 import com.nilemnod.mangareader.app.util.system.isShizukuInstalled
+import com.nilemnod.mangareader.core.reader.ReaderPreferences
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.feature.settings.Preference
 import com.nilemnod.mangareader.feature.settings.screen.advanced.AdvancedSettingsGroups
@@ -27,6 +28,7 @@ import dev.zacsweers.metro.Inject
 class AppAdvancedSettingsGroups(
     private val basePreferences: BasePreferences,
     private val trustExtension: TrustExtension,
+    private val readerPreferences: ReaderPreferences,
 ) : AdvancedSettingsGroups {
 
     @Composable
@@ -41,7 +43,7 @@ class AppAdvancedSettingsGroups(
             title = stringResource(MR.strings.pref_category_reader),
             preferenceItems = listOf(
                 Preference.PreferenceItem.SwitchPreference(
-                    preference = basePreferences.highQualityRenderer,
+                    preference = readerPreferences.highQualityRenderer,
                     title = stringResource(MR.strings.pref_high_quality_renderer),
                 ),
             ),

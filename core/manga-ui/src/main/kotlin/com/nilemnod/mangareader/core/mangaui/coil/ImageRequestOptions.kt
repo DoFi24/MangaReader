@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.data.coil
+package com.nilemnod.mangareader.core.mangaui.coil
 
 import coil3.Extras
 import coil3.getExtra

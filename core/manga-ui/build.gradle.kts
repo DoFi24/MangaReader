@@ -22,5 +22,6 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.uiUtil)
     implementation(libs.bundles.coil)
+    implementation(libs.image.decoder)
     implementation(libs.bundles.markdown)
 }
