@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.history.components
+package com.nilemnod.mangareader.feature.history
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.nilemnod.mangareader.domain.history.model.HistoryWithRelations

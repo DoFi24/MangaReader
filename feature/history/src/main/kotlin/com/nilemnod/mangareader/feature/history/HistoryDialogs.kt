@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.history.components
+package com.nilemnod.mangareader.feature.history
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

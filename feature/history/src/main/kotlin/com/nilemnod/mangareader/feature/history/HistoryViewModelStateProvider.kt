@@ -1,7 +1,6 @@
-package com.nilemnod.mangareader.app.presentation.history
+package com.nilemnod.mangareader.feature.history
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.nilemnod.mangareader.app.ui.history.HistoryViewModel
 import com.nilemnod.mangareader.domain.history.model.HistoryWithRelations
 import com.nilemnod.mangareader.domain.manga.model.MangaCover
 import kotlinx.datetime.TimeZone

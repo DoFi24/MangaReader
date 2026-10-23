@@ -33,7 +33,6 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.ui.browse.BrowseTab
-import com.nilemnod.mangareader.app.ui.history.HistoryTab
 import com.nilemnod.mangareader.app.ui.library.LibraryTab
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.more.MoreTab
@@ -44,6 +43,7 @@ import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
 import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.core.ui.util.isTabletUi
 import com.nilemnod.mangareader.feature.downloads.DownloadQueueScreen
+import com.nilemnod.mangareader.feature.history.HistoryTab
 import com.nilemnod.mangareader.i18n.MR
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collectLatest

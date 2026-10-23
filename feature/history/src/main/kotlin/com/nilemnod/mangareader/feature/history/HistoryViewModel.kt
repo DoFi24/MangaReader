@@ -1,16 +1,16 @@
-package com.nilemnod.mangareader.app.ui.history
+package com.nilemnod.mangareader.feature.history
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nilemnod.mangareader.app.presentation.history.HistoryUiModel
 import com.nilemnod.mangareader.core.android.lang.toLocalDate
 import com.nilemnod.mangareader.core.common.preference.CheckboxState
 import com.nilemnod.mangareader.core.common.preference.mapAsCheckboxState
 import com.nilemnod.mangareader.core.common.util.lang.SubscriberGate
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.core.ui.preference.UiPreferences
 import com.nilemnod.mangareader.core.ui.util.insertSeparators
 import com.nilemnod.mangareader.domain.category.interactor.GetCategories
 import com.nilemnod.mangareader.domain.category.interactor.SetMangaCategories
@@ -67,7 +67,8 @@ class HistoryViewModel(
     private val removeHistory: RemoveHistory,
     private val setMangaCategories: SetMangaCategories,
     private val updateManga: UpdateManga,
-    private val sourceManager: SourceManager,
+    val sourceManager: SourceManager,
+    val uiPreferences: UiPreferences,
 ) : ViewModel() {
 
     private val subscriberGate = SubscriberGate()

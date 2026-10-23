@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.history
+package com.nilemnod.mangareader.feature.history
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -6,16 +6,11 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLocale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.presentation.history.components.HistoryItem
-import com.nilemnod.mangareader.app.ui.history.HistoryViewModel
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.AppBarActions
 import com.nilemnod.mangareader.core.ui.components.AppBarTitle
@@ -26,10 +21,10 @@ import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.core.ui.components.relativeDateText
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.preference.UiPreferences
+import com.nilemnod.mangareader.core.ui.preference.model.TimeFormat
 import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
 import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
 import com.nilemnod.mangareader.core.ui.theme.MangaReaderPreviewTheme
-import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.core.ui.util.rememberIs24HourSystem
 import com.nilemnod.mangareader.domain.history.model.HistoryWithRelations
 import com.nilemnod.mangareader.i18n.MR
@@ -40,6 +35,7 @@ import kotlinx.datetime.LocalDate
 @Composable
 fun HistoryScreen(
     state: HistoryViewModel.State,
+    timeFormat: TimeFormat,
     snackbarHostState: SnackbarHostState,
     onSearchQueryChange: (String?) -> Unit,
     onClickCover: (mangaId: Long) -> Unit,
@@ -87,6 +83,7 @@ fun HistoryScreen(
             } else {
                 HistoryScreenContent(
                     history = it,
+                    timeFormat = timeFormat,
                     contentPadding = contentPadding,
                     onClickCover = { history -> onClickCover(history.mangaId) },
                     onClickResume = { history -> onClickResume(history.mangaId, history.chapterId) },
@@ -101,16 +98,15 @@ fun HistoryScreen(
 @Composable
 private fun HistoryScreenContent(
     history: List<HistoryUiModel>,
+    timeFormat: TimeFormat,
     contentPadding: PaddingValues,
     onClickCover: (HistoryWithRelations) -> Unit,
     onClickResume: (HistoryWithRelations) -> Unit,
     onClickDelete: (HistoryWithRelations) -> Unit,
     onClickFavorite: (HistoryWithRelations) -> Unit,
 ) {
-    val context = LocalContext.current
     val locale = LocalLocale.current
     val is24HourSystem = rememberIs24HourSystem()
-    val timeFormat by remember { context.appGraph.uiPreferences.timeFormat }.collectAsState()
     val timeFormatter = remember(timeFormat, locale, is24HourSystem) {
         UiPreferences.timeFormat(timeFormat, locale.platformLocale, is24HourSystem)
     }
@@ -166,6 +162,7 @@ internal fun HistoryScreenPreviews(
     MangaReaderPreviewTheme {
         HistoryScreen(
             state = historyState,
+            timeFormat = TimeFormat.FOLLOW_LANGUAGE,
             snackbarHostState = SnackbarHostState(),
             onSearchQueryChange = {},
             onClickCover = {},
