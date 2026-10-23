@@ -16,15 +16,16 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.nilemnod.mangareader.app.R
-import com.nilemnod.mangareader.app.presentation.category.components.ChangeCategoryDialog
+import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.presentation.history.HistoryScreen
 import com.nilemnod.mangareader.app.presentation.history.components.HistoryDeleteAllDialog
 import com.nilemnod.mangareader.app.presentation.history.components.HistoryDeleteDialog
-import com.nilemnod.mangareader.app.presentation.manga.DuplicateMangaDialog
 import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
 import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.mangaui.ChangeCategoryDialog
+import com.nilemnod.mangareader.core.mangaui.DuplicateMangaDialog
 import com.nilemnod.mangareader.core.navigation.SharedIntent
 import com.nilemnod.mangareader.core.navigation.SharedScreen
 import com.nilemnod.mangareader.core.navigation.intent
@@ -106,6 +107,7 @@ data object HistoryTab : Tab {
                     onConfirm = { viewModel.addFavorite(dialog.manga) },
                     onOpenManga = { navigator.push(SharedScreen.Manga(it.id).screen()) },
                     onMigrate = { viewModel.showMigrateDialog(dialog.manga, it) },
+                    sourceManager = LocalContext.current.appGraph.sourceManager,
                 )
             }
             is HistoryViewModel.Dialog.ChangeCategory -> {

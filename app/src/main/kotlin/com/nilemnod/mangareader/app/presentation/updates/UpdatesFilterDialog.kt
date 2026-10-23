@@ -22,10 +22,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEachIndexed
-import com.nilemnod.mangareader.app.presentation.category.visualName
 import com.nilemnod.mangareader.app.ui.updates.UpdatesSettingsViewModel
 import com.nilemnod.mangareader.core.common.preference.TriState
 import com.nilemnod.mangareader.core.common.preference.getAndSet
+import com.nilemnod.mangareader.core.mangaui.visualName
 import com.nilemnod.mangareader.core.ui.components.SettingsItemsPaddings
 import com.nilemnod.mangareader.core.ui.components.TabbedDialog
 import com.nilemnod.mangareader.core.ui.components.TabbedDialogPaddings

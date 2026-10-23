@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.manga
+package com.nilemnod.mangareader.core.mangaui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
@@ -46,21 +46,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastMaxOfOrNull
 import coil3.request.ImageRequest
 import coil3.request.crossfade
-import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.presentation.manga.components.MangaCover
-import com.nilemnod.mangareader.app.presentation.more.settings.LocalPreferenceMinHeight
-import com.nilemnod.mangareader.app.presentation.more.settings.widget.TextPreferenceWidget
 import com.nilemnod.mangareader.core.ui.components.AdaptiveSheet
 import com.nilemnod.mangareader.core.ui.components.Badge
 import com.nilemnod.mangareader.core.ui.components.BadgeGroup
 import com.nilemnod.mangareader.core.ui.components.TabbedDialogPaddings
 import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.components.preference.LocalPreferenceMinHeight
+import com.nilemnod.mangareader.core.ui.components.preference.TextPreferenceWidget
 import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.secondaryItemAlpha
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaWithChapterCount
 import com.nilemnod.mangareader.domain.source.model.StubSource
+import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Add
@@ -84,10 +83,9 @@ fun DuplicateMangaDialog(
     onConfirm: () -> Unit,
     onOpenManga: (manga: Manga) -> Unit,
     onMigrate: (manga: Manga) -> Unit,
+    sourceManager: SourceManager,
     modifier: Modifier = Modifier,
 ) {
-    val context = LocalContext.current
-    val sourceManager = remember { context.appGraph.sourceManager }
     val minHeight = LocalPreferenceMinHeight.current
     val horizontalPadding = PaddingValues(horizontal = TabbedDialogPaddings.Horizontal)
     val horizontalPaddingModifier = Modifier.padding(horizontalPadding)

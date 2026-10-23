@@ -19,7 +19,6 @@ import com.nilemnod.mangareader.app.domain.chapter.interactor.GetAvailableScanla
 import com.nilemnod.mangareader.app.domain.chapter.interactor.SetReadStatus
 import com.nilemnod.mangareader.app.domain.manga.interactor.GetExcludedScanlators
 import com.nilemnod.mangareader.app.domain.manga.interactor.SetExcludedScanlators
-import com.nilemnod.mangareader.app.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.app.domain.manga.model.chaptersFiltered
 import com.nilemnod.mangareader.app.domain.manga.model.downloadedFilter
 import com.nilemnod.mangareader.app.presentation.manga.DownloadAction
@@ -56,6 +55,7 @@ import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.interactor.GetDuplicateLibraryManga
 import com.nilemnod.mangareader.domain.manga.interactor.GetMangaWithChapters
 import com.nilemnod.mangareader.domain.manga.interactor.SetMangaChapterFlags
+import com.nilemnod.mangareader.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaWithChapterCount
 import com.nilemnod.mangareader.domain.manga.model.applyFilter

@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
+import com.nilemnod.mangareader.core.ui.R
 
 /**
  * Create a BitmapPainter from a drawable resource.
@@ -27,3 +28,6 @@ fun rememberResourceBitmapPainter(@DrawableRes id: Int): BitmapPainter {
         BitmapPainter(drawable.toBitmap().asImageBitmap())
     }
 }
+
+@Composable
+fun rememberCoverErrorPainter(): BitmapPainter = rememberResourceBitmapPainter(R.drawable.cover_error)

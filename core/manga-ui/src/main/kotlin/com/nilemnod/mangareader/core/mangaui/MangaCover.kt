@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.manga.components
+package com.nilemnod.mangareader.core.mangaui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.aspectRatio
@@ -12,8 +12,7 @@ import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.semantics.Role
 import coil3.compose.AsyncImage
-import com.nilemnod.mangareader.app.R
-import com.nilemnod.mangareader.core.ui.util.rememberResourceBitmapPainter
+import com.nilemnod.mangareader.core.ui.util.rememberCoverErrorPainter
 enum class MangaCover(val ratio: Float) {
     Square(1f / 1f),
     Book(2f / 3f),
@@ -30,7 +29,7 @@ enum class MangaCover(val ratio: Float) {
         AsyncImage(
             model = data,
             placeholder = ColorPainter(CoverPlaceholderColor),
-            error = rememberResourceBitmapPainter(id = R.drawable.cover_error),
+            error = rememberCoverErrorPainter(),
             contentDescription = contentDescription,
             modifier = modifier
                 .aspectRatio(ratio)

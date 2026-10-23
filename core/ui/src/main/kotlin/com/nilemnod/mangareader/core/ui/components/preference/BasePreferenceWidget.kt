@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.more.settings.widget
+package com.nilemnod.mangareader.core.ui.components.preference
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.RepeatMode
@@ -29,13 +29,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.nilemnod.mangareader.app.presentation.more.settings.LocalPreferenceHighlighted
-import com.nilemnod.mangareader.app.presentation.more.settings.LocalPreferenceMinHeight
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.seconds
 
 @Composable
-internal fun BasePreferenceWidget(
+fun BasePreferenceWidget(
     modifier: Modifier = Modifier,
     title: String? = null,
     subcomponent: @Composable (ColumnScope.() -> Unit)? = null,
@@ -86,7 +84,7 @@ internal fun BasePreferenceWidget(
 }
 
 @Composable
-internal fun Modifier.highlightBackground(highlighted: Boolean): Modifier {
+fun Modifier.highlightBackground(highlighted: Boolean): Modifier {
     var highlightFlag by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) {
         if (highlighted) {
@@ -119,7 +117,7 @@ internal fun Modifier.highlightBackground(highlighted: Boolean): Modifier {
     return this.background(color = highlight)
 }
 
-internal val TrailingWidgetBuffer = 16.dp
-internal val PrefsHorizontalPadding = 16.dp
-internal val PrefsVerticalPadding = 16.dp
-internal val TitleFontSize = 16.sp
+val TrailingWidgetBuffer = 16.dp
+val PrefsHorizontalPadding = 16.dp
+val PrefsVerticalPadding = 16.dp
+val TitleFontSize = 16.sp

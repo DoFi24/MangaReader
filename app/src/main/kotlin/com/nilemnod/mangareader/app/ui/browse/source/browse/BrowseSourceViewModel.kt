@@ -15,7 +15,6 @@ import androidx.paging.filter
 import androidx.paging.map
 import com.nilemnod.mangareader.app.core.preference.asState
 import com.nilemnod.mangareader.app.data.cache.CoverCache
-import com.nilemnod.mangareader.app.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.app.domain.source.interactor.GetIncognitoState
 import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.app.util.removeCovers
@@ -29,6 +28,7 @@ import com.nilemnod.mangareader.domain.chapter.interactor.SetMangaDefaultChapter
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.interactor.GetDuplicateLibraryManga
 import com.nilemnod.mangareader.domain.manga.interactor.GetManga
+import com.nilemnod.mangareader.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaUpdate
 import com.nilemnod.mangareader.domain.manga.model.MangaWithChapterCount
@@ -57,9 +57,9 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import eu.kanade.tachiyomi.source.model.Filter as SourceModelFilter
 import kotlin.time.Clock
 import kotlin.time.Duration.Companion.seconds
-import eu.kanade.tachiyomi.source.model.Filter as SourceModelFilter
 
 @AssistedInject
 class BrowseSourceViewModel(

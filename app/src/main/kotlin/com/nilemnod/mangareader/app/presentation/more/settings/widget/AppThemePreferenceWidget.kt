@@ -40,10 +40,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
-import com.nilemnod.mangareader.app.presentation.manga.components.MangaCover
 import com.nilemnod.mangareader.core.android.system.isDynamicColorAvailable
 import com.nilemnod.mangareader.core.common.util.system.DeviceUtil
+import com.nilemnod.mangareader.core.mangaui.MangaCover
 import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.components.preference.BasePreferenceWidget
+import com.nilemnod.mangareader.core.ui.components.preference.PrefsHorizontalPadding
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.preference.model.AppTheme
 import com.nilemnod.mangareader.core.ui.theme.MangaReaderTheme

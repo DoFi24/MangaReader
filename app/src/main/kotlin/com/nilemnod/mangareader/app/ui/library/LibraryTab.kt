@@ -26,7 +26,6 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.nilemnod.mangareader.app.R
 import com.nilemnod.mangareader.app.data.library.LibraryUpdateWorker
-import com.nilemnod.mangareader.app.presentation.category.components.ChangeCategoryDialog
 import com.nilemnod.mangareader.app.presentation.library.DeleteLibraryMangaDialog
 import com.nilemnod.mangareader.app.presentation.library.LibrarySettingsDialog
 import com.nilemnod.mangareader.app.presentation.library.components.LibraryContent
@@ -39,6 +38,7 @@ import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
 import com.nilemnod.mangareader.core.android.system.workManager
 import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.mangaui.ChangeCategoryDialog
 import com.nilemnod.mangareader.core.navigation.SharedIntent
 import com.nilemnod.mangareader.core.navigation.SharedScreen
 import com.nilemnod.mangareader.core.navigation.intent

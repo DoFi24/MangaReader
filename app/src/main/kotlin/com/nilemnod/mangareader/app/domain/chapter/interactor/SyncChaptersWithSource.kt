@@ -5,7 +5,6 @@ import com.nilemnod.mangareader.app.data.download.DownloadProvider
 import com.nilemnod.mangareader.app.domain.chapter.model.copyFromSChapter
 import com.nilemnod.mangareader.app.domain.chapter.model.toSChapter
 import com.nilemnod.mangareader.app.domain.manga.interactor.GetExcludedScanlators
-import com.nilemnod.mangareader.app.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.app.domain.manga.model.toSManga
 import com.nilemnod.mangareader.data.chapter.ChapterSanitizer
 import com.nilemnod.mangareader.domain.chapter.interactor.ShouldUpdateDbChapter
@@ -15,6 +14,7 @@ import com.nilemnod.mangareader.domain.chapter.model.NoChaptersException
 import com.nilemnod.mangareader.domain.chapter.repository.ChapterRepository
 import com.nilemnod.mangareader.domain.chapter.service.ChapterRecognition
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
+import com.nilemnod.mangareader.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.source.local.isLocal
 import dev.zacsweers.metro.Inject

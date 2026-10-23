@@ -17,7 +17,7 @@ import coil3.compose.AsyncImage
 import com.nilemnod.mangareader.app.R
 import com.nilemnod.mangareader.app.data.coil.InstalledExtensionIcon
 import com.nilemnod.mangareader.app.data.coil.InstalledSourceIcon
-import com.nilemnod.mangareader.core.ui.util.rememberResourceBitmapPainter
+import com.nilemnod.mangareader.core.ui.util.rememberCoverErrorPainter
 import com.nilemnod.mangareader.domain.extension.model.Extension
 import com.nilemnod.mangareader.domain.source.model.Source
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
@@ -75,7 +75,7 @@ fun ExtensionIcon(
                 model = extension.iconUrl,
                 contentDescription = null,
                 placeholder = ColorPainter(Color(0x1F888888)),
-                error = rememberResourceBitmapPainter(id = R.drawable.cover_error),
+                error = rememberCoverErrorPainter(),
                 modifier = modifier
                     .clip(MaterialTheme.shapes.extraSmall),
             )
