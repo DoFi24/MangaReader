@@ -7,6 +7,11 @@ import kotlin.reflect.KClass
 
 sealed interface SharedDialog {
 
+    data class MangaCover(
+        val mangaId: Long,
+        val onDismissRequest: () -> Unit,
+    ) : SharedDialog
+
     data class MigrateManga(
         val current: Manga,
         val target: Manga,

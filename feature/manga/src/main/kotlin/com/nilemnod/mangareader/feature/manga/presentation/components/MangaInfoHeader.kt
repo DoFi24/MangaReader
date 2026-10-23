@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.manga.components
+package com.nilemnod.mangareader.feature.manga.presentation.components
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animateFloatAsState
@@ -70,9 +70,6 @@ import coil3.request.crossfade
 import com.mikepenz.markdown.model.markdownAnnotator
 import com.mikepenz.markdown.model.markdownAnnotatorConfig
 import com.mikepenz.markdown.utils.getUnescapedTextInNode
-import com.nilemnod.mangareader.app.R
-import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.source.getNameForMangaInfo
 import com.nilemnod.mangareader.core.common.util.system.copyToClipboard
 import com.nilemnod.mangareader.core.mangaui.DotSeparatorText
 import com.nilemnod.mangareader.core.mangaui.MangaCover
@@ -82,11 +79,13 @@ import com.nilemnod.mangareader.core.ui.components.material.TextButton
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.preference.appUiPreferences
 import com.nilemnod.mangareader.core.ui.util.clickableNoIndication
 import com.nilemnod.mangareader.core.ui.util.secondaryItemAlpha
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.api.MangaStatus
+import com.nilemnod.mangareader.feature.manga.R
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.AttachMoney
@@ -118,6 +117,7 @@ fun MangaInfoBox(
     appBarPadding: Dp,
     manga: Manga,
     source: ContentSource,
+    sourceName: String,
     isStubSource: Boolean,
     onCoverClick: () -> Unit,
     doSearch: (query: String, global: Boolean) -> Unit,
@@ -155,6 +155,7 @@ fun MangaInfoBox(
                     appBarPadding = appBarPadding,
                     manga = manga,
                     source = source,
+                    sourceName = sourceName,
                     isStubSource = isStubSource,
                     onCoverClick = onCoverClick,
                     doSearch = doSearch,
@@ -164,6 +165,7 @@ fun MangaInfoBox(
                     appBarPadding = appBarPadding,
                     manga = manga,
                     source = source,
+                    sourceName = sourceName,
                     isStubSource = isStubSource,
                     onCoverClick = onCoverClick,
                     doSearch = doSearch,
@@ -336,6 +338,7 @@ private fun MangaAndSourceTitlesLarge(
     appBarPadding: Dp,
     manga: Manga,
     source: ContentSource,
+    sourceName: String,
     isStubSource: Boolean,
     onCoverClick: () -> Unit,
     doSearch: (query: String, global: Boolean) -> Unit,
@@ -362,6 +365,7 @@ private fun MangaAndSourceTitlesLarge(
             artist = manga.artist,
             status = manga.status,
             source = source,
+            sourceName = sourceName,
             isStubSource = isStubSource,
             doSearch = doSearch,
             textAlign = TextAlign.Center,
@@ -374,6 +378,7 @@ private fun MangaAndSourceTitlesSmall(
     appBarPadding: Dp,
     manga: Manga,
     source: ContentSource,
+    sourceName: String,
     isStubSource: Boolean,
     onCoverClick: () -> Unit,
     doSearch: (query: String, global: Boolean) -> Unit,
@@ -405,6 +410,7 @@ private fun MangaAndSourceTitlesSmall(
                 artist = manga.artist,
                 status = manga.status,
                 source = source,
+                sourceName = sourceName,
                 isStubSource = isStubSource,
                 doSearch = doSearch,
             )
@@ -419,6 +425,7 @@ private fun ColumnScope.MangaContentInfo(
     artist: String?,
     status: Long,
     source: ContentSource,
+    sourceName: String,
     isStubSource: Boolean,
     doSearch: (query: String, global: Boolean) -> Unit,
     textAlign: TextAlign? = LocalTextStyle.current.textAlign,
@@ -544,7 +551,7 @@ private fun ColumnScope.MangaContentInfo(
                 )
             }
             Text(
-                text = source.getNameForMangaInfo(),
+                text = sourceName,
                 modifier = Modifier.clickableNoIndication {
                     doSearch(source.query(), false)
                 },
@@ -608,7 +615,7 @@ private fun MangaSummary(
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
-    val preferences = remember { context.appGraph.uiPreferences }
+    val preferences = remember { context.appUiPreferences }
     val loadImages = remember { preferences.imagesInDescription.get() }
     val animProgress by animateFloatAsState(
         targetValue = if (expanded) 1f else 0f,

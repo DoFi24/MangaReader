@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.domain.manga.interactor
+package com.nilemnod.mangareader.domain.manga.interactor
 
 import com.nilemnod.mangareader.domain.manga.repository.MangaRepository
 import dev.zacsweers.metro.Inject

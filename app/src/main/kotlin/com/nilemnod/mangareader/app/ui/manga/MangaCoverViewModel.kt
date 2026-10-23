@@ -132,6 +132,8 @@ class MangaCoverViewModel(
      * @param context Context.
      * @param data uri of the cover resource.
      */
+    fun hasCustomCover(manga: Manga): Boolean = coverCache.hasCustomCover(manga.id)
+
     fun editCover(context: Context, data: Uri) {
         val manga = state.value ?: return
         viewModelScope.launch(Dispatchers.IO) {

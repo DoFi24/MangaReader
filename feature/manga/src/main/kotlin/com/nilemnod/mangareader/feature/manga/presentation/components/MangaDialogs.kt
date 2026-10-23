@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.manga.components
+package com.nilemnod.mangareader.feature.manga.presentation.components
 
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -19,7 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
-import com.nilemnod.mangareader.app.util.system.isReleaseBuildType
+import com.nilemnod.mangareader.core.common.AppBuild
 import com.nilemnod.mangareader.core.ui.components.WheelTextPicker
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
@@ -109,7 +109,7 @@ fun SetIntervalDialog(
                 }
                 Spacer(Modifier.height(MaterialTheme.padding.small))
 
-                if (onValueChanged != null && (!isReleaseBuildType)) {
+                if (onValueChanged != null && (!AppBuild.isRelease)) {
                     Text(stringResource(MR.strings.manga_interval_custom_amount))
 
                     BoxWithConstraints(

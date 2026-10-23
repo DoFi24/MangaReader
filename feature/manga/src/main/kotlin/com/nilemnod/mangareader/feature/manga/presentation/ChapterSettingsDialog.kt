@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.manga
+package com.nilemnod.mangareader.feature.manga.presentation
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -26,8 +26,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.domain.manga.model.downloadedFilter
 import com.nilemnod.mangareader.core.common.preference.TriState
 import com.nilemnod.mangareader.core.ui.components.LabeledCheckbox
 import com.nilemnod.mangareader.core.ui.components.RadioItem
@@ -38,6 +36,7 @@ import com.nilemnod.mangareader.core.ui.components.TriStateItem
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.theme.active
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.manga.model.downloadedFilter
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Group
@@ -45,6 +44,7 @@ import com.nilemnod.mangareader.icons.materialsymbols.rounded.Group
 fun ChapterSettingsDialog(
     onDismissRequest: () -> Unit,
     manga: Manga? = null,
+    downloadedOnly: Boolean,
     onDownloadFilterChanged: (TriState) -> Unit,
     onUnreadFilterChanged: (TriState) -> Unit,
     onBookmarkedFilterChanged: (TriState) -> Unit,
@@ -62,9 +62,6 @@ fun ChapterSettingsDialog(
             onConfirmed = onSetAsDefault,
         )
     }
-
-    val context = LocalContext.current
-    val downloadedOnly = remember { context.appGraph.basePreferences.downloadedOnly.get() }
 
     TabbedDialog(
         onDismissRequest = onDismissRequest,
@@ -98,7 +95,7 @@ fun ChapterSettingsDialog(
             when (page) {
                 0 -> {
                     FilterPage(
-                        downloadFilter = manga?.downloadedFilter ?: TriState.DISABLED,
+                        downloadFilter = manga?.downloadedFilter(downloadedOnly) ?: TriState.DISABLED,
                         onDownloadFilterChanged = onDownloadFilterChanged
                             .takeUnless { downloadedOnly },
                         unreadFilter = manga?.unreadFilter ?: TriState.DISABLED,

@@ -33,10 +33,10 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.ui.browse.extension.ExtensionsBrowseTab
-import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.more.MoreTab
 import com.nilemnod.mangareader.core.navigation.HomeTab
 import com.nilemnod.mangareader.core.navigation.HomeTabRouter
+import com.nilemnod.mangareader.core.navigation.SearchableScreen
 import com.nilemnod.mangareader.core.navigation.SharedScreen
 import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
@@ -48,6 +48,7 @@ import com.nilemnod.mangareader.feature.browse.BrowseTabs
 import com.nilemnod.mangareader.feature.downloads.DownloadQueueScreen
 import com.nilemnod.mangareader.feature.history.HistoryTab
 import com.nilemnod.mangareader.feature.library.LibraryTab
+import com.nilemnod.mangareader.feature.manga.MangaScreen
 import com.nilemnod.mangareader.feature.updates.UpdatesTab
 import com.nilemnod.mangareader.i18n.MR
 import kotlinx.coroutines.channels.Channel
@@ -58,7 +59,7 @@ import kotlinx.coroutines.launch
 import soup.compose.material.motion.animation.materialFadeThroughIn
 import soup.compose.material.motion.animation.materialFadeThroughOut
 
-object HomeScreen : Screen() {
+object HomeScreen : Screen(), SearchableScreen {
 
     private val librarySearchEvent = Channel<String>()
 
@@ -259,7 +260,7 @@ object HomeScreen : Screen() {
         }
     }
 
-    suspend fun search(query: String) {
+    override suspend fun search(query: String) {
         librarySearchEvent.send(query)
     }
 

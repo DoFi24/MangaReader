@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.ui.manga
+package com.nilemnod.mangareader.feature.manga
 
 import android.content.Context
 import androidx.compose.material3.SnackbarHostState
@@ -11,15 +11,6 @@ import androidx.compose.ui.util.fastFilter
 import androidx.compose.ui.util.fastMap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nilemnod.mangareader.app.domain.chapter.interactor.GetAvailableScanlators
-import com.nilemnod.mangareader.app.domain.manga.interactor.GetExcludedScanlators
-import com.nilemnod.mangareader.app.domain.manga.interactor.SetExcludedScanlators
-import com.nilemnod.mangareader.app.domain.manga.model.chaptersFiltered
-import com.nilemnod.mangareader.app.domain.manga.model.downloadedFilter
-import com.nilemnod.mangareader.app.source.interactor.UpdateMangaFromRemote
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
-import com.nilemnod.mangareader.app.util.chapter.getNextUnread
-import com.nilemnod.mangareader.app.util.removeCovers
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.preference.CheckboxState
 import com.nilemnod.mangareader.core.common.preference.TriState
@@ -38,29 +29,39 @@ import com.nilemnod.mangareader.core.storage.CoverCache
 import com.nilemnod.mangareader.core.ui.preference.asState
 import com.nilemnod.mangareader.core.ui.util.addOrRemove
 import com.nilemnod.mangareader.core.ui.util.insertSeparators
+import com.nilemnod.mangareader.domain.base.service.ModePreferences
 import com.nilemnod.mangareader.domain.category.interactor.GetCategories
 import com.nilemnod.mangareader.domain.category.interactor.SetMangaCategories
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.domain.chapter.interactor.FilterChaptersForDownload
+import com.nilemnod.mangareader.domain.chapter.interactor.GetAvailableScanlators
 import com.nilemnod.mangareader.domain.chapter.interactor.SetMangaDefaultChapterFlags
 import com.nilemnod.mangareader.domain.chapter.interactor.UpdateChapter
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.chapter.model.ChapterUpdate
 import com.nilemnod.mangareader.domain.chapter.model.NoChaptersException
+import com.nilemnod.mangareader.domain.chapter.service.ChapterPreferences
 import com.nilemnod.mangareader.domain.chapter.service.calculateChapterGap
 import com.nilemnod.mangareader.domain.chapter.service.getChapterSort
 import com.nilemnod.mangareader.domain.chapter.service.missingChaptersCount
 import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.interactor.GetDuplicateLibraryManga
+import com.nilemnod.mangareader.domain.manga.interactor.GetExcludedScanlators
 import com.nilemnod.mangareader.domain.manga.interactor.GetMangaWithChapters
+import com.nilemnod.mangareader.domain.manga.interactor.SetExcludedScanlators
 import com.nilemnod.mangareader.domain.manga.interactor.SetMangaChapterFlags
 import com.nilemnod.mangareader.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaWithChapterCount
 import com.nilemnod.mangareader.domain.manga.model.applyFilter
+import com.nilemnod.mangareader.domain.manga.model.chaptersFiltered
+import com.nilemnod.mangareader.domain.manga.model.downloadedFilter
 import com.nilemnod.mangareader.domain.source.api.ContentSource
+import com.nilemnod.mangareader.domain.source.service.RemoteMangaUpdater
 import com.nilemnod.mangareader.domain.source.service.SourceManager
+import com.nilemnod.mangareader.domain.source.service.SourcePreferences
+import com.nilemnod.mangareader.domain.source.service.getNameForMangaInfo
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.source.local.isLocal
 import dev.zacsweers.metro.AppScope
@@ -101,7 +102,9 @@ class MangaViewModel(
     @AppCoroutineScope private val appScope: CoroutineScope,
     private val context: Context,
     private val libraryPreferences: LibraryPreferences,
-    readerPreferences: ReaderPreferences,
+    chapterPreferences: ChapterPreferences,
+    private val modePreferences: ModePreferences,
+    private val sourcePreferences: SourcePreferences,
     private val downloadManager: DownloadManager,
     private val downloadCache: DownloadCache,
     private val getMangaAndChapters: GetMangaWithChapters,
@@ -117,8 +120,8 @@ class MangaViewModel(
     private val getCategories: GetCategories,
     private val setMangaCategories: SetMangaCategories,
     private val filterChaptersForDownload: FilterChaptersForDownload,
-    private val updateMangaFromRemote: UpdateMangaFromRemote,
-    private val sourceManager: SourceManager,
+    private val updateMangaFromRemote: RemoteMangaUpdater,
+    val sourceManager: SourceManager,
     private val coverCache: CoverCache,
 ) : ViewModel() {
 
@@ -154,7 +157,7 @@ class MangaViewModel(
     val chapterSwipeStartAction = libraryPreferences.swipeToEndAction.get()
     val chapterSwipeEndAction = libraryPreferences.swipeToStartAction.get()
 
-    private val skipFiltered by readerPreferences.skipFiltered.asState(viewModelScope)
+    private val skipFiltered by chapterPreferences.skipFiltered.asState(viewModelScope)
 
     val isUpdateIntervalEnabled =
         LibraryPreferences.MANGA_OUTSIDE_RELEASE_PERIOD in libraryPreferences.autoUpdateMangaRestrictions.get()
@@ -242,6 +245,8 @@ class MangaViewModel(
             isRefreshingData = isRefreshingData,
             dialog = dialog,
             hideMissingChapters = hideMissingChapters,
+            downloadedOnly = modePreferences.downloadedOnly.get(),
+            sourceName = mangaAndChapters.source.getNameForMangaInfo(sourcePreferences),
         )
     }
         // Composition would otherwise build these on first read, on the main thread, for every new state
@@ -374,7 +379,7 @@ class MangaViewModel(
             if (isFavorited) {
                 // Remove from library
                 if (updateManga.awaitUpdateFavorite(manga.id, false)) {
-                    manga.removeCovers(coverCache)
+                    if (!manga.isLocal()) coverCache.deleteFromCache(manga, true)
                     onRemoved()
                 }
             } else {
@@ -609,7 +614,12 @@ class MangaViewModel(
      */
     fun getNextUnreadChapter(): Chapter? {
         val successState = successState ?: return null
-        return successState.chapters.getNextUnread(successState.manga)
+        val chapters = successState.processedChapters
+        return if (successState.manga.sortDescending()) {
+            chapters.findLast { !it.chapter.read }
+        } else {
+            chapters.find { !it.chapter.read }
+        }?.chapter
     }
 
     private fun getUnreadChapters(): List<Chapter> {
@@ -1014,6 +1024,8 @@ class MangaViewModel(
             val isRefreshingData: Boolean = false,
             val dialog: Dialog? = null,
             val hideMissingChapters: Boolean = false,
+            val downloadedOnly: Boolean = false,
+            val sourceName: String = "",
         ) : State {
             val processedChapters by lazy {
                 chapters.applyFilters(manga).toList()
@@ -1075,7 +1087,7 @@ class MangaViewModel(
                 get() = excludedScanlators.intersect(availableScanlators).isNotEmpty()
 
             val filterActive: Boolean
-                get() = scanlatorFilterActive || manga.chaptersFiltered()
+                get() = scanlatorFilterActive || manga.chaptersFiltered(downloadedOnly)
 
             /**
              * Applies the view filters to the list of chapters obtained from the database.
@@ -1084,7 +1096,7 @@ class MangaViewModel(
             private fun List<ChapterList.Item>.applyFilters(manga: Manga): Sequence<ChapterList.Item> {
                 val isLocalManga = manga.isLocal()
                 val unreadFilter = manga.unreadFilter
-                val downloadedFilter = manga.downloadedFilter
+                val downloadedFilter = manga.downloadedFilter(downloadedOnly)
                 val bookmarkedFilter = manga.bookmarkedFilter
                 val chapterSort = getChapterSort(manga)
                 return asSequence()

@@ -1,7 +1,6 @@
 package com.nilemnod.mangareader.app.source.interactor
 
 import com.nilemnod.mangareader.app.domain.chapter.interactor.SyncChaptersWithSource
-import com.nilemnod.mangareader.app.domain.manga.model.hasCustomCover
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.core.storage.CoverCache
@@ -113,7 +112,7 @@ class UpdateMangaFromRemote(
             remoteManga.thumbnailUrl.isNullOrEmpty() -> null
             !manualFetch && localManga.thumbnailUrl == remoteManga.thumbnailUrl -> null
             localManga.isLocal() -> Clock.System.now()
-            localManga.hasCustomCover(coverCache) -> {
+            coverCache.hasCustomCover(localManga.id) -> {
                 coverCache.deleteFromCache(localManga, false)
                 null
             }

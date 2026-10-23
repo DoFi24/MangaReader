@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.ui.manga
+package com.nilemnod.mangareader.feature.manga
 
 import android.content.Context
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -20,27 +20,21 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.domain.manga.model.hasCustomCover
-import com.nilemnod.mangareader.app.presentation.manga.ChapterSettingsDialog
-import com.nilemnod.mangareader.app.presentation.manga.EditCoverAction
-import com.nilemnod.mangareader.app.presentation.manga.MangaScreen
-import com.nilemnod.mangareader.app.presentation.manga.components.DeleteChaptersDialog
-import com.nilemnod.mangareader.app.presentation.manga.components.MangaCoverDialog
-import com.nilemnod.mangareader.app.presentation.manga.components.ScanlatorFilterDialog
-import com.nilemnod.mangareader.app.presentation.manga.components.SetIntervalDialog
-import com.nilemnod.mangareader.app.source.isLocalOrStub
-import com.nilemnod.mangareader.app.ui.home.HomeScreen
-import com.nilemnod.mangareader.app.ui.manga.notes.MangaNotesScreen
-import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
-import com.nilemnod.mangareader.app.ui.webview.WebViewScreen
 import com.nilemnod.mangareader.core.android.system.toShareIntent
 import com.nilemnod.mangareader.core.common.util.system.copyToClipboard
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.core.mangaui.ChangeCategoryDialog
 import com.nilemnod.mangareader.core.mangaui.DuplicateMangaDialog
+import com.nilemnod.mangareader.core.mangaui.RemoveMangaDialog
+import com.nilemnod.mangareader.core.navigation.Content
 import com.nilemnod.mangareader.core.navigation.MangaDestination
+import com.nilemnod.mangareader.core.navigation.SearchableScreen
+import com.nilemnod.mangareader.core.navigation.SharedDialog
+import com.nilemnod.mangareader.core.navigation.SharedIntent
+import com.nilemnod.mangareader.core.navigation.SharedScreen
+import com.nilemnod.mangareader.core.navigation.intent
+import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
 import com.nilemnod.mangareader.core.ui.util.AssistContentScreen
 import com.nilemnod.mangareader.core.ui.util.Screen
@@ -49,12 +43,13 @@ import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.toSourceManga
 import com.nilemnod.mangareader.domain.source.api.ContentSource
-import com.nilemnod.mangareader.feature.browse.migration.config.MigrationConfigScreen
-import com.nilemnod.mangareader.feature.browse.migration.dialog.MigrateMangaDialog
-import com.nilemnod.mangareader.feature.browse.presentation.components.RemoveMangaDialog
-import com.nilemnod.mangareader.feature.browse.source.browse.BrowseSourceScreen
-import com.nilemnod.mangareader.feature.browse.source.globalsearch.GlobalSearchScreen
-import com.nilemnod.mangareader.feature.categories.CategoryScreen
+import com.nilemnod.mangareader.domain.source.api.isLocalOrStub
+import com.nilemnod.mangareader.feature.manga.notes.MangaNotesScreen
+import com.nilemnod.mangareader.feature.manga.presentation.ChapterSettingsDialog
+import com.nilemnod.mangareader.feature.manga.presentation.MangaScreen
+import com.nilemnod.mangareader.feature.manga.presentation.components.DeleteChaptersDialog
+import com.nilemnod.mangareader.feature.manga.presentation.components.ScanlatorFilterDialog
+import com.nilemnod.mangareader.feature.manga.presentation.components.SetIntervalDialog
 import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -149,7 +144,7 @@ class MangaScreen(
                 successState.manga.favorite
             },
             onMigrateClicked = {
-                navigator.push(MigrationConfigScreen(successState.manga.id))
+                navigator.push(SharedScreen.MigrationConfig(listOf(successState.manga.id)).screen())
             }.takeIf { successState.manga.favorite },
             onEditNotesClicked = { navigator.push(MangaNotesScreen(manga = successState.manga)) },
             onMultiBookmarkClicked = viewModel::bookmarkChapters,
@@ -180,7 +175,7 @@ class MangaScreen(
                 ChangeCategoryDialog(
                     initialSelection = dialog.initialSelection,
                     onDismissRequest = onDismissRequest,
-                    onEditCategories = { navigator.push(CategoryScreen()) },
+                    onEditCategories = { navigator.push(SharedScreen.Category.screen()) },
                     onConfirm = { include, _ ->
                         viewModel.moveMangaToCategoriesAndAddToLibrary(dialog.manga, include)
                     },
@@ -203,22 +198,23 @@ class MangaScreen(
                     onConfirm = { viewModel.toggleFavorite(onRemoved = {}, checkDuplicate = false) },
                     onOpenManga = { navigator.push(MangaScreen(it.id)) },
                     onMigrate = { viewModel.showMigrateDialog(it) },
-                    sourceManager = LocalContext.current.appGraph.sourceManager,
+                    sourceManager = viewModel.sourceManager,
                 )
             }
 
             is MangaViewModel.Dialog.Migrate -> {
-                MigrateMangaDialog(
+                SharedDialog.MigrateManga(
                     current = dialog.current,
                     target = dialog.target,
                     // Initiated from the context of [dialog.target] so we show [dialog.current].
                     onClickTitle = { navigator.push(MangaScreen(dialog.current.id)) },
                     onDismissRequest = onDismissRequest,
-                )
+                ).Content()
             }
             MangaViewModel.Dialog.SettingsSheet -> ChapterSettingsDialog(
                 onDismissRequest = onDismissRequest,
                 manga = successState.manga,
+                downloadedOnly = successState.downloadedOnly,
                 onDownloadFilterChanged = viewModel::setDownloadedFilter,
                 onUnreadFilterChanged = viewModel::setUnreadFilter,
                 onBookmarkedFilterChanged = viewModel::setBookmarkedFilter,
@@ -229,36 +225,7 @@ class MangaScreen(
                 scanlatorFilterActive = successState.scanlatorFilterActive,
                 onScanlatorFilterClicked = { showScanlatorsDialog = true },
             )
-            MangaViewModel.Dialog.FullCover -> {
-                val vm =
-                    assistedMetroViewModel<MangaCoverViewModel, MangaCoverViewModel.Factory> {
-                        create(mangaId = mangaId)
-                    }
-                val manga by vm.state.collectAsStateWithLifecycle()
-                if (manga != null) {
-                    val getContent = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) {
-                        if (it == null) return@rememberLauncherForActivityResult
-                        vm.editCover(context, it)
-                    }
-                    MangaCoverDialog(
-                        manga = manga!!,
-                        snackbarHostState = vm.snackbarHostState,
-                        isCustomCover = remember(manga) { manga!!.hasCustomCover() },
-                        onShareClick = { vm.shareCover(context) },
-                        onSaveClick = { vm.saveCover(context) },
-                        onEditClick = {
-                            when (it) {
-                                EditCoverAction.EDIT -> getContent.launch("image/*")
-                                EditCoverAction.DELETE -> vm.deleteCustomCover(context)
-                                EditCoverAction.ADD_TO_LIBRARY -> vm.addToLibraryWarning(context)
-                            }
-                        },
-                        onDismissRequest = onDismissRequest,
-                    )
-                } else {
-                    LoadingScreen(Modifier.systemBarsPadding())
-                }
-            }
+            MangaViewModel.Dialog.FullCover -> SharedDialog.MangaCover(mangaId, onDismissRequest).Content()
             is MangaViewModel.Dialog.SetFetchInterval -> {
                 SetIntervalDialog(
                     interval = dialog.manga.fetchInterval,
@@ -285,7 +252,7 @@ class MangaScreen(
     }
 
     private fun openChapter(context: Context, chapter: Chapter) {
-        context.startActivity(ReaderActivity.newIntent(context, chapter.mangaId, chapter.id))
+        context.startActivity(SharedIntent.Reader(chapter.mangaId, chapter.id).intent(context))
     }
 
     private fun getMangaUrl(manga_: Manga?, source_: ContentSource?): String? {
@@ -302,11 +269,11 @@ class MangaScreen(
     private fun openMangaInWebView(navigator: Navigator, manga_: Manga?, source_: ContentSource?) {
         getMangaUrl(manga_, source_)?.let { url ->
             navigator.push(
-                WebViewScreen(
+                SharedScreen.WebView(
                     url = url,
                     initialTitle = manga_?.title,
                     sourceId = source_?.id,
-                ),
+                ).screen(),
             )
         }
     }
@@ -329,7 +296,7 @@ class MangaScreen(
      */
     private suspend fun performSearch(navigator: Navigator, query: String, global: Boolean) {
         if (global) {
-            navigator.push(GlobalSearchScreen(query))
+            navigator.push(SharedScreen.GlobalSearch(query).screen())
             return
         }
 
@@ -337,15 +304,10 @@ class MangaScreen(
             return
         }
 
-        when (val previousController = navigator.items[navigator.size - 2]) {
-            is HomeScreen -> {
-                navigator.pop()
-                previousController.search(query)
-            }
-            is BrowseSourceScreen -> {
-                navigator.pop()
-                previousController.search(query)
-            }
+        val previousController = navigator.items[navigator.size - 2]
+        if (previousController is SearchableScreen) {
+            navigator.pop()
+            previousController.search(query)
         }
     }
 
@@ -360,7 +322,7 @@ class MangaScreen(
         }
 
         val previousController = navigator.items[navigator.size - 2]
-        if (previousController is BrowseSourceScreen && source.web != null) {
+        if (previousController is SearchableScreen && source.web != null) {
             navigator.pop()
             previousController.searchGenre(genreName)
         } else {

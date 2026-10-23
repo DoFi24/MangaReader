@@ -1,22 +1,25 @@
 package com.nilemnod.mangareader.app.domain.chapter.model
 
-import com.nilemnod.mangareader.app.domain.manga.model.downloadedFilter
-import com.nilemnod.mangareader.app.ui.manga.ChapterList
 import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.chapter.service.getChapterSort
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.applyFilter
+import com.nilemnod.mangareader.domain.manga.model.downloadedFilter
 import com.nilemnod.mangareader.source.local.isLocal
 
 /**
  * Applies the view filters to the list of chapters obtained from the database.
  * @return an observable of the list of chapters filtered and sorted.
  */
-fun List<Chapter>.applyFilters(manga: Manga, downloadManager: DownloadManager): List<Chapter> {
+fun List<Chapter>.applyFilters(
+    manga: Manga,
+    downloadManager: DownloadManager,
+    downloadedOnly: Boolean,
+): List<Chapter> {
     val isLocalManga = manga.isLocal()
     val unreadFilter = manga.unreadFilter
-    val downloadedFilter = manga.downloadedFilter
+    val downloadedFilter = manga.downloadedFilter(downloadedOnly)
     val bookmarkedFilter = manga.bookmarkedFilter
 
     return filter { chapter -> applyFilter(unreadFilter) { !chapter.read } }
@@ -34,20 +37,4 @@ fun List<Chapter>.applyFilters(manga: Manga, downloadManager: DownloadManager): 
             }
         }
         .sortedWith(getChapterSort(manga))
-}
-
-/**
- * Applies the view filters to the list of chapters obtained from the database.
- * @return an observable of the list of chapters filtered and sorted.
- */
-fun List<ChapterList.Item>.applyFilters(manga: Manga): Sequence<ChapterList.Item> {
-    val isLocalManga = manga.isLocal()
-    val unreadFilter = manga.unreadFilter
-    val downloadedFilter = manga.downloadedFilter
-    val bookmarkedFilter = manga.bookmarkedFilter
-    return asSequence()
-        .filter { (chapter) -> applyFilter(unreadFilter) { !chapter.read } }
-        .filter { (chapter) -> applyFilter(bookmarkedFilter) { chapter.bookmark } }
-        .filter { applyFilter(downloadedFilter) { it.isDownloaded || isLocalManga } }
-        .sortedWith { (chapter1), (chapter2) -> getChapterSort(manga).invoke(chapter1, chapter2) }
 }

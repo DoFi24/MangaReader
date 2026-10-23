@@ -16,22 +16,3 @@ val Manga.readingMode: Long
 
 val Manga.readerOrientation: Long
     get() = viewerFlags and ReaderOrientation.MASK.toLong()
-
-val Manga.downloadedFilter: TriState
-    get() {
-        if (Injekt.get<Context>().appGraph.basePreferences.downloadedOnly.get()) return TriState.ENABLED_IS
-        return when (downloadedFilterRaw) {
-            Manga.CHAPTER_SHOW_DOWNLOADED -> TriState.ENABLED_IS
-            Manga.CHAPTER_SHOW_NOT_DOWNLOADED -> TriState.ENABLED_NOT
-            else -> TriState.DISABLED
-        }
-    }
-fun Manga.chaptersFiltered(): Boolean {
-    return unreadFilter != TriState.DISABLED ||
-        downloadedFilter != TriState.DISABLED ||
-        bookmarkedFilter != TriState.DISABLED
-}
-
-fun Manga.hasCustomCover(coverCache: CoverCache = Injekt.get<Context>().appGraph.coverCache): Boolean {
-    return coverCache.hasCustomCover(id)
-}

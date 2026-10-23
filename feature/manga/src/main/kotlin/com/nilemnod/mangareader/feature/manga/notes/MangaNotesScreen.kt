@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.ui.manga.notes
+package com.nilemnod.mangareader.feature.manga.notes
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
@@ -8,11 +8,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.presentation.manga.MangaNotesScreen
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.domain.manga.interactor.UpdateMangaNotes
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.feature.manga.presentation.MangaNotesScreen
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Assisted
 import dev.zacsweers.metro.AssistedFactory

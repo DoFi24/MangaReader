@@ -50,7 +50,6 @@ import coil3.size.Size
 import com.nilemnod.mangareader.app.data.coil.ImageDecoder
 import com.nilemnod.mangareader.app.data.coil.newDecoder
 import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.presentation.manga.EditCoverAction
 import com.nilemnod.mangareader.app.ui.reader.viewer.ReaderPageImageView
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.AppBarActions
@@ -274,4 +273,10 @@ private fun ActionsPill(content: @Composable () -> Unit) {
     ) {
         content()
     }
+}
+
+enum class EditCoverAction {
+    EDIT,
+    DELETE,
+    ADD_TO_LIBRARY,
 }
