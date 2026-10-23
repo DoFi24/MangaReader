@@ -20,12 +20,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.domain.manga.model.hasCustomCover
-import com.nilemnod.mangareader.app.domain.manga.model.toSManga
 import com.nilemnod.mangareader.app.presentation.browse.components.RemoveMangaDialog
-import com.nilemnod.mangareader.app.presentation.category.components.ChangeCategoryDialog
 import com.nilemnod.mangareader.app.presentation.manga.ChapterSettingsDialog
-import com.nilemnod.mangareader.app.presentation.manga.DuplicateMangaDialog
 import com.nilemnod.mangareader.app.presentation.manga.EditCoverAction
 import com.nilemnod.mangareader.app.presentation.manga.MangaScreen
 import com.nilemnod.mangareader.app.presentation.manga.components.DeleteChaptersDialog
@@ -35,7 +33,6 @@ import com.nilemnod.mangareader.app.presentation.manga.components.SetIntervalDia
 import com.nilemnod.mangareader.app.source.isLocalOrStub
 import com.nilemnod.mangareader.app.ui.browse.source.browse.BrowseSourceScreen
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.GlobalSearchScreen
-import com.nilemnod.mangareader.app.ui.category.CategoryScreen
 import com.nilemnod.mangareader.app.ui.home.HomeScreen
 import com.nilemnod.mangareader.app.ui.manga.notes.MangaNotesScreen
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
@@ -44,17 +41,20 @@ import com.nilemnod.mangareader.app.util.system.copyToClipboard
 import com.nilemnod.mangareader.core.android.system.toShareIntent
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.toast
+import com.nilemnod.mangareader.core.mangaui.ChangeCategoryDialog
+import com.nilemnod.mangareader.core.mangaui.DuplicateMangaDialog
 import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
 import com.nilemnod.mangareader.core.ui.util.AssistContentScreen
 import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.core.ui.util.isTabletUi
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.manga.model.toSourceManga
+import com.nilemnod.mangareader.domain.source.api.ContentSource
+import com.nilemnod.mangareader.feature.categories.CategoryScreen
 import com.nilemnod.mangareader.feature.migration.config.MigrationConfigScreen
 import com.nilemnod.mangareader.feature.migration.dialog.MigrateMangaDialog
 import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -88,7 +88,7 @@ class MangaScreen(
         }
 
         val successState = state as MangaViewModel.State.Success
-        val isHttpSource = remember { successState.source is HttpSource }
+        val isHttpSource = remember { successState.source.web != null }
 
         LaunchedEffect(successState.manga, viewModel.source) {
             if (isHttpSource) {
@@ -202,6 +202,7 @@ class MangaScreen(
                     onConfirm = { viewModel.toggleFavorite(onRemoved = {}, checkDuplicate = false) },
                     onOpenManga = { navigator.push(MangaScreen(it.id)) },
                     onMigrate = { viewModel.showMigrateDialog(it) },
+                    sourceManager = LocalContext.current.appGraph.sourceManager,
                 )
             }
 
@@ -286,18 +287,18 @@ class MangaScreen(
         context.startActivity(ReaderActivity.newIntent(context, chapter.mangaId, chapter.id))
     }
 
-    private fun getMangaUrl(manga_: Manga?, source_: Source?): String? {
+    private fun getMangaUrl(manga_: Manga?, source_: ContentSource?): String? {
         val manga = manga_ ?: return null
-        val source = source_ as? HttpSource ?: return null
+        val web = source_?.web ?: return null
 
         return try {
-            source.getMangaUrl(manga.toSManga())
+            web.mangaUrl(manga.toSourceManga())
         } catch (e: Exception) {
             null
         }
     }
 
-    private fun openMangaInWebView(navigator: Navigator, manga_: Manga?, source_: Source?) {
+    private fun openMangaInWebView(navigator: Navigator, manga_: Manga?, source_: ContentSource?) {
         getMangaUrl(manga_, source_)?.let { url ->
             navigator.push(
                 WebViewScreen(
@@ -309,7 +310,7 @@ class MangaScreen(
         }
     }
 
-    private fun shareManga(context: Context, manga_: Manga?, source_: Source?) {
+    private fun shareManga(context: Context, manga_: Manga?, source_: ContentSource?) {
         try {
             getMangaUrl(manga_, source_)?.let { url ->
                 val intent = url.toUri().toShareIntent(context, type = "text/plain")
@@ -352,13 +353,13 @@ class MangaScreen(
      *
      * @param genreName the search genre to the parent controller
      */
-    private suspend fun performGenreSearch(navigator: Navigator, genreName: String, source: Source) {
+    private suspend fun performGenreSearch(navigator: Navigator, genreName: String, source: ContentSource) {
         if (navigator.size < 2) {
             return
         }
 
         val previousController = navigator.items[navigator.size - 2]
-        if (previousController is BrowseSourceScreen && source is HttpSource) {
+        if (previousController is BrowseSourceScreen && source.web != null) {
             navigator.pop()
             previousController.searchGenre(genreName)
         } else {
@@ -369,10 +370,10 @@ class MangaScreen(
     /**
      * Copy Manga URL to Clipboard
      */
-    private fun copyMangaUrl(context: Context, manga_: Manga?, source_: Source?) {
+    private fun copyMangaUrl(context: Context, manga_: Manga?, source_: ContentSource?) {
         val manga = manga_ ?: return
-        val source = source_ as? HttpSource ?: return
-        val url = source.getMangaUrl(manga.toSManga())
+        val web = source_?.web ?: return
+        val url = web.mangaUrl(manga.toSourceManga())
         context.copyToClipboard(url, url)
     }
 }

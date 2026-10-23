@@ -13,10 +13,10 @@ import com.nilemnod.mangareader.app.data.backup.restore.restorers.CategoriesRest
 import com.nilemnod.mangareader.app.data.backup.restore.restorers.ExtensionStoreRestorer
 import com.nilemnod.mangareader.app.data.backup.restore.restorers.MangaRestorer
 import com.nilemnod.mangareader.app.data.backup.restore.restorers.PreferenceRestorer
-import com.nilemnod.mangareader.app.data.download.DownloadCache
 import com.nilemnod.mangareader.app.util.system.createFileInCacheDir
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.download.DownloadCache
 import com.nilemnod.mangareader.domain.source.repository.StubSourceRepository
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.i18n.MR

@@ -1,22 +1,20 @@
 package com.nilemnod.mangareader.app.ui.reader.loader
 
 import android.content.Context
-import com.nilemnod.mangareader.app.data.cache.ChapterCache
-import com.nilemnod.mangareader.app.data.download.DownloadManager
-import com.nilemnod.mangareader.app.data.download.DownloadProvider
-import com.nilemnod.mangareader.app.domain.chapter.model.toSChapter
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderChapter
 import com.nilemnod.mangareader.core.archive.archiveReader
 import com.nilemnod.mangareader.core.archive.epubReader
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.download.ChapterCache
+import com.nilemnod.mangareader.core.download.DownloadManager
+import com.nilemnod.mangareader.core.download.DownloadProvider
+import com.nilemnod.mangareader.domain.chapter.model.toSourceChapter
 import com.nilemnod.mangareader.domain.manga.model.Manga
-import com.nilemnod.mangareader.domain.source.model.StubSource
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.source.local.LocalSource
 import com.nilemnod.mangareader.source.local.io.Format
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -32,7 +30,7 @@ class ChapterLoader(
     private val appScope: CoroutineScope,
     private val canLoadAhead: () -> Boolean,
     private val manga: Manga,
-    private val source: Source,
+    private val source: ContentSource,
 ) {
 
     /**
@@ -99,15 +97,15 @@ class ChapterLoader(
                 downloadManager,
                 downloadProvider,
             )
-            source is LocalSource -> source.getFormat(chapter.chapter.toSChapter()).let { format ->
+            source is LocalSource -> source.getFormat(chapter.chapter.toSourceChapter()).let { format ->
                 when (format) {
                     is Format.Directory -> DirectoryPageLoader(format.file)
                     is Format.Archive -> ArchivePageLoader(format.file.archiveReader(context))
                     is Format.Epub -> EpubPageLoader(format.file.epubReader(context))
                 }
             }
-            source is HttpSource -> HttpPageLoader(chapter, source, chapterCache, appScope, canLoadAhead)
-            source is StubSource -> error(context.stringResource(MR.strings.source_not_installed, source.toString()))
+            source.web != null -> HttpPageLoader(chapter, source, chapterCache, appScope, canLoadAhead)
+            source.isStub -> error(context.stringResource(MR.strings.source_not_installed, source.displayName))
             else -> error(context.stringResource(MR.strings.loader_not_implemented_error))
         }
     }

@@ -10,6 +10,11 @@ import com.nilemnod.mangareader.app.extension.util.ExtensionInstaller
 import com.nilemnod.mangareader.app.util.storage.getUriCompat
 import com.nilemnod.mangareader.core.android.storage.saveTo
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.network.GET
+import com.nilemnod.mangareader.core.network.NetworkHelper
+import com.nilemnod.mangareader.core.network.ProgressListener
+import com.nilemnod.mangareader.core.network.awaitSuccess
+import com.nilemnod.mangareader.core.network.newCachelessCallWithProgress
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Assisted
 import dev.zacsweers.metro.AssistedFactory
@@ -17,11 +22,6 @@ import dev.zacsweers.metro.AssistedInject
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactory
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactoryKey
-import eu.kanade.tachiyomi.network.GET
-import eu.kanade.tachiyomi.network.NetworkHelper
-import eu.kanade.tachiyomi.network.ProgressListener
-import eu.kanade.tachiyomi.network.awaitSuccess
-import eu.kanade.tachiyomi.network.newCachelessCallWithProgress
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

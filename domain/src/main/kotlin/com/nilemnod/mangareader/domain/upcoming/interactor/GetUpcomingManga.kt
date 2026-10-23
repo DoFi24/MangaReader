@@ -2,8 +2,8 @@ package com.nilemnod.mangareader.domain.upcoming.interactor
 
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.repository.MangaRepository
+import com.nilemnod.mangareader.domain.source.api.MangaStatus
 import dev.zacsweers.metro.Inject
-import eu.kanade.tachiyomi.source.model.SManga
 import kotlinx.coroutines.flow.Flow
 
 @Inject
@@ -12,8 +12,8 @@ class GetUpcomingManga(
 ) {
 
     private val includedStatuses = setOf(
-        SManga.ONGOING.toLong(),
-        SManga.PUBLISHING_FINISHED.toLong(),
+        MangaStatus.ONGOING.code,
+        MangaStatus.PUBLISHING_FINISHED.code,
     )
 
     suspend fun subscribe(

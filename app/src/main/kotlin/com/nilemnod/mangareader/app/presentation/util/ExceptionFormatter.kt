@@ -3,10 +3,10 @@ package com.nilemnod.mangareader.app.presentation.util
 import android.content.Context
 import com.nilemnod.mangareader.core.android.system.isOnline
 import com.nilemnod.mangareader.core.common.i18n.stringResource
+import com.nilemnod.mangareader.core.network.HttpException
 import com.nilemnod.mangareader.data.source.NoResultsException
 import com.nilemnod.mangareader.domain.source.model.SourceNotInstalledException
 import com.nilemnod.mangareader.i18n.MR
-import eu.kanade.tachiyomi.network.HttpException
 import java.net.UnknownHostException
 
 context(context: Context)

@@ -43,8 +43,6 @@ import com.nilemnod.mangareader.app.domain.extension.interactor.ExtensionSourceI
 import com.nilemnod.mangareader.app.presentation.browse.components.ExtensionIcon
 import com.nilemnod.mangareader.app.presentation.browse.components.ExtensionPill
 import com.nilemnod.mangareader.app.presentation.browse.components.label
-import com.nilemnod.mangareader.app.presentation.more.settings.widget.TextPreferenceWidget
-import com.nilemnod.mangareader.app.presentation.more.settings.widget.TrailingWidgetBuffer
 import com.nilemnod.mangareader.app.ui.browse.extension.details.ExtensionDetailsViewModel
 import com.nilemnod.mangareader.app.util.system.LocaleHelper
 import com.nilemnod.mangareader.app.util.system.copyToClipboard
@@ -54,6 +52,8 @@ import com.nilemnod.mangareader.core.ui.components.ScrollbarLazyColumn
 import com.nilemnod.mangareader.core.ui.components.WarningBanner
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.core.ui.components.material.padding
+import com.nilemnod.mangareader.core.ui.components.preference.TextPreferenceWidget
+import com.nilemnod.mangareader.core.ui.components.preference.TrailingWidgetBuffer
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.domain.extension.model.Extension
 import com.nilemnod.mangareader.i18n.MR

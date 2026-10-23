@@ -7,7 +7,7 @@ import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.SearchViewMode
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.SourceFilter
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.domain.manga.model.Manga
-import eu.kanade.tachiyomi.source.Source
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 
 @Composable
 fun MigrateSearchScreen(
@@ -19,7 +19,7 @@ fun MigrateSearchScreen(
     onChangeSearchFilter: (SourceFilter) -> Unit,
     onToggleResults: () -> Unit,
     getManga: @Composable (Manga) -> State<Manga>,
-    onClickSource: (Source) -> Unit,
+    onClickSource: (ContentSource) -> Unit,
     onClickItem: (Manga) -> Unit,
     onLongClickItem: (Manga) -> Unit,
 ) {

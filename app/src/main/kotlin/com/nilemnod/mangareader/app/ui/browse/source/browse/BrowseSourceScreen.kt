@@ -26,20 +26,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.presentation.browse.BrowseSourceContent
 import com.nilemnod.mangareader.app.presentation.browse.MissingSourceScreen
 import com.nilemnod.mangareader.app.presentation.browse.components.BrowseSourceToolbar
 import com.nilemnod.mangareader.app.presentation.browse.components.RemoveMangaDialog
-import com.nilemnod.mangareader.app.presentation.category.components.ChangeCategoryDialog
-import com.nilemnod.mangareader.app.presentation.manga.DuplicateMangaDialog
 import com.nilemnod.mangareader.app.ui.browse.extension.details.SourcePreferencesScreen
 import com.nilemnod.mangareader.app.ui.browse.source.browse.BrowseSourceViewModel.Listing
-import com.nilemnod.mangareader.app.ui.category.CategoryScreen
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
 import com.nilemnod.mangareader.app.ui.webview.WebViewScreen
+import com.nilemnod.mangareader.core.mangaui.ChangeCategoryDialog
+import com.nilemnod.mangareader.core.mangaui.DuplicateMangaDialog
 import com.nilemnod.mangareader.core.navigation.SharedScreen
 import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
@@ -50,6 +51,7 @@ import com.nilemnod.mangareader.core.ui.util.AssistContentScreen
 import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.core.ui.util.collectAsLazyPagingItems
 import com.nilemnod.mangareader.domain.source.model.StubSource
+import com.nilemnod.mangareader.feature.categories.CategoryScreen
 import com.nilemnod.mangareader.feature.migration.dialog.MigrateMangaDialog
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
@@ -95,7 +97,7 @@ data class BrowseSourceScreen(
             return
         }
 
-        if (source is StubSource) {
+        if (source.isStub) {
             MissingSourceScreen(
                 source = source,
                 navigateUp = navigateUp,
@@ -108,18 +110,18 @@ data class BrowseSourceScreen(
         val snackbarHostState = remember { SnackbarHostState() }
 
         val onWebViewClick = f@{
-            val httpSource = source as? HttpSource ?: return@f
+            val web = source.web ?: return@f
             navigator.push(
                 WebViewScreen(
-                    url = httpSource.getHomeUrl(),
-                    initialTitle = httpSource.name,
-                    sourceId = httpSource.id,
+                    url = web.homeUrl,
+                    initialTitle = source.name,
+                    sourceId = source.id,
                 ),
             )
         }
 
         LaunchedEffect(source) {
-            assistUrl = (source as? HttpSource)?.getHomeUrl()
+            assistUrl = source.web?.homeUrl
         }
 
         Scaffold(
@@ -252,6 +254,7 @@ data class BrowseSourceScreen(
                     onConfirm = { viewModel.addFavorite(dialog.manga) },
                     onOpenManga = { navigator.push(SharedScreen.Manga(it.id).screen()) },
                     onMigrate = { viewModel.setDialog(BrowseSourceViewModel.Dialog.Migrate(dialog.manga, it)) },
+                    sourceManager = LocalContext.current.appGraph.sourceManager,
                 )
             }
 

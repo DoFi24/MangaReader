@@ -9,18 +9,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
-import com.nilemnod.mangareader.app.data.cache.ChapterCache
 import com.nilemnod.mangareader.app.data.cache.CoverCache
-import com.nilemnod.mangareader.app.data.download.DownloadCache
-import com.nilemnod.mangareader.app.data.download.DownloadManager
-import com.nilemnod.mangareader.app.data.download.DownloadProvider
 import com.nilemnod.mangareader.app.data.saver.Image
 import com.nilemnod.mangareader.app.data.saver.ImageSaver
 import com.nilemnod.mangareader.app.data.saver.Location
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
-import com.nilemnod.mangareader.app.domain.chapter.model.toSChapter
 import com.nilemnod.mangareader.app.domain.manga.interactor.SetMangaViewerFlags
-import com.nilemnod.mangareader.app.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.app.domain.manga.model.readerOrientation
 import com.nilemnod.mangareader.app.domain.manga.model.readingMode
 import com.nilemnod.mangareader.app.domain.source.interactor.GetIncognitoState
@@ -44,11 +38,16 @@ import com.nilemnod.mangareader.core.common.preference.toggle
 import com.nilemnod.mangareader.core.common.storage.DiskUtil
 import com.nilemnod.mangareader.core.common.util.lang.byteSize
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.download.ChapterCache
+import com.nilemnod.mangareader.core.download.DownloadCache
+import com.nilemnod.mangareader.core.download.DownloadManager
+import com.nilemnod.mangareader.core.download.DownloadProvider
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.domain.chapter.interactor.GetChaptersByMangaId
 import com.nilemnod.mangareader.domain.chapter.interactor.UpdateChapter
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.chapter.model.ChapterUpdate
+import com.nilemnod.mangareader.domain.chapter.model.toSourceChapter
 import com.nilemnod.mangareader.domain.chapter.service.getChapterSort
 import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
@@ -57,7 +56,10 @@ import com.nilemnod.mangareader.domain.history.interactor.UpsertHistory
 import com.nilemnod.mangareader.domain.history.model.HistoryUpdate
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.interactor.GetManga
+import com.nilemnod.mangareader.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.source.api.ContentSource
+import com.nilemnod.mangareader.domain.source.api.Page
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.source.local.image.LocalCoverManager
 import com.nilemnod.mangareader.source.local.isLocal
@@ -68,8 +70,6 @@ import dev.zacsweers.metro.AssistedInject
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metrox.viewmodel.ViewModelAssistedFactory
 import dev.zacsweers.metrox.viewmodel.ViewModelAssistedFactoryKey
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.model.Page
 import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -161,7 +161,7 @@ class ReaderViewModel(
     /**
      * The source of the manga loaded in the reader. Null until it has been resolved.
      */
-    val source: Source?
+    val source: ContentSource?
         get() = state.value.source
 
     /**
@@ -776,14 +776,16 @@ class ReaderViewModel(
         return state.value.currentChapter
     }
 
-    fun getSource() = state.value.source as? HttpSource
+    fun getWebSource() = state.value.source?.takeIf { it.web != null }
+
+    fun getWebAccess() = state.value.source?.web
 
     fun getChapterUrl(): String? {
-        val sChapter = getCurrentChapter()?.chapter?.toSChapter() ?: return null
-        val source = getSource() ?: return null
+        val sourceChapter = getCurrentChapter()?.chapter?.toSourceChapter() ?: return null
+        val web = getWebAccess() ?: return null
 
         return try {
-            source.getChapterUrl(sChapter)
+            web.chapterUrl(sourceChapter)
         } catch (e: Exception) {
             logcat(LogPriority.ERROR, e)
             null
@@ -1083,7 +1085,7 @@ class ReaderViewModel(
     @Immutable
     data class State(
         val manga: Manga? = null,
-        val source: Source? = null,
+        val source: ContentSource? = null,
         val initError: Throwable? = null,
         val viewerChapters: ViewerChapters? = null,
         val bookmarked: Boolean = false,

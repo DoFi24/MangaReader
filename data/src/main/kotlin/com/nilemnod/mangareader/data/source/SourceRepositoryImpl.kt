@@ -3,8 +3,9 @@ package com.nilemnod.mangareader.data.source
 import com.nilemnod.mangareader.data.Database
 import com.nilemnod.mangareader.data.subscribeToList
 import com.nilemnod.mangareader.domain.manga.interactor.NetworkToLocalManga
+import com.nilemnod.mangareader.domain.source.api.ContentSource
+import com.nilemnod.mangareader.domain.source.api.FilterList
 import com.nilemnod.mangareader.domain.source.model.SourceWithCount
-import com.nilemnod.mangareader.domain.source.model.StubSource
 import com.nilemnod.mangareader.domain.source.repository.SourcePagingSource
 import com.nilemnod.mangareader.domain.source.repository.SourceRepository
 import com.nilemnod.mangareader.domain.source.service.SourceManager
@@ -12,9 +13,6 @@ import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.model.FilterList
-import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
@@ -42,7 +40,7 @@ class SourceRepositoryImpl(
     override fun getOnlineSources(): Flow<List<DomainSource>> {
         return sourceManager.sources.map { sources ->
             sources
-                .filterIsInstance<HttpSource>()
+                .filter { it.web != null }
                 .map(::mapSourceToDomainSource)
         }
     }
@@ -58,7 +56,7 @@ class SourceRepositoryImpl(
                 it.map { (sourceId, count) ->
                     val source = sourceManager.getOrStub(sourceId)
                     val domainSource = mapSourceToDomainSource(source).copy(
-                        isStub = source is StubSource,
+                        isStub = source.isStub,
                     )
                     domainSource to count
                 }
@@ -73,7 +71,7 @@ class SourceRepositoryImpl(
                 sourceId.map { (sourceId, count) ->
                     val source = sourceManager.getOrStub(sourceId)
                     val domainSource = mapSourceToDomainSource(source).copy(
-                        isStub = source is StubSource,
+                        isStub = source.isStub,
                     )
                     SourceWithCount(domainSource, count)
                 }
@@ -101,7 +99,7 @@ class SourceRepositoryImpl(
         return SourceLatestPagingSource({ sourceManager.getOrStub(sourceId) }, networkToLocalManga)
     }
 
-    private fun mapSourceToDomainSource(source: Source): DomainSource = DomainSource(
+    private fun mapSourceToDomainSource(source: ContentSource): DomainSource = DomainSource(
         id = source.id,
         lang = source.lang,
         name = source.name,

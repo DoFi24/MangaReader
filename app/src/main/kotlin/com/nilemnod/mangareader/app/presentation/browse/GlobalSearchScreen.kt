@@ -16,7 +16,7 @@ import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.SourceFilter
 import com.nilemnod.mangareader.app.util.system.LocaleHelper
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.domain.manga.model.Manga
-import eu.kanade.tachiyomi.source.Source
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 
 @Composable
 fun GlobalSearchScreen(
@@ -27,7 +27,7 @@ fun GlobalSearchScreen(
     onChangeSearchFilter: (SourceFilter) -> Unit,
     onToggleResults: () -> Unit,
     getManga: @Composable (Manga) -> State<Manga>,
-    onClickSource: (Source) -> Unit,
+    onClickSource: (ContentSource) -> Unit,
     onClickItem: (Manga) -> Unit,
     onLongClickItem: (Manga) -> Unit,
 ) {
@@ -62,10 +62,10 @@ fun GlobalSearchScreen(
 
 @Composable
 internal fun GlobalSearchContent(
-    items: Map<Source, SearchItemResult>,
+    items: Map<ContentSource, SearchItemResult>,
     contentPadding: PaddingValues,
     getManga: @Composable (Manga) -> State<Manga>,
-    onClickSource: (Source) -> Unit,
+    onClickSource: (ContentSource) -> Unit,
     onClickItem: (Manga) -> Unit,
     onLongClickItem: (Manga) -> Unit,
     fromSourceId: Long? = null,

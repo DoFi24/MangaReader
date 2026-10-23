@@ -46,8 +46,6 @@ import com.nilemnod.mangareader.app.presentation.more.settings.Preference
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.data.CreateBackupScreen
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.data.RestoreBackupScreen
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.data.StorageInfo
-import com.nilemnod.mangareader.app.presentation.more.settings.widget.BasePreferenceWidget
-import com.nilemnod.mangareader.app.presentation.more.settings.widget.PrefsHorizontalPadding
 import com.nilemnod.mangareader.core.android.system.workManager
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.storage.displayablePath
@@ -55,6 +53,8 @@ import com.nilemnod.mangareader.core.common.util.system.DeviceUtil
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.core.ui.components.material.TextButton
+import com.nilemnod.mangareader.core.ui.components.preference.BasePreferenceWidget
+import com.nilemnod.mangareader.core.ui.components.preference.PrefsHorizontalPadding
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.core.ui.util.relativeTimeSpanString

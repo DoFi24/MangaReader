@@ -67,8 +67,6 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.NavigatorDisposeBehavior
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.data.cache.ChapterCache
-import com.nilemnod.mangareader.app.data.download.DownloadCache
 import com.nilemnod.mangareader.app.data.notification.NotificationReceiver
 import com.nilemnod.mangareader.app.di.AppGraph
 import com.nilemnod.mangareader.app.di.appGraph
@@ -93,6 +91,8 @@ import com.nilemnod.mangareader.app.util.view.setComposeContent
 import com.nilemnod.mangareader.core.common.Constants
 import com.nilemnod.mangareader.core.common.util.system.dpToPx
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.download.ChapterCache
+import com.nilemnod.mangareader.core.download.DownloadCache
 import com.nilemnod.mangareader.core.metro.metroGraph
 import com.nilemnod.mangareader.core.migration.Migrator
 import com.nilemnod.mangareader.core.ui.components.AdaptiveSheet
@@ -105,6 +105,7 @@ import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.AssistContentScreen
 import com.nilemnod.mangareader.core.ui.util.DefaultNavigatorScreenTransition
+import com.nilemnod.mangareader.core.ui.util.SplashReady
 import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.core.ui.util.system.isNavigationBarNeedsScrim
 import com.nilemnod.mangareader.domain.database.repository.DatabaseRepository
@@ -136,7 +137,7 @@ import kotlin.time.Instant
 import kotlin.time.TimeSource
 import kotlin.time.times
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(), SplashReady {
 
     private val graph: AppGraph by lazy { metroGraph() }
 
@@ -157,7 +158,7 @@ class MainActivity : BaseActivity() {
     @Inject private lateinit var extensionManager: ExtensionManager
 
     // To be checked by splash screen. If true then splash screen will be removed.
-    var ready = false
+    override var ready = false
 
     private var navigator: Navigator? = null
 

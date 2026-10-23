@@ -15,20 +15,21 @@ import com.nilemnod.mangareader.core.ui.components.RadioMenuItem
 import com.nilemnod.mangareader.core.ui.components.SearchToolbar
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.domain.library.model.LibraryDisplayMode
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredroundedfilled.ViewList
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.ViewCompact
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.ViewModule
 import com.nilemnod.mangareader.source.local.LocalSource
+import com.nilemnod.mangareader.source.local.isLocal
 import eu.kanade.tachiyomi.source.ConfigurableSource
-import eu.kanade.tachiyomi.source.Source
 
 @Composable
 fun BrowseSourceToolbar(
     searchQuery: String?,
     onSearchQueryChange: (String?) -> Unit,
-    source: Source?,
+    source: ContentSource?,
     displayMode: LibraryDisplayMode,
     onDisplayModeChange: (LibraryDisplayMode) -> Unit,
     navigateUp: () -> Unit,
@@ -39,8 +40,8 @@ fun BrowseSourceToolbar(
 ) {
     // Avoid capturing unstable source in actions lambda
     val title = source?.name
-    val isLocalSource = source is LocalSource
-    val isConfigurableSource = source is ConfigurableSource
+    val isLocalSource = source?.isLocal() == true
+    val isConfigurableSource = source?.hasSettings == true
 
     var selectingDisplayMode by remember { mutableStateOf(false) }
 

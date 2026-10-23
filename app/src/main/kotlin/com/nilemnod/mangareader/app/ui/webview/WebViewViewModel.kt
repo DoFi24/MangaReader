@@ -9,6 +9,7 @@ import com.nilemnod.mangareader.core.android.system.toShareIntent
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.toWebViewHeaders
 import com.nilemnod.mangareader.core.common.util.system.toast
+import com.nilemnod.mangareader.core.network.NetworkHelper
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Assisted
@@ -17,13 +18,13 @@ import dev.zacsweers.metro.AssistedInject
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactory
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactoryKey
-import eu.kanade.tachiyomi.network.NetworkHelper
 import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import logcat.LogPriority
+import okhttp3.Headers.Companion.toHeaders
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 @AssistedInject
@@ -46,9 +47,9 @@ class WebViewViewModel(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val source = sourceId?.let { sourceManager.get(it) as? HttpSource }
+            val source = sourceId?.let { sourceManager.get(it)?.takeIf { it.web != null } }
             headers.value = try {
-                source?.headers?.toWebViewHeaders().orEmpty()
+                source?.web?.headers?.toHeaders()?.toWebViewHeaders().orEmpty()
             } catch (e: Exception) {
                 logcat(LogPriority.ERROR, e) { "Failed to build headers" }
                 emptyMap()

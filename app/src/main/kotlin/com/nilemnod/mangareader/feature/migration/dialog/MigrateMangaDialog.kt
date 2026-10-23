@@ -19,11 +19,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastForEach
 import androidx.lifecycle.ViewModel
-import cafe.adriel.voyager.core.screen.Screen
 import com.nilemnod.mangareader.app.data.cache.CoverCache
-import com.nilemnod.mangareader.app.data.download.DownloadManager
 import com.nilemnod.mangareader.app.domain.manga.model.hasCustomCover
 import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
+import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.core.ui.components.LabeledCheckbox
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
@@ -47,7 +46,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @Composable
-internal fun Screen.MigrateMangaDialog(
+internal fun MigrateMangaDialog(
     current: Manga,
     target: Manga,
     onClickTitle: () -> Unit,

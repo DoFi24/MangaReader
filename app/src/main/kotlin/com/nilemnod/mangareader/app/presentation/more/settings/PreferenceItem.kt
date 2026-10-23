@@ -10,28 +10,23 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.EditTextPreferenceWidget
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.InfoWidget
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.ListPreferenceWidget
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.MultiSelectListPreferenceWidget
-import com.nilemnod.mangareader.app.presentation.more.settings.widget.PrefsHorizontalPadding
-import com.nilemnod.mangareader.app.presentation.more.settings.widget.PrefsVerticalPadding
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.SwitchPreferenceWidget
-import com.nilemnod.mangareader.app.presentation.more.settings.widget.TextPreferenceWidget
-import com.nilemnod.mangareader.app.presentation.more.settings.widget.TitleFontSize
 import com.nilemnod.mangareader.core.ui.components.BaseSliderItem
+import com.nilemnod.mangareader.core.ui.components.preference.LocalPreferenceHighlighted
+import com.nilemnod.mangareader.core.ui.components.preference.PrefsHorizontalPadding
+import com.nilemnod.mangareader.core.ui.components.preference.PrefsVerticalPadding
+import com.nilemnod.mangareader.core.ui.components.preference.TextPreferenceWidget
+import com.nilemnod.mangareader.core.ui.components.preference.TitleFontSize
 import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.i18n.MR
 import kotlinx.coroutines.launch
-
-val LocalPreferenceHighlighted = compositionLocalOf(structuralEqualityPolicy()) { false }
-val LocalPreferenceMinHeight = compositionLocalOf(structuralEqualityPolicy()) { 56.dp }
 
 @Composable
 fun StatusWrapper(

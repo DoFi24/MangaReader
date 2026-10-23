@@ -1,9 +1,9 @@
 package com.nilemnod.mangareader.app.data.backup.create.creators
 
 import com.nilemnod.mangareader.app.data.backup.models.BackupSource
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import dev.zacsweers.metro.Inject
-import eu.kanade.tachiyomi.source.Source
 
 @Inject
 class SourcesBackupCreator(
@@ -15,7 +15,7 @@ class SourcesBackupCreator(
     }
 }
 
-private fun Source.toBackupSource() =
+private fun ContentSource.toBackupSource() =
     BackupSource(
         name = this.name,
         sourceId = this.id,

@@ -3,14 +3,14 @@ package com.nilemnod.mangareader.app.ui.reader.loader
 import android.content.Context
 import android.net.Uri
 import com.hippo.unifile.UniFile
-import com.nilemnod.mangareader.app.data.download.DownloadManager
-import com.nilemnod.mangareader.app.data.download.DownloadProvider
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderChapter
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderPage
 import com.nilemnod.mangareader.core.archive.archiveReader
+import com.nilemnod.mangareader.core.download.DownloadManager
+import com.nilemnod.mangareader.core.download.DownloadProvider
 import com.nilemnod.mangareader.domain.manga.model.Manga
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.model.Page
+import com.nilemnod.mangareader.domain.source.api.ContentSource
+import com.nilemnod.mangareader.domain.source.api.Page
 import uy.kohesive.injekt.injectLazy
 
 /**
@@ -19,7 +19,7 @@ import uy.kohesive.injekt.injectLazy
 internal class DownloadPageLoader(
     private val chapter: ReaderChapter,
     private val manga: Manga,
-    private val source: Source,
+    private val source: ContentSource,
     private val downloadManager: DownloadManager,
     private val downloadProvider: DownloadProvider,
 ) : PageLoader() {

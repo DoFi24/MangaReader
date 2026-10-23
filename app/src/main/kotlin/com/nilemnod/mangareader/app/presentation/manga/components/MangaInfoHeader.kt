@@ -74,6 +74,8 @@ import com.nilemnod.mangareader.app.R
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.source.getNameForMangaInfo
 import com.nilemnod.mangareader.app.util.system.copyToClipboard
+import com.nilemnod.mangareader.core.mangaui.DotSeparatorText
+import com.nilemnod.mangareader.core.mangaui.MangaCover
 import com.nilemnod.mangareader.core.ui.components.DropdownMenu
 import com.nilemnod.mangareader.core.ui.components.material.DISABLED_ALPHA
 import com.nilemnod.mangareader.core.ui.components.material.TextButton
@@ -83,6 +85,8 @@ import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.clickableNoIndication
 import com.nilemnod.mangareader.core.ui.util.secondaryItemAlpha
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.source.api.ContentSource
+import com.nilemnod.mangareader.domain.source.api.MangaStatus
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.AttachMoney
@@ -99,8 +103,6 @@ import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Brush
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Favorite
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Pause
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Warning
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.model.SManga
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.daysUntil
 import org.intellij.markdown.MarkdownElementTypes
@@ -115,7 +117,7 @@ fun MangaInfoBox(
     isTabletUi: Boolean,
     appBarPadding: Dp,
     manga: Manga,
-    source: Source,
+    source: ContentSource,
     isStubSource: Boolean,
     onCoverClick: () -> Unit,
     doSearch: (query: String, global: Boolean) -> Unit,
@@ -333,7 +335,7 @@ fun ExpandableMangaDescription(
 private fun MangaAndSourceTitlesLarge(
     appBarPadding: Dp,
     manga: Manga,
-    source: Source,
+    source: ContentSource,
     isStubSource: Boolean,
     onCoverClick: () -> Unit,
     doSearch: (query: String, global: Boolean) -> Unit,
@@ -371,7 +373,7 @@ private fun MangaAndSourceTitlesLarge(
 private fun MangaAndSourceTitlesSmall(
     appBarPadding: Dp,
     manga: Manga,
-    source: Source,
+    source: ContentSource,
     isStubSource: Boolean,
     onCoverClick: () -> Unit,
     doSearch: (query: String, global: Boolean) -> Unit,
@@ -416,7 +418,7 @@ private fun ColumnScope.MangaContentInfo(
     author: String?,
     artist: String?,
     status: Long,
-    source: Source,
+    source: ContentSource,
     isStubSource: Boolean,
     doSearch: (query: String, global: Boolean) -> Unit,
     textAlign: TextAlign? = LocalTextStyle.current.textAlign,
@@ -503,12 +505,12 @@ private fun ColumnScope.MangaContentInfo(
     ) {
         Icon(
             imageVector = when (status) {
-                SManga.ONGOING.toLong() -> MaterialSymbols.Rounded.Schedule
-                SManga.COMPLETED.toLong() -> MaterialSymbols.Rounded.DoneAll
-                SManga.LICENSED.toLong() -> MaterialSymbols.Rounded.AttachMoney
-                SManga.PUBLISHING_FINISHED.toLong() -> MaterialSymbols.Rounded.Check
-                SManga.CANCELLED.toLong() -> MaterialSymbols.Rounded.Close
-                SManga.ON_HIATUS.toLong() -> MaterialSymbols.RoundedFilled.Pause
+                MangaStatus.ONGOING.code -> MaterialSymbols.Rounded.Schedule
+                MangaStatus.COMPLETED.code -> MaterialSymbols.Rounded.DoneAll
+                MangaStatus.LICENSED.code -> MaterialSymbols.Rounded.AttachMoney
+                MangaStatus.PUBLISHING_FINISHED.code -> MaterialSymbols.Rounded.Check
+                MangaStatus.CANCELLED.code -> MaterialSymbols.Rounded.Close
+                MangaStatus.ON_HIATUS.code -> MaterialSymbols.RoundedFilled.Pause
                 else -> MaterialSymbols.Rounded.Block
             },
             contentDescription = null,
@@ -519,12 +521,12 @@ private fun ColumnScope.MangaContentInfo(
         ProvideTextStyle(MaterialTheme.typography.bodyMedium) {
             Text(
                 text = when (status) {
-                    SManga.ONGOING.toLong() -> stringResource(MR.strings.ongoing)
-                    SManga.COMPLETED.toLong() -> stringResource(MR.strings.completed)
-                    SManga.LICENSED.toLong() -> stringResource(MR.strings.licensed)
-                    SManga.PUBLISHING_FINISHED.toLong() -> stringResource(MR.strings.publishing_finished)
-                    SManga.CANCELLED.toLong() -> stringResource(MR.strings.cancelled)
-                    SManga.ON_HIATUS.toLong() -> stringResource(MR.strings.on_hiatus)
+                    MangaStatus.ONGOING.code -> stringResource(MR.strings.ongoing)
+                    MangaStatus.COMPLETED.code -> stringResource(MR.strings.completed)
+                    MangaStatus.LICENSED.code -> stringResource(MR.strings.licensed)
+                    MangaStatus.PUBLISHING_FINISHED.code -> stringResource(MR.strings.publishing_finished)
+                    MangaStatus.CANCELLED.code -> stringResource(MR.strings.cancelled)
+                    MangaStatus.ON_HIATUS.code -> stringResource(MR.strings.on_hiatus)
                     else -> stringResource(MR.strings.unknown)
                 },
                 overflow = TextOverflow.Ellipsis,
@@ -553,7 +555,7 @@ private fun ColumnScope.MangaContentInfo(
     }
 }
 
-private fun Source.query(): String = """src:"$name" lang:$lang""".takeIf { name.isNotBlank() } ?: "srcid:$id"
+private fun ContentSource.query(): String = """src:"$name" lang:$lang""".takeIf { name.isNotBlank() } ?: "srcid:$id"
 
 @Composable
 private fun descriptionAnnotator(loadImages: Boolean, linkStyle: SpanStyle) = remember(loadImages, linkStyle) {

@@ -12,6 +12,7 @@ import com.nilemnod.mangareader.domain.manga.interactor.GetManga
 import com.nilemnod.mangareader.domain.manga.interactor.NetworkToLocalManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.migration.usecases.MigrateMangaUseCase
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.feature.migration.list.models.MigratingManga
 import com.nilemnod.mangareader.feature.migration.list.models.MigratingManga.SearchResult
@@ -23,7 +24,6 @@ import dev.zacsweers.metro.AssistedInject
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactory
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactoryKey
-import eu.kanade.tachiyomi.source.Source
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -189,7 +189,7 @@ class MigrationListViewModel(
 
     private suspend fun searchSource(
         manga: Manga,
-        source: Source,
+        source: ContentSource,
         deepSearchMode: Boolean,
     ): Pair<Manga, ChapterInfo>? {
         return try {

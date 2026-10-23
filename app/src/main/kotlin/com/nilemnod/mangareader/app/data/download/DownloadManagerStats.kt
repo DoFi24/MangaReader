@@ -1,5 +1,6 @@
 package com.nilemnod.mangareader.app.data.download
 
+import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.feature.stats.DownloadStats
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding

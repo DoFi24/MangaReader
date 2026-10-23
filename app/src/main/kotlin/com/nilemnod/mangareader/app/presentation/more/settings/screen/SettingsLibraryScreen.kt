@@ -17,10 +17,9 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.data.library.LibraryUpdateWorker
 import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.presentation.category.visualName
 import com.nilemnod.mangareader.app.presentation.more.settings.Preference
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.TriStateListDialog
-import com.nilemnod.mangareader.app.ui.category.CategoryScreen
+import com.nilemnod.mangareader.core.mangaui.visualName
 import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.collectAsState
@@ -35,6 +34,7 @@ import com.nilemnod.mangareader.domain.library.service.LibraryPreferences.Compan
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences.Companion.MANGA_OUTSIDE_RELEASE_PERIOD
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences.Companion.MARK_DUPLICATE_CHAPTER_READ_EXISTING
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences.Companion.MARK_DUPLICATE_CHAPTER_READ_NEW
+import com.nilemnod.mangareader.feature.categories.CategoryScreen
 import com.nilemnod.mangareader.i18n.MR
 import kotlinx.coroutines.launch
 

@@ -1,26 +1,25 @@
 package com.nilemnod.mangareader.app.domain.chapter.interactor
 
-import com.nilemnod.mangareader.app.data.download.DownloadManager
-import com.nilemnod.mangareader.app.data.download.DownloadProvider
-import com.nilemnod.mangareader.app.domain.chapter.model.copyFromSChapter
-import com.nilemnod.mangareader.app.domain.chapter.model.toSChapter
 import com.nilemnod.mangareader.app.domain.manga.interactor.GetExcludedScanlators
-import com.nilemnod.mangareader.app.domain.manga.interactor.UpdateManga
-import com.nilemnod.mangareader.app.domain.manga.model.toSManga
+import com.nilemnod.mangareader.core.download.DownloadManager
+import com.nilemnod.mangareader.core.download.DownloadProvider
 import com.nilemnod.mangareader.data.chapter.ChapterSanitizer
 import com.nilemnod.mangareader.domain.chapter.interactor.ShouldUpdateDbChapter
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.chapter.model.ChapterRemoteUpdate
 import com.nilemnod.mangareader.domain.chapter.model.NoChaptersException
+import com.nilemnod.mangareader.domain.chapter.model.copyFrom
+import com.nilemnod.mangareader.domain.chapter.model.toSourceChapter
 import com.nilemnod.mangareader.domain.chapter.repository.ChapterRepository
 import com.nilemnod.mangareader.domain.chapter.service.ChapterRecognition
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
+import com.nilemnod.mangareader.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.manga.model.toSourceManga
+import com.nilemnod.mangareader.domain.source.api.ContentSource
+import com.nilemnod.mangareader.domain.source.api.SourceChapter
 import com.nilemnod.mangareader.source.local.isLocal
 import dev.zacsweers.metro.Inject
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.model.SChapter
-import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
@@ -50,9 +49,9 @@ class SyncChaptersWithSource(
      * @return Newly added chapters
      */
     suspend fun await(
-        rawSourceChapters: List<SChapter>,
+        rawSourceChapters: List<SourceChapter>,
         manga: Manga,
-        source: Source,
+        source: ContentSource,
         manualFetch: Boolean = false,
         fetchWindow: ClosedRange<Instant>? = null,
     ): List<Chapter> {
@@ -66,10 +65,10 @@ class SyncChaptersWithSource(
 
         val sourceChapters = rawSourceChapters
             .distinctBy { it.url }
-            .mapIndexed { i, sChapter ->
+            .mapIndexed { i, sourceChapter ->
                 Chapter.create()
-                    .copyFromSChapter(sChapter)
-                    .copy(name = with(ChapterSanitizer) { sChapter.name.sanitize(manga.title) })
+                    .copyFrom(sourceChapter)
+                    .copy(name = with(ChapterSanitizer) { sourceChapter.name.sanitize(manga.title) })
                     .copy(mangaId = manga.id, sourceOrder = i.toLong())
             }
 
@@ -85,16 +84,9 @@ class SyncChaptersWithSource(
         var maxSeenUploadDate: Instant? = null
 
         // Update metadata from source if necessary.
-        val preparedChapters = if (source is HttpSource) {
-            val sManga = manga.toSManga()
-            sourceChapters.map { chapter ->
-                val sChapter = chapter.toSChapter()
-                @Suppress("DEPRECATION")
-                source.prepareNewChapter(sChapter, sManga)
-                chapter.copyFromSChapter(sChapter)
-            }
-        } else {
-            sourceChapters
+        val sourceManga = manga.toSourceManga()
+        val preparedChapters = sourceChapters.map { chapter ->
+            chapter.copyFrom(source.prepareNewChapter(chapter.toSourceChapter(), sourceManga))
         }
 
         // Recognize chapter numbers, from the whole list since names alone don't always tell.

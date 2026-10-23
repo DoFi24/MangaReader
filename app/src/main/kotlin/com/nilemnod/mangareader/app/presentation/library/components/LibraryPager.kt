@@ -18,8 +18,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
-import com.nilemnod.mangareader.app.core.preference.PreferenceMutableState
 import com.nilemnod.mangareader.app.ui.library.LibraryItem
+import com.nilemnod.mangareader.core.ui.preference.PreferenceMutableState
 import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
 import com.nilemnod.mangareader.core.ui.util.plus
 import com.nilemnod.mangareader.domain.category.model.Category

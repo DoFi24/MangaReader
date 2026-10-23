@@ -1,6 +1,10 @@
 package com.nilemnod.mangareader.data.release
 
 import android.os.Build
+import com.nilemnod.mangareader.core.network.GET
+import com.nilemnod.mangareader.core.network.NetworkHelper
+import com.nilemnod.mangareader.core.network.awaitSuccess
+import com.nilemnod.mangareader.core.network.parseAs
 import com.nilemnod.mangareader.domain.release.interactor.GetApplicationRelease
 import com.nilemnod.mangareader.domain.release.model.Release
 import com.nilemnod.mangareader.domain.release.service.ReleaseService
@@ -8,10 +12,6 @@ import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
-import eu.kanade.tachiyomi.network.GET
-import eu.kanade.tachiyomi.network.NetworkHelper
-import eu.kanade.tachiyomi.network.awaitSuccess
-import eu.kanade.tachiyomi.network.parseAs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json

@@ -11,19 +11,12 @@ import androidx.compose.ui.util.fastFilter
 import androidx.compose.ui.util.fastMap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nilemnod.mangareader.app.core.preference.asState
 import com.nilemnod.mangareader.app.data.cache.CoverCache
-import com.nilemnod.mangareader.app.data.download.DownloadCache
-import com.nilemnod.mangareader.app.data.download.DownloadManager
 import com.nilemnod.mangareader.app.domain.chapter.interactor.GetAvailableScanlators
-import com.nilemnod.mangareader.app.domain.chapter.interactor.SetReadStatus
 import com.nilemnod.mangareader.app.domain.manga.interactor.GetExcludedScanlators
 import com.nilemnod.mangareader.app.domain.manga.interactor.SetExcludedScanlators
-import com.nilemnod.mangareader.app.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.app.domain.manga.model.chaptersFiltered
 import com.nilemnod.mangareader.app.domain.manga.model.downloadedFilter
-import com.nilemnod.mangareader.app.presentation.manga.DownloadAction
-import com.nilemnod.mangareader.app.presentation.manga.components.ChapterDownloadAction
 import com.nilemnod.mangareader.app.presentation.util.formattedMessage
 import com.nilemnod.mangareader.app.source.interactor.UpdateMangaFromRemote
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
@@ -36,7 +29,13 @@ import com.nilemnod.mangareader.core.common.preference.mapAsCheckboxState
 import com.nilemnod.mangareader.core.common.util.lang.SubscriberGate
 import com.nilemnod.mangareader.core.common.util.lang.pausedWhileUnsubscribed
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.download.DownloadCache
+import com.nilemnod.mangareader.core.download.DownloadManager
+import com.nilemnod.mangareader.core.download.SetReadStatus
+import com.nilemnod.mangareader.core.mangaui.ChapterDownloadAction
+import com.nilemnod.mangareader.core.mangaui.DownloadAction
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.core.ui.preference.asState
 import com.nilemnod.mangareader.core.ui.util.addOrRemove
 import com.nilemnod.mangareader.core.ui.util.insertSeparators
 import com.nilemnod.mangareader.domain.category.interactor.GetCategories
@@ -56,9 +55,11 @@ import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.interactor.GetDuplicateLibraryManga
 import com.nilemnod.mangareader.domain.manga.interactor.GetMangaWithChapters
 import com.nilemnod.mangareader.domain.manga.interactor.SetMangaChapterFlags
+import com.nilemnod.mangareader.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaWithChapterCount
 import com.nilemnod.mangareader.domain.manga.model.applyFilter
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.source.local.isLocal
@@ -69,7 +70,6 @@ import dev.zacsweers.metro.AssistedInject
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactory
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactoryKey
-import eu.kanade.tachiyomi.source.Source
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -139,7 +139,7 @@ class MangaViewModel(
     val manga: Manga?
         get() = successState?.manga
 
-    val source: Source?
+    val source: ContentSource?
         get() = successState?.source
 
     private val isFavorited: Boolean
@@ -993,7 +993,7 @@ class MangaViewModel(
         }
     }
 
-    private data class MangaAndChapters(val manga: Manga, val source: Source, val chapters: List<ChapterList.Item>)
+    private data class MangaAndChapters(val manga: Manga, val source: ContentSource, val chapters: List<ChapterList.Item>)
 
     sealed interface State {
         @Immutable
@@ -1002,7 +1002,7 @@ class MangaViewModel(
         @Immutable
         data class Success(
             val manga: Manga,
-            val source: Source,
+            val source: ContentSource,
             val isFromSource: Boolean,
             val chapters: List<ChapterList.Item>,
             val availableScanlators: Set<String>,

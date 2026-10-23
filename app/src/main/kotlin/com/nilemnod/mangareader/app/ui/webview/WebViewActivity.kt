@@ -20,15 +20,16 @@ import com.nilemnod.mangareader.core.common.util.system.WebViewUtil
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.toWebViewHeaders
 import com.nilemnod.mangareader.core.common.util.system.toast
+import com.nilemnod.mangareader.core.network.NetworkHelper
 import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metro.Inject
-import eu.kanade.tachiyomi.network.NetworkHelper
 import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import logcat.LogPriority
+import okhttp3.Headers.Companion.toHeaders
 import okhttp3.HttpUrl.Companion.toHttpUrl
 
 class WebViewActivity : BaseActivity() {
@@ -69,10 +70,10 @@ class WebViewActivity : BaseActivity() {
         setComposeContent {
             // Null until the source it belongs to has been resolved
             val headers by produceState<Map<String, String>?>(initialValue = null) {
-                val source = sourceManager.get(intent.extras!!.getLong(SOURCE_KEY)) as? HttpSource
+                val source = sourceManager.get(intent.extras!!.getLong(SOURCE_KEY))?.takeIf { it.web != null }
                 value = withContext(Dispatchers.IO) {
                     try {
-                        source?.headers?.toWebViewHeaders().orEmpty()
+                        source?.web?.headers?.toHeaders()?.toWebViewHeaders().orEmpty()
                     } catch (e: Exception) {
                         logcat(LogPriority.ERROR, e) { "Failed to build headers" }
                         emptyMap()

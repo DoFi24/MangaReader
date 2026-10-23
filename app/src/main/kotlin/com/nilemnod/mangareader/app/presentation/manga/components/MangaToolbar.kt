@@ -11,8 +11,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
-import com.nilemnod.mangareader.app.presentation.components.DownloadDropdownMenu
-import com.nilemnod.mangareader.app.presentation.manga.DownloadAction
+import com.nilemnod.mangareader.core.mangaui.DownloadAction
+import com.nilemnod.mangareader.core.mangaui.DownloadDropdownMenu
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.AppBarActions
 import com.nilemnod.mangareader.core.ui.components.AppBarTitle

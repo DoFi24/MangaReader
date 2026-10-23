@@ -15,11 +15,11 @@ import com.hippo.unifile.UniFile
 import com.nilemnod.mangareader.app.data.cache.CoverCache
 import com.nilemnod.mangareader.app.data.coil.MangaCoverFetcher.Companion.USE_CUSTOM_COVER_KEY
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.network.await
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaCover
+import com.nilemnod.mangareader.domain.source.api.WebAccess
 import com.nilemnod.mangareader.domain.source.service.SourceManager
-import eu.kanade.tachiyomi.network.await
-import eu.kanade.tachiyomi.source.online.HttpSource
 import logcat.LogPriority
 import okhttp3.CacheControl
 import okhttp3.Call
@@ -51,7 +51,7 @@ class MangaCoverFetcher(
     private val coverFileLazy: Lazy<File?>,
     private val customCoverFileLazy: Lazy<File>,
     private val diskCacheKeyLazy: Lazy<String>,
-    private val getSource: suspend () -> HttpSource?,
+    private val getSource: suspend () -> WebAccess?,
     private val callFactoryLazy: Lazy<Call.Factory>,
     private val imageLoader: ImageLoader,
 ) : Fetcher {
@@ -180,14 +180,11 @@ class MangaCoverFetcher(
         return response
     }
 
-    private fun newRequest(source: HttpSource?): Request {
+    private fun newRequest(source: WebAccess?): Request {
         val request = Request.Builder().apply {
             url(url!!)
 
-            val sourceHeaders = source?.headers
-            if (sourceHeaders != null) {
-                headers(sourceHeaders)
-            }
+            source?.headers?.forEach { (name, value) -> addHeader(name, value) }
         }
 
         when {
@@ -312,7 +309,7 @@ class MangaCoverFetcher(
                 coverFileLazy = lazy { coverCache.getCoverFile(data.thumbnailUrl) },
                 customCoverFileLazy = lazy { coverCache.getCustomCoverFile(data.id) },
                 diskCacheKeyLazy = lazy { imageLoader.components.key(data, options)!! },
-                getSource = { sourceManager.get(data.source) as? HttpSource },
+                getSource = { sourceManager.get(data.source)?.web },
                 callFactoryLazy = callFactoryLazy,
                 imageLoader = imageLoader,
             )
@@ -333,7 +330,7 @@ class MangaCoverFetcher(
                 coverFileLazy = lazy { coverCache.getCoverFile(data.url) },
                 customCoverFileLazy = lazy { coverCache.getCustomCoverFile(data.mangaId) },
                 diskCacheKeyLazy = lazy { imageLoader.components.key(data, options)!! },
-                getSource = { sourceManager.get(data.sourceId) as? HttpSource },
+                getSource = { sourceManager.get(data.sourceId)?.web },
                 callFactoryLazy = callFactoryLazy,
                 imageLoader = imageLoader,
             )

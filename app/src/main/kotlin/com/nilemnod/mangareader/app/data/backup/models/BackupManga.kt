@@ -4,7 +4,7 @@ import com.nilemnod.mangareader.core.common.extensions.JsonObjectEmptyBytes
 import com.nilemnod.mangareader.core.common.extensions.toInstantOrNull
 import com.nilemnod.mangareader.core.common.extensions.toJsonObject
 import com.nilemnod.mangareader.domain.manga.model.Manga
-import eu.kanade.tachiyomi.source.model.UpdateStrategy
+import com.nilemnod.mangareader.domain.source.api.UpdateStrategy
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.protobuf.ProtoNumber
 import kotlin.time.Instant

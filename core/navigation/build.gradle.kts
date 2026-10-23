@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.mangareader.android.library)
+    alias(libs.plugins.mangareader.compose)
     alias(libs.plugins.mangareader.spotless)
 }
 
@@ -8,6 +9,7 @@ android {
 }
 
 dependencies {
+    api(projects.domain)
     api(libs.voyager.navigator)
 
     testImplementation(platform(libs.androidx.compose.bom))

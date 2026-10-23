@@ -24,6 +24,9 @@ dependencies {
     implementation(libs.metro.runtime)
     implementation(libs.bundles.kotlinx.coroutines)
     implementation(libs.bundles.serialization)
+    api(libs.kotlinx.serialization.json)
+    api(libs.okhttp.core)
+    api(libs.okio)
 
     implementation(libs.kotlinx.datetime)
 

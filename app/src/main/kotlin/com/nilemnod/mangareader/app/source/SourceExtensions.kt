@@ -2,13 +2,12 @@ package com.nilemnod.mangareader.app.source
 
 import android.content.Context
 import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.domain.source.model.StubSource
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.source.local.isLocal
-import eu.kanade.tachiyomi.source.Source
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
-fun Source.getNameForMangaInfo(): String {
+fun ContentSource.getNameForMangaInfo(): String {
     val preferences = Injekt.get<Context>().appGraph.sourcePreferences
     val enabledLanguages = preferences.enabledLanguages.get()
         .filterNot { it in listOf("all", "other") }
@@ -16,11 +15,11 @@ fun Source.getNameForMangaInfo(): String {
     val isInEnabledLanguages = lang in enabledLanguages
     return when {
         // For edge cases where user disables a source they got manga of in their library.
-        hasOneActiveLanguages && !isInEnabledLanguages -> toString()
+        hasOneActiveLanguages && !isInEnabledLanguages -> displayName
         // Hide the language tag when only one language is used.
         hasOneActiveLanguages && isInEnabledLanguages -> name
-        else -> toString()
+        else -> displayName
     }
 }
 
-fun Source.isLocalOrStub(): Boolean = isLocal() || this is StubSource
+fun ContentSource.isLocalOrStub(): Boolean = isLocal() || isStub

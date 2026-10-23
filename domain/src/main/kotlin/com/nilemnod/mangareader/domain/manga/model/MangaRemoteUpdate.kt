@@ -1,6 +1,6 @@
 package com.nilemnod.mangareader.domain.manga.model
 
-import eu.kanade.tachiyomi.source.model.UpdateStrategy
+import com.nilemnod.mangareader.domain.source.api.UpdateStrategy
 import kotlinx.serialization.json.JsonObject
 import kotlin.time.Instant
 

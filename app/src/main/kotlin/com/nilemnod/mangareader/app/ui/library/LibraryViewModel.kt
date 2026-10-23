@@ -5,16 +5,9 @@ import androidx.compose.ui.util.fastFilter
 import androidx.compose.ui.util.fastMap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nilemnod.mangareader.app.core.preference.PreferenceMutableState
-import com.nilemnod.mangareader.app.core.preference.asState
 import com.nilemnod.mangareader.app.data.cache.CoverCache
-import com.nilemnod.mangareader.app.data.download.DownloadCache
-import com.nilemnod.mangareader.app.data.download.DownloadManager
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
-import com.nilemnod.mangareader.app.domain.chapter.interactor.SetReadStatus
-import com.nilemnod.mangareader.app.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.app.presentation.library.components.LibraryToolbarTitle
-import com.nilemnod.mangareader.app.presentation.manga.DownloadAction
 import com.nilemnod.mangareader.app.util.chapter.getNextUnread
 import com.nilemnod.mangareader.app.util.removeCovers
 import com.nilemnod.mangareader.core.common.preference.CheckboxState
@@ -23,7 +16,13 @@ import com.nilemnod.mangareader.core.common.util.lang.SubscriberGate
 import com.nilemnod.mangareader.core.common.util.lang.compareToWithCollator
 import com.nilemnod.mangareader.core.common.util.lang.pausedWhileUnsubscribed
 import com.nilemnod.mangareader.core.common.util.mutate
+import com.nilemnod.mangareader.core.download.DownloadCache
+import com.nilemnod.mangareader.core.download.DownloadManager
+import com.nilemnod.mangareader.core.download.SetReadStatus
+import com.nilemnod.mangareader.core.mangaui.DownloadAction
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.core.ui.preference.PreferenceMutableState
+import com.nilemnod.mangareader.core.ui.preference.asState
 import com.nilemnod.mangareader.core.ui.util.fastFilterNot
 import com.nilemnod.mangareader.domain.category.interactor.GetCategories
 import com.nilemnod.mangareader.domain.category.interactor.SetMangaCategories
@@ -39,9 +38,11 @@ import com.nilemnod.mangareader.domain.library.model.search.QueryNode
 import com.nilemnod.mangareader.domain.library.model.sort
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.interactor.GetLibraryManga
+import com.nilemnod.mangareader.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaUpdate
 import com.nilemnod.mangareader.domain.manga.model.applyFilter
+import com.nilemnod.mangareader.domain.source.api.MangaStatus
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.feature.library.matches
 import com.nilemnod.mangareader.source.local.isLocal
@@ -50,7 +51,6 @@ import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.binding
 import dev.zacsweers.metrox.viewmodel.ViewModelKey
-import eu.kanade.tachiyomi.source.model.SManga
 import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -223,7 +223,7 @@ class LibraryViewModel(
         }
 
         val filterFnCompleted: (LibraryItem) -> Boolean = {
-            applyFilter(filterCompleted) { it.libraryManga.manga.status.toInt() == SManga.COMPLETED }
+            applyFilter(filterCompleted) { it.libraryManga.manga.status == MangaStatus.COMPLETED.code }
         }
 
         val filterFnIntervalCustom: (LibraryItem) -> Boolean = {
@@ -493,7 +493,7 @@ class LibraryViewModel(
 
             if (deleteChapters) {
                 mangas.forEach { manga ->
-                    val source = sourceManager.get(manga.source) as? HttpSource
+                    val source = sourceManager.get(manga.source)?.takeIf { it.web != null }
                     if (source != null) {
                         downloadManager.deleteManga(manga, source)
                     }

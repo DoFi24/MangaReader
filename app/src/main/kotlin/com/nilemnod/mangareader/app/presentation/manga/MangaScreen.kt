@@ -45,11 +45,9 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.util.fastAll
 import androidx.compose.ui.util.fastAny
 import androidx.compose.ui.util.fastMap
-import com.nilemnod.mangareader.app.presentation.manga.components.ChapterDownloadAction
 import com.nilemnod.mangareader.app.presentation.manga.components.ChapterHeader
 import com.nilemnod.mangareader.app.presentation.manga.components.ExpandableMangaDescription
 import com.nilemnod.mangareader.app.presentation.manga.components.MangaActionRow
-import com.nilemnod.mangareader.app.presentation.manga.components.MangaBottomActionMenu
 import com.nilemnod.mangareader.app.presentation.manga.components.MangaChapterListItem
 import com.nilemnod.mangareader.app.presentation.manga.components.MangaInfoBox
 import com.nilemnod.mangareader.app.presentation.manga.components.MangaToolbar
@@ -58,6 +56,9 @@ import com.nilemnod.mangareader.app.source.getNameForMangaInfo
 import com.nilemnod.mangareader.app.ui.manga.ChapterList
 import com.nilemnod.mangareader.app.ui.manga.MangaViewModel
 import com.nilemnod.mangareader.app.util.system.copyToClipboard
+import com.nilemnod.mangareader.core.mangaui.ChapterDownloadAction
+import com.nilemnod.mangareader.core.mangaui.DownloadAction
+import com.nilemnod.mangareader.core.mangaui.MangaBottomActionMenu
 import com.nilemnod.mangareader.core.ui.components.TwoPanelBox
 import com.nilemnod.mangareader.core.ui.components.VerticalFastScroller
 import com.nilemnod.mangareader.core.ui.components.material.PullRefresh
@@ -370,7 +371,7 @@ private fun MangaScreenSmallImpl(
                             appBarPadding = topPadding,
                             manga = state.manga,
                             source = remember { state.source },
-                            isStubSource = remember { state.source is StubSource },
+                            isStubSource = remember { state.source.isStub },
                             onCoverClick = onCoverClicked,
                             doSearch = onSearch,
                         )
@@ -591,7 +592,7 @@ fun MangaScreenLargeImpl(
                             appBarPadding = contentPadding.calculateTopPadding(),
                             manga = state.manga,
                             source = remember { state.source },
-                            isStubSource = remember { state.source is StubSource },
+                            isStubSource = remember { state.source.isStub },
                             onCoverClick = onCoverClicked,
                             doSearch = onSearch,
                         )

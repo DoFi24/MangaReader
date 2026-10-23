@@ -16,7 +16,6 @@ import coil3.request.ImageRequest
 import coil3.request.transformations
 import coil3.transform.CircleCropTransformation
 import com.nilemnod.mangareader.app.R
-import com.nilemnod.mangareader.app.data.download.Downloader
 import com.nilemnod.mangareader.app.data.notification.NotificationReceiver
 import com.nilemnod.mangareader.app.data.notification.Notifications
 import com.nilemnod.mangareader.app.ui.main.MainActivity
@@ -29,6 +28,7 @@ import com.nilemnod.mangareader.core.common.i18n.pluralStringResource
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.security.SecurityPreferences
 import com.nilemnod.mangareader.core.common.util.lang.chop
+import com.nilemnod.mangareader.core.download.Downloader
 import com.nilemnod.mangareader.core.ui.util.formatChapterNumber
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.library.model.LibraryManga
@@ -36,10 +36,9 @@ import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metro.Inject
-import eu.kanade.tachiyomi.source.UnmeteredSource
+import com.nilemnod.mangareader.icons.materialsymbols.R as MaterialSymbolsR
 import java.math.RoundingMode
 import java.text.NumberFormat
-import com.nilemnod.mangareader.icons.materialsymbols.R as MaterialSymbolsR
 
 @Inject
 class LibraryUpdateNotifier(
@@ -130,7 +129,7 @@ class LibraryUpdateNotifier(
     suspend fun showQueueSizeWarningNotificationIfNeeded(mangaToUpdate: List<LibraryManga>) {
         val maxUpdatesFromSource = mangaToUpdate
             .groupBy { it.manga.source }
-            .filter { (sourceId, _) -> sourceManager.get(sourceId) !is UnmeteredSource }
+            .filter { (sourceId, _) -> sourceManager.get(sourceId)?.isUnmetered != true }
             .maxOfOrNull { it.value.size } ?: 0
 
         if (maxUpdatesFromSource <= MANGA_PER_SOURCE_QUEUE_WARNING_THRESHOLD) {

@@ -3,7 +3,7 @@ package com.nilemnod.mangareader.app.presentation.more.settings.screen
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.platform.LocalContext
-import com.nilemnod.mangareader.app.presentation.category.visualName
+import com.nilemnod.mangareader.core.mangaui.visualName
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.domain.category.model.Category
 import com.nilemnod.mangareader.i18n.MR

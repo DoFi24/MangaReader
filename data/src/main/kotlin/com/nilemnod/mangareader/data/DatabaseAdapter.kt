@@ -3,7 +3,7 @@ package com.nilemnod.mangareader.data
 import app.cash.sqldelight.ColumnAdapter
 import com.nilemnod.mangareader.core.common.extensions.toByteArray
 import com.nilemnod.mangareader.core.common.extensions.toJsonObject
-import eu.kanade.tachiyomi.source.model.UpdateStrategy
+import com.nilemnod.mangareader.domain.source.api.UpdateStrategy
 import kotlinx.serialization.json.JsonObject
 import kotlin.time.Instant
 

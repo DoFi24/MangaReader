@@ -452,7 +452,7 @@ class ReaderActivity : BaseActivity() {
 
     @Composable
     fun AppBars(state: ReaderViewModel.State) {
-        val isHttpSource = state.source is HttpSource
+        val isHttpSource = state.source?.web != null
 
         val cropBorderPaged by readerPreferences.cropBorders.collectAsState()
         val cropBorderWebtoon by readerPreferences.cropBordersWebtoon.collectAsState()
@@ -586,7 +586,7 @@ class ReaderActivity : BaseActivity() {
 
     private fun openChapterInWebView() {
         val manga = viewModel.manga ?: return
-        val source = viewModel.getSource() ?: return
+        val source = viewModel.getWebSource() ?: return
         assistUrl?.let {
             val intent = WebViewActivity.newIntent(this@ReaderActivity, it, source.id, manga.title)
             startActivity(intent)
