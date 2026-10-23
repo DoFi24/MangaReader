@@ -32,6 +32,7 @@ class AndroidSourceManager(
     private val extensionManager: ExtensionManager,
     private val sourceRepository: StubSourceRepository,
     private val localSource: LocalSource,
+    private val builtInSources: Set<ContentSource>,
     private val downloadManager: Lazy<DownloadManager>,
 ) : SourceManager {
 
@@ -55,6 +56,7 @@ class AndroidSourceManager(
                     val mutableMap = ConcurrentHashMap<Long, ContentSource>(
                         mapOf(LocalSource.ID to localSource),
                     )
+                    builtInSources.forEach { mutableMap[it.id] = it }
                     extensions.forEach { extension ->
                         extension.sources.forEach {
                             val source = adapterFor(it)
