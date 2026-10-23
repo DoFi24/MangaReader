@@ -6,7 +6,6 @@ plugins {
 dependencies {
     implementation(projects.core.metro)
     implementation(projects.domain)
-    implementation(projects.extensionApi)
 
     implementation(libs.bundles.androidx.lifecycle)
     implementation(libs.bundles.kotlinx.coroutines)

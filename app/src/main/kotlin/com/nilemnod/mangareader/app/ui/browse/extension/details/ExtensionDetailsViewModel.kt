@@ -21,7 +21,6 @@ import dev.zacsweers.metro.AssistedInject
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactory
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactoryKey
-import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -96,8 +95,7 @@ class ExtensionDetailsViewModel(
         val extension = successState?.extension ?: return
 
         val urls = extension.sources
-            .filterIsInstance<HttpSource>()
-            .flatMap { listOf(it.baseUrl, it.getHomeUrl()) }
+            .mapNotNull { it.web?.homeUrl }
             .filter { it.isNotEmpty() }
             .distinct()
 

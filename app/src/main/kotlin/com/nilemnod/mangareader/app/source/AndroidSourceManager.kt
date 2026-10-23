@@ -1,7 +1,6 @@
 package com.nilemnod.mangareader.app.source
 
 import com.nilemnod.mangareader.app.extension.ExtensionManager
-import com.nilemnod.mangareader.app.source.compat.ExtensionContentSource
 import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.domain.source.api.ContentSource
@@ -13,7 +12,6 @@ import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
-import eu.kanade.tachiyomi.source.Source
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -43,8 +41,6 @@ class AndroidSourceManager(
 
     private val stubSourcesMap = ConcurrentHashMap<Long, StubSource>()
 
-    private val adapters = ConcurrentHashMap<Long, ExtensionContentSource>()
-
     override val sources: Flow<List<ContentSource>> = sourcesMapFlow
         .filterNotNull()
         .map { it.values.toList() }
@@ -59,9 +55,8 @@ class AndroidSourceManager(
                     builtInSources.forEach { mutableMap[it.id] = it }
                     extensions.forEach { extension ->
                         extension.sources.forEach {
-                            val source = adapterFor(it, extension.pkgName)
-                            mutableMap[source.id] = source
-                            registerStubSource(StubSource.from(source))
+                            mutableMap[it.id] = it
+                            registerStubSource(StubSource.from(it))
                         }
                     }
                     sourcesMapFlow.value = mutableMap
@@ -104,12 +99,6 @@ class AndroidSourceManager(
     override suspend fun getStubSources(): List<ContentSource> {
         val onlineSourceIds = getOnlineSources().map { it.id }
         return stubSourcesMap.values.filterNot { it.id in onlineSourceIds }
-    }
-
-    private fun adapterFor(source: Source, origin: String): ExtensionContentSource {
-        val cached = adapters[source.id]
-        if (cached != null && cached.native === source && cached.origin == origin) return cached
-        return ExtensionContentSource(source, origin).also { adapters[source.id] = it }
     }
 
     private fun registerStubSource(source: StubSource) {

@@ -17,7 +17,6 @@ kotlin {
 }
 
 dependencies {
-    implementation(projects.extensionApi)
     implementation(projects.core.common)
     implementation(projects.core.metro)
 

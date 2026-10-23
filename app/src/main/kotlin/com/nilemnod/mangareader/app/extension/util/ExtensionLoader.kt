@@ -8,6 +8,7 @@ import android.os.Build
 import androidx.core.content.pm.PackageInfoCompat
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.domain.extension.interactor.TrustExtension
+import com.nilemnod.mangareader.app.source.compat.ExtensionContentSource
 import com.nilemnod.mangareader.app.util.storage.copyAndSetReadOnlyTo
 import com.nilemnod.mangareader.core.common.util.lang.Hash
 import com.nilemnod.mangareader.core.common.util.system.logcat
@@ -441,7 +442,7 @@ internal object ExtensionLoader {
             libVersion = libVersion,
             lang = lang,
             contentWarning = contentWarning,
-            sources = sources,
+            sources = sources.map { ExtensionContentSource(it, pkgName) },
             pkgFactory = metaData.getString(METADATA_SOURCE_FACTORY),
             isShared = extensionInfo.isShared,
             signatures = signatures,

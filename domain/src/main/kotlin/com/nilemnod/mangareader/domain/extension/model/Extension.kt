@@ -2,8 +2,8 @@ package com.nilemnod.mangareader.domain.extension.model
 
 import com.nilemnod.mangareader.domain.extension.model.ContentWarning
 import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.model.StubSource
-import eu.kanade.tachiyomi.source.Source
 
 sealed interface Extension {
 
@@ -93,7 +93,7 @@ sealed interface Extension {
         override val isShared: Boolean,
         override val signatures: List<String>,
         val pkgFactory: String?,
-        val sources: List<Source>,
+        val sources: List<ContentSource>,
         override val hasUpdate: Boolean = false,
         val isObsolete: Boolean = false,
         override val store: ExtensionStore? = null,

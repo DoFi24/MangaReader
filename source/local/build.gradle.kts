@@ -16,7 +16,6 @@ kotlin {
 }
 
 dependencies {
-    implementation(projects.extensionApi)
     implementation(projects.i18n)
 
     implementation(projects.core.archive)

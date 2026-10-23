@@ -14,7 +14,6 @@ dependencies {
     implementation(projects.core.network)
     implementation(projects.core.ui)
     implementation(projects.domain)
-    implementation(projects.extensionApi)
     implementation(projects.i18n)
     implementation(projects.icons.customMaterialSymbols)
     implementation(projects.icons.materialSymbols)

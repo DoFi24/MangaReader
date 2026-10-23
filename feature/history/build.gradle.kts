@@ -10,7 +10,6 @@ dependencies {
     implementation(projects.core.metro)
     implementation(projects.core.navigation)
     implementation(projects.domain)
-    implementation(projects.extensionApi)
 
     implementation(libs.androidx.compose.animation)
     implementation(libs.androidx.compose.animationGraphics)

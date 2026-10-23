@@ -23,7 +23,6 @@ import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.ViewCompact
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.ViewModule
 import com.nilemnod.mangareader.source.local.LocalSource
 import com.nilemnod.mangareader.source.local.isLocal
-import eu.kanade.tachiyomi.source.ConfigurableSource
 
 @Composable
 fun BrowseSourceToolbar(
