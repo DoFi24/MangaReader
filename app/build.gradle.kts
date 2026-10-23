@@ -203,6 +203,7 @@ dependencies {
     implementation(projects.extensionApi)
     implementation(projects.source.common)
     implementation(projects.source.local)
+    implementation(projects.source.mangadex)
     implementation(projects.source.pepper)
     implementation(projects.data)
     implementation(projects.domain)
