@@ -9,7 +9,6 @@ import androidx.core.net.toUri
 import com.nilemnod.mangareader.app.data.library.LibraryUpdateWorker
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.ui.main.MainActivity
-import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
 import com.nilemnod.mangareader.app.util.system.cancelNotification
 import com.nilemnod.mangareader.app.util.system.notificationManager
 import com.nilemnod.mangareader.core.android.system.getParcelableExtraCompat
@@ -29,6 +28,7 @@ import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
 import com.nilemnod.mangareader.domain.manga.interactor.GetManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.service.SourceManager
+import com.nilemnod.mangareader.feature.reader.legacy.ReaderActivity
 import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch

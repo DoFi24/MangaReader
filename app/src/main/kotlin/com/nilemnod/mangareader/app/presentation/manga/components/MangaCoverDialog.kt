@@ -48,7 +48,6 @@ import coil3.request.ImageRequest
 import coil3.request.SuccessResult
 import coil3.size.Size
 import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.ui.reader.viewer.ReaderPageImageView
 import com.nilemnod.mangareader.core.mangaui.coil.ImageDecoder
 import com.nilemnod.mangareader.core.mangaui.coil.newDecoder
 import com.nilemnod.mangareader.core.ui.components.AppBar
@@ -58,6 +57,7 @@ import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.clickableNoIndication
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.feature.reader.legacy.viewer.ReaderPageImageView
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Close

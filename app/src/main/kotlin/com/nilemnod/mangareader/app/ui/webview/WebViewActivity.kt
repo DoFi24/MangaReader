@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import androidx.core.net.toUri
-import com.nilemnod.mangareader.app.R
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.presentation.webview.WebViewScreenContent
 import com.nilemnod.mangareader.app.ui.base.activity.BaseActivity
@@ -30,6 +29,7 @@ import kotlinx.coroutines.withContext
 import logcat.LogPriority
 import okhttp3.Headers.Companion.toHeaders
 import okhttp3.HttpUrl.Companion.toHttpUrl
+import com.nilemnod.mangareader.core.ui.R as UiR
 
 class WebViewActivity : BaseActivity() {
 
@@ -47,12 +47,12 @@ class WebViewActivity : BaseActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             overrideActivityTransition(
                 OVERRIDE_TRANSITION_OPEN,
-                R.anim.shared_axis_x_push_enter,
-                R.anim.shared_axis_x_push_exit,
+                UiR.anim.shared_axis_x_push_enter,
+                UiR.anim.shared_axis_x_push_exit,
             )
         } else {
             @Suppress("DEPRECATION")
-            overridePendingTransition(R.anim.shared_axis_x_push_enter, R.anim.shared_axis_x_push_exit)
+            overridePendingTransition(UiR.anim.shared_axis_x_push_enter, UiR.anim.shared_axis_x_push_exit)
         }
         super.onCreate(savedInstanceState)
         appGraph.inject(this)
@@ -109,12 +109,12 @@ class WebViewActivity : BaseActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             overrideActivityTransition(
                 OVERRIDE_TRANSITION_CLOSE,
-                R.anim.shared_axis_x_pop_enter,
-                R.anim.shared_axis_x_pop_exit,
+                UiR.anim.shared_axis_x_pop_enter,
+                UiR.anim.shared_axis_x_pop_exit,
             )
         } else {
             @Suppress("DEPRECATION")
-            overridePendingTransition(R.anim.shared_axis_x_pop_enter, R.anim.shared_axis_x_pop_exit)
+            overridePendingTransition(UiR.anim.shared_axis_x_pop_enter, UiR.anim.shared_axis_x_pop_exit)
         }
     }
 

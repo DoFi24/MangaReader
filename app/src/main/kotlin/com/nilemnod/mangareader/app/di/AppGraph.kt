@@ -12,7 +12,6 @@ import com.nilemnod.mangareader.app.extension.ExtensionManager
 import com.nilemnod.mangareader.app.extension.util.ExtensionInstallActivity
 import com.nilemnod.mangareader.app.ui.base.delegate.SecureActivityDelegateImpl
 import com.nilemnod.mangareader.app.ui.main.MainActivity
-import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
 import com.nilemnod.mangareader.app.ui.webview.WebViewActivity
 import com.nilemnod.mangareader.app.util.CrashLogUtil
 import com.nilemnod.mangareader.core.common.security.SecurityPreferences
@@ -56,7 +55,6 @@ import nl.adaptivity.xmlutil.serialization.XML
 interface AppGraph : ViewModelGraph, UiPreferencesProvider {
     fun inject(app: App)
     fun inject(mainActivity: MainActivity)
-    fun inject(readerActivity: ReaderActivity)
     fun inject(webViewActivity: WebViewActivity)
     fun inject(libraryUpdateWorker: LibraryUpdateWorker)
     fun inject(metadataUpdateWorker: MetadataUpdateWorker)

@@ -152,13 +152,13 @@
         </activity>
 
         <activity
-            android:name=".ui.reader.compose.NewReaderActivity"
+            android:name="com.nilemnod.mangareader.feature.reader.compose.NewReaderActivity"
             android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden|uiMode"
             android:exported="false"
             android:launchMode="singleTask" />
 
         <activity
-            android:name=".ui.reader.ReaderActivity"
+            android:name="com.nilemnod.mangareader.feature.reader.legacy.ReaderActivity"
             android:exported="false"
             android:launchMode="singleTask">
             <intent-filter>

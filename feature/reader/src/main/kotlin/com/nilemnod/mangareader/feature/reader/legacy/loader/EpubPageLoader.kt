@@ -1,0 +1,31 @@
+package com.nilemnod.mangareader.feature.reader.legacy.loader
+
+import com.nilemnod.mangareader.core.archive.EpubReader
+import com.nilemnod.mangareader.domain.source.api.Page
+import com.nilemnod.mangareader.feature.reader.legacy.model.ReaderPage
+
+/**
+ * Loader used to load a chapter from a .epub file.
+ */
+internal class EpubPageLoader(private val reader: EpubReader) : PageLoader() {
+
+    override var isLocal: Boolean = true
+
+    override suspend fun getPages(): List<ReaderPage> {
+        return reader.getImagesFromPages().mapIndexed { i, path ->
+            ReaderPage(i).apply {
+                stream = { reader.getInputStream(path)!! }
+                status = Page.State.Ready
+            }
+        }
+    }
+
+    override suspend fun loadPage(page: ReaderPage) {
+        check(!isRecycled)
+    }
+
+    override fun recycle() {
+        super.recycle()
+        reader.close()
+    }
+}
