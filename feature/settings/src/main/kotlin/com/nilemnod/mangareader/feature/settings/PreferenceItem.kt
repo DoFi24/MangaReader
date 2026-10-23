@@ -23,7 +23,6 @@ import com.nilemnod.mangareader.core.ui.components.preference.PrefsHorizontalPad
 import com.nilemnod.mangareader.core.ui.components.preference.PrefsVerticalPadding
 import com.nilemnod.mangareader.core.ui.components.preference.SwitchPreferenceWidget
 import com.nilemnod.mangareader.core.ui.components.preference.TextPreferenceWidget
-import com.nilemnod.mangareader.core.ui.components.preference.TitleFontSize
 import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.i18n.MR
 import kotlinx.coroutines.launch
@@ -92,7 +91,7 @@ internal fun PreferenceItem(
                             }
                         }
                     },
-                    titleStyle = MaterialTheme.typography.titleLarge.copy(fontSize = TitleFontSize),
+                    titleStyle = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(
                         horizontal = PrefsHorizontalPadding,
                         vertical = PrefsVerticalPadding,

@@ -1,12 +1,11 @@
 package com.nilemnod.mangareader.feature.settings.screen
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBarDefaults
@@ -17,11 +16,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import androidx.core.graphics.ColorUtils
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -47,26 +43,14 @@ object SettingsMainScreen : Screen() {
     }
 
     @Composable
-    private fun getPalerSurface(): Color {
-        val surface = MaterialTheme.colorScheme.surface
-        val dark = isSystemInDarkTheme()
-        return remember(surface, dark) {
-            val arr = FloatArray(3)
-            ColorUtils.colorToHSL(surface.toArgb(), arr)
-            arr[2] = if (dark) {
-                arr[2] - 0.05f
-            } else {
-                arr[2] + 0.02f
-            }.coerceIn(0f, 1f)
-            Color.hsl(arr[0], arr[1], arr[2])
-        }
-    }
-
-    @Composable
     fun Content(twoPane: Boolean) {
         val navigator = LocalNavigator.currentOrThrow
         val backPress = LocalBackPress.currentOrThrow
-        val containerColor = if (twoPane) getPalerSurface() else MaterialTheme.colorScheme.surface
+        val containerColor = if (twoPane) {
+            MaterialTheme.colorScheme.surfaceContainerLow
+        } else {
+            MaterialTheme.colorScheme.surface
+        }
         val topBarState = rememberTopAppBarState()
         val entries = remember { SettingsEntries.all() }
 
@@ -122,16 +106,16 @@ object SettingsMainScreen : Screen() {
                         if (twoPane) {
                             modifier = Modifier
                                 .padding(horizontal = 8.dp)
-                                .clip(RoundedCornerShape(24.dp))
+                                .clip(CircleShape)
                                 .then(
                                     if (selected) {
-                                        Modifier.background(MaterialTheme.colorScheme.surfaceVariant)
+                                        Modifier.background(MaterialTheme.colorScheme.secondaryContainer)
                                     } else {
                                         Modifier
                                     },
                                 )
                             if (selected) {
-                                contentColor = MaterialTheme.colorScheme.onSurfaceVariant
+                                contentColor = MaterialTheme.colorScheme.onSecondaryContainer
                             }
                         }
                         CompositionLocalProvider(LocalContentColor provides contentColor) {

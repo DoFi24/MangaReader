@@ -983,4 +983,6 @@
     <string name="start_reading_chapter">Начать · %1$s</string>
     <string name="add_note">Добавить заметку</string>
     <string name="crash_screen_restart">Перезапустить</string>
+    <string name="more_group_manage">Управление</string>
+    <string name="more_group_app">Приложение</string>
 </resources>

@@ -1140,4 +1140,6 @@
     <string name="start_reading_chapter">Start · %1$s</string>
     <string name="add_note">Add a note</string>
     <string name="crash_screen_restart">Restart</string>
+    <string name="more_group_manage">Manage</string>
+    <string name="more_group_app">App</string>
 </resources>

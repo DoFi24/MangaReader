@@ -18,6 +18,7 @@ import com.nilemnod.mangareader.feature.settings.screen.SettingsSecurityScreen
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
 import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.About
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Advanced
 import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Appearance
 import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Browse
 import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Download
@@ -25,8 +26,6 @@ import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Library
 import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.ReaderLtr
 import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Security
 import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Storage
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Code
 import dev.icerock.moko.resources.StringResource
 import java.util.concurrent.CopyOnWriteArrayList
 
@@ -99,7 +98,7 @@ object SettingsEntries {
             order = ORDER_ADVANCED,
             titleRes = MR.strings.pref_category_advanced,
             subtitleRes = MR.strings.pref_advanced_summary,
-            icon = MaterialSymbols.Rounded.Code,
+            icon = CustomMaterialSymbols.Edge.Advanced,
             screen = SettingsAdvancedScreen,
         ),
         SettingsEntry(

@@ -28,7 +28,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.seconds
 
@@ -53,7 +52,7 @@ fun BasePreferenceWidget(
     ) {
         if (icon != null) {
             Box(
-                modifier = Modifier.padding(start = PrefsHorizontalPadding, end = 8.dp),
+                modifier = Modifier.padding(start = PrefsHorizontalPadding),
                 content = { icon() },
             )
         }
@@ -68,8 +67,8 @@ fun BasePreferenceWidget(
                     text = title,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 2,
-                    style = MaterialTheme.typography.titleLarge,
-                    fontSize = TitleFontSize,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurface,
                 )
             }
             subcomponent?.invoke(this)
@@ -120,4 +119,3 @@ fun Modifier.highlightBackground(highlighted: Boolean): Modifier {
 val TrailingWidgetBuffer = 16.dp
 val PrefsHorizontalPadding = 16.dp
 val PrefsVerticalPadding = 16.dp
-val TitleFontSize = 16.sp

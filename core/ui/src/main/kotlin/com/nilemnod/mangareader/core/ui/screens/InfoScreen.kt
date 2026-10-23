@@ -9,29 +9,26 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarDefaults
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.core.ui.components.material.padding
-import com.nilemnod.mangareader.core.ui.util.secondaryItemAlpha
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Newspaper
 @Composable
@@ -49,36 +46,31 @@ fun InfoScreen(
 ) {
     Scaffold(
         bottomBar = {
-            val strokeWidth = Dp.Hairline
-            val borderColor = MaterialTheme.colorScheme.outline
             Column(
                 modifier = Modifier
-                    .background(MaterialTheme.colorScheme.background)
-                    .drawBehind {
-                        drawLine(
-                            borderColor,
-                            Offset(0f, 0f),
-                            Offset(size.width, 0f),
-                            strokeWidth.value,
-                        )
-                    }
+                    .background(MaterialTheme.colorScheme.surface)
                     .windowInsetsPadding(NavigationBarDefaults.windowInsets)
                     .padding(
                         horizontal = MaterialTheme.padding.medium,
-                        vertical = MaterialTheme.padding.small,
+                        vertical = MaterialTheme.padding.medium,
                     ),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
             ) {
                 Button(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .heightIn(min = 56.dp),
                     enabled = canAccept,
                     onClick = onAcceptClick,
                 ) {
                     Text(text = acceptText)
                 }
                 if (rejectText != null && onRejectClick != null) {
-                    Row(horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall)) {
-                        OutlinedButton(
-                            modifier = Modifier.weight(1f),
+                    Row(horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small)) {
+                        FilledTonalButton(
+                            modifier = Modifier
+                                .weight(1f)
+                                .heightIn(min = 48.dp),
                             onClick = onRejectClick,
                         ) {
                             Text(text = rejectText)
@@ -93,8 +85,7 @@ fun InfoScreen(
         Box(
             modifier = Modifier
                 .zIndex(2f)
-                .secondaryItemAlpha()
-                .background(MaterialTheme.colorScheme.background)
+                .background(MaterialTheme.colorScheme.surface)
                 .fillMaxWidth()
                 .height(paddingValues.calculateTopPadding()),
         )
@@ -117,14 +108,13 @@ fun InfoScreen(
             )
             Text(
                 text = headingText,
-                style = MaterialTheme.typography.headlineLarge,
+                style = MaterialTheme.typography.headlineMedium,
             )
             Text(
                 text = subtitleText,
-                modifier = Modifier
-                    .secondaryItemAlpha()
-                    .padding(vertical = MaterialTheme.padding.small),
-                style = MaterialTheme.typography.titleSmall,
+                modifier = Modifier.padding(vertical = MaterialTheme.padding.small),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
 
             content()
