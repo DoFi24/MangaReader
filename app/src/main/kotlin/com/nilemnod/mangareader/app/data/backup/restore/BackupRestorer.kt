@@ -162,7 +162,7 @@ class BackupRestorer(
         backupSources
             .filter { it.name.isNotBlank() }
             .filter {
-                sourceManager.get(it.sourceId) == null && stubSourceRepository.getStubSource(it.sourceId) == null
+                sourceManager.content(it.sourceId) == null && stubSourceRepository.getStubSource(it.sourceId) == null
             }
             .forEach { stubSourceRepository.upsertStubSource(it.sourceId, lang = "", name = it.name) }
     }

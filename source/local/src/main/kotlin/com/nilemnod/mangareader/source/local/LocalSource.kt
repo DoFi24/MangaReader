@@ -17,6 +17,7 @@ import com.nilemnod.mangareader.core.metadata.comicinfo.getComicInfo
 import com.nilemnod.mangareader.core.metadata.details.MangaDetails
 import com.nilemnod.mangareader.domain.chapter.service.ChapterRecognition
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.source.local.filter.OrderBy
 import com.nilemnod.mangareader.source.local.image.LocalCoverManager
@@ -50,10 +51,10 @@ import logcat.LogPriority
 import nl.adaptivity.xmlutil.core.AndroidXmlReader
 import nl.adaptivity.xmlutil.serialization.XML
 import uy.kohesive.injekt.injectLazy
+import com.nilemnod.mangareader.domain.source.model.Source as DomainSource
 import java.io.InputStream
 import java.nio.charset.StandardCharsets
 import kotlin.time.Duration.Companion.days
-import com.nilemnod.mangareader.domain.source.model.Source as DomainSource
 
 @Inject
 @SingleIn(AppScope::class)
@@ -412,5 +413,7 @@ class LocalSource(
 fun Manga.isLocal(): Boolean = source == LocalSource.ID
 
 fun Source.isLocal(): Boolean = id == LocalSource.ID
+
+fun ContentSource.isLocal(): Boolean = id == LocalSource.ID
 
 fun DomainSource.isLocal(): Boolean = id == LocalSource.ID

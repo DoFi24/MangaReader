@@ -3,9 +3,9 @@ package com.nilemnod.mangareader.app.ui.reader.loader
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderChapter
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderPage
 import com.nilemnod.mangareader.core.download.ChapterCache
-import com.nilemnod.mangareader.domain.chapter.model.toSChapter
-import eu.kanade.tachiyomi.source.model.Page
-import eu.kanade.tachiyomi.source.online.HttpSource
+import com.nilemnod.mangareader.domain.chapter.model.toSourceChapter
+import com.nilemnod.mangareader.domain.source.api.ContentSource
+import com.nilemnod.mangareader.domain.source.api.Page
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
@@ -23,7 +23,7 @@ import java.util.concurrent.ConcurrentHashMap
  */
 internal class HttpPageLoader(
     private val chapter: ReaderChapter,
-    private val source: HttpSource,
+    private val source: ContentSource,
     private val chapterCache: ChapterCache,
     private val appScope: CoroutineScope,
     private val canLoadAhead: () -> Boolean,
@@ -47,7 +47,7 @@ internal class HttpPageLoader(
             if (e is CancellationException) {
                 throw e
             }
-            source.getPageList(chapter.chapter.toSChapter())
+            source.pages(chapter.chapter.toSourceChapter())
         }
         return pages.mapIndexed { index, page ->
             // Don't trust sources and use our own indexing
@@ -226,7 +226,7 @@ internal class HttpPageLoader(
         try {
             if (page.imageUrl.isNullOrEmpty()) {
                 page.status = Page.State.LoadPage
-                page.imageUrl = source.getImageUrl(page)
+                page.imageUrl = source.imageUrl(page)
             }
             val imageUrl = page.imageUrl!!
 
@@ -234,8 +234,8 @@ internal class HttpPageLoader(
                 val live = page.downloadStream
                 page.status = Page.State.DownloadImage
                 try {
-                    val imageResponse = source.getImage(page)
-                    chapterCache.putImageToCache(imageUrl, imageResponse, live)
+                    val image = source.openImage(page) { bytesRead, contentLength -> page.updateProgress(bytesRead, contentLength) }
+                    chapterCache.putImageToCache(imageUrl, image, live)
                     live?.finish()
                 } catch (e: Throwable) {
                     live?.finish(e)

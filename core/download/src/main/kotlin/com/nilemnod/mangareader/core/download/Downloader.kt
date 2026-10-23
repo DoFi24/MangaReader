@@ -14,19 +14,19 @@ import com.nilemnod.mangareader.core.metadata.comicinfo.ComicInfo
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.domain.category.interactor.GetCategories
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
-import com.nilemnod.mangareader.domain.chapter.model.toSChapter
+import com.nilemnod.mangareader.domain.chapter.model.toSourceChapter
 import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.source.api.ContentSource
+import com.nilemnod.mangareader.domain.source.api.Page
+import com.nilemnod.mangareader.domain.source.api.SourceHttpException
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
 import eu.kanade.tachiyomi.network.HttpException
-import eu.kanade.tachiyomi.source.UnmeteredSource
-import eu.kanade.tachiyomi.source.model.Page
-import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
@@ -240,7 +240,7 @@ class Downloader(
 
             // Use supervisorScope to cancel child jobs when the downloader job is cancelled
             supervisorScope {
-                val sourceJobs = mutableMapOf<HttpSource, Job>()
+                val sourceJobs = mutableMapOf<ContentSource, Job>()
                 val downloadJobs = ConcurrentHashMap<Download, Job>()
 
                 // A source runs several of its chapters at once, so a removed one is stopped by itself
@@ -273,7 +273,7 @@ class Downloader(
      * pages finish and it's archived.
      */
     private fun CoroutineScope.launchSourceJob(
-        source: HttpSource,
+        source: ContentSource,
         downloadJobs: MutableMap<Download, Job>,
         owner: Job,
     ) = launch(Dispatchers.IO) {
@@ -348,7 +348,7 @@ class Downloader(
     suspend fun queueChapters(manga: Manga, chapters: List<Chapter>, autoStart: Boolean): Boolean {
         if (chapters.isEmpty()) return false
 
-        val source = sourceManager.get(manga.source) as? HttpSource ?: return false
+        val source = sourceManager.content(manga.source)?.takeIf { it.web != null } ?: return false
         val wasEmpty = queueState.value.isEmpty()
         val chaptersToQueue = withContext(Dispatchers.IO) {
             val downloadedChapterIds = provider.findDownloadedChapterIds(chapters, manga, source)
@@ -371,10 +371,10 @@ class Downloader(
 
             // Start downloader if needed
             if (autoStart && wasEmpty) {
-                val queuedDownloads = queueState.value.count { it.source !is UnmeteredSource }
+                val queuedDownloads = queueState.value.count { !it.source.isUnmetered }
                 val maxDownloadsFromSource = queueState.value
                     .groupBy { it.source }
-                    .filterKeys { it !is UnmeteredSource }
+                    .filterKeys { !it.isUnmetered }
                     .maxOfOrNull { it.value.size }
                     ?: 0
                 if (
@@ -442,7 +442,7 @@ class Downloader(
             // If the page list already exists, start from the file
             val pageList = download.pages ?: run {
                 // Otherwise, pull page list from network and add them to download object
-                val pages = download.source.getPageList(download.chapter.toSChapter())
+                val pages = download.source.pages(download.chapter.toSourceChapter())
 
                 if (pages.isEmpty()) {
                     throw Exception(context.stringResource(MR.strings.page_list_empty_error))
@@ -465,7 +465,7 @@ class Downloader(
                         if (page.imageUrl.isNullOrEmpty()) {
                             page.status = Page.State.LoadPage
                             try {
-                                page.imageUrl = download.source.getImageUrl(page)
+                                page.imageUrl = download.source.imageUrl(page)
                             } catch (e: Throwable) {
                                 page.status = Page.State.Error(e)
                             }
@@ -564,7 +564,7 @@ class Downloader(
      * @param tmpDir the temporary directory of the download.
      * @param filename the filename of the image.
      */
-    private suspend fun downloadImage(page: Page, source: HttpSource, tmpDir: UniFile, filename: String): UniFile {
+    private suspend fun downloadImage(page: Page, source: ContentSource, tmpDir: UniFile, filename: String): UniFile {
         page.status = Page.State.DownloadImage
         page.progress = 0
         return flow {
@@ -572,17 +572,19 @@ class Downloader(
                 ?: tmpDir.createFile("$filename.tmp")!!
 
             try {
-                source.getImage(page, file.length()).use {
-                    it.body.source().saveTo(
+                source.openImage(page, file.length()) { bytesRead, contentLength ->
+                    page.updateProgress(bytesRead, contentLength)
+                }.use {
+                    it.source.saveTo(
                         // If the server supports partial downloads (HTTP 206),
                         // append to the existing file.
                         // Otherwise, start from scratch and overwrite the file.
-                        stream = file.openOutputStream(it.code == 206),
+                        stream = file.openOutputStream(it.isPartial),
                     )
-                    val extension = getImageExtension(it, file)
+                    val extension = getImageExtension(it.contentType, file)
                     file.renameTo("$filename.$extension")
                 }
-            } catch (e: HttpException) {
+            } catch (e: SourceHttpException) {
                 if (e.code == 416) {
                     file.delete()
                 }
@@ -631,8 +633,8 @@ class Downloader(
      * @param response the network response of the image.
      * @param file the file where the image is already downloaded.
      */
-    private fun getImageExtension(response: Response, file: UniFile): String {
-        val mime = response.body.contentType()?.run { if (type == "image") "image/$subtype" else null }
+    private fun getImageExtension(contentType: String?, file: UniFile): String {
+        val mime = contentType?.substringBefore(';')?.trim()?.takeIf { it.startsWith("image/") }
         return ImageUtil.getExtensionFromMimeType(mime) { file.openInputStream() }
     }
 
@@ -705,10 +707,10 @@ class Downloader(
         dir: UniFile,
         manga: Manga,
         chapter: Chapter,
-        source: HttpSource,
+        source: ContentSource,
     ) {
         val categories = getCategories.await(manga.id).map { it.name.trim() }.takeUnless { it.isEmpty() }
-        val urls = listOf(source.getChapterUrl(chapter.toSChapter()).trim())
+        val urls = listOfNotNull(source.web?.chapterUrl(chapter.toSourceChapter())?.trim())
 
         val comicInfo = getComicInfo(
             manga,

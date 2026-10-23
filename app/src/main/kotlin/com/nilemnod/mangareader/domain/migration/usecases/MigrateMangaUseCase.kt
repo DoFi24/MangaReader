@@ -37,8 +37,8 @@ class MigrateMangaUseCase(
     private val updateMangaFromRemote: UpdateMangaFromRemote,
 ) {
     suspend operator fun invoke(current: Manga, target: Manga, replace: Boolean) {
-        val targetSource = sourceManager.get(target.source) ?: return
-        val currentSource = sourceManager.get(current.source)
+        val targetSource = sourceManager.content(target.source) ?: return
+        val currentSource = sourceManager.content(current.source)
         val flags = sourcePreferences.migrationFlags.get()
 
         try {

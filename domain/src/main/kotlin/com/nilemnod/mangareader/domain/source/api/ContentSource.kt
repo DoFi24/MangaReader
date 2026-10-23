@@ -10,6 +10,21 @@ interface ContentSource {
 
     val supportsLatest: Boolean
 
+    val hasSettings: Boolean
+        get() = false
+
+    val resolver: UriResolver?
+        get() = null
+
+    val isStub: Boolean
+        get() = false
+
+    val isUnmetered: Boolean
+        get() = false
+
+    val displayName: String
+        get() = if (lang.isEmpty()) name else "$name (${lang.uppercase()})"
+
     val web: WebAccess?
         get() = null
 
@@ -28,10 +43,12 @@ interface ContentSource {
         fetchChapters: Boolean,
     ): MangaRefresh
 
-    suspend fun pages(chapter: SourceChapter): List<PageRef>
+    suspend fun pages(chapter: SourceChapter): List<Page>
+
+    suspend fun imageUrl(page: Page): String = page.imageUrl.orEmpty()
 
     suspend fun openImage(
-        page: PageRef,
+        page: Page,
         resumeFrom: Long = 0L,
         onProgress: (bytesRead: Long, contentLength: Long) -> Unit = { _, _ -> },
     ): ImageContent

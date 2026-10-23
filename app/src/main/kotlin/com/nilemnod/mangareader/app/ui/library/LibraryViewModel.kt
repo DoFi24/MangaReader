@@ -358,7 +358,7 @@ class LibraryViewModel(
         ) { libraryManga, preferences, _ ->
             val sources = libraryManga
                 .mapTo(mutableSetOf()) { it.manga.source }
-                .associateWith { sourceManager.getOrStub(it) }
+                .associateWith { sourceManager.contentOrStub(it) }
             val downloadCounts = downloadManager.getDownloadCounts(libraryManga.map { it.manga })
             libraryManga.map { manga ->
                 val source = sources.getValue(manga.manga.source)
@@ -493,7 +493,7 @@ class LibraryViewModel(
 
             if (deleteChapters) {
                 mangas.forEach { manga ->
-                    val source = sourceManager.get(manga.source) as? HttpSource
+                    val source = sourceManager.content(manga.source)?.takeIf { it.web != null }
                     if (source != null) {
                         downloadManager.deleteManga(manga, source)
                     }

@@ -12,14 +12,13 @@ import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
 import com.nilemnod.mangareader.domain.manga.interactor.GetManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.source.api.ContentSource
+import com.nilemnod.mangareader.domain.source.api.Page
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.model.Page
-import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
@@ -114,7 +113,7 @@ class DownloadManager(
     private suspend fun downloadFromChapterId(chapterId: Long): Download? {
         val chapter = getChapter.await(chapterId) ?: return null
         val manga = getManga.await(chapter.mangaId) ?: return null
-        val source = sourceManager.get(manga.source) as? HttpSource ?: return null
+        val source = sourceManager.content(manga.source)?.takeIf { it.web != null } ?: return null
 
         return Download(source, manga, chapter)
     }
@@ -168,7 +167,7 @@ class DownloadManager(
      * @param chapter the downloaded chapter.
      * @return the list of pages from the chapter.
      */
-    suspend fun buildPageList(source: Source, manga: Manga, chapter: Chapter): List<Page> {
+    suspend fun buildPageList(source: ContentSource, manga: Manga, chapter: Chapter): List<Page> {
         val chapterDir = provider.findChapterDir(chapter.name, chapter.scanlator, chapter.url, manga.title, source)
         val files = withContext(Dispatchers.IO) {
             chapterDir?.listFiles().orEmpty()
@@ -226,7 +225,7 @@ class DownloadManager(
         chapterScanlator: String?,
         chapterUrl: String,
         mangaTitle: String,
-        source: Source,
+        source: ContentSource,
     ): Boolean {
         return provider.findChapterDir(chapterName, chapterScanlator, chapterUrl, mangaTitle, source) != null
     }
@@ -267,7 +266,7 @@ class DownloadManager(
      * @param manga the manga of the chapters.
      * @param source the source of the chapters.
      */
-    suspend fun deleteChapters(chapters: List<Chapter>, manga: Manga, source: Source) {
+    suspend fun deleteChapters(chapters: List<Chapter>, manga: Manga, source: ContentSource) {
         withContext(Dispatchers.IO) {
             val filteredChapters = getChaptersToDelete(chapters, manga)
             if (filteredChapters.isEmpty()) {
@@ -294,7 +293,7 @@ class DownloadManager(
      * @param source the source of the manga.
      * @param removeQueued whether to also remove queued downloads.
      */
-    suspend fun deleteManga(manga: Manga, source: Source, removeQueued: Boolean = true) {
+    suspend fun deleteManga(manga: Manga, source: ContentSource, removeQueued: Boolean = true) {
         withContext(Dispatchers.IO) {
             if (removeQueued) {
                 downloader.removeFromQueue(manga)
@@ -327,7 +326,7 @@ class DownloadManager(
     suspend fun deletePendingChapters() {
         val pendingChapters = pendingDeleter.getPendingChapters()
         for ((manga, chapters) in pendingChapters) {
-            val source = sourceManager.get(manga.source) ?: continue
+            val source = sourceManager.content(manga.source) ?: continue
             deleteChapters(chapters, manga, source)
         }
     }
@@ -338,7 +337,7 @@ class DownloadManager(
      * @param oldSource the old source.
      * @param newSource the new source.
      */
-    suspend fun renameSource(oldSource: Source, newSource: Source) = withContext(Dispatchers.IO) {
+    suspend fun renameSource(oldSource: ContentSource, newSource: ContentSource) = withContext(Dispatchers.IO) {
         val oldFolder = provider.findSourceDir(oldSource) ?: return@withContext
         val newName = provider.getSourceDirName(newSource)
 
@@ -365,7 +364,7 @@ class DownloadManager(
      * @param newTitle the new manga title.
      */
     suspend fun renameManga(manga: Manga, newTitle: String) = withContext(Dispatchers.IO) {
-        val source = sourceManager.getOrStub(manga.source)
+        val source = sourceManager.contentOrStub(manga.source)
         val oldFolder = provider.findMangaDir(manga.title, source) ?: return@withContext
         val newName = provider.getMangaDirName(newTitle)
 
@@ -398,7 +397,7 @@ class DownloadManager(
      * @param oldChapter the existing chapter with the old name.
      * @param newChapter the target chapter with the new name.
      */
-    suspend fun renameChapter(source: Source, manga: Manga, oldChapter: Chapter, newChapter: Chapter) =
+    suspend fun renameChapter(source: ContentSource, manga: Manga, oldChapter: Chapter, newChapter: Chapter) =
         withContext(Dispatchers.IO) {
             val oldNames = provider.getValidChapterDirNames(oldChapter.name, oldChapter.scanlator, oldChapter.url)
             val mangaDir = provider.getMangaDir(manga.title, source).getOrElse { e ->

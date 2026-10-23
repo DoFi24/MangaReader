@@ -2,19 +2,19 @@ package com.nilemnod.mangareader.app.source.compat
 
 import com.nilemnod.mangareader.domain.source.api.MangaListing
 import com.nilemnod.mangareader.domain.source.api.MangaStatus
-import com.nilemnod.mangareader.domain.source.api.PageRef
 import com.nilemnod.mangareader.domain.source.api.SourceChapter
 import com.nilemnod.mangareader.domain.source.api.SourceManga
 import com.nilemnod.mangareader.domain.source.api.UpdateStrategy
 import eu.kanade.tachiyomi.source.model.MangasPage
-import eu.kanade.tachiyomi.source.model.Page
 import eu.kanade.tachiyomi.source.model.SChapter
 import eu.kanade.tachiyomi.source.model.SManga
+import com.nilemnod.mangareader.domain.source.api.Page as SourcePage
+import eu.kanade.tachiyomi.source.model.Page as NativePage
 import eu.kanade.tachiyomi.source.model.UpdateStrategy as NativeUpdateStrategy
 
 internal fun SManga.toSource(): SourceManga = SourceManga(
-    url = url,
-    title = title,
+    url = runCatching { url }.getOrDefault(""),
+    title = runCatching { title }.getOrDefault(""),
     author = author,
     artist = artist,
     description = description,
@@ -47,8 +47,8 @@ internal fun SourceManga.toNative(): SManga = SManga.create().also {
 }
 
 internal fun SChapter.toSource(): SourceChapter = SourceChapter(
-    url = url,
-    name = name,
+    url = runCatching { url }.getOrDefault(""),
+    name = runCatching { name }.getOrDefault(""),
     chapterNumber = chapter_number.toDouble(),
     scanlator = scanlator,
     dateUpload = date_upload,
@@ -69,4 +69,4 @@ internal fun MangasPage.toSource(): MangaListing = MangaListing(
     hasNextPage = hasNextPage,
 )
 
-internal fun Page.toSource(): PageRef = PageRef(index = index, url = url, imageUrl = imageUrl)
+internal fun NativePage.toSource(): SourcePage = SourcePage(index = index, url = url, imageUrl = imageUrl)

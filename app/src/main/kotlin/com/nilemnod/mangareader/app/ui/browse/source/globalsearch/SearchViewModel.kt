@@ -12,9 +12,9 @@ import com.nilemnod.mangareader.domain.manga.interactor.GetManga
 import com.nilemnod.mangareader.domain.manga.interactor.NetworkToLocalManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.toDomainManga
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.source.local.isLocal
-import eu.kanade.tachiyomi.source.Source
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
@@ -59,8 +59,8 @@ abstract class SearchViewModel(
 
     protected var extensionFilter: String? = null
 
-    open val sortComparator = { map: Map<Source, SearchItemResult> ->
-        compareBy<Source>(
+    open val sortComparator = { map: Map<ContentSource, SearchItemResult> ->
+        compareBy<ContentSource>(
             { (map[it] as? SearchItemResult.Success)?.isEmpty ?: true },
             { "${it.id}" !in pinnedSources },
             { "${it.name.lowercase()} (${it.lang})" },
@@ -86,8 +86,8 @@ abstract class SearchViewModel(
         }
     }
 
-    open suspend fun getEnabledSources(): List<Source> {
-        return sourceManager.getAll()
+    open suspend fun getEnabledSources(): List<ContentSource> {
+        return sourceManager.allContent()
             .filter { (it.lang in enabledLanguages || it.isLocal()) && "${it.id}" !in disabledSources }
             .sortedWith(
                 compareBy(
@@ -97,7 +97,7 @@ abstract class SearchViewModel(
             )
     }
 
-    private suspend fun getSelectedSources(): List<Source> {
+    private suspend fun getSelectedSources(): List<ContentSource> {
         val enabledSources = getEnabledSources()
 
         val filter = extensionFilter
@@ -105,10 +105,12 @@ abstract class SearchViewModel(
             return enabledSources
         }
 
-        return extensionManager.getLoadedExtensions()
+        val extensionSourceIds = extensionManager.getLoadedExtensions()
             .filter { it.pkgName == filter }
             .flatMap { it.sources }
-            .filter { it in enabledSources }
+            .map { it.id }
+            .toSet()
+        return enabledSources.filter { it.id in extensionSourceIds }
     }
 
     fun updateSearchQuery(query: String?) {
@@ -163,7 +165,7 @@ abstract class SearchViewModel(
 
                     try {
                         val page = withContext(coroutineDispatcher) {
-                            source.getSearchManga(1, query, source.getFilterList())
+                            source.search(1, query, source.filters())
                         }
 
                         val titles = page.mangas
@@ -185,7 +187,7 @@ abstract class SearchViewModel(
         }
     }
 
-    private fun updateItems(items: Map<Source, SearchItemResult>) {
+    private fun updateItems(items: Map<ContentSource, SearchItemResult>) {
         state.update {
             it.copy(
                 items = items
@@ -194,7 +196,7 @@ abstract class SearchViewModel(
         }
     }
 
-    private fun updateItem(source: Source, result: SearchItemResult) {
+    private fun updateItem(source: ContentSource, result: SearchItemResult) {
         state.update { currentState ->
             val newItems = currentState.items + (source to result)
             currentState.copy(
@@ -220,7 +222,7 @@ abstract class SearchViewModel(
         val searchQuery: String? = null,
         val sourceFilter: SourceFilter = SourceFilter.PinnedOnly,
         val onlyShowHasResults: Boolean = false,
-        val items: Map<Source, SearchItemResult> = mapOf(),
+        val items: Map<ContentSource, SearchItemResult> = mapOf(),
         val dialog: Dialog? = null,
     ) {
         val progress: Int = items.count { it.value !is SearchItemResult.Loading }

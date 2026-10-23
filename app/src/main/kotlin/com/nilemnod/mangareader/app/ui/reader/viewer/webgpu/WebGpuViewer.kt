@@ -45,7 +45,7 @@ import com.nilemnod.mangareader.app.util.system.createReaderThemeContext
 import com.nilemnod.mangareader.app.util.system.readerBackgroundColor
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.download.DownloadStream
-import eu.kanade.tachiyomi.source.model.Page
+import com.nilemnod.mangareader.domain.source.api.Page
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers

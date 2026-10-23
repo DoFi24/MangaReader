@@ -3,22 +3,21 @@ package com.nilemnod.mangareader.app.source.interactor
 import com.nilemnod.mangareader.app.data.cache.CoverCache
 import com.nilemnod.mangareader.app.domain.chapter.interactor.SyncChaptersWithSource
 import com.nilemnod.mangareader.app.domain.manga.model.hasCustomCover
-import com.nilemnod.mangareader.app.domain.manga.model.toSManga
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.download.DownloadManager
-import com.nilemnod.mangareader.domain.chapter.model.Chapter
-import com.nilemnod.mangareader.domain.chapter.model.toSChapter
+import com.nilemnod.mangareader.domain.chapter.model.toSourceChapter
 import com.nilemnod.mangareader.domain.chapter.repository.ChapterRepository
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaRemoteUpdate
+import com.nilemnod.mangareader.domain.manga.model.toSourceManga
 import com.nilemnod.mangareader.domain.manga.repository.MangaRepository
+import com.nilemnod.mangareader.domain.source.api.ContentSource
+import com.nilemnod.mangareader.domain.source.api.SourceManga
 import com.nilemnod.mangareader.domain.source.models.RemoteMangaUpdate
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.source.local.isLocal
 import dev.zacsweers.metro.Inject
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.model.SManga
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import logcat.LogPriority
@@ -42,7 +41,7 @@ class UpdateMangaFromRemote(
         manualFetch: Boolean = false,
         fetchWindow: ClosedRange<Instant>? = null,
     ): Result<RemoteMangaUpdate> {
-        val source = sourceManager.getOrStub(manga.source)
+        val source = sourceManager.contentOrStub(manga.source)
         return invoke(
             source = source,
             manga = manga,
@@ -53,7 +52,7 @@ class UpdateMangaFromRemote(
     }
 
     suspend operator fun invoke(
-        source: Source,
+        source: ContentSource,
         manga: Manga,
         fetchDetails: Boolean = false,
         fetchChapters: Boolean = false,
@@ -63,9 +62,9 @@ class UpdateMangaFromRemote(
         try {
             val chapters = chapterRepository.getChapterByMangaId(manga.id)
                 .sortedBy { it.sourceOrder }
-            val update = source.getMangaUpdate(
-                manga = manga.toSManga(),
-                chapters = chapters.map(Chapter::toSChapter),
+            val update = source.refresh(
+                manga = manga.toSourceManga(),
+                chapters = chapters.map { it.toSourceChapter() },
                 fetchDetails = fetchDetails,
                 fetchChapters = fetchChapters,
             )
@@ -88,7 +87,7 @@ class UpdateMangaFromRemote(
 
     private suspend fun awaitUpdateFromSource(
         localManga: Manga,
-        remoteManga: SManga,
+        remoteManga: SourceManga,
         manualFetch: Boolean,
     ): Boolean {
         val remoteTitle = try {
@@ -107,8 +106,8 @@ class UpdateMangaFromRemote(
 
         val coverLastModified = when {
             // Never refresh covers if the url is empty to avoid "losing" existing covers
-            remoteManga.thumbnail_url.isNullOrEmpty() -> null
-            !manualFetch && localManga.thumbnailUrl == remoteManga.thumbnail_url -> null
+            remoteManga.thumbnailUrl.isNullOrEmpty() -> null
+            !manualFetch && localManga.thumbnailUrl == remoteManga.thumbnailUrl -> null
             localManga.isLocal() -> Clock.System.now()
             localManga.hasCustomCover(coverCache) -> {
                 coverCache.deleteFromCache(localManga, false)
@@ -120,7 +119,7 @@ class UpdateMangaFromRemote(
             }
         }
 
-        val thumbnailUrl = remoteManga.thumbnail_url?.takeIf { it.isNotEmpty() }
+        val thumbnailUrl = remoteManga.thumbnailUrl?.takeIf { it.isNotEmpty() }
 
         val success = mangaRepository.updateRemote(
             MangaRemoteUpdate(
@@ -130,10 +129,10 @@ class UpdateMangaFromRemote(
                 author = remoteManga.author,
                 artist = remoteManga.artist,
                 description = remoteManga.description,
-                genre = remoteManga.getGenres(),
+                genre = remoteManga.genres.takeIf { it.isNotEmpty() },
                 thumbnailUrl = thumbnailUrl,
-                status = remoteManga.status.toLong(),
-                updateStrategy = remoteManga.update_strategy,
+                status = remoteManga.status.code,
+                updateStrategy = remoteManga.updateStrategy,
                 initialized = true,
                 memo = remoteManga.memo,
             ),

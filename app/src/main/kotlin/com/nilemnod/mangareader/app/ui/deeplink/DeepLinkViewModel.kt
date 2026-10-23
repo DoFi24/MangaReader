@@ -9,6 +9,8 @@ import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.manga.interactor.NetworkToLocalManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.toDomainManga
+import com.nilemnod.mangareader.domain.source.api.SourceChapter
+import com.nilemnod.mangareader.domain.source.api.UriType
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Assisted
@@ -17,10 +19,6 @@ import dev.zacsweers.metro.AssistedInject
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactory
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactoryKey
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.model.SChapter
-import eu.kanade.tachiyomi.source.online.ResolvableSource
-import eu.kanade.tachiyomi.source.online.UriType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -48,16 +46,16 @@ class DeepLinkViewModel(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val source = sourceManager.getAll()
-                .filterIsInstance<ResolvableSource>()
-                .firstOrNull { it.getUriType(query) != UriType.Unknown }
+            val source = sourceManager.allContent()
+                .firstOrNull { it.resolver?.uriType(query).let { type -> type != null && type != UriType.Unknown } }
+            val resolver = source?.resolver
 
-            val manga = source?.getManga(query)?.let {
+            val manga = resolver?.manga(query)?.let {
                 networkToLocalManga(it.toDomainManga(source.id))
             }
 
-            val chapter = if (source?.getUriType(query) == UriType.Chapter && manga != null) {
-                source.getChapter(query)?.let { getChapterFromSChapter(it, manga, source) }
+            val chapter = if (resolver?.uriType(query) == UriType.Chapter && manga != null) {
+                resolver.chapter(query)?.let { getChapterFromSourceChapter(it, manga) }
             } else {
                 null
             }
@@ -76,12 +74,12 @@ class DeepLinkViewModel(
         }
     }
 
-    private suspend fun getChapterFromSChapter(sChapter: SChapter, manga: Manga, source: Source): Chapter? {
-        val localChapter = getChapterByUrlAndMangaId.await(sChapter.url, manga.id)
+    private suspend fun getChapterFromSourceChapter(sourceChapter: SourceChapter, manga: Manga): Chapter? {
+        val localChapter = getChapterByUrlAndMangaId.await(sourceChapter.url, manga.id)
 
         if (localChapter != null) return localChapter
         updateMangaFromRemote(manga, fetchChapters = true).getOrElse { return null }
-        return getChapterByUrlAndMangaId.await(sChapter.url, manga.id)
+        return getChapterByUrlAndMangaId.await(sourceChapter.url, manga.id)
     }
 
     sealed interface State {

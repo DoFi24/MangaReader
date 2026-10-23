@@ -12,6 +12,7 @@ import com.nilemnod.mangareader.domain.manga.interactor.GetManga
 import com.nilemnod.mangareader.domain.manga.interactor.NetworkToLocalManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.migration.usecases.MigrateMangaUseCase
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.feature.migration.list.models.MigratingManga
 import com.nilemnod.mangareader.feature.migration.list.models.MigratingManga.SearchResult
@@ -23,7 +24,6 @@ import dev.zacsweers.metro.AssistedInject
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactory
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactoryKey
-import eu.kanade.tachiyomi.source.Source
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -91,7 +91,7 @@ class MigrationListViewModel(
                             manga = manga,
                             chapterCount = chapterInfo.chapterCount,
                             latestChapter = chapterInfo.latestChapter,
-                            source = sourceManager.getOrStub(manga.source).getNameForMangaInfo(),
+                            source = sourceManager.contentOrStub(manga.source).getNameForMangaInfo(),
                             parentContext = viewModelScope.coroutineContext,
                         )
                     }
@@ -112,7 +112,7 @@ class MigrationListViewModel(
 
     private suspend fun Manga.toSuccessSearchResult(): SearchResult.Success {
         val chapterInfo = getChapterInfo(id)
-        val source = sourceManager.getOrStub(source).getNameForMangaInfo()
+        val source = sourceManager.contentOrStub(source).getNameForMangaInfo()
         return SearchResult.Success(
             manga = this,
             chapterCount = chapterInfo.chapterCount,
@@ -126,7 +126,7 @@ class MigrationListViewModel(
         val deepSearchMode = preferences.migrationDeepSearchMode.get()
 
         val sources = preferences.migrationSources.get()
-            .mapNotNull { sourceManager.get(it) }
+            .mapNotNull { sourceManager.content(it) }
 
         for (manga in mangas) {
             if (!currentCoroutineContext().isActive) break
@@ -189,7 +189,7 @@ class MigrationListViewModel(
 
     private suspend fun searchSource(
         manga: Manga,
-        source: Source,
+        source: ContentSource,
         deepSearchMode: Boolean,
     ): Pair<Manga, ChapterInfo>? {
         return try {
@@ -237,7 +237,7 @@ class MigrationListViewModel(
             val result = migratingManga.migrationScope.async {
                 val manga = getManga.await(target) ?: return@async null
                 try {
-                    val source = sourceManager.get(manga.source)!!
+                    val source = sourceManager.content(manga.source)!!
                     updateMangaFromRemote(source = source, manga = manga, fetchChapters = true).getOrThrow().manga
                 } catch (_: Exception) {
                     null

@@ -130,7 +130,7 @@ class LibraryUpdateNotifier(
     suspend fun showQueueSizeWarningNotificationIfNeeded(mangaToUpdate: List<LibraryManga>) {
         val maxUpdatesFromSource = mangaToUpdate
             .groupBy { it.manga.source }
-            .filter { (sourceId, _) -> sourceManager.get(sourceId) !is UnmeteredSource }
+            .filter { (sourceId, _) -> sourceManager.content(sourceId) !is UnmeteredSource }
             .maxOfOrNull { it.value.size } ?: 0
 
         if (maxUpdatesFromSource <= MANGA_PER_SOURCE_QUEUE_WARNING_THRESHOLD) {

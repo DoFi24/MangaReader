@@ -25,18 +25,18 @@ import com.nilemnod.mangareader.core.ui.screens.EmptyScreenAction
 import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
 import com.nilemnod.mangareader.domain.library.model.LibraryDisplayMode
 import com.nilemnod.mangareader.domain.manga.model.Manga
-import com.nilemnod.mangareader.domain.source.model.StubSource
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Public
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Refresh
 import com.nilemnod.mangareader.source.local.LocalSource
-import eu.kanade.tachiyomi.source.Source
+import com.nilemnod.mangareader.source.local.isLocal
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 fun BrowseSourceContent(
-    source: Source?,
+    source: ContentSource?,
     mangaList: LazyPagingItems<StateFlow<Manga>>,
     columns: GridCells,
     displayMode: LibraryDisplayMode,
@@ -81,7 +81,7 @@ fun BrowseSourceContent(
                 is LoadState.Error -> getErrorMessage(errorState)
                 else -> stringResource(MR.strings.no_results_found)
             },
-            actions = if (source is LocalSource) {
+            actions = if (source?.isLocal() == true) {
                 emptyList()
             } else {
                 listOf(
@@ -134,7 +134,7 @@ fun BrowseSourceContent(
 
 @Composable
 internal fun MissingSourceScreen(
-    source: StubSource,
+    source: ContentSource,
     navigateUp: () -> Unit,
 ) {
     Scaffold(
@@ -147,7 +147,7 @@ internal fun MissingSourceScreen(
         },
     ) { paddingValues ->
         EmptyScreen(
-            message = stringResource(MR.strings.source_not_installed, source.toString()),
+            message = stringResource(MR.strings.source_not_installed, source.displayName),
             modifier = Modifier.padding(paddingValues),
         )
     }

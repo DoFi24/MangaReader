@@ -29,6 +29,7 @@ import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import logcat.LogPriority
+import okhttp3.Headers.Companion.toHeaders
 import okhttp3.HttpUrl.Companion.toHttpUrl
 
 class WebViewActivity : BaseActivity() {
@@ -69,10 +70,10 @@ class WebViewActivity : BaseActivity() {
         setComposeContent {
             // Null until the source it belongs to has been resolved
             val headers by produceState<Map<String, String>?>(initialValue = null) {
-                val source = sourceManager.get(intent.extras!!.getLong(SOURCE_KEY)) as? HttpSource
+                val source = sourceManager.content(intent.extras!!.getLong(SOURCE_KEY))?.takeIf { it.web != null }
                 value = withContext(Dispatchers.IO) {
                     try {
-                        source?.headers?.toWebViewHeaders().orEmpty()
+                        source?.web?.headers?.toHeaders()?.toWebViewHeaders().orEmpty()
                     } catch (e: Exception) {
                         logcat(LogPriority.ERROR, e) { "Failed to build headers" }
                         emptyMap()

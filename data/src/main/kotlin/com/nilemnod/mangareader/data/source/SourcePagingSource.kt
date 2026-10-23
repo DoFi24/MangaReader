@@ -4,51 +4,51 @@ import androidx.paging.PagingState
 import com.nilemnod.mangareader.domain.manga.interactor.NetworkToLocalManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.toDomainManga
+import com.nilemnod.mangareader.domain.source.api.ContentSource
+import com.nilemnod.mangareader.domain.source.api.FilterList
+import com.nilemnod.mangareader.domain.source.api.MangaListing
 import com.nilemnod.mangareader.domain.source.repository.SourcePagingSource
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.model.FilterList
-import eu.kanade.tachiyomi.source.model.MangasPage
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class SourceSearchPagingSource(
-    source: suspend () -> Source,
+    source: suspend () -> ContentSource,
     private val query: String,
     private val filters: FilterList,
     networkToLocalManga: NetworkToLocalManga,
 ) : BaseSourcePagingSource(source, networkToLocalManga) {
-    override suspend fun requestNextPage(source: Source, currentPage: Int): MangasPage {
-        return source.getSearchManga(currentPage, query, filters)
+    override suspend fun requestNextPage(source: ContentSource, currentPage: Int): MangaListing {
+        return source.search(currentPage, query, filters)
     }
 }
 
 class SourcePopularPagingSource(
-    source: suspend () -> Source,
+    source: suspend () -> ContentSource,
     networkToLocalManga: NetworkToLocalManga,
 ) : BaseSourcePagingSource(source, networkToLocalManga) {
-    override suspend fun requestNextPage(source: Source, currentPage: Int): MangasPage {
-        return source.getPopularManga(currentPage)
+    override suspend fun requestNextPage(source: ContentSource, currentPage: Int): MangaListing {
+        return source.popular(currentPage)
     }
 }
 
 class SourceLatestPagingSource(
-    source: suspend () -> Source,
+    source: suspend () -> ContentSource,
     networkToLocalManga: NetworkToLocalManga,
 ) : BaseSourcePagingSource(source, networkToLocalManga) {
-    override suspend fun requestNextPage(source: Source, currentPage: Int): MangasPage {
-        return source.getLatestUpdates(currentPage)
+    override suspend fun requestNextPage(source: ContentSource, currentPage: Int): MangaListing {
+        return source.latest(currentPage)
     }
 }
 
 abstract class BaseSourcePagingSource(
-    private val source: suspend () -> Source,
+    private val source: suspend () -> ContentSource,
     private val networkToLocalManga: NetworkToLocalManga,
 ) : SourcePagingSource() {
 
     private val seenManga = hashSetOf<String>()
 
-    abstract suspend fun requestNextPage(source: Source, currentPage: Int): MangasPage
+    abstract suspend fun requestNextPage(source: ContentSource, currentPage: Int): MangaListing
 
     override suspend fun load(params: LoadParams<Long>): LoadResult<Long, Manga> {
         val page = params.key ?: 1

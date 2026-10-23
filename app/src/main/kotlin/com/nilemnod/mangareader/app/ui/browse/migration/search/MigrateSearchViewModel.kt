@@ -7,6 +7,7 @@ import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.SearchItemResu
 import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.SearchViewModel
 import com.nilemnod.mangareader.domain.manga.interactor.GetManga
 import com.nilemnod.mangareader.domain.manga.interactor.NetworkToLocalManga
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Assisted
@@ -15,7 +16,6 @@ import dev.zacsweers.metro.AssistedInject
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactory
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactoryKey
-import eu.kanade.tachiyomi.source.Source
 import kotlinx.coroutines.launch
 
 @AssistedInject
@@ -44,8 +44,8 @@ class MigrateSearchViewModel(
 
     private val migrationSources by lazy { sourcePreferences.migrationSources.get() }
 
-    override val sortComparator = { map: Map<Source, SearchItemResult> ->
-        compareBy<Source>(
+    override val sortComparator = { map: Map<ContentSource, SearchItemResult> ->
+        compareBy<ContentSource>(
             { (map[it] as? SearchItemResult.Success)?.isEmpty ?: true },
             { migrationSources.indexOf(it.id) },
         )
@@ -64,7 +64,7 @@ class MigrateSearchViewModel(
         }
     }
 
-    override suspend fun getEnabledSources(): List<Source> {
-        return migrationSources.mapNotNull { sourceManager.get(it) }
+    override suspend fun getEnabledSources(): List<ContentSource> {
+        return migrationSources.mapNotNull { sourceManager.content(it) }
     }
 }

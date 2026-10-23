@@ -59,6 +59,7 @@ import com.nilemnod.mangareader.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaWithChapterCount
 import com.nilemnod.mangareader.domain.manga.model.applyFilter
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.source.local.isLocal
@@ -69,7 +70,6 @@ import dev.zacsweers.metro.AssistedInject
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactory
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactoryKey
-import eu.kanade.tachiyomi.source.Source
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -139,7 +139,7 @@ class MangaViewModel(
     val manga: Manga?
         get() = successState?.manga
 
-    val source: Source?
+    val source: ContentSource?
         get() = successState?.source
 
     private val isFavorited: Boolean
@@ -202,7 +202,7 @@ class MangaViewModel(
     ) { (manga, chapters), _, _ ->
         MangaAndChapters(
             manga = manga,
-            source = sourceManager.getOrStub(manga.source),
+            source = sourceManager.contentOrStub(manga.source),
             chapters = chapters.toChapterListItems(manga),
         )
     }
@@ -313,7 +313,7 @@ class MangaViewModel(
     ) {
         try {
             val update = updateMangaFromRemote(
-                source = sourceManager.getOrStub(manga.source),
+                source = sourceManager.contentOrStub(manga.source),
                 manga = manga,
                 fetchDetails = fetchDetails,
                 fetchChapters = fetchChapters,
@@ -993,7 +993,7 @@ class MangaViewModel(
         }
     }
 
-    private data class MangaAndChapters(val manga: Manga, val source: Source, val chapters: List<ChapterList.Item>)
+    private data class MangaAndChapters(val manga: Manga, val source: ContentSource, val chapters: List<ChapterList.Item>)
 
     sealed interface State {
         @Immutable
@@ -1002,7 +1002,7 @@ class MangaViewModel(
         @Immutable
         data class Success(
             val manga: Manga,
-            val source: Source,
+            val source: ContentSource,
             val isFromSource: Boolean,
             val chapters: List<ChapterList.Item>,
             val availableScanlators: Set<String>,

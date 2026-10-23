@@ -5,13 +5,22 @@ import com.nilemnod.mangareader.domain.source.api.FilterList
 import com.nilemnod.mangareader.domain.source.api.ImageContent
 import com.nilemnod.mangareader.domain.source.api.MangaListing
 import com.nilemnod.mangareader.domain.source.api.MangaRefresh
-import com.nilemnod.mangareader.domain.source.api.PageRef
+import com.nilemnod.mangareader.domain.source.api.Page
 import com.nilemnod.mangareader.domain.source.api.SourceChapter
+import com.nilemnod.mangareader.domain.source.api.SourceHttpException
 import com.nilemnod.mangareader.domain.source.api.SourceManga
+import com.nilemnod.mangareader.domain.source.api.UriResolver
+import com.nilemnod.mangareader.domain.source.api.UriType
 import com.nilemnod.mangareader.domain.source.api.WebAccess
+import com.nilemnod.mangareader.domain.source.model.StubSource
+import eu.kanade.tachiyomi.network.HttpException
+import eu.kanade.tachiyomi.source.ConfigurableSource
 import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.model.Page
+import eu.kanade.tachiyomi.source.UnmeteredSource
 import eu.kanade.tachiyomi.source.online.HttpSource
+import eu.kanade.tachiyomi.source.online.ResolvableSource
+import eu.kanade.tachiyomi.source.model.Page as NativePage
+import eu.kanade.tachiyomi.source.online.UriType as NativeUriType
 
 class ExtensionContentSource(
     val native: Source,
@@ -28,6 +37,20 @@ class ExtensionContentSource(
 
     override val supportsLatest: Boolean
         get() = native.supportsLatest
+
+    override val hasSettings: Boolean
+        get() = native is ConfigurableSource
+
+    override val resolver: UriResolver? = (native as? ResolvableSource)?.let { ExtensionUriResolver(it) }
+
+    override val isStub: Boolean
+        get() = native is StubSource
+
+    override val isUnmetered: Boolean
+        get() = native is UnmeteredSource
+
+    override val displayName: String
+        get() = native.toString()
 
     override val web: WebAccess? = (native as? HttpSource)?.let { HttpWebAccess(it) }
 
@@ -60,25 +83,30 @@ class ExtensionContentSource(
         )
     }
 
-    override suspend fun pages(chapter: SourceChapter): List<PageRef> {
+    override suspend fun pages(chapter: SourceChapter): List<Page> {
         return native.getPageList(chapter.toNative()).map { it.toSource() }
     }
 
     override suspend fun openImage(
-        page: PageRef,
+        page: Page,
         resumeFrom: Long,
         onProgress: (bytesRead: Long, contentLength: Long) -> Unit,
     ): ImageContent {
         val http = native as? HttpSource ?: throw UnsupportedOperationException("Source has no remote images")
-        val nativePage = object : Page(page.index, page.url, page.imageUrl) {
+        val nativePage = object : NativePage(page.index, page.url, page.imageUrl) {
             override fun update(bytesRead: Long, contentLength: Long, done: Boolean) {
                 onProgress(bytesRead, contentLength)
             }
         }
         if (nativePage.imageUrl.isNullOrEmpty()) {
             nativePage.imageUrl = http.getImageUrl(nativePage)
+            page.imageUrl = nativePage.imageUrl
         }
-        val response = http.getImage(nativePage, resumeFrom)
+        val response = try {
+            http.getImage(nativePage, resumeFrom)
+        } catch (e: HttpException) {
+            throw SourceHttpException(e.code)
+        }
         val body = response.body
         return ImageContent(
             source = body.source(),
@@ -94,6 +122,15 @@ class ExtensionContentSource(
         http.prepareNewChapter(nativeChapter, manga.toNative())
         return nativeChapter.toSource()
     }
+
+    override suspend fun imageUrl(page: Page): String {
+        val http = native as? HttpSource ?: return page.imageUrl.orEmpty()
+        return http.getImageUrl(NativePage(page.index, page.url, page.imageUrl))
+    }
+
+    override fun equals(other: Any?): Boolean = other is ExtensionContentSource && other.native === native
+
+    override fun hashCode(): Int = System.identityHashCode(native)
 
     override fun toString(): String = native.toString()
 
@@ -116,4 +153,17 @@ private class HttpWebAccess(private val source: HttpSource) : WebAccess {
     override fun mangaUrl(manga: SourceManga): String = source.getMangaUrl(manga.toNative())
 
     override fun chapterUrl(chapter: SourceChapter): String = source.getChapterUrl(chapter.toNative())
+}
+
+private class ExtensionUriResolver(private val source: ResolvableSource) : UriResolver {
+
+    override fun uriType(uri: String): UriType = when (source.getUriType(uri)) {
+        NativeUriType.Manga -> UriType.Manga
+        NativeUriType.Chapter -> UriType.Chapter
+        NativeUriType.Unknown -> UriType.Unknown
+    }
+
+    override suspend fun manga(uri: String): SourceManga? = source.getManga(uri)?.toSource()
+
+    override suspend fun chapter(uri: String): SourceChapter? = source.getChapter(uri)?.toSource()
 }

@@ -338,7 +338,7 @@ class UpdatesViewModel(
                 val mangaId = updates.first().update.mangaId
                 val manga = getManga.await(mangaId) ?: continue
                 // Don't download if source isn't available
-                sourceManager.get(manga.source) ?: continue
+                sourceManager.content(manga.source) ?: continue
                 val chapters = updates.mapNotNull { getChapter.await(it.update.chapterId) }
                 downloadManager.downloadChapters(manga, chapters)
             }
@@ -357,7 +357,7 @@ class UpdatesViewModel(
                 .entries
                 .forEach { (mangaId, updates) ->
                     val manga = getManga.await(mangaId) ?: return@forEach
-                    val source = sourceManager.get(manga.source) ?: return@forEach
+                    val source = sourceManager.content(manga.source) ?: return@forEach
                     val chapters = updates.mapNotNull { getChapter.await(it.update.chapterId) }
                     downloadManager.deleteChapters(chapters, manga, source)
                 }

@@ -1,6 +1,7 @@
 package com.nilemnod.mangareader.domain.manga.model
 
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.source.api.UpdateStrategy
 import eu.kanade.tachiyomi.source.model.SManga
 
 fun SManga.toDomainManga(sourceId: Long): Manga {
@@ -13,7 +14,7 @@ fun SManga.toDomainManga(sourceId: Long): Manga {
         genre = getGenres(),
         status = status.toLong(),
         thumbnailUrl = thumbnail_url,
-        updateStrategy = update_strategy,
+        updateStrategy = UpdateStrategy.valueOf(update_strategy.name),
         initialized = initialized,
         memo = memo,
         source = sourceId,

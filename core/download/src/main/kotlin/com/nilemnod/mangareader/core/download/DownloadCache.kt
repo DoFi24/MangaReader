@@ -11,12 +11,12 @@ import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.domain.storage.service.StorageManager
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
-import eu.kanade.tachiyomi.source.Source
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -245,7 +245,7 @@ class DownloadCache(
             // Retrieve the cached source directory or cache a new one
             var sourceDir = rootDownloadsDir.sourceDirs[manga.source]
             if (sourceDir == null) {
-                val source = sourceManager.get(manga.source) ?: return
+                val source = sourceManager.content(manga.source) ?: return
                 val sourceUniFile = provider.findSourceDir(source) ?: return
                 sourceDir = SourceDirectory(sourceUniFile)
                 rootDownloadsDir.sourceDirs += manga.source to sourceDir
@@ -353,7 +353,7 @@ class DownloadCache(
         notifyChanges()
     }
 
-    suspend fun removeSource(source: Source) {
+    suspend fun removeSource(source: ContentSource) {
         rootDownloadsDirMutex.withLock {
             rootDownloadsDir.sourceDirs -= source.id
         }
@@ -386,7 +386,7 @@ class DownloadCache(
             }
 
             // Try to wait until extensions and sources have loaded
-            var sources = emptyList<Source>()
+            var sources = emptyList<ContentSource>()
             withTimeoutOrNull(30.seconds) {
                 sources = getSources()
             }
@@ -452,8 +452,8 @@ class DownloadCache(
         notifyChanges()
     }
 
-    private suspend fun getSources(): List<Source> {
-        return sourceManager.getOnlineSources() + sourceManager.getStubSources()
+    private suspend fun getSources(): List<ContentSource> {
+        return sourceManager.getOnlineContent() + sourceManager.getStubContent()
     }
 
     private fun notifyChanges() {

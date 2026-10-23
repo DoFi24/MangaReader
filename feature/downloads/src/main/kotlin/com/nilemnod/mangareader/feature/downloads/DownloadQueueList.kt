@@ -48,12 +48,12 @@ import com.nilemnod.mangareader.core.ui.components.ListGroupHeader
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.domain.download.model.Download
+import com.nilemnod.mangareader.domain.source.api.Page
 import com.nilemnod.mangareader.feature.downloads.DownloadQueueSection
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.DragHandle
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.MoreVert
-import eu.kanade.tachiyomi.source.model.Page
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf

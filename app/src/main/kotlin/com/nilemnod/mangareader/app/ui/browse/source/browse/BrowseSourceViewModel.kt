@@ -32,6 +32,9 @@ import com.nilemnod.mangareader.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaUpdate
 import com.nilemnod.mangareader.domain.manga.model.MangaWithChapterCount
+import com.nilemnod.mangareader.domain.source.api.ContentSource
+import com.nilemnod.mangareader.domain.source.api.FilterList
+import com.nilemnod.mangareader.domain.source.api.SourceFilter
 import com.nilemnod.mangareader.domain.source.interactor.GetRemoteManga
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import dev.zacsweers.metro.AppScope
@@ -41,8 +44,6 @@ import dev.zacsweers.metro.AssistedInject
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactory
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactoryKey
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.model.FilterList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -57,7 +58,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import eu.kanade.tachiyomi.source.model.Filter as SourceModelFilter
 import kotlin.time.Clock
 import kotlin.time.Duration.Companion.seconds
 
@@ -92,11 +92,11 @@ class BrowseSourceViewModel(
 
     var displayMode by sourcePreferences.sourceDisplayMode.asState(viewModelScope)
 
-    private val source: Source? get() = state.value.source
+    private val source: ContentSource? get() = state.value.source
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val source = sourceManager.getOrStub(sourceId)
+            val source = sourceManager.contentOrStub(sourceId)
 
             state.update {
                 var query: String? = null
@@ -104,13 +104,13 @@ class BrowseSourceViewModel(
 
                 if (listing is Listing.Search) {
                     query = listing.query
-                    listing = Listing.Search(query, source.getFilterList())
+                    listing = Listing.Search(query, source.filters())
                 }
 
                 it.copy(
                     source = source,
                     listing = listing,
-                    filters = source.getFilterList(),
+                    filters = source.filters(),
                     toolbarQuery = query,
                 )
             }
@@ -156,7 +156,7 @@ class BrowseSourceViewModel(
 
     fun resetFilters() {
         val source = source ?: return
-        state.update { it.copy(filters = source.getFilterList()) }
+        state.update { it.copy(filters = source.filters()) }
     }
 
     fun setListing(listing: Listing) {
@@ -173,7 +173,7 @@ class BrowseSourceViewModel(
 
     fun search(query: String? = null, filters: FilterList? = null) {
         val input = state.value.listing as? Listing.Search
-            ?: Listing.Search(query = null, filters = source?.getFilterList() ?: FilterList())
+            ?: Listing.Search(query = null, filters = source?.filters() ?: FilterList())
 
         state.update {
             it.copy(
@@ -187,42 +187,53 @@ class BrowseSourceViewModel(
     }
 
     fun searchGenre(genreName: String) {
-        val defaultFilters = source?.getFilterList() ?: return
+        val defaultFilters = source?.filters() ?: return
         var genreExists = false
 
-        filter@ for (sourceFilter in defaultFilters) {
-            if (sourceFilter is SourceModelFilter.Group<*>) {
-                for (filter in sourceFilter.state) {
-                    if (filter is SourceModelFilter<*> && filter.name.equals(genreName, true)) {
-                        when (filter) {
-                            is SourceModelFilter.TriState -> filter.state = 1
-                            is SourceModelFilter.CheckBox -> filter.state = true
-                            else -> {}
-                        }
+        val updated = defaultFilters.filters.map { sourceFilter ->
+            if (genreExists) return@map sourceFilter
+            when (sourceFilter) {
+                is SourceFilter.Group -> {
+                    val index = sourceFilter.filters.indexOfFirst {
+                        it.name.equals(genreName, true) && (it is SourceFilter.TriState || it is SourceFilter.CheckBox)
+                    }
+                    if (index == -1) {
+                        sourceFilter
+                    } else {
                         genreExists = true
-                        break@filter
+                        sourceFilter.copy(
+                            filters = sourceFilter.filters.toMutableList().also {
+                                it[index] = when (val child = it[index]) {
+                                    is SourceFilter.TriState -> child.copy(state = SourceFilter.TriState.State.INCLUDE)
+                                    is SourceFilter.CheckBox -> child.copy(checked = true)
+                                    else -> child
+                                }
+                            },
+                        )
                     }
                 }
-            } else if (sourceFilter is SourceModelFilter.Select<*>) {
-                val index = sourceFilter.values.filterIsInstance<String>()
-                    .indexOfFirst { it.equals(genreName, true) }
-
-                if (index != -1) {
-                    sourceFilter.state = index
-                    genreExists = true
-                    break
+                is SourceFilter.Select -> {
+                    val index = sourceFilter.values.indexOfFirst { it.equals(genreName, true) }
+                    if (index == -1) {
+                        sourceFilter
+                    } else {
+                        genreExists = true
+                        sourceFilter.copy(selected = index)
+                    }
                 }
+                else -> sourceFilter
             }
         }
+        val filters = FilterList(updated)
 
         state.update {
             val listing = if (genreExists) {
-                Listing.Search(query = null, filters = defaultFilters)
+                Listing.Search(query = null, filters = filters)
             } else {
-                Listing.Search(query = genreName, filters = defaultFilters)
+                Listing.Search(query = genreName, filters = filters)
             }
             it.copy(
-                filters = defaultFilters,
+                filters = filters,
                 listing = listing,
                 toolbarQuery = listing.query,
             )
@@ -357,7 +368,7 @@ class BrowseSourceViewModel(
     @Immutable
     data class State(
         val listing: Listing,
-        val source: Source? = null,
+        val source: ContentSource? = null,
         val filters: FilterList = FilterList(),
         val toolbarQuery: String? = null,
         val dialog: Dialog? = null,

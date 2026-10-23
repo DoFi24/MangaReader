@@ -20,6 +20,10 @@ interface SourceManager {
 
     suspend fun getStubSources(): List<StubSource>
 
+    suspend fun getOnlineContent(): List<ContentSource>
+
+    suspend fun getStubContent(): List<ContentSource>
+
     val contentSources: Flow<List<ContentSource>>
 
     suspend fun content(sourceKey: Long): ContentSource?

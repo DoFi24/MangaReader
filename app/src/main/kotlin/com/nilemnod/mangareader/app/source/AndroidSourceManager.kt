@@ -1,8 +1,8 @@
 package com.nilemnod.mangareader.app.source
 
 import com.nilemnod.mangareader.app.extension.ExtensionManager
-import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.app.source.compat.ExtensionContentSource
+import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.model.StubSource
@@ -113,6 +113,12 @@ class AndroidSourceManager(
         return ExtensionContentSource(source).also { contentCache[source.id] = it }
     }
 
+    override suspend fun getOnlineContent(): List<ContentSource> =
+        getOnlineSources().map(::contentFor)
+
+    override suspend fun getStubContent(): List<ContentSource> =
+        getStubSources().map(::contentFor)
+
     override suspend fun getStubSources(): List<StubSource> {
         val onlineSourceIds = getOnlineSources().map { it.id }
         return stubSourcesMap.values.filterNot { it.id in onlineSourceIds }
@@ -124,7 +130,7 @@ class AndroidSourceManager(
             if (dbSource == source) return@launch
             sourceRepository.upsertStubSource(source.id, source.lang, source.name)
             if (dbSource != null) {
-                downloadManager.value.renameSource(dbSource, source)
+                downloadManager.value.renameSource(contentFor(dbSource), contentFor(source))
             }
         }
     }

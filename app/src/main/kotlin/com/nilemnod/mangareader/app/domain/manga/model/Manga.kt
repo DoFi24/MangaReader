@@ -46,29 +46,6 @@ fun Manga.toSManga(): SManga = SManga.create().also {
     it.memo = memo
 }
 
-fun Manga.copyFrom(other: SManga): Manga {
-    val author = other.author ?: author
-    val artist = other.artist ?: artist
-    val description = other.description ?: description
-    val genres = if (other.genre != null) {
-        other.getGenres()
-    } else {
-        genre
-    }
-    val thumbnailUrl = other.thumbnail_url ?: thumbnailUrl
-    return this.copy(
-        author = author,
-        artist = artist,
-        description = description,
-        genre = genres,
-        thumbnailUrl = thumbnailUrl,
-        status = other.status.toLong(),
-        updateStrategy = other.update_strategy,
-        initialized = other.initialized && initialized,
-        memo = other.memo,
-    )
-}
-
 fun Manga.hasCustomCover(coverCache: CoverCache = Injekt.get<Context>().appGraph.coverCache): Boolean {
     return coverCache.hasCustomCover(id)
 }

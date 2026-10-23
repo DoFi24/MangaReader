@@ -24,6 +24,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import logcat.LogPriority
+import okhttp3.Headers.Companion.toHeaders
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 @AssistedInject
@@ -46,9 +47,9 @@ class WebViewViewModel(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val source = sourceId?.let { sourceManager.get(it) as? HttpSource }
+            val source = sourceId?.let { sourceManager.content(it)?.takeIf { it.web != null } }
             headers.value = try {
-                source?.headers?.toWebViewHeaders().orEmpty()
+                source?.web?.headers?.toHeaders()?.toWebViewHeaders().orEmpty()
             } catch (e: Exception) {
                 logcat(LogPriority.ERROR, e) { "Failed to build headers" }
                 emptyMap()

@@ -50,11 +50,11 @@ import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.core.ui.util.isTabletUi
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.feature.categories.CategoryScreen
 import com.nilemnod.mangareader.feature.migration.config.MigrationConfigScreen
 import com.nilemnod.mangareader.feature.migration.dialog.MigrateMangaDialog
 import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
-import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -288,7 +288,7 @@ class MangaScreen(
         context.startActivity(ReaderActivity.newIntent(context, chapter.mangaId, chapter.id))
     }
 
-    private fun getMangaUrl(manga_: Manga?, source_: Source?): String? {
+    private fun getMangaUrl(manga_: Manga?, source_: ContentSource?): String? {
         val manga = manga_ ?: return null
         val source = source_ as? HttpSource ?: return null
 
@@ -299,7 +299,7 @@ class MangaScreen(
         }
     }
 
-    private fun openMangaInWebView(navigator: Navigator, manga_: Manga?, source_: Source?) {
+    private fun openMangaInWebView(navigator: Navigator, manga_: Manga?, source_: ContentSource?) {
         getMangaUrl(manga_, source_)?.let { url ->
             navigator.push(
                 WebViewScreen(
@@ -311,7 +311,7 @@ class MangaScreen(
         }
     }
 
-    private fun shareManga(context: Context, manga_: Manga?, source_: Source?) {
+    private fun shareManga(context: Context, manga_: Manga?, source_: ContentSource?) {
         try {
             getMangaUrl(manga_, source_)?.let { url ->
                 val intent = url.toUri().toShareIntent(context, type = "text/plain")
@@ -354,7 +354,7 @@ class MangaScreen(
      *
      * @param genreName the search genre to the parent controller
      */
-    private suspend fun performGenreSearch(navigator: Navigator, genreName: String, source: Source) {
+    private suspend fun performGenreSearch(navigator: Navigator, genreName: String, source: ContentSource) {
         if (navigator.size < 2) {
             return
         }
@@ -371,7 +371,7 @@ class MangaScreen(
     /**
      * Copy Manga URL to Clipboard
      */
-    private fun copyMangaUrl(context: Context, manga_: Manga?, source_: Source?) {
+    private fun copyMangaUrl(context: Context, manga_: Manga?, source_: ContentSource?) {
         val manga = manga_ ?: return
         val source = source_ as? HttpSource ?: return
         val url = source.getMangaUrl(manga.toSManga())

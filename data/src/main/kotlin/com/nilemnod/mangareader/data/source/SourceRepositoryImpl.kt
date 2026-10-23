@@ -3,8 +3,9 @@ package com.nilemnod.mangareader.data.source
 import com.nilemnod.mangareader.data.Database
 import com.nilemnod.mangareader.data.subscribeToList
 import com.nilemnod.mangareader.domain.manga.interactor.NetworkToLocalManga
+import com.nilemnod.mangareader.domain.source.api.ContentSource
+import com.nilemnod.mangareader.domain.source.api.FilterList
 import com.nilemnod.mangareader.domain.source.model.SourceWithCount
-import com.nilemnod.mangareader.domain.source.model.StubSource
 import com.nilemnod.mangareader.domain.source.repository.SourcePagingSource
 import com.nilemnod.mangareader.domain.source.repository.SourceRepository
 import com.nilemnod.mangareader.domain.source.service.SourceManager
@@ -12,9 +13,6 @@ import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.model.FilterList
-import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
@@ -30,7 +28,7 @@ class SourceRepositoryImpl(
 ) : SourceRepository {
 
     override fun getSources(): Flow<List<DomainSource>> {
-        return sourceManager.sources.map { sources ->
+        return sourceManager.contentSources.map { sources ->
             sources.map {
                 mapSourceToDomainSource(it).copy(
                     supportsLatest = it.supportsLatest,
@@ -40,9 +38,9 @@ class SourceRepositoryImpl(
     }
 
     override fun getOnlineSources(): Flow<List<DomainSource>> {
-        return sourceManager.sources.map { sources ->
+        return sourceManager.contentSources.map { sources ->
             sources
-                .filterIsInstance<HttpSource>()
+                .filter { it.web != null }
                 .map(::mapSourceToDomainSource)
         }
     }
@@ -51,14 +49,14 @@ class SourceRepositoryImpl(
         val sourceIdWithFavoriteCountFlow = database.mangaQueries
             .getSourceIdWithFavoriteCount()
             .subscribeToList()
-        return combine(sourceIdWithFavoriteCountFlow, sourceManager.sources) { sourceIdWithFavoriteCount, _ ->
+        return combine(sourceIdWithFavoriteCountFlow, sourceManager.contentSources) { sourceIdWithFavoriteCount, _ ->
             sourceIdWithFavoriteCount
         }
             .map {
                 it.map { (sourceId, count) ->
-                    val source = sourceManager.getOrStub(sourceId)
+                    val source = sourceManager.contentOrStub(sourceId)
                     val domainSource = mapSourceToDomainSource(source).copy(
-                        isStub = source is StubSource,
+                        isStub = source.isStub,
                     )
                     domainSource to count
                 }
@@ -71,9 +69,9 @@ class SourceRepositoryImpl(
             .subscribeToList()
             .map { sourceId ->
                 sourceId.map { (sourceId, count) ->
-                    val source = sourceManager.getOrStub(sourceId)
+                    val source = sourceManager.contentOrStub(sourceId)
                     val domainSource = mapSourceToDomainSource(source).copy(
-                        isStub = source is StubSource,
+                        isStub = source.isStub,
                     )
                     SourceWithCount(domainSource, count)
                 }
@@ -86,7 +84,7 @@ class SourceRepositoryImpl(
         filterList: FilterList,
     ): SourcePagingSource {
         return SourceSearchPagingSource(
-            { sourceManager.getOrStub(sourceId) },
+            { sourceManager.contentOrStub(sourceId) },
             query,
             filterList,
             networkToLocalManga,
@@ -94,14 +92,14 @@ class SourceRepositoryImpl(
     }
 
     override fun getPopular(sourceId: Long): SourcePagingSource {
-        return SourcePopularPagingSource({ sourceManager.getOrStub(sourceId) }, networkToLocalManga)
+        return SourcePopularPagingSource({ sourceManager.contentOrStub(sourceId) }, networkToLocalManga)
     }
 
     override fun getLatest(sourceId: Long): SourcePagingSource {
-        return SourceLatestPagingSource({ sourceManager.getOrStub(sourceId) }, networkToLocalManga)
+        return SourceLatestPagingSource({ sourceManager.contentOrStub(sourceId) }, networkToLocalManga)
     }
 
-    private fun mapSourceToDomainSource(source: Source): DomainSource = DomainSource(
+    private fun mapSourceToDomainSource(source: ContentSource): DomainSource = DomainSource(
         id = source.id,
         lang = source.lang,
         name = source.name,

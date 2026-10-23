@@ -58,7 +58,8 @@ import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.secondaryItemAlpha
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaWithChapterCount
-import com.nilemnod.mangareader.domain.source.model.StubSource
+import com.nilemnod.mangareader.domain.source.api.ContentSource
+import com.nilemnod.mangareader.domain.source.api.MangaStatus
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
@@ -73,8 +74,6 @@ import com.nilemnod.mangareader.icons.materialsymbols.rounded.Schedule
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Brush
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Pause
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Warning
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.model.SManga
 
 @Composable
 fun DuplicateMangaDialog(
@@ -126,7 +125,7 @@ fun DuplicateMangaDialog(
                 ) {
                     DuplicateMangaListItem(
                         duplicate = it,
-                        getSource = { sourceManager.getOrStub(it.manga.source) },
+                        getSource = { sourceManager.contentOrStub(it.manga.source) },
                         onMigrate = { onMigrate(it.manga) },
                         onDismissRequest = onDismissRequest,
                         onOpenManga = { onOpenManga(it.manga) },
@@ -170,12 +169,12 @@ fun DuplicateMangaDialog(
 @Composable
 private fun DuplicateMangaListItem(
     duplicate: MangaWithChapterCount,
-    getSource: suspend () -> Source,
+    getSource: suspend () -> ContentSource,
     onDismissRequest: () -> Unit,
     onOpenManga: () -> Unit,
     onMigrate: () -> Unit,
 ) {
-    val source by produceState<Source?>(initialValue = null) { value = getSource() }
+    val source by produceState<ContentSource?>(initialValue = null) { value = getSource() }
     val manga = duplicate.manga
     Column(
         modifier = Modifier
@@ -243,21 +242,21 @@ private fun DuplicateMangaListItem(
 
         MangaDetailRow(
             text = when (manga.status) {
-                SManga.ONGOING.toLong() -> stringResource(MR.strings.ongoing)
-                SManga.COMPLETED.toLong() -> stringResource(MR.strings.completed)
-                SManga.LICENSED.toLong() -> stringResource(MR.strings.licensed)
-                SManga.PUBLISHING_FINISHED.toLong() -> stringResource(MR.strings.publishing_finished)
-                SManga.CANCELLED.toLong() -> stringResource(MR.strings.cancelled)
-                SManga.ON_HIATUS.toLong() -> stringResource(MR.strings.on_hiatus)
+                MangaStatus.ONGOING.code -> stringResource(MR.strings.ongoing)
+                MangaStatus.COMPLETED.code -> stringResource(MR.strings.completed)
+                MangaStatus.LICENSED.code -> stringResource(MR.strings.licensed)
+                MangaStatus.PUBLISHING_FINISHED.code -> stringResource(MR.strings.publishing_finished)
+                MangaStatus.CANCELLED.code -> stringResource(MR.strings.cancelled)
+                MangaStatus.ON_HIATUS.code -> stringResource(MR.strings.on_hiatus)
                 else -> stringResource(MR.strings.unknown)
             },
             iconImageVector = when (manga.status) {
-                SManga.ONGOING.toLong() -> MaterialSymbols.Rounded.Schedule
-                SManga.COMPLETED.toLong() -> MaterialSymbols.Rounded.DoneAll
-                SManga.LICENSED.toLong() -> MaterialSymbols.Rounded.AttachMoney
-                SManga.PUBLISHING_FINISHED.toLong() -> MaterialSymbols.Rounded.Check
-                SManga.CANCELLED.toLong() -> MaterialSymbols.Rounded.Close
-                SManga.ON_HIATUS.toLong() -> MaterialSymbols.RoundedFilled.Pause
+                MangaStatus.ONGOING.code -> MaterialSymbols.Rounded.Schedule
+                MangaStatus.COMPLETED.code -> MaterialSymbols.Rounded.DoneAll
+                MangaStatus.LICENSED.code -> MaterialSymbols.Rounded.AttachMoney
+                MangaStatus.PUBLISHING_FINISHED.code -> MaterialSymbols.Rounded.Check
+                MangaStatus.CANCELLED.code -> MaterialSymbols.Rounded.Close
+                MangaStatus.ON_HIATUS.code -> MaterialSymbols.RoundedFilled.Pause
                 else -> MaterialSymbols.Rounded.Block
             },
         )
@@ -268,7 +267,7 @@ private fun DuplicateMangaListItem(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center,
         ) {
-            if (source is StubSource) {
+            if (source?.isStub == true) {
                 Icon(
                     imageVector = MaterialSymbols.RoundedFilled.Warning,
                     contentDescription = null,

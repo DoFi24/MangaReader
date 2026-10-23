@@ -7,13 +7,13 @@ import com.nilemnod.mangareader.core.android.storage.saveTo
 import com.nilemnod.mangareader.core.common.storage.DiskUtil
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
+import com.nilemnod.mangareader.domain.source.api.ImageContent
+import com.nilemnod.mangareader.domain.source.api.Page
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
-import eu.kanade.tachiyomi.source.model.Page
 import kotlinx.serialization.json.Json
 import logcat.LogPriority
-import okhttp3.Response
 import okio.buffer
 import okio.sink
 import java.io.File
@@ -154,7 +154,7 @@ class ChapterCache(
      * @throws IOException image error.
      */
     @Throws(IOException::class)
-    fun putImageToCache(imageUrl: String, response: Response, live: DownloadStream? = null) {
+    fun putImageToCache(imageUrl: String, image: ImageContent, live: DownloadStream? = null) {
         // Initialize editor (edits the values for an entry).
         var editor: DiskLruCache.Editor? = null
 
@@ -165,10 +165,10 @@ class ChapterCache(
 
             // Get OutputStream and write image with Okio.
             if (live == null) {
-                response.body.source().saveTo(editor.newOutputStream(0))
+                image.source.saveTo(editor.newOutputStream(0))
             } else {
-                live.reserve(response.body.contentLength())
-                response.body.source().use { source ->
+                live.reserve(image.contentLength)
+                image.source.use { source ->
                     editor.newOutputStream(0).use { out ->
                         val buffer = ByteArray(1 shl 16)
                         while (true) {
@@ -184,7 +184,7 @@ class ChapterCache(
             diskCache.flush()
             editor.commit()
         } finally {
-            response.body.close()
+            image.close()
             editor?.abortUnlessCommitted()
         }
     }

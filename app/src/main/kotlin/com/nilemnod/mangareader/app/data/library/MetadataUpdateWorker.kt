@@ -117,7 +117,7 @@ class MetadataUpdateWorker(context: Context, workerParams: WorkerParameters) :
                                     progressCount,
                                     manga,
                                 ) {
-                                    val source = sourceManager.get(manga.source) ?: return@withUpdateNotification
+                                    val source = sourceManager.content(manga.source) ?: return@withUpdateNotification
                                     try {
                                         updateMangaFromRemote(
                                             source = source,

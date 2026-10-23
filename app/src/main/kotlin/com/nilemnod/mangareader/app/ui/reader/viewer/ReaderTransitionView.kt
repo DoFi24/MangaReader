@@ -17,8 +17,8 @@ import com.nilemnod.mangareader.app.ui.reader.model.ChapterTransition
 import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.core.ui.theme.MangaReaderTheme
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.source.local.isLocal
-import eu.kanade.tachiyomi.source.Source
 
 class ReaderTransitionView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) :
     AbstractComposeView(context, attrs) {
@@ -29,7 +29,7 @@ class ReaderTransitionView @JvmOverloads constructor(context: Context, attrs: At
         layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
     }
 
-    fun bind(transition: ChapterTransition, downloadManager: DownloadManager, manga: Manga?, source: Source?) {
+    fun bind(transition: ChapterTransition, downloadManager: DownloadManager, manga: Manga?, source: ContentSource?) {
         data = if (manga != null && source != null) {
             val goingToChapter = transition.to?.chapter.takeUnless { manga.isLocal() }
             Data(

@@ -85,6 +85,7 @@ import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.clickableNoIndication
 import com.nilemnod.mangareader.core.ui.util.secondaryItemAlpha
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.AttachMoney
@@ -101,7 +102,6 @@ import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Brush
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Favorite
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Pause
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Warning
-import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.source.model.SManga
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.daysUntil
@@ -117,7 +117,7 @@ fun MangaInfoBox(
     isTabletUi: Boolean,
     appBarPadding: Dp,
     manga: Manga,
-    source: Source,
+    source: ContentSource,
     isStubSource: Boolean,
     onCoverClick: () -> Unit,
     doSearch: (query: String, global: Boolean) -> Unit,
@@ -335,7 +335,7 @@ fun ExpandableMangaDescription(
 private fun MangaAndSourceTitlesLarge(
     appBarPadding: Dp,
     manga: Manga,
-    source: Source,
+    source: ContentSource,
     isStubSource: Boolean,
     onCoverClick: () -> Unit,
     doSearch: (query: String, global: Boolean) -> Unit,
@@ -373,7 +373,7 @@ private fun MangaAndSourceTitlesLarge(
 private fun MangaAndSourceTitlesSmall(
     appBarPadding: Dp,
     manga: Manga,
-    source: Source,
+    source: ContentSource,
     isStubSource: Boolean,
     onCoverClick: () -> Unit,
     doSearch: (query: String, global: Boolean) -> Unit,
@@ -418,7 +418,7 @@ private fun ColumnScope.MangaContentInfo(
     author: String?,
     artist: String?,
     status: Long,
-    source: Source,
+    source: ContentSource,
     isStubSource: Boolean,
     doSearch: (query: String, global: Boolean) -> Unit,
     textAlign: TextAlign? = LocalTextStyle.current.textAlign,
@@ -555,7 +555,7 @@ private fun ColumnScope.MangaContentInfo(
     }
 }
 
-private fun Source.query(): String = """src:"$name" lang:$lang""".takeIf { name.isNotBlank() } ?: "srcid:$id"
+private fun ContentSource.query(): String = """src:"$name" lang:$lang""".takeIf { name.isNotBlank() } ?: "srcid:$id"
 
 @Composable
 private fun descriptionAnnotator(loadImages: Boolean, linkStyle: SpanStyle) = remember(loadImages, linkStyle) {

@@ -56,12 +56,6 @@ data class MangaRefresh(
     val chapters: List<SourceChapter>,
 )
 
-data class PageRef(
-    val index: Int,
-    val url: String = "",
-    val imageUrl: String? = null,
-)
-
 class ImageContent(
     val source: BufferedSource,
     val contentType: String? = null,

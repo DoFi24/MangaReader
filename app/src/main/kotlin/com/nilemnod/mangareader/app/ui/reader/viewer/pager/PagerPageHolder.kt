@@ -15,8 +15,8 @@ import com.nilemnod.mangareader.app.widget.ViewPagerAdapter
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.util.system.ImageUtil
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.domain.source.api.Page
 import com.nilemnod.mangareader.i18n.MR
-import eu.kanade.tachiyomi.source.model.Page
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope

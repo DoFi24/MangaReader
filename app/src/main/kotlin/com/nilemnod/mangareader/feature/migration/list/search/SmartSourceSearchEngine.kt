@@ -2,29 +2,29 @@ package com.nilemnod.mangareader.feature.migration.list.search
 
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.toDomainManga
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.model.SManga
+import com.nilemnod.mangareader.domain.source.api.ContentSource
+import com.nilemnod.mangareader.domain.source.api.SourceManga
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class SmartSourceSearchEngine(extraSearchParams: String?) : BaseSmartSearchEngine<SManga>(extraSearchParams) {
+class SmartSourceSearchEngine(extraSearchParams: String?) : BaseSmartSearchEngine<SourceManga>(extraSearchParams) {
 
-    override fun getTitle(result: SManga) = result.title
+    override fun getTitle(result: SourceManga) = result.title
 
-    suspend fun regularSearch(source: Source, title: String): Manga? {
+    suspend fun regularSearch(source: ContentSource, title: String): Manga? {
         return regularSearch(makeSearchAction(source), title).let {
             it?.toDomainManga(source.id)
         }
     }
 
-    suspend fun deepSearch(source: Source, title: String): Manga? {
+    suspend fun deepSearch(source: ContentSource, title: String): Manga? {
         return deepSearch(makeSearchAction(source), title).let {
             it?.toDomainManga(source.id)
         }
     }
 
     // Sources aren't main-safe: their default implementations block on the network
-    private fun makeSearchAction(source: Source): SearchAction<SManga> = { query ->
-        withContext(Dispatchers.IO) { source.getSearchManga(1, query, source.getFilterList()).mangas }
+    private fun makeSearchAction(source: ContentSource): SearchAction<SourceManga> = { query ->
+        withContext(Dispatchers.IO) { source.search(1, query, source.filters()).mangas }
     }
 }

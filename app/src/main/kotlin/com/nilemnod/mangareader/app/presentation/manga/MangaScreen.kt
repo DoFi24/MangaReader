@@ -371,7 +371,7 @@ private fun MangaScreenSmallImpl(
                             appBarPadding = topPadding,
                             manga = state.manga,
                             source = remember { state.source },
-                            isStubSource = remember { state.source is StubSource },
+                            isStubSource = remember { state.source.isStub },
                             onCoverClick = onCoverClicked,
                             doSearch = onSearch,
                         )
@@ -592,7 +592,7 @@ fun MangaScreenLargeImpl(
                             appBarPadding = contentPadding.calculateTopPadding(),
                             manga = state.manga,
                             source = remember { state.source },
-                            isStubSource = remember { state.source is StubSource },
+                            isStubSource = remember { state.source.isStub },
                             onCoverClick = onCoverClicked,
                             doSearch = onSearch,
                         )

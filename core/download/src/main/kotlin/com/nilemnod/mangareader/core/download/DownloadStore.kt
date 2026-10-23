@@ -6,11 +6,11 @@ import com.nilemnod.mangareader.domain.chapter.interactor.GetChapter
 import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.domain.manga.interactor.GetManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
-import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
@@ -104,7 +104,7 @@ class DownloadStore(
                 val manga = cachedManga.getOrPut(mangaId) {
                     getManga.await(mangaId)
                 } ?: continue
-                val source = sourceManager.get(manga.source) as? HttpSource ?: continue
+                val source = sourceManager.content(manga.source)?.takeIf { it.web != null } ?: continue
                 val chapter = getChapter.await(chapterId) ?: continue
                 downloads.add(Download(source, manga, chapter))
             }

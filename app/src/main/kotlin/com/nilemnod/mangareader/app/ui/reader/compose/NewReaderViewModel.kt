@@ -45,6 +45,7 @@ import com.nilemnod.mangareader.domain.history.model.HistoryUpdate
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.interactor.GetManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.source.api.Page
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.feature.reader.model.PageSource
 import com.nilemnod.mangareader.feature.reader.model.ReaderChapterContent
@@ -56,7 +57,6 @@ import dev.zacsweers.metro.AssistedInject
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metrox.viewmodel.ViewModelAssistedFactory
 import dev.zacsweers.metrox.viewmodel.ViewModelAssistedFactoryKey
-import eu.kanade.tachiyomi.source.model.Page
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -170,7 +170,7 @@ class NewReaderViewModel(
     private suspend fun initialize() {
         try {
             val manga = getManga.await(mangaId) ?: error("Requested manga of id $mangaId not found")
-            val source = sourceManager.getOrStub(manga.source)
+            val source = sourceManager.contentOrStub(manga.source)
             incognito = getIncognitoState.await(manga.source)
             this.manga = manga
             loader = ChapterLoader(

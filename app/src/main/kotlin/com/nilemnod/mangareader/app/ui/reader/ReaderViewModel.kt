@@ -58,6 +58,8 @@ import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.interactor.GetManga
 import com.nilemnod.mangareader.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.source.api.ContentSource
+import com.nilemnod.mangareader.domain.source.api.Page
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.source.local.image.LocalCoverManager
 import com.nilemnod.mangareader.source.local.isLocal
@@ -68,8 +70,6 @@ import dev.zacsweers.metro.AssistedInject
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metrox.viewmodel.ViewModelAssistedFactory
 import dev.zacsweers.metrox.viewmodel.ViewModelAssistedFactoryKey
-import eu.kanade.tachiyomi.source.Source
-import eu.kanade.tachiyomi.source.model.Page
 import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -161,7 +161,7 @@ class ReaderViewModel(
     /**
      * The source of the manga loaded in the reader. Null until it has been resolved.
      */
-    val source: Source?
+    val source: ContentSource?
         get() = state.value.source
 
     /**
@@ -344,7 +344,7 @@ class ReaderViewModel(
         withContext(Dispatchers.IO) {
             try {
                 val manga = getManga.await(mangaId) ?: error("Requested manga of id $mangaId not found")
-                val source = sourceManager.getOrStub(manga.source)
+                val source = sourceManager.contentOrStub(manga.source)
                 incognitoMode = getIncognitoState.await(manga.source)
                 mutableState.update { it.copy(manga = manga, source = source) }
                 if (chapterId == -1L) chapterId = initialChapterId
@@ -1083,7 +1083,7 @@ class ReaderViewModel(
     @Immutable
     data class State(
         val manga: Manga? = null,
-        val source: Source? = null,
+        val source: ContentSource? = null,
         val initError: Throwable? = null,
         val viewerChapters: ViewerChapters? = null,
         val bookmarked: Boolean = false,

@@ -11,12 +11,12 @@ import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.model.Manga
+import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.storage.service.StorageManager
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
-import eu.kanade.tachiyomi.source.Source
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -48,10 +48,10 @@ class DownloadProvider(
      * @param mangaTitle the title of the manga to query.
      * @param source the source of the manga.
      */
-    internal suspend fun getMangaDir(mangaTitle: String, source: Source): Result<UniFile> =
+    internal suspend fun getMangaDir(mangaTitle: String, source: ContentSource): Result<UniFile> =
         withContext(Dispatchers.IO) { createMangaDir(mangaTitle, source) }
 
-    private fun createMangaDir(mangaTitle: String, source: Source): Result<UniFile> {
+    private fun createMangaDir(mangaTitle: String, source: ContentSource): Result<UniFile> {
         val downloadsDir = downloadsDir
         if (downloadsDir == null) {
             logcat(LogPriority.ERROR) { "Failed to create download directory" }
@@ -88,7 +88,7 @@ class DownloadProvider(
      *
      * @param source the source to query.
      */
-    suspend fun findSourceDir(source: Source): UniFile? = withContext(Dispatchers.IO) {
+    suspend fun findSourceDir(source: ContentSource): UniFile? = withContext(Dispatchers.IO) {
         downloadsDir?.findFile(getSourceDirName(source))
     }
 
@@ -98,7 +98,7 @@ class DownloadProvider(
      * @param mangaTitle the title of the manga to query.
      * @param source the source of the manga.
      */
-    suspend fun findMangaDir(mangaTitle: String, source: Source): UniFile? = withContext(Dispatchers.IO) {
+    suspend fun findMangaDir(mangaTitle: String, source: ContentSource): UniFile? = withContext(Dispatchers.IO) {
         findSourceDir(source)?.findFile(getMangaDirName(mangaTitle))
     }
 
@@ -115,7 +115,7 @@ class DownloadProvider(
         chapterScanlator: String?,
         chapterUrl: String,
         mangaTitle: String,
-        source: Source,
+        source: ContentSource,
     ): UniFile? = withContext(Dispatchers.IO) {
         val mangaDir = findMangaDir(mangaTitle, source)
         getValidChapterDirNames(chapterName, chapterScanlator, chapterUrl).asSequence()
@@ -133,7 +133,7 @@ class DownloadProvider(
     suspend fun findChapterDirs(
         chapters: List<Chapter>,
         manga: Manga,
-        source: Source,
+        source: ContentSource,
     ): Pair<UniFile?, List<UniFile>> = withContext(Dispatchers.IO) {
         val mangaDir = findMangaDir(manga.title, source) ?: return@withContext null to emptyList()
         mangaDir to findChapterDirs(chapters, mangaDir).values.toList()
@@ -149,7 +149,7 @@ class DownloadProvider(
     suspend fun findDownloadedChapterIds(
         chapters: List<Chapter>,
         manga: Manga,
-        source: Source,
+        source: ContentSource,
     ): Set<Long> = withContext(Dispatchers.IO) {
         val mangaDir = findMangaDir(manga.title, source) ?: return@withContext emptySet()
         findChapterDirs(chapters, mangaDir).keys
@@ -197,9 +197,9 @@ class DownloadProvider(
      *
      * @param source the source to query.
      */
-    fun getSourceDirName(source: Source): String {
+    fun getSourceDirName(source: ContentSource): String {
         return DiskUtil.buildValidFilename(
-            source.toString(),
+            source.displayName,
             disallowNonAscii = libraryPreferences.disallowNonAsciiFilenames.get(),
         )
     }

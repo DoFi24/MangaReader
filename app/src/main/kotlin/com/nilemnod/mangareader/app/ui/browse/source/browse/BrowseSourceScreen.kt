@@ -97,7 +97,7 @@ data class BrowseSourceScreen(
             return
         }
 
-        if (source is StubSource) {
+        if (source.isStub) {
             MissingSourceScreen(
                 source = source,
                 navigateUp = navigateUp,
