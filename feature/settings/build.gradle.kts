@@ -25,6 +25,7 @@ dependencies {
     implementation(projects.core.metro)
     implementation(projects.core.navigation)
     implementation(projects.core.network)
+    implementation(projects.core.reader)
     implementation(projects.core.storage)
     implementation(projects.domain)
 

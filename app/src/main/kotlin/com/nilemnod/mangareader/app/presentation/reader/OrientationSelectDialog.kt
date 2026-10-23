@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.nilemnod.mangareader.app.domain.manga.model.readerOrientation
 import com.nilemnod.mangareader.app.presentation.reader.components.ModeSelectionDialog
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderOrientation
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderSettingsViewModel
+import com.nilemnod.mangareader.core.reader.ReaderOrientation
 import com.nilemnod.mangareader.core.ui.components.AdaptiveSheet
 import com.nilemnod.mangareader.core.ui.components.SettingsIconGrid
 import com.nilemnod.mangareader.core.ui.components.material.IconToggleButton

@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderOrientation
-import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode
+import com.nilemnod.mangareader.core.reader.ReaderOrientation
+import com.nilemnod.mangareader.core.reader.ReadingMode
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols

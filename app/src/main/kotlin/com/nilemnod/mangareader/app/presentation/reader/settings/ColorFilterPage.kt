@@ -10,9 +10,9 @@ import androidx.core.graphics.alpha
 import androidx.core.graphics.blue
 import androidx.core.graphics.green
 import androidx.core.graphics.red
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences.Companion.ColorFilterMode
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderSettingsViewModel
 import com.nilemnod.mangareader.core.common.preference.getAndSet
+import com.nilemnod.mangareader.core.reader.ReaderPreferences.Companion.ColorFilterMode
 import com.nilemnod.mangareader.core.ui.components.CheckboxItem
 import com.nilemnod.mangareader.core.ui.components.SettingsChipRow
 import com.nilemnod.mangareader.core.ui.components.SliderItem

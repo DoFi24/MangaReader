@@ -3,8 +3,8 @@ package com.nilemnod.mangareader.app.ui.reader.viewer
 import android.graphics.Color
 import android.graphics.PointF
 import android.graphics.RectF
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
 import com.nilemnod.mangareader.app.util.lang.invert
+import com.nilemnod.mangareader.core.reader.ReaderPreferences
 import com.nilemnod.mangareader.i18n.MR
 import dev.icerock.moko.resources.StringResource
 

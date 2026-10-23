@@ -1,7 +1,7 @@
 package com.nilemnod.mangareader.app.util.lang
 
 import android.graphics.RectF
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
+import com.nilemnod.mangareader.core.reader.ReaderPreferences
 
 fun RectF.invert(invertMode: ReaderPreferences.TappingInvertMode): RectF {
     val horizontal = invertMode.shouldInvertHorizontal

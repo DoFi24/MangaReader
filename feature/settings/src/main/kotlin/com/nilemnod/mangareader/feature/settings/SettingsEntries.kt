@@ -13,9 +13,11 @@ import com.nilemnod.mangareader.feature.settings.screen.SettingsBrowseScreen
 import com.nilemnod.mangareader.feature.settings.screen.SettingsDataScreen
 import com.nilemnod.mangareader.feature.settings.screen.SettingsDownloadScreen
 import com.nilemnod.mangareader.feature.settings.screen.SettingsLibraryScreen
+import com.nilemnod.mangareader.feature.settings.screen.SettingsReaderScreen
 import com.nilemnod.mangareader.feature.settings.screen.SettingsSecurityScreen
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
+import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.ChromeReaderMode
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Code
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.CollectionsBookmark
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Download
@@ -55,6 +57,13 @@ object SettingsEntries {
             subtitleRes = MR.strings.pref_library_summary,
             icon = MaterialSymbols.Rounded.CollectionsBookmark,
             screen = SettingsLibraryScreen,
+        ),
+        SettingsEntry(
+            order = ORDER_READER,
+            titleRes = MR.strings.pref_category_reader,
+            subtitleRes = MR.strings.pref_reader_summary,
+            icon = MaterialSymbols.AutoMirroredRounded.ChromeReaderMode,
+            screen = SettingsReaderScreen,
         ),
         SettingsEntry(
             order = ORDER_DOWNLOADS,

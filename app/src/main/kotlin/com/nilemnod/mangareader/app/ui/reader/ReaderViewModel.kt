@@ -23,9 +23,6 @@ import com.nilemnod.mangareader.app.ui.reader.model.InsertPage
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderChapter
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderPage
 import com.nilemnod.mangareader.app.ui.reader.model.ViewerChapters
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderOrientation
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
-import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode
 import com.nilemnod.mangareader.app.ui.reader.viewer.Viewer
 import com.nilemnod.mangareader.app.util.chapter.filterDownloaded
 import com.nilemnod.mangareader.app.util.chapter.removeDuplicates
@@ -41,6 +38,9 @@ import com.nilemnod.mangareader.core.download.DownloadCache
 import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.core.download.DownloadProvider
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
+import com.nilemnod.mangareader.core.reader.ReaderOrientation
+import com.nilemnod.mangareader.core.reader.ReaderPreferences
+import com.nilemnod.mangareader.core.reader.ReadingMode
 import com.nilemnod.mangareader.core.storage.CoverCache
 import com.nilemnod.mangareader.domain.chapter.interactor.GetChaptersByMangaId
 import com.nilemnod.mangareader.domain.chapter.interactor.UpdateChapter

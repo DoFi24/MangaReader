@@ -69,10 +69,8 @@ import com.nilemnod.mangareader.app.ui.reader.compose.NewReaderActivity
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderChapter
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderPage
 import com.nilemnod.mangareader.app.ui.reader.model.ViewerChapters
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderOrientation
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderSettingsViewModel
-import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode
+import com.nilemnod.mangareader.app.ui.reader.setting.toViewer
 import com.nilemnod.mangareader.app.ui.reader.viewer.ReaderProgressIndicator
 import com.nilemnod.mangareader.app.ui.reader.viewer.pager.R2LPagerViewer
 import com.nilemnod.mangareader.app.ui.reader.viewer.webgpu.WebGpuViewer
@@ -86,6 +84,9 @@ import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.core.metro.metroGraph
+import com.nilemnod.mangareader.core.reader.ReaderOrientation
+import com.nilemnod.mangareader.core.reader.ReaderPreferences
+import com.nilemnod.mangareader.core.reader.ReadingMode
 import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metro.Inject

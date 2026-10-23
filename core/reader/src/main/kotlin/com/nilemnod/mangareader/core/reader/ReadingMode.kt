@@ -1,15 +1,6 @@
-package com.nilemnod.mangareader.app.ui.reader.setting
+package com.nilemnod.mangareader.core.reader
 
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
-import com.nilemnod.mangareader.app.ui.reader.viewer.Viewer
-import com.nilemnod.mangareader.app.ui.reader.viewer.pager.L2RPagerViewer
-import com.nilemnod.mangareader.app.ui.reader.viewer.pager.R2LPagerViewer
-import com.nilemnod.mangareader.app.ui.reader.viewer.pager.VerticalPagerViewer
-import com.nilemnod.mangareader.app.ui.reader.viewer.webgpu.WebGpuViewer
-import com.nilemnod.mangareader.app.ui.reader.viewer.webgpu.WebGpuViewerContinuous
-import com.nilemnod.mangareader.app.ui.reader.viewer.webtoon.WebtoonViewer
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
 import com.nilemnod.mangareader.icons.custommaterialsymbols.rounded.ReaderLeftToRight
@@ -74,27 +65,6 @@ enum class ReadingMode(
         fun isPagerType(preference: Int): Boolean {
             val mode = fromPreference(preference)
             return mode.type is ViewerType.Pager
-        }
-
-        fun toViewer(preference: Int?, activity: ReaderActivity): Viewer {
-            if (activity.appGraph.basePreferences.highQualityRenderer.get()) {
-                return when (fromPreference(preference)) {
-                    LEFT_TO_RIGHT -> WebGpuViewer(activity, isReversed = false, isVertical = false)
-                    RIGHT_TO_LEFT -> WebGpuViewer(activity, isReversed = true, isVertical = false)
-                    VERTICAL -> WebGpuViewer(activity, isReversed = false, isVertical = true)
-                    WEBTOON -> WebGpuViewerContinuous(activity, useGap = false)
-                    CONTINUOUS_VERTICAL -> WebGpuViewerContinuous(activity, useGap = true)
-                    DEFAULT -> throw IllegalStateException("Preference value must be resolved: $preference")
-                }
-            }
-            return when (fromPreference(preference)) {
-                LEFT_TO_RIGHT -> L2RPagerViewer(activity)
-                RIGHT_TO_LEFT -> R2LPagerViewer(activity)
-                VERTICAL -> VerticalPagerViewer(activity)
-                WEBTOON -> WebtoonViewer(activity)
-                CONTINUOUS_VERTICAL -> WebtoonViewer(activity, isContinuous = false)
-                DEFAULT -> throw IllegalStateException("Preference value must be resolved: $preference")
-            }
         }
     }
 

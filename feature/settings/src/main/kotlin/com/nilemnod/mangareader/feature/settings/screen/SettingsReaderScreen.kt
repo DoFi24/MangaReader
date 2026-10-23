@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.more.settings.screen
+package com.nilemnod.mangareader.feature.settings.screen
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
@@ -6,16 +6,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
-import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderOrientation
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
-import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode
+import com.nilemnod.mangareader.core.reader.ReaderOrientation
+import com.nilemnod.mangareader.core.reader.ReaderPreferences
+import com.nilemnod.mangareader.core.reader.ReadingMode
 import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.core.ui.util.system.hasDisplayCutout
 import com.nilemnod.mangareader.feature.settings.Preference
-import com.nilemnod.mangareader.feature.settings.screen.SearchableSettings
+import com.nilemnod.mangareader.feature.settings.settingsGraph
 import com.nilemnod.mangareader.i18n.MR
 import java.text.NumberFormat
 
@@ -28,7 +27,7 @@ object SettingsReaderScreen : SearchableSettings {
     @Composable
     override fun getPreferences(): List<Preference> {
         val context = LocalContext.current
-        val readerPref = remember { context.appGraph.readerPreferences }
+        val readerPref = remember { context.settingsGraph.readerPreferences }
 
         return listOf(
             Preference.PreferenceItem.ListPreference(

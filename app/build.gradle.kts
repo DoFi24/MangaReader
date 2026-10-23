@@ -201,6 +201,7 @@ dependencies {
     implementation(projects.core.navigation)
     implementation(projects.core.storage)
     implementation(projects.core.network)
+    implementation(projects.core.reader)
     implementation(projects.core.metadata)
     implementation(projects.compat.tachiyomi)
     implementation(projects.source.common)

@@ -1,9 +1,7 @@
-package com.nilemnod.mangareader.app.ui.reader.setting
+package com.nilemnod.mangareader.core.reader
 
 import android.os.Build
 import androidx.compose.ui.graphics.BlendMode
-import com.nilemnod.mangareader.app.ui.reader.viewer.webgpu.WebGpuShader
-import com.nilemnod.mangareader.app.ui.reader.viewer.webgpu.WebGpuShaders
 import com.nilemnod.mangareader.core.common.preference.Preference
 import com.nilemnod.mangareader.core.common.preference.PreferenceStore
 import com.nilemnod.mangareader.core.common.preference.getEnum
@@ -233,16 +231,16 @@ class ReaderPreferences(
     val imageFilters: Preference<List<WebGpuShader>> = preferenceStore.getObjectFromString(
         "webgpu_image_filters",
         emptyList(),
-        WebGpuShaders::serialize,
-        WebGpuShaders::deserialize,
+        WebGpuShaderCodec::serialize,
+        WebGpuShaderCodec::deserialize,
     )
 
     /** In run order. */
     val tileFilters: Preference<List<WebGpuShader>> = preferenceStore.getObjectFromString(
         "webgpu_tile_filters",
         emptyList(),
-        WebGpuShaders::serialize,
-        WebGpuShaders::deserialize,
+        WebGpuShaderCodec::serialize,
+        WebGpuShaderCodec::deserialize,
     )
 
     // endregion

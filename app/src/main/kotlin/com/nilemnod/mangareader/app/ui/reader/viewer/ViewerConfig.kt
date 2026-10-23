@@ -1,7 +1,7 @@
 package com.nilemnod.mangareader.app.ui.reader.viewer
 
-import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
 import com.nilemnod.mangareader.core.common.preference.Preference
+import com.nilemnod.mangareader.core.reader.ReaderPreferences
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
