@@ -19,7 +19,7 @@ class GetRemoteManga(
     }
 
     companion object {
-        const val QUERY_POPULAR = "com.nilemnod.mangareader.app.domain.source.interactor.POPULAR"
-        const val QUERY_LATEST = "com.nilemnod.mangareader.app.domain.source.interactor.LATEST"
+        const val QUERY_POPULAR = "com.nilemnod.mangareader.domain.source.interactor.POPULAR"
+        const val QUERY_LATEST = "com.nilemnod.mangareader.domain.source.interactor.LATEST"
     }
 }

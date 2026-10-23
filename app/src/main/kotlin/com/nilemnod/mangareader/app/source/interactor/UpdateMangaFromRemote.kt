@@ -15,8 +15,11 @@ import com.nilemnod.mangareader.domain.manga.repository.MangaRepository
 import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.api.SourceManga
 import com.nilemnod.mangareader.domain.source.models.RemoteMangaUpdate
+import com.nilemnod.mangareader.domain.source.service.RemoteMangaUpdater
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.source.local.isLocal
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesBinding
 import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -25,6 +28,7 @@ import kotlin.time.Clock
 import kotlin.time.Instant
 
 @Inject
+@ContributesBinding(AppScope::class)
 class UpdateMangaFromRemote(
     private val sourceManager: SourceManager,
     private val chapterRepository: ChapterRepository,
@@ -33,13 +37,13 @@ class UpdateMangaFromRemote(
     private val coverCache: CoverCache,
     private val libraryPreferences: LibraryPreferences,
     private val downloadManager: DownloadManager,
-) {
-    suspend operator fun invoke(
+) : RemoteMangaUpdater {
+    override suspend operator fun invoke(
         manga: Manga,
-        fetchDetails: Boolean = false,
-        fetchChapters: Boolean = false,
-        manualFetch: Boolean = false,
-        fetchWindow: ClosedRange<Instant>? = null,
+        fetchDetails: Boolean,
+        fetchChapters: Boolean,
+        manualFetch: Boolean,
+        fetchWindow: ClosedRange<Instant>?,
     ): Result<RemoteMangaUpdate> {
         val source = sourceManager.getOrStub(manga.source)
         return invoke(
@@ -51,13 +55,13 @@ class UpdateMangaFromRemote(
         )
     }
 
-    suspend operator fun invoke(
+    override suspend operator fun invoke(
         source: ContentSource,
         manga: Manga,
-        fetchDetails: Boolean = false,
-        fetchChapters: Boolean = false,
-        manualFetch: Boolean = false,
-        fetchWindow: ClosedRange<Instant>? = null,
+        fetchDetails: Boolean,
+        fetchChapters: Boolean,
+        manualFetch: Boolean,
+        fetchWindow: ClosedRange<Instant>?,
     ): Result<RemoteMangaUpdate> = withContext(Dispatchers.IO) {
         try {
             val chapters = chapterRepository.getChapterByMangaId(manga.id)

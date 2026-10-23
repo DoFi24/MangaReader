@@ -25,9 +25,9 @@ import androidx.work.WorkQuery
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.util.system.copyToClipboard
 import com.nilemnod.mangareader.core.android.lang.toDateTimestampString
 import com.nilemnod.mangareader.core.android.system.workManager
+import com.nilemnod.mangareader.core.common.util.system.copyToClipboard
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.AppBarActions
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold

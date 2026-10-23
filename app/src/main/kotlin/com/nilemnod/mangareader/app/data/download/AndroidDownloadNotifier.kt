@@ -22,8 +22,8 @@ import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 import dev.zacsweers.metro.Inject
-import com.nilemnod.mangareader.icons.materialsymbols.R as MaterialSymbolsR
 import java.util.regex.Pattern
+import com.nilemnod.mangareader.icons.materialsymbols.R as MaterialSymbolsR
 
 /**
  * DownloadNotifier is used to show notifications when downloading one or multiple chapters.

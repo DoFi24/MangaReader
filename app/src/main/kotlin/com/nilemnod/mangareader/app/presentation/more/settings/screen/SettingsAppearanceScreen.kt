@@ -14,9 +14,9 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.presentation.more.settings.Preference
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.appearance.AppLanguageScreen
-import com.nilemnod.mangareader.app.presentation.more.settings.widget.AppThemeModePreferenceWidget
 import com.nilemnod.mangareader.app.presentation.more.settings.widget.AppThemePreferenceWidget
 import com.nilemnod.mangareader.core.common.util.system.toast
+import com.nilemnod.mangareader.core.ui.components.preference.AppThemeModePreferenceWidget
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.preference.UiPreferences
 import com.nilemnod.mangareader.core.ui.preference.model.TabletUiMode

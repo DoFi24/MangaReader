@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.domain.extension.interactor.GetExtensionsByType
-import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.app.extension.ExtensionManager
 import com.nilemnod.mangareader.app.extension.model.InstallStep
-import com.nilemnod.mangareader.app.util.system.LocaleHelper
+import com.nilemnod.mangareader.core.common.i18n.LocaleHelper
 import com.nilemnod.mangareader.domain.extension.model.Extension
+import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.i18n.MR
 import dev.icerock.moko.resources.StringResource
 import dev.zacsweers.metro.AppScope

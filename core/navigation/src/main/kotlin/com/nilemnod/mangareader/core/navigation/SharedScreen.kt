@@ -4,6 +4,8 @@ import cafe.adriel.voyager.core.registry.ScreenProvider
 import cafe.adriel.voyager.core.registry.ScreenRegistry
 import cafe.adriel.voyager.core.screen.Screen
 
+interface MangaDestination
+
 sealed interface SharedScreen : ScreenProvider {
 
     data class Manga(
@@ -23,6 +25,16 @@ sealed interface SharedScreen : ScreenProvider {
 
     data class MigrationConfig(
         val mangaIds: List<Long>,
+    ) : SharedScreen
+
+    data class WebView(
+        val url: String,
+        val initialTitle: String? = null,
+        val sourceId: Long? = null,
+    ) : SharedScreen
+
+    data class SourcePreferences(
+        val sourceId: Long,
     ) : SharedScreen
 
     data object Category : SharedScreen

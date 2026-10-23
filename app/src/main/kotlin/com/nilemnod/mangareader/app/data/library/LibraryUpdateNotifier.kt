@@ -36,9 +36,9 @@ import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metro.Inject
-import com.nilemnod.mangareader.icons.materialsymbols.R as MaterialSymbolsR
 import java.math.RoundingMode
 import java.text.NumberFormat
+import com.nilemnod.mangareader.icons.materialsymbols.R as MaterialSymbolsR
 
 @Inject
 class LibraryUpdateNotifier(

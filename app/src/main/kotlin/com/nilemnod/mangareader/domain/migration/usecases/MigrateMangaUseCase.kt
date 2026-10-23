@@ -1,7 +1,5 @@
 package com.nilemnod.mangareader.domain.migration.usecases
 
-import com.nilemnod.mangareader.app.domain.manga.model.hasCustomCover
-import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.app.source.interactor.UpdateMangaFromRemote
 import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
@@ -15,7 +13,11 @@ import com.nilemnod.mangareader.domain.manga.interactor.UpdateManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.MangaUpdate
 import com.nilemnod.mangareader.domain.migration.models.MigrationFlag
+import com.nilemnod.mangareader.domain.migration.service.MangaMigrator
 import com.nilemnod.mangareader.domain.source.service.SourceManager
+import com.nilemnod.mangareader.domain.source.service.SourcePreferences
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesBinding
 import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -23,6 +25,7 @@ import kotlinx.coroutines.launch
 import kotlin.time.Clock
 
 @Inject
+@ContributesBinding(AppScope::class)
 class MigrateMangaUseCase(
     @AppCoroutineScope private val scope: CoroutineScope,
     private val sourcePreferences: SourcePreferences,
@@ -35,8 +38,8 @@ class MigrateMangaUseCase(
     private val setMangaCategories: SetMangaCategories,
     private val coverCache: CoverCache,
     private val updateMangaFromRemote: UpdateMangaFromRemote,
-) {
-    suspend operator fun invoke(current: Manga, target: Manga, replace: Boolean) {
+) : MangaMigrator {
+    override suspend operator fun invoke(current: Manga, target: Manga, replace: Boolean) {
         val targetSource = sourceManager.get(target.source) ?: return
         val currentSource = sourceManager.get(current.source)
         val flags = sourcePreferences.migrationFlags.get()
@@ -86,7 +89,7 @@ class MigrateMangaUseCase(
             }
 
             // Update custom cover (recheck if custom cover exists)
-            if (MigrationFlag.CUSTOM_COVER in flags && current.hasCustomCover()) {
+            if (MigrationFlag.CUSTOM_COVER in flags && coverCache.hasCustomCover(current.id)) {
                 coverCache.getCustomCoverFile(current.id).inputStream().use {
                     coverCache.setCustomCoverToCache(target, it)
                 }

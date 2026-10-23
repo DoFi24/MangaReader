@@ -13,7 +13,6 @@ import com.nilemnod.mangareader.app.data.saver.Location
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.domain.manga.interactor.SetMangaViewerFlags
 import com.nilemnod.mangareader.app.domain.manga.model.readingMode
-import com.nilemnod.mangareader.app.domain.source.interactor.GetIncognitoState
 import com.nilemnod.mangareader.app.ui.reader.SaveImageNotifier
 import com.nilemnod.mangareader.app.ui.reader.loader.ChapterLoader
 import com.nilemnod.mangareader.app.ui.reader.loader.DownloadPageLoader
@@ -46,6 +45,7 @@ import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.interactor.GetManga
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.api.Page
+import com.nilemnod.mangareader.domain.source.interactor.GetIncognitoState
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.feature.reader.model.PageSource
 import com.nilemnod.mangareader.feature.reader.model.ReaderChapterContent
@@ -77,11 +77,11 @@ import logcat.LogPriority
 import okio.BufferedSource
 import okio.buffer
 import okio.source
+import kotlin.time.Clock
+import kotlin.time.Instant
 import com.nilemnod.mangareader.app.ui.reader.setting.ReadingMode as AppReadingMode
 import com.nilemnod.mangareader.feature.reader.model.ReaderPage as ComposeReaderPage
 import com.nilemnod.mangareader.feature.reader.settings.ReadingMode as ReaderMode
-import kotlin.time.Clock
-import kotlin.time.Instant
 
 @AssistedInject
 class NewReaderViewModel(

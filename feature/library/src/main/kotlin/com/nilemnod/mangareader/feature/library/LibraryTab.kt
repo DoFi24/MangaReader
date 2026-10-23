@@ -191,7 +191,9 @@ data object LibraryTab : Tab {
                         },
                         onRefresh = { onClickRefresh(state.activeCategory) },
                         onGlobalSearchClicked = {
-                            navigator.push(SharedScreen.GlobalSearch(viewModel.state.value.searchQuery.orEmpty()).screen())
+                            navigator.push(
+                                SharedScreen.GlobalSearch(viewModel.state.value.searchQuery.orEmpty()).screen(),
+                            )
                         },
                         getItemCountForCategory = { state.getItemCountForCategory(it) },
                         getDisplayMode = { viewModel.getDisplayMode() },

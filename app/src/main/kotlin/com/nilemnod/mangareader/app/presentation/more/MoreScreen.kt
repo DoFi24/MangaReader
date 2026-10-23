@@ -4,10 +4,10 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
-import com.nilemnod.mangareader.app.presentation.more.settings.widget.SwitchPreferenceWidget
 import com.nilemnod.mangareader.app.ui.more.DownloadQueueState
 import com.nilemnod.mangareader.core.ui.components.ScrollbarLazyColumn
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
+import com.nilemnod.mangareader.core.ui.components.preference.SwitchPreferenceWidget
 import com.nilemnod.mangareader.core.ui.components.preference.TextPreferenceWidget
 import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
 import com.nilemnod.mangareader.core.ui.i18n.stringResource

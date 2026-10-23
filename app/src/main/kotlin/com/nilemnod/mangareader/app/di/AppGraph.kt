@@ -11,7 +11,6 @@ import com.nilemnod.mangareader.app.data.notification.NotificationReceiver
 import com.nilemnod.mangareader.app.data.updater.AppUpdateChecker
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.domain.extension.interactor.TrustExtension
-import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.app.extension.ExtensionManager
 import com.nilemnod.mangareader.app.extension.util.ExtensionInstallActivity
 import com.nilemnod.mangareader.app.ui.base.delegate.SecureActivityDelegateImpl
@@ -41,6 +40,7 @@ import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.interactor.GetFavorites
 import com.nilemnod.mangareader.domain.manga.interactor.ResetViewerFlags
 import com.nilemnod.mangareader.domain.source.service.SourceManager
+import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.domain.storage.service.StoragePreferences
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.DependencyGraph

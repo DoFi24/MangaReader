@@ -35,4 +35,3 @@ fun Manga.chaptersFiltered(): Boolean {
 fun Manga.hasCustomCover(coverCache: CoverCache = Injekt.get<Context>().appGraph.coverCache): Boolean {
     return coverCache.hasCustomCover(id)
 }
-

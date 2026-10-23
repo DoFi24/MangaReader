@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.data.backup.models.Backup
-import com.nilemnod.mangareader.app.util.system.copyToClipboard
+import com.nilemnod.mangareader.core.common.util.system.copyToClipboard
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.AppBarActions
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold

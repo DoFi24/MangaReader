@@ -16,7 +16,6 @@ import com.nilemnod.mangareader.app.domain.manga.interactor.GetExcludedScanlator
 import com.nilemnod.mangareader.app.domain.manga.interactor.SetExcludedScanlators
 import com.nilemnod.mangareader.app.domain.manga.model.chaptersFiltered
 import com.nilemnod.mangareader.app.domain.manga.model.downloadedFilter
-import com.nilemnod.mangareader.app.presentation.util.formattedMessage
 import com.nilemnod.mangareader.app.source.interactor.UpdateMangaFromRemote
 import com.nilemnod.mangareader.app.ui.reader.setting.ReaderPreferences
 import com.nilemnod.mangareader.app.util.chapter.getNextUnread
@@ -33,6 +32,7 @@ import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.core.download.SetReadStatus
 import com.nilemnod.mangareader.core.mangaui.ChapterDownloadAction
 import com.nilemnod.mangareader.core.mangaui.DownloadAction
+import com.nilemnod.mangareader.core.mangaui.formattedMessage
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.core.storage.CoverCache
 import com.nilemnod.mangareader.core.ui.preference.asState
@@ -993,7 +993,11 @@ class MangaViewModel(
         }
     }
 
-    private data class MangaAndChapters(val manga: Manga, val source: ContentSource, val chapters: List<ChapterList.Item>)
+    private data class MangaAndChapters(
+        val manga: Manga,
+        val source: ContentSource,
+        val chapters: List<ChapterList.Item>,
+    )
 
     sealed interface State {
         @Immutable

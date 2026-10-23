@@ -5,7 +5,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import androidx.core.view.isVisible
 import com.nilemnod.mangareader.app.databinding.ReaderErrorBinding
-import com.nilemnod.mangareader.app.presentation.util.formattedMessage
 import com.nilemnod.mangareader.app.ui.reader.model.InsertPage
 import com.nilemnod.mangareader.app.ui.reader.model.ReaderPage
 import com.nilemnod.mangareader.app.ui.reader.viewer.ReaderPageImageView
@@ -15,6 +14,7 @@ import com.nilemnod.mangareader.app.widget.ViewPagerAdapter
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.common.util.system.ImageUtil
 import com.nilemnod.mangareader.core.common.util.system.logcat
+import com.nilemnod.mangareader.core.mangaui.formattedMessage
 import com.nilemnod.mangareader.domain.source.api.Page
 import com.nilemnod.mangareader.i18n.MR
 import kotlinx.coroutines.Dispatchers

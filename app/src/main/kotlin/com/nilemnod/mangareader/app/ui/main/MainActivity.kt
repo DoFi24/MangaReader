@@ -71,14 +71,11 @@ import com.nilemnod.mangareader.app.data.notification.NotificationReceiver
 import com.nilemnod.mangareader.app.di.AppGraph
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
-import com.nilemnod.mangareader.app.domain.source.interactor.GetIncognitoState
 import com.nilemnod.mangareader.app.extension.ExtensionManager
 import com.nilemnod.mangareader.app.presentation.more.AppMigratingScreen
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.browse.ExtensionStoresScreen
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.data.RestoreBackupScreen
 import com.nilemnod.mangareader.app.ui.base.activity.BaseActivity
-import com.nilemnod.mangareader.app.ui.browse.source.browse.BrowseSourceScreen
-import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.GlobalSearchScreen
 import com.nilemnod.mangareader.app.ui.deeplink.DeepLinkScreen
 import com.nilemnod.mangareader.app.ui.home.HomeScreen
 import com.nilemnod.mangareader.app.ui.manga.MangaScreen
@@ -95,6 +92,7 @@ import com.nilemnod.mangareader.core.download.ChapterCache
 import com.nilemnod.mangareader.core.download.DownloadCache
 import com.nilemnod.mangareader.core.metro.metroGraph
 import com.nilemnod.mangareader.core.migration.Migrator
+import com.nilemnod.mangareader.core.navigation.HomeTab
 import com.nilemnod.mangareader.core.ui.components.AdaptiveSheet
 import com.nilemnod.mangareader.core.ui.components.AppStateBanners
 import com.nilemnod.mangareader.core.ui.components.DownloadedOnlyBannerBackgroundColor
@@ -111,6 +109,9 @@ import com.nilemnod.mangareader.core.ui.util.system.isNavigationBarNeedsScrim
 import com.nilemnod.mangareader.domain.database.repository.DatabaseRepository
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.release.interactor.GetApplicationRelease
+import com.nilemnod.mangareader.domain.source.interactor.GetIncognitoState
+import com.nilemnod.mangareader.feature.browse.source.browse.BrowseSourceScreen
+import com.nilemnod.mangareader.feature.browse.source.globalsearch.GlobalSearchScreen
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.OpenInNew
@@ -479,19 +480,19 @@ class MainActivity : BaseActivity(), SplashReady {
         }
 
         val tabToOpen = when (intent.action) {
-            Constants.SHORTCUT_LIBRARY -> HomeScreen.Tab.Library()
+            Constants.SHORTCUT_LIBRARY -> HomeTab.Library()
             Constants.SHORTCUT_MANGA -> {
                 val idToOpen = intent.extras?.getLong(Constants.MANGA_EXTRA) ?: return false
                 navigator.popUntilRoot()
-                HomeScreen.Tab.Library(idToOpen)
+                HomeTab.Library(idToOpen)
             }
-            Constants.SHORTCUT_UPDATES -> HomeScreen.Tab.Updates
-            Constants.SHORTCUT_HISTORY -> HomeScreen.Tab.History
-            Constants.SHORTCUT_SOURCES -> HomeScreen.Tab.Browse(false)
-            Constants.SHORTCUT_EXTENSIONS -> HomeScreen.Tab.Browse(true)
+            Constants.SHORTCUT_UPDATES -> HomeTab.Updates
+            Constants.SHORTCUT_HISTORY -> HomeTab.History
+            Constants.SHORTCUT_SOURCES -> HomeTab.Browse(false)
+            Constants.SHORTCUT_EXTENSIONS -> HomeTab.Browse(true)
             Constants.SHORTCUT_DOWNLOADS -> {
                 navigator.popUntilRoot()
-                HomeScreen.Tab.More(toDownloads = true)
+                HomeTab.More(toDownloads = true)
             }
             Intent.ACTION_APPLICATION_PREFERENCES -> {
                 navigator.popUntilRoot()

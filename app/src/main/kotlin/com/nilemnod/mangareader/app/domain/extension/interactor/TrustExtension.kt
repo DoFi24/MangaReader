@@ -2,10 +2,10 @@ package com.nilemnod.mangareader.app.domain.extension.interactor
 
 import android.content.pm.PackageInfo
 import androidx.core.content.pm.PackageInfoCompat
-import com.nilemnod.mangareader.app.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.core.common.preference.getAndSet
 import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
 import com.nilemnod.mangareader.domain.extension.repository.ExtensionStoreRepository
+import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged

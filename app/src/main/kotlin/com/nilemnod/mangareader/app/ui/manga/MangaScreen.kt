@@ -22,7 +22,6 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.domain.manga.model.hasCustomCover
-import com.nilemnod.mangareader.app.presentation.browse.components.RemoveMangaDialog
 import com.nilemnod.mangareader.app.presentation.manga.ChapterSettingsDialog
 import com.nilemnod.mangareader.app.presentation.manga.EditCoverAction
 import com.nilemnod.mangareader.app.presentation.manga.MangaScreen
@@ -31,18 +30,17 @@ import com.nilemnod.mangareader.app.presentation.manga.components.MangaCoverDial
 import com.nilemnod.mangareader.app.presentation.manga.components.ScanlatorFilterDialog
 import com.nilemnod.mangareader.app.presentation.manga.components.SetIntervalDialog
 import com.nilemnod.mangareader.app.source.isLocalOrStub
-import com.nilemnod.mangareader.app.ui.browse.source.browse.BrowseSourceScreen
-import com.nilemnod.mangareader.app.ui.browse.source.globalsearch.GlobalSearchScreen
 import com.nilemnod.mangareader.app.ui.home.HomeScreen
 import com.nilemnod.mangareader.app.ui.manga.notes.MangaNotesScreen
 import com.nilemnod.mangareader.app.ui.reader.ReaderActivity
 import com.nilemnod.mangareader.app.ui.webview.WebViewScreen
-import com.nilemnod.mangareader.app.util.system.copyToClipboard
 import com.nilemnod.mangareader.core.android.system.toShareIntent
+import com.nilemnod.mangareader.core.common.util.system.copyToClipboard
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.core.mangaui.ChangeCategoryDialog
 import com.nilemnod.mangareader.core.mangaui.DuplicateMangaDialog
+import com.nilemnod.mangareader.core.navigation.MangaDestination
 import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
 import com.nilemnod.mangareader.core.ui.util.AssistContentScreen
 import com.nilemnod.mangareader.core.ui.util.Screen
@@ -51,9 +49,12 @@ import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.toSourceManga
 import com.nilemnod.mangareader.domain.source.api.ContentSource
+import com.nilemnod.mangareader.feature.browse.migration.config.MigrationConfigScreen
+import com.nilemnod.mangareader.feature.browse.migration.dialog.MigrateMangaDialog
+import com.nilemnod.mangareader.feature.browse.presentation.components.RemoveMangaDialog
+import com.nilemnod.mangareader.feature.browse.source.browse.BrowseSourceScreen
+import com.nilemnod.mangareader.feature.browse.source.globalsearch.GlobalSearchScreen
 import com.nilemnod.mangareader.feature.categories.CategoryScreen
-import com.nilemnod.mangareader.feature.migration.config.MigrationConfigScreen
-import com.nilemnod.mangareader.feature.migration.dialog.MigrateMangaDialog
 import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -63,7 +64,7 @@ import logcat.LogPriority
 class MangaScreen(
     private val mangaId: Long,
     val fromSource: Boolean = false,
-) : Screen(), AssistContentScreen {
+) : Screen(), AssistContentScreen, MangaDestination {
 
     private var assistUrl: String? = null
 

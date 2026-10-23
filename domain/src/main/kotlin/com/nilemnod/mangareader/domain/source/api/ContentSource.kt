@@ -22,6 +22,9 @@ interface ContentSource {
     val isUnmetered: Boolean
         get() = false
 
+    val origin: String?
+        get() = null
+
     val displayName: String
         get() = if (lang.isEmpty()) name else "$name (${lang.uppercase()})"
 

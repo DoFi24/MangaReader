@@ -23,6 +23,7 @@ import eu.kanade.tachiyomi.source.online.UriType as NativeUriType
 
 class ExtensionContentSource(
     val native: Source,
+    override val origin: String?,
 ) : ContentSource {
 
     override val id: Long

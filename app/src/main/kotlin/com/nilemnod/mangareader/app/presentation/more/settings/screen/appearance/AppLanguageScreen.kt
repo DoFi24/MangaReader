@@ -21,7 +21,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.core.os.LocaleListCompat
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.util.system.LocaleHelper
+import com.nilemnod.mangareader.core.common.i18n.LocaleHelper
 import com.nilemnod.mangareader.core.common.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold

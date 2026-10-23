@@ -211,6 +211,7 @@ dependencies {
     implementation(projects.feature.reader)
     implementation(projects.core.ui)
     implementation(projects.core.mangaUi)
+    implementation(projects.feature.browse)
     implementation(projects.feature.categories)
     implementation(projects.feature.downloads)
     implementation(projects.feature.history)
