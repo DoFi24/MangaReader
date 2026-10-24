@@ -7,9 +7,6 @@ import com.nilemnod.mangareader.app.data.library.LibraryUpdateWorker
 import com.nilemnod.mangareader.app.data.library.MetadataUpdateWorker
 import com.nilemnod.mangareader.app.data.notification.NotificationReceiver
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
-import com.nilemnod.mangareader.app.domain.extension.interactor.TrustExtension
-import com.nilemnod.mangareader.app.extension.ExtensionManager
-import com.nilemnod.mangareader.app.extension.util.ExtensionInstallActivity
 import com.nilemnod.mangareader.app.ui.base.delegate.SecureActivityDelegateImpl
 import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.app.ui.webview.WebViewActivity
@@ -31,8 +28,6 @@ import com.nilemnod.mangareader.domain.category.interactor.GetCategories
 import com.nilemnod.mangareader.domain.category.interactor.ResetCategoryFlags
 import com.nilemnod.mangareader.domain.download.service.DownloadPreferences
 import com.nilemnod.mangareader.domain.extension.interactor.GetExtensionStoreCountAsFlow
-import com.nilemnod.mangareader.domain.extension.repository.ExtensionStoreRepository
-import com.nilemnod.mangareader.domain.extension.service.ExtensionSourceLoader
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.domain.manga.interactor.GetFavorites
 import com.nilemnod.mangareader.domain.manga.interactor.ResetViewerFlags
@@ -61,7 +56,6 @@ interface AppGraph : ViewModelGraph, UiPreferencesProvider {
     fun inject(downloadWorker: DownloadWorker)
     fun inject(notificationReceiver: NotificationReceiver)
     fun inject(notificationReceiver: SecureActivityDelegateImpl)
-    fun inject(extensionInstallActivity: ExtensionInstallActivity)
 
     val context: Context
 
@@ -82,12 +76,7 @@ interface AppGraph : ViewModelGraph, UiPreferencesProvider {
 
     val downloadManager: DownloadManager
 
-    val trustExtension: TrustExtension
-    val extensionStoreRepository: ExtensionStoreRepository
-
     val sourceManager: SourceManager
-    val extensionManager: ExtensionManager
-    val extensionSourceLoader: ExtensionSourceLoader
 
     val chapterCache: ChapterCache
     val coverCache: CoverCache

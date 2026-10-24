@@ -3,6 +3,12 @@ plugins {
     alias(libs.plugins.metro)
 }
 
+android {
+    buildFeatures {
+        aidl = true
+    }
+}
+
 dependencies {
     implementation(projects.core.android)
     implementation(projects.core.common)
@@ -14,10 +20,13 @@ dependencies {
     implementation(projects.icons.simpleIcons)
 
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.core)
     implementation(libs.bundles.androidx.lifecycle)
     implementation(libs.bundles.coil)
     implementation(libs.bundles.kotlinx.coroutines)
+    implementation(libs.bundles.shizuku)
     implementation(libs.bundles.voyager)
+    implementation(libs.unifile)
 
     implementation(libs.metro.runtime)
     implementation(libs.metrox.viewmodel)
