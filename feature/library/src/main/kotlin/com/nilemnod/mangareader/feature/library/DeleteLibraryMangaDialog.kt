@@ -2,6 +2,7 @@ package com.nilemnod.mangareader.feature.library
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -49,7 +50,10 @@ fun DeleteLibraryMangaDialog(
                     )
                 },
             ) {
-                Text(text = stringResource(MR.strings.action_ok))
+                Text(
+                    text = stringResource(MR.strings.action_ok),
+                    color = MaterialTheme.colorScheme.error,
+                )
             }
         },
         title = {

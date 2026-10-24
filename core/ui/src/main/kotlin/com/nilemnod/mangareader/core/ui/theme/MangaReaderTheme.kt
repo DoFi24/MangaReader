@@ -78,6 +78,8 @@ private fun BaseMangaReaderTheme(
                 isAmoled = isAmoled,
             )
         },
+        typography = AppTypography,
+        shapes = AppShapes,
         content = content,
     )
 }

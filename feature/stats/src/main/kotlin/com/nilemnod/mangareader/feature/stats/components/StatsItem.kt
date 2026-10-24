@@ -13,9 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import com.nilemnod.mangareader.core.ui.components.material.SECONDARY_ALPHA
 import com.nilemnod.mangareader.core.ui.components.material.padding
 @Composable
 fun RowScope.StatsOverviewItem(
@@ -25,9 +23,9 @@ fun RowScope.StatsOverviewItem(
 ) {
     BaseStatsItem(
         title = title,
-        titleStyle = MaterialTheme.typography.titleLarge,
+        titleStyle = MaterialTheme.typography.headlineSmall,
         subtitle = subtitle,
-        subtitleStyle = MaterialTheme.typography.bodyMedium,
+        subtitleStyle = MaterialTheme.typography.labelMedium,
         icon = icon,
     )
 }
@@ -39,9 +37,9 @@ fun RowScope.StatsItem(
 ) {
     BaseStatsItem(
         title = title,
-        titleStyle = MaterialTheme.typography.bodyMedium,
+        titleStyle = MaterialTheme.typography.titleMedium,
         subtitle = subtitle,
-        subtitleStyle = MaterialTheme.typography.labelSmall,
+        subtitleStyle = MaterialTheme.typography.labelMedium,
     )
 }
 
@@ -62,18 +60,13 @@ private fun RowScope.BaseStatsItem(
     ) {
         Text(
             text = title,
-            style = titleStyle
-                .copy(fontWeight = FontWeight.Bold),
+            style = titleStyle,
             textAlign = TextAlign.Center,
             maxLines = 1,
         )
         Text(
             text = subtitle,
-            style = subtitleStyle
-                .copy(
-                    color = MaterialTheme.colorScheme.onSurface
-                        .copy(alpha = SECONDARY_ALPHA),
-                ),
+            style = subtitleStyle.copy(color = MaterialTheme.colorScheme.onSurfaceVariant),
             textAlign = TextAlign.Center,
         )
         if (icon != null) {

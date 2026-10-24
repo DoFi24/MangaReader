@@ -56,14 +56,15 @@ import com.nilemnod.mangareader.core.ui.util.rememberCoverErrorPainter
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.feature.browse.migration.list.models.MigratingManga
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Close
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.MarkRead
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.MenuDots
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.ArrowForward
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Check
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Close
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.ContentCopy
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.CopyAll
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.DoneAll
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.MoreVert
 @Composable
 fun MigrationListScreenContent(
     items: List<MigratingManga>,
@@ -106,7 +107,7 @@ fun MigrationListScreenContent(
                                 ) {
                                     MaterialSymbols.Rounded.Check
                                 } else {
-                                    MaterialSymbols.Rounded.DoneAll
+                                    CustomMaterialSymbols.Edge.MarkRead
                                 },
                                 onClick = { openMigrationDialog(false) },
                                 enabled = migrationComplete,
@@ -326,7 +327,7 @@ private fun MigrationListItemAction(
             MigratingManga.SearchResult.Searching -> {
                 IconButton(onClick = onSkip) {
                     Icon(
-                        imageVector = MaterialSymbols.Rounded.Close,
+                        imageVector = CustomMaterialSymbols.Edge.Close,
                         contentDescription = null,
                     )
                 }
@@ -334,7 +335,7 @@ private fun MigrationListItemAction(
             MigratingManga.SearchResult.NotFound, is MigratingManga.SearchResult.Success -> {
                 IconButton(onClick = { menuExpanded = true }) {
                     Icon(
-                        imageVector = MaterialSymbols.Rounded.MoreVert,
+                        imageVector = CustomMaterialSymbols.Edge.MenuDots,
                         contentDescription = null,
                     )
                 }

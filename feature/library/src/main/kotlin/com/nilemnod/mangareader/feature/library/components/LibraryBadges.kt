@@ -6,15 +6,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.nilemnod.mangareader.core.ui.components.Badge
 import com.nilemnod.mangareader.core.ui.theme.MangaReaderPreviewTheme
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Folder
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.LocalSource
 @Composable
 internal fun DownloadsBadge(count: Int) {
     if (count > 0) {
         Badge(
             text = "$count",
-            color = MaterialTheme.colorScheme.tertiary,
-            textColor = MaterialTheme.colorScheme.onTertiary,
+            color = MaterialTheme.colorScheme.tertiaryContainer,
+            textColor = MaterialTheme.colorScheme.tertiary,
         )
     }
 }
@@ -33,15 +33,15 @@ internal fun LanguageBadge(
 ) {
     if (isLocal) {
         Badge(
-            imageVector = MaterialSymbols.Rounded.Folder,
-            color = MaterialTheme.colorScheme.tertiary,
-            iconColor = MaterialTheme.colorScheme.onTertiary,
+            imageVector = CustomMaterialSymbols.Edge.LocalSource,
+            color = MaterialTheme.colorScheme.secondaryContainer,
+            iconColor = MaterialTheme.colorScheme.onSecondaryContainer,
         )
     } else if (sourceLanguage.isNotEmpty()) {
         Badge(
             text = sourceLanguage.uppercase(),
-            color = MaterialTheme.colorScheme.tertiary,
-            textColor = MaterialTheme.colorScheme.onTertiary,
+            color = MaterialTheme.colorScheme.secondaryContainer,
+            textColor = MaterialTheme.colorScheme.onSecondaryContainer,
         )
     }
 }

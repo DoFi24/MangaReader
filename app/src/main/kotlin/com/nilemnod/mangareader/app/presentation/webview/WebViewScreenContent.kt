@@ -51,10 +51,11 @@ import com.nilemnod.mangareader.core.ui.components.WarningBanner
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Back
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Close
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.ArrowBack
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.ArrowForward
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Close
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.TabClose
 import kotlinx.coroutines.launch
 import logcat.LogPriority
@@ -249,13 +250,13 @@ fun WebViewScreenContent(
                         title = currentWindow.state.pageTitle ?: initialTitle,
                         subtitle = currentUrl,
                         navigateUp = onNavigateUp,
-                        navigationIcon = MaterialSymbols.Rounded.Close,
+                        navigationIcon = CustomMaterialSymbols.Edge.Close,
                         actions = {
                             AppBarActions(
                                 listOf(
                                     AppBar.Action(
                                         title = stringResource(MR.strings.action_webview_back),
-                                        icon = MaterialSymbols.AutoMirroredRounded.ArrowBack,
+                                        icon = CustomMaterialSymbols.Edge.Back,
                                         onClick = {
                                             if (navigator.canGoBack) {
                                                 navigator.navigateBack()

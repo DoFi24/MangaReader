@@ -34,7 +34,6 @@ import com.nilemnod.mangareader.core.ui.components.AdaptiveSheet
 import com.nilemnod.mangareader.core.ui.components.material.Button
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
-import com.nilemnod.mangareader.core.ui.theme.active
 import com.nilemnod.mangareader.core.ui.theme.header
 import com.nilemnod.mangareader.core.ui.util.collectAsState
 import com.nilemnod.mangareader.core.ui.util.fastFilterNot
@@ -42,9 +41,10 @@ import com.nilemnod.mangareader.domain.migration.models.MigrationFlag
 import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.feature.browse.migration.utils.getLabel
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Warning
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Check
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Warning
 @Composable
 fun MigrationConfigScreenSheet(
     preferences: SourcePreferences,
@@ -225,9 +225,9 @@ private fun MigrationSheetWarningItem(
     ListItem(
         leadingContent = {
             Icon(
-                imageVector = MaterialSymbols.RoundedFilled.Warning,
+                imageVector = CustomMaterialSymbols.EdgeFilled.Warning,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.active,
+                tint = MaterialTheme.colorScheme.primary,
             )
         },
         colors = ListItemDefaults.colors(containerColor = Color.Transparent),

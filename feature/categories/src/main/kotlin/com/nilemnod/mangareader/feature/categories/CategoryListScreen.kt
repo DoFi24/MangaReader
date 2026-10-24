@@ -1,6 +1,5 @@
 package com.nilemnod.mangareader.feature.categories
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -8,7 +7,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -17,7 +15,6 @@ import androidx.compose.ui.Modifier
 import com.nilemnod.mangareader.core.ui.components.AddFloatingActionButton
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
-import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.components.material.topSmallPaddingValues
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
@@ -97,10 +94,7 @@ private fun CategoryContent(
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         state = lazyListState,
-        contentPadding = paddingValues +
-            topSmallPaddingValues +
-            PaddingValues(horizontal = MaterialTheme.padding.medium),
-        verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+        contentPadding = paddingValues + topSmallPaddingValues,
     ) {
         items(
             items = categoriesState,

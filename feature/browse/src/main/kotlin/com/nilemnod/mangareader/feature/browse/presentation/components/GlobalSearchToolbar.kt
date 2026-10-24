@@ -29,10 +29,10 @@ import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.feature.browse.source.globalsearch.SourceFilter
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.DoneAll
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.FilterList
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Keep
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Filter
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.MarkRead
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Pin
 @Composable
 fun GlobalSearchToolbar(
     searchQuery: String?,
@@ -82,7 +82,7 @@ fun GlobalSearchToolbar(
                     onClick = { onChangeSearchFilter(SourceFilter.PinnedOnly) },
                     leadingIcon = {
                         Icon(
-                            imageVector = MaterialSymbols.Rounded.Keep,
+                            imageVector = CustomMaterialSymbols.Edge.Pin,
                             contentDescription = null,
                             modifier = Modifier
                                 .size(FilterChipDefaults.IconSize),
@@ -97,7 +97,7 @@ fun GlobalSearchToolbar(
                     onClick = { onChangeSearchFilter(SourceFilter.All) },
                     leadingIcon = {
                         Icon(
-                            imageVector = MaterialSymbols.Rounded.DoneAll,
+                            imageVector = CustomMaterialSymbols.Edge.MarkRead,
                             contentDescription = null,
                             modifier = Modifier
                                 .size(FilterChipDefaults.IconSize),
@@ -116,7 +116,7 @@ fun GlobalSearchToolbar(
                 onClick = { onToggleResults() },
                 leadingIcon = {
                     Icon(
-                        imageVector = MaterialSymbols.Rounded.FilterList,
+                        imageVector = CustomMaterialSymbols.Edge.Filter,
                         contentDescription = null,
                         modifier = Modifier
                             .size(FilterChipDefaults.IconSize),

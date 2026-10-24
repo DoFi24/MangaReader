@@ -1,6 +1,7 @@
 package com.nilemnod.mangareader.feature.updates
 
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -21,7 +22,10 @@ fun UpdatesDeleteConfirmationDialog(
                 onConfirm()
                 onDismissRequest()
             }) {
-                Text(text = stringResource(MR.strings.action_ok))
+                Text(
+                    text = stringResource(MR.strings.action_ok),
+                    color = MaterialTheme.colorScheme.error,
+                )
             }
         },
         dismissButton = {

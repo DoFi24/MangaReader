@@ -50,9 +50,9 @@ import com.nilemnod.mangareader.domain.source.interactor.GetSourcesWithNonLibrar
 import com.nilemnod.mangareader.domain.source.model.Source
 import com.nilemnod.mangareader.domain.source.model.SourceWithCount
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.FlipToBack
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.SelectAll
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.InvertSelection
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.SelectAll
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metro.Inject
@@ -148,12 +148,12 @@ class ClearDatabaseScreen : Screen() {
                                         actions = listOf(
                                             AppBar.Action(
                                                 title = stringResource(MR.strings.action_select_all),
-                                                icon = MaterialSymbols.Rounded.SelectAll,
+                                                icon = CustomMaterialSymbols.Edge.SelectAll,
                                                 onClick = viewModel::selectAll,
                                             ),
                                             AppBar.Action(
                                                 title = stringResource(MR.strings.action_select_inverse),
-                                                icon = MaterialSymbols.Rounded.FlipToBack,
+                                                icon = CustomMaterialSymbols.Edge.InvertSelection,
                                                 onClick = viewModel::invertSelection,
                                             ),
                                         ),

@@ -16,8 +16,8 @@ import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.theme.MangaReaderPreviewTheme
 import com.nilemnod.mangareader.core.ui.util.secondaryItemAlpha
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Info
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.About
 @Composable
 fun InfoWidget(text: String) {
     Column(
@@ -30,7 +30,7 @@ fun InfoWidget(text: String) {
         verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.medium),
     ) {
         Icon(
-            imageVector = MaterialSymbols.Rounded.Info,
+            imageVector = CustomMaterialSymbols.Edge.About,
             contentDescription = null,
         )
         Text(

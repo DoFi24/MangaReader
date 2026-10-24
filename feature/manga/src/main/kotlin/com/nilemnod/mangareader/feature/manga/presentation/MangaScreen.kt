@@ -22,8 +22,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.SmallExtendedFloatingActionButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -72,8 +73,8 @@ import com.nilemnod.mangareader.feature.manga.presentation.components.MangaInfoB
 import com.nilemnod.mangareader.feature.manga.presentation.components.MangaToolbar
 import com.nilemnod.mangareader.feature.manga.presentation.components.MissingChapterCountListItem
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.PlayArrow
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.NextChapter
 import com.nilemnod.mangareader.source.local.isLocal
 import kotlin.time.Instant
 
@@ -320,7 +321,7 @@ private fun MangaScreenSmallImpl(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         floatingActionButton = {
             val isFABVisible = state.hasUnreadChapters && !isAnySelected
-            SmallExtendedFloatingActionButton(
+            ExtendedFloatingActionButton(
                 text = {
                     Text(
                         text = stringResource(
@@ -328,8 +329,11 @@ private fun MangaScreenSmallImpl(
                         ),
                     )
                 },
-                icon = { Icon(imageVector = MaterialSymbols.RoundedFilled.PlayArrow, contentDescription = null) },
+                icon = { Icon(imageVector = CustomMaterialSymbols.EdgeFilled.NextChapter, contentDescription = null) },
                 onClick = onContinueReading,
+                shape = MaterialTheme.shapes.large,
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                 expanded = chapterListState.shouldExpandFAB(),
                 modifier = Modifier.animateFloatingActionButton(
                     visible = isFABVisible,
@@ -548,7 +552,7 @@ fun MangaScreenLargeImpl(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         floatingActionButton = {
             val isFABVisible = state.hasUnreadChapters && !isAnySelected
-            SmallExtendedFloatingActionButton(
+            ExtendedFloatingActionButton(
                 text = {
                     Text(
                         text = stringResource(
@@ -556,8 +560,11 @@ fun MangaScreenLargeImpl(
                         ),
                     )
                 },
-                icon = { Icon(imageVector = MaterialSymbols.RoundedFilled.PlayArrow, contentDescription = null) },
+                icon = { Icon(imageVector = CustomMaterialSymbols.EdgeFilled.NextChapter, contentDescription = null) },
                 onClick = onContinueReading,
+                shape = MaterialTheme.shapes.large,
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                 expanded = chapterListState.shouldExpandFAB(),
                 modifier = Modifier.animateFloatingActionButton(
                     visible = isFABVisible,
@@ -756,6 +763,7 @@ private fun LazyListScope.sharedChapterItems(
                     read = item.chapter.read,
                     bookmark = item.chapter.bookmark,
                     selected = item.selected,
+                    selectionMode = isAnyChapterSelected,
                     downloadIndicatorEnabled = !isAnyChapterSelected && !manga.isLocal(),
                     downloadStateProvider = { item.downloadState },
                     downloadProgressProvider = { downloadProgressProvider(item.id) },

@@ -23,9 +23,10 @@ import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Error
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.ArrowForward
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Error
 @Composable
 fun GlobalSearchResultItem(
     title: String,
@@ -89,7 +90,7 @@ fun GlobalSearchErrorResultItem(message: String?) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        Icon(imageVector = MaterialSymbols.RoundedFilled.Error, contentDescription = null)
+        Icon(imageVector = CustomMaterialSymbols.EdgeFilled.Error, contentDescription = null)
         Spacer(Modifier.height(4.dp))
         Text(
             text = message ?: stringResource(MR.strings.unknown_error),

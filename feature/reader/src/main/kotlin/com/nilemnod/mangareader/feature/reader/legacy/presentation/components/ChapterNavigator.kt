@@ -3,17 +3,18 @@ package com.nilemnod.mangareader.feature.reader.legacy.presentation.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -22,7 +23,6 @@ import androidx.compose.material3.SliderState
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalSlider
 import androidx.compose.material3.rememberSliderState
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -45,11 +45,12 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.theme.MangaReaderPreviewTheme
+import com.nilemnod.mangareader.core.ui.theme.TabularNumbers
 import com.nilemnod.mangareader.core.ui.util.isTabletUi
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.SkipNext
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.SkipPrevious
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.NextChapter
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.PreviousChapter
 import kotlin.math.roundToInt
 
 enum class ChapterNavigatorType {
@@ -103,12 +104,10 @@ fun ChapterNavigator(
     val isTabletUi = isTabletUi()
     val mainAxisPadding = if (isTabletUi) 24.dp else 8.dp
 
-    // Match with toolbar background color set in ReaderActivity
-    val backgroundColor = MaterialTheme.colorScheme
-        .surfaceColorAtElevation(3.dp)
-        .copy(alpha = if (isSystemInDarkTheme()) 0.9f else 0.95f)
+    val backgroundColor = MaterialTheme.colorScheme.surfaceContainer
     val buttonColor = IconButtonDefaults.filledIconButtonColors(
         containerColor = backgroundColor,
+        contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
         disabledContainerColor = backgroundColor,
     )
 
@@ -177,16 +176,19 @@ fun HorizontalChapterNavigator(
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(horizontal = mainAxisPadding),
+                .height(56.dp)
+                .clip(CircleShape)
+                .background(backgroundColor)
+                .padding(horizontal = 4.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            FilledIconButton(
+            IconButton(
                 enabled = if (isRtl) enabledNext else enabledPrevious,
                 onClick = if (isRtl) onNextChapter else onPreviousChapter,
                 colors = buttonColor,
             ) {
                 Icon(
-                    imageVector = MaterialSymbols.Rounded.SkipPrevious,
+                    imageVector = CustomMaterialSymbols.Edge.PreviousChapter,
                     contentDescription = stringResource(
                         if (isRtl) MR.strings.action_next_chapter else MR.strings.action_previous_chapter,
                     ),
@@ -196,17 +198,19 @@ fun HorizontalChapterNavigator(
             if (state != null) {
                 CompositionLocalProvider(LocalLayoutDirection provides layoutDirection) {
                     Row(
-                        modifier = Modifier
-                            .weight(1f)
-                            .clip(RoundedCornerShape(24.dp))
-                            .background(backgroundColor)
-                            .padding(horizontal = 16.dp),
+                        modifier = Modifier.weight(1f),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        Box(contentAlignment = Alignment.CenterEnd) {
-                            Text(text = currentPage.toString())
-                            // Taking up full length so the slider doesn't shift when 'currentPage' length changes
-                            Text(text = totalPages.toString(), color = Color.Transparent)
+                        Box(contentAlignment = Alignment.Center) {
+                            Text(
+                                text = currentPage.toString(),
+                                style = MaterialTheme.typography.labelLarge.merge(TabularNumbers),
+                            )
+                            Text(
+                                text = totalPages.toString(),
+                                style = MaterialTheme.typography.labelLarge.merge(TabularNumbers),
+                                color = Color.Transparent,
+                            )
                         }
 
                         Slider(
@@ -219,20 +223,24 @@ fun HorizontalChapterNavigator(
                             interactionSource = interactionSource,
                         )
 
-                        Text(text = totalPages.toString())
+                        Text(
+                            text = totalPages.toString(),
+                            style = MaterialTheme.typography.bodyMedium.merge(TabularNumbers),
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
                     }
                 }
             } else {
                 Spacer(Modifier.weight(1f))
             }
 
-            FilledIconButton(
+            IconButton(
                 enabled = if (isRtl) enabledPrevious else enabledNext,
                 onClick = if (isRtl) onPreviousChapter else onNextChapter,
                 colors = buttonColor,
             ) {
                 Icon(
-                    imageVector = MaterialSymbols.Rounded.SkipNext,
+                    imageVector = CustomMaterialSymbols.Edge.NextChapter,
                     contentDescription = stringResource(
                         if (isRtl) MR.strings.action_previous_chapter else MR.strings.action_next_chapter,
                     ),
@@ -271,7 +279,7 @@ fun VerticalChapterNavigator(
             colors = buttonColor,
         ) {
             Icon(
-                imageVector = MaterialSymbols.Rounded.SkipPrevious,
+                imageVector = CustomMaterialSymbols.Edge.PreviousChapter,
                 contentDescription = stringResource(MR.strings.action_previous_chapter),
                 modifier = Modifier.rotate(90f),
             )
@@ -281,7 +289,7 @@ fun VerticalChapterNavigator(
             Column(
                 modifier = Modifier
                     .weight(1f)
-                    .clip(RoundedCornerShape(24.dp))
+                    .clip(CircleShape)
                     .background(backgroundColor)
                     .padding(vertical = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -310,7 +318,7 @@ fun VerticalChapterNavigator(
             colors = buttonColor,
         ) {
             Icon(
-                imageVector = MaterialSymbols.Rounded.SkipNext,
+                imageVector = CustomMaterialSymbols.Edge.NextChapter,
                 contentDescription = stringResource(MR.strings.action_next_chapter),
                 modifier = Modifier.rotate(90f),
             )

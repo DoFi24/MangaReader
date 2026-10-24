@@ -7,9 +7,10 @@ import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
 import com.nilemnod.mangareader.core.ui.screens.EmptyScreenAction
 import com.nilemnod.mangareader.core.ui.theme.MangaReaderPreviewTheme
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Refresh
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.Help
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Refresh
 @PreviewLightDark
 @Composable
 private fun NoActionPreview() {
@@ -32,7 +33,7 @@ private fun WithActionPreview() {
                 actions = listOf(
                     EmptyScreenAction(
                         stringRes = MR.strings.action_retry,
-                        icon = MaterialSymbols.Rounded.Refresh,
+                        icon = CustomMaterialSymbols.Edge.Refresh,
                         onClick = {},
                     ),
                     EmptyScreenAction(

@@ -1,7 +1,6 @@
 package com.nilemnod.mangareader.core.ui.util
 
 import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.isImeVisible
 import androidx.compose.material3.MaterialTheme
@@ -28,8 +27,7 @@ import com.nilemnod.mangareader.core.ui.components.material.SECONDARY_ALPHA
 @Composable
 fun Modifier.selectedBackground(isSelected: Boolean): Modifier {
     if (!isSelected) return this
-    val alpha = if (isSystemInDarkTheme()) 0.16f else 0.22f
-    val color = MaterialTheme.colorScheme.secondary.copy(alpha = alpha)
+    val color = MaterialTheme.colorScheme.secondaryContainer
     return this.drawBehind { drawRect(color) }
 }
 

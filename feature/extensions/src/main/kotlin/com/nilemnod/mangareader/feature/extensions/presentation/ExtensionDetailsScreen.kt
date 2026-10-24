@@ -57,9 +57,10 @@ import com.nilemnod.mangareader.feature.extensions.interactor.ExtensionSourceIte
 import com.nilemnod.mangareader.feature.extensions.presentation.components.ExtensionPill
 import com.nilemnod.mangareader.feature.extensions.ui.details.ExtensionDetailsViewModel
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Settings
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Eyeglasses2
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Settings
 import dev.icerock.moko.resources.StringResource
 
 @Composable
@@ -435,7 +436,7 @@ private fun SourceSwitchPreference(
                 if (source.source.hasSettings) {
                     IconButton(onClick = { onClickSourcePreferences(source.source.id) }) {
                         Icon(
-                            imageVector = MaterialSymbols.Rounded.Settings,
+                            imageVector = CustomMaterialSymbols.Edge.Settings,
                             contentDescription = stringResource(MR.strings.label_settings),
                             tint = MaterialTheme.colorScheme.onSurface,
                         )

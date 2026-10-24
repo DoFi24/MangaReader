@@ -27,17 +27,19 @@ import com.nilemnod.mangareader.core.ui.components.FastScrollLazyColumn
 import com.nilemnod.mangareader.core.ui.components.material.PullRefresh
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.screens.EmptyIllustration
 import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
-import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
-import com.nilemnod.mangareader.core.ui.theme.active
+import com.nilemnod.mangareader.core.ui.screens.EmptyScreenAction
+import com.nilemnod.mangareader.core.ui.screens.ListSkeleton
 import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Filter
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.InvertSelection
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Refresh
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.SelectAll
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.CalendarMonth
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.FilterList
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.FlipToBack
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Refresh
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.SelectAll
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
@@ -94,7 +96,7 @@ fun UpdateScreen(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
     ) { contentPadding ->
         when {
-            state.isLoading -> LoadingScreen(Modifier.padding(contentPadding))
+            state.isLoading -> ListSkeleton(Modifier.padding(contentPadding))
             else -> {
                 var isRefreshing by remember { mutableStateOf(false) }
 
@@ -119,14 +121,26 @@ fun UpdateScreen(
                                 .fillMaxSize(),
                         ) {
                             UpdatesLastUpdatedHeader(lastUpdated = lastUpdated)
-                            EmptyScreen(
-                                stringRes = if (hasActiveFilters) {
-                                    MR.strings.error_no_match
-                                } else {
-                                    MR.strings.information_no_recent
-                                },
-                                modifier = Modifier.weight(1f),
-                            )
+                            if (hasActiveFilters) {
+                                EmptyScreen(
+                                    stringRes = MR.strings.error_no_match,
+                                    modifier = Modifier.weight(1f),
+                                )
+                            } else {
+                                EmptyScreen(
+                                    stringRes = MR.strings.empty_updates_text,
+                                    title = stringResource(MR.strings.empty_updates_title),
+                                    illustration = EmptyIllustration.NoUpdates,
+                                    modifier = Modifier.weight(1f),
+                                    actions = listOf(
+                                        EmptyScreenAction(
+                                            stringRes = MR.strings.action_update_library,
+                                            icon = CustomMaterialSymbols.Edge.Refresh,
+                                            onClick = { scope.launch { onUpdateLibrary() } },
+                                        ),
+                                    ),
+                                )
+                            }
                         }
                     } else {
                         FastScrollLazyColumn(
@@ -172,8 +186,8 @@ private fun UpdatesAppBar(
                 listOf(
                     AppBar.Action(
                         title = stringResource(MR.strings.action_filter),
-                        icon = MaterialSymbols.Rounded.FilterList,
-                        iconTint = if (hasFilters) MaterialTheme.colorScheme.active else LocalContentColor.current,
+                        icon = CustomMaterialSymbols.Edge.Filter,
+                        iconTint = if (hasFilters) MaterialTheme.colorScheme.primary else LocalContentColor.current,
                         onClick = onFilterClicked,
                     ),
                     AppBar.Action(
@@ -183,7 +197,7 @@ private fun UpdatesAppBar(
                     ),
                     AppBar.Action(
                         title = stringResource(MR.strings.action_update_library),
-                        icon = MaterialSymbols.Rounded.Refresh,
+                        icon = CustomMaterialSymbols.Edge.Refresh,
                         onClick = onUpdateLibrary,
                     ),
                 ),
@@ -196,12 +210,12 @@ private fun UpdatesAppBar(
                 listOf(
                     AppBar.Action(
                         title = stringResource(MR.strings.action_select_all),
-                        icon = MaterialSymbols.Rounded.SelectAll,
+                        icon = CustomMaterialSymbols.Edge.SelectAll,
                         onClick = onSelectAll,
                     ),
                     AppBar.Action(
                         title = stringResource(MR.strings.action_select_inverse),
-                        icon = MaterialSymbols.Rounded.FlipToBack,
+                        icon = CustomMaterialSymbols.Edge.InvertSelection,
                         onClick = onInvertSelection,
                     ),
                 ),

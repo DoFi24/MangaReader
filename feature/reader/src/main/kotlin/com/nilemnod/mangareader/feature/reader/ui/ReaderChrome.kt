@@ -2,9 +2,10 @@ package com.nilemnod.mangareader.feature.reader.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -22,12 +23,13 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.theme.TabularNumbers
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.ArrowBack
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Settings
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.SkipNext
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.SkipPrevious
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Back
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.NextChapter
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.PreviousChapter
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Settings
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ReaderTopBar(
@@ -48,7 +50,7 @@ internal fun ReaderTopBar(
         navigationIcon = {
             IconButton(onClick = onBack) {
                 Icon(
-                    imageVector = MaterialSymbols.AutoMirroredRounded.ArrowBack,
+                    imageVector = CustomMaterialSymbols.Edge.Back,
                     contentDescription = null,
                 )
             }
@@ -56,13 +58,14 @@ internal fun ReaderTopBar(
         actions = {
             IconButton(onClick = onOpenSettings) {
                 Icon(
-                    imageVector = MaterialSymbols.Rounded.Settings,
+                    imageVector = CustomMaterialSymbols.Edge.Settings,
                     contentDescription = stringResource(MR.strings.action_settings),
                 )
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.surfaceContainer,
+            actionIconContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
         ),
     )
 }
@@ -81,26 +84,31 @@ internal fun ReaderBottomBar(
 ) {
     val direction = if (rightToLeft) LayoutDirection.Rtl else LayoutDirection.Ltr
     Surface(
-        modifier = modifier,
+        modifier = modifier
+            .navigationBarsPadding()
+            .padding(start = 16.dp, end = 16.dp, bottom = 24.dp),
+        shape = CircleShape,
         color = MaterialTheme.colorScheme.surfaceContainer,
+        contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
     ) {
         CompositionLocalProvider(LocalLayoutDirection provides direction) {
             Row(
                 modifier = Modifier
-                    .navigationBarsPadding()
-                    .padding(horizontal = 8.dp, vertical = 4.dp),
+                    .height(56.dp)
+                    .padding(horizontal = 4.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
             ) {
                 IconButton(onClick = onPreviousChapter, enabled = hasPrevious) {
                     Icon(
-                        imageVector = MaterialSymbols.Rounded.SkipPrevious,
+                        imageVector = CustomMaterialSymbols.Edge.PreviousChapter,
                         contentDescription = stringResource(MR.strings.action_previous_chapter),
                     )
                 }
                 Text(
                     text = "${currentPage + 1}",
-                    style = MaterialTheme.typography.labelLarge,
+                    style = MaterialTheme.typography.labelLarge.merge(TabularNumbers),
+                    color = MaterialTheme.colorScheme.onSurface,
                 )
                 Slider(
                     value = currentPage.toFloat(),
@@ -111,11 +119,11 @@ internal fun ReaderBottomBar(
                 )
                 Text(
                     text = "$pageCount",
-                    style = MaterialTheme.typography.labelLarge,
+                    style = MaterialTheme.typography.bodyMedium.merge(TabularNumbers),
                 )
                 IconButton(onClick = onNextChapter, enabled = hasNext) {
                     Icon(
-                        imageVector = MaterialSymbols.Rounded.SkipNext,
+                        imageVector = CustomMaterialSymbols.Edge.NextChapter,
                         contentDescription = stringResource(MR.strings.action_next_chapter),
                     )
                 }
@@ -132,12 +140,12 @@ internal fun PageNumberBadge(
 ) {
     Surface(
         modifier = modifier,
-        shape = RoundedCornerShape(50),
-        color = MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.85f),
+        shape = CircleShape,
+        color = MaterialTheme.colorScheme.surfaceContainer,
     ) {
         Text(
             text = "${currentPage + 1} / $pageCount",
-            style = MaterialTheme.typography.labelLarge,
+            style = MaterialTheme.typography.labelLarge.merge(TabularNumbers),
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp),
         )

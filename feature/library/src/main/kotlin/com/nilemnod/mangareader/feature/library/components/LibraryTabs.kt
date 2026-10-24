@@ -31,7 +31,8 @@ internal fun LibraryTabs(
                         badgeCount = getItemCountForCategory(category),
                     )
                 },
-                unselectedContentColor = MaterialTheme.colorScheme.onSurface,
+                selectedContentColor = MaterialTheme.colorScheme.primary,
+                unselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }
     }

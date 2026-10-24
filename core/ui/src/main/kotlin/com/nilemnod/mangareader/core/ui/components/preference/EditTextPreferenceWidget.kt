@@ -21,9 +21,10 @@ import androidx.compose.ui.window.DialogProperties
 import com.nilemnod.mangareader.core.ui.components.preference.TextPreferenceWidget
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Error
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Cancel
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Error
 import kotlinx.coroutines.launch
 
 @Composable
@@ -58,7 +59,7 @@ fun EditTextPreferenceWidget(
                     onValueChange = { textFieldValue = it },
                     trailingIcon = {
                         if (textFieldValue.text.isBlank()) {
-                            Icon(imageVector = MaterialSymbols.RoundedFilled.Error, contentDescription = null)
+                            Icon(imageVector = CustomMaterialSymbols.EdgeFilled.Error, contentDescription = null)
                         } else {
                             IconButton(onClick = { textFieldValue = TextFieldValue("") }) {
                                 Icon(imageVector = MaterialSymbols.RoundedFilled.Cancel, contentDescription = null)

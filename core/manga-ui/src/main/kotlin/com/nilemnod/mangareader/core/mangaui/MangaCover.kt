@@ -6,7 +6,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
@@ -23,12 +22,12 @@ enum class MangaCover(val ratio: Float) {
         data: Any?,
         modifier: Modifier = Modifier,
         contentDescription: String = "",
-        shape: Shape = MaterialTheme.shapes.extraSmall,
+        shape: Shape = MaterialTheme.shapes.small,
         onClick: (() -> Unit)? = null,
     ) {
         AsyncImage(
             model = data,
-            placeholder = ColorPainter(CoverPlaceholderColor),
+            placeholder = ColorPainter(MaterialTheme.colorScheme.surfaceContainerHigh),
             error = rememberCoverErrorPainter(),
             contentDescription = contentDescription,
             modifier = modifier
@@ -48,5 +47,3 @@ enum class MangaCover(val ratio: Float) {
         )
     }
 }
-
-private val CoverPlaceholderColor = Color(0x1F888888)

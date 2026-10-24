@@ -42,9 +42,10 @@ import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
 import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.feature.downloads.DownloadQueueList
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Sort
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Pause
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.Sort
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Pause
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.PlayArrow
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 
@@ -171,7 +172,7 @@ object DownloadQueueScreen : Screen() {
                                 listOf(
                                     AppBar.Action(
                                         title = stringResource(MR.strings.action_sort),
-                                        icon = MaterialSymbols.AutoMirroredRounded.Sort,
+                                        icon = CustomMaterialSymbols.Edge.Sort,
                                         onClick = { sortExpanded = true },
                                     ),
                                     AppBar.OverflowAction(
@@ -198,7 +199,7 @@ object DownloadQueueScreen : Screen() {
                     },
                     icon = {
                         val icon = if (isRunning) {
-                            MaterialSymbols.RoundedFilled.Pause
+                            CustomMaterialSymbols.EdgeFilled.Pause
                         } else {
                             MaterialSymbols.RoundedFilled.PlayArrow
                         }

@@ -17,9 +17,10 @@ import com.nilemnod.mangareader.core.mangaui.formattedMessage
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.core.ui.screens.EmptyIllustration
 import com.nilemnod.mangareader.core.ui.screens.EmptyScreen
 import com.nilemnod.mangareader.core.ui.screens.EmptyScreenAction
-import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
+import com.nilemnod.mangareader.core.ui.screens.GridSkeleton
 import com.nilemnod.mangareader.domain.library.model.LibraryDisplayMode
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.api.ContentSource
@@ -27,9 +28,9 @@ import com.nilemnod.mangareader.feature.browse.presentation.components.BrowseSou
 import com.nilemnod.mangareader.feature.browse.presentation.components.BrowseSourceCompactGrid
 import com.nilemnod.mangareader.feature.browse.presentation.components.BrowseSourceList
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Public
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Refresh
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Refresh
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Web
 import com.nilemnod.mangareader.source.local.LocalSource
 import com.nilemnod.mangareader.source.local.isLocal
 import kotlinx.coroutines.flow.StateFlow
@@ -70,7 +71,7 @@ fun BrowseSourceContent(
     }
 
     if (mangaList.itemCount == 0 && mangaList.loadState.refresh is LoadState.Loading) {
-        LoadingScreen(Modifier.padding(contentPadding))
+        GridSkeleton(Modifier.padding(contentPadding))
         return
     }
 
@@ -81,18 +82,24 @@ fun BrowseSourceContent(
                 is LoadState.Error -> getErrorMessage(errorState)
                 else -> stringResource(MR.strings.no_results_found)
             },
+            title = stringResource(MR.strings.offline_title).takeIf { errorState is LoadState.Error },
+            illustration = if (errorState is LoadState.Error) {
+                EmptyIllustration.Offline
+            } else {
+                EmptyIllustration.NoResults
+            },
             actions = if (source?.isLocal() == true) {
                 emptyList()
             } else {
                 listOf(
                     EmptyScreenAction(
                         stringRes = MR.strings.action_retry,
-                        icon = MaterialSymbols.Rounded.Refresh,
+                        icon = CustomMaterialSymbols.Edge.Refresh,
                         onClick = mangaList::refresh,
                     ),
                     EmptyScreenAction(
                         stringRes = MR.strings.action_open_in_web_view,
-                        icon = MaterialSymbols.Rounded.Public,
+                        icon = CustomMaterialSymbols.Edge.Web,
                         onClick = onWebViewClick,
                     ),
                 )

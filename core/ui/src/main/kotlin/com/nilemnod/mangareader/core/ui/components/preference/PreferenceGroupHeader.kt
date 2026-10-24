@@ -2,6 +2,7 @@ package com.nilemnod.mangareader.core.ui.components.preference
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -19,13 +20,14 @@ fun PreferenceGroupHeader(title: String, highlighted: Boolean = false) {
         modifier = Modifier
             .fillMaxWidth()
             .highlightBackground(highlighted)
-            .padding(bottom = 8.dp, top = 14.dp),
+            .heightIn(min = 48.dp)
+            .padding(top = 16.dp, bottom = 8.dp),
     ) {
         Text(
             text = title,
-            color = MaterialTheme.colorScheme.secondary,
+            color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.padding(horizontal = PrefsHorizontalPadding),
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.titleSmall,
         )
     }
 }

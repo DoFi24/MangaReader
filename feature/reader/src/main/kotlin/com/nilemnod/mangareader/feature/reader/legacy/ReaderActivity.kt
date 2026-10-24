@@ -507,9 +507,6 @@ class ReaderActivity : HostActivity() {
                 viewModel.getMangaReadingMode(resolveDefault = false),
             ),
             onClickReadingMode = viewModel::openReadingModeSelectDialog,
-            orientation = ReaderOrientation.fromPreference(
-                viewModel.getMangaOrientation(resolveDefault = false),
-            ),
             onClickOrientation = viewModel::openOrientationModeSelectDialog,
             cropEnabled = cropEnabled,
             onClickCropBorder = {

@@ -1,11 +1,10 @@
 package com.nilemnod.mangareader.feature.browse
 
-import androidx.compose.animation.graphics.res.animatedVectorResource
-import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
@@ -14,12 +13,13 @@ import com.nilemnod.mangareader.core.ui.components.TabbedScreen
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.SplashReady
 import com.nilemnod.mangareader.core.ui.util.Tab
-import com.nilemnod.mangareader.core.ui.util.rememberAnimatedVectorPainter
-import com.nilemnod.mangareader.feature.browse.R
 import com.nilemnod.mangareader.feature.browse.migration.sources.migrateSourceTab
 import com.nilemnod.mangareader.feature.browse.source.globalsearch.GlobalSearchScreen
 import com.nilemnod.mangareader.feature.browse.source.sourcesTab
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Browse
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Browse
 import kotlinx.coroutines.flow.collectLatest
 
 data object BrowseTab : Tab {
@@ -28,12 +28,12 @@ data object BrowseTab : Tab {
         @Composable
         get() {
             val isSelected = LocalTabNavigator.current.current.key == key
-            val enter = AnimatedImageVector.animatedVectorResource(R.drawable.animated_browse_enter)
-            val exit = AnimatedImageVector.animatedVectorResource(R.drawable.animated_browse_exit)
             return TabOptions(
                 index = 3u,
                 title = stringResource(MR.strings.browse),
-                icon = rememberAnimatedVectorPainter(enter, exit, isSelected),
+                icon = rememberVectorPainter(
+                    if (isSelected) CustomMaterialSymbols.EdgeFilled.Browse else CustomMaterialSymbols.Edge.Browse,
+                ),
             )
         }
 

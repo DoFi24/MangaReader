@@ -1,7 +1,9 @@
 package com.nilemnod.mangareader.core.mangaui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
@@ -13,43 +15,41 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButtonDefaults
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.nilemnod.mangareader.core.ui.components.BadgeGroup
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.selectedBackground
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.PlayArrow
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Downloaded
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.NextChapter
 import com.nilemnod.mangareader.domain.manga.model.MangaCover as MangaCoverModel
 
 object CommonMangaItemDefaults {
-    val GridHorizontalSpacer = 4.dp
-    val GridVerticalSpacer = 4.dp
+    val GridHorizontalSpacer = 8.dp
+    val GridVerticalSpacer = 8.dp
 
     @Suppress("ConstPropertyName")
-    const val BrowseFavoriteCoverAlpha = 0.34f
+    const val BrowseFavoriteCoverAlpha = 0.5f
 }
 
 private val ContinueReadingButtonSizeSmall = 28.dp
@@ -61,7 +61,8 @@ private val ContinueReadingButtonIconSizeLarge = 20.dp
 private val ContinueReadingButtonGridPadding = 6.dp
 private val ContinueReadingButtonListSpacing = 8.dp
 
-private const val GRID_SELECTED_COVER_ALPHA = 0.76f
+private val SelectedOutlineWidth = 3.dp
+private val SelectedCheckSize = 24.dp
 
 /**
  * Layout of grid list item with title overlaying the cover.
@@ -80,16 +81,16 @@ fun MangaCompactGridItem(
     coverBadgeEnd: @Composable (RowScope.() -> Unit)? = null,
 ) {
     GridItemSelectable(
-        isSelected = isSelected,
         onClick = onClick,
         onLongClick = onLongClick,
     ) {
         MangaGridCover(
+            isSelected = isSelected,
             cover = {
                 MangaCover.Book(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .alpha(if (isSelected) GRID_SELECTED_COVER_ALPHA else coverAlpha),
+                        .alpha(coverAlpha),
                     data = coverData,
                 )
             },
@@ -126,7 +127,7 @@ private fun BoxScope.CoverTextOverlay(
 ) {
     Box(
         modifier = Modifier
-            .clip(RoundedCornerShape(bottomStart = 4.dp, bottomEnd = 4.dp))
+            .clip(RoundedCornerShape(bottomStart = 8.dp, bottomEnd = 8.dp))
             .background(
                 Brush.verticalGradient(
                     0f to Color.Transparent,
@@ -146,7 +147,7 @@ private fun BoxScope.CoverTextOverlay(
                 .weight(1f)
                 .padding(8.dp),
             title = title,
-            style = MaterialTheme.typography.titleSmall.copy(
+            style = MaterialTheme.typography.labelMedium.copy(
                 color = Color.White,
                 shadow = Shadow(
                     color = Color.Black,
@@ -186,17 +187,17 @@ fun MangaComfortableGridItem(
     onClickContinueReading: (() -> Unit)? = null,
 ) {
     GridItemSelectable(
-        isSelected = isSelected,
         onClick = onClick,
         onLongClick = onLongClick,
     ) {
-        Column {
+        Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
             MangaGridCover(
+                isSelected = isSelected,
                 cover = {
                     MangaCover.Book(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .alpha(if (isSelected) GRID_SELECTED_COVER_ALPHA else coverAlpha),
+                            .alpha(coverAlpha),
                         data = coverData,
                     )
                 },
@@ -216,9 +217,8 @@ fun MangaComfortableGridItem(
                 },
             )
             GridItemTitle(
-                modifier = Modifier.padding(4.dp),
                 title = title,
-                style = MaterialTheme.typography.titleSmall,
+                style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Medium),
                 minLines = 2,
                 maxLines = titleMaxLines,
             )
@@ -231,6 +231,7 @@ fun MangaComfortableGridItem(
  */
 @Composable
 private fun MangaGridCover(
+    isSelected: Boolean,
     modifier: Modifier = Modifier,
     cover: @Composable BoxScope.() -> Unit = {},
     badgesStart: (@Composable RowScope.() -> Unit)? = null,
@@ -240,10 +241,28 @@ private fun MangaGridCover(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .aspectRatio(MangaCover.Book.ratio),
+            .aspectRatio(MangaCover.Book.ratio)
+            .clip(MaterialTheme.shapes.small),
     ) {
         cover()
         content?.invoke(this)
+        if (isSelected) {
+            Box(
+                modifier = Modifier
+                    .matchParentSize()
+                    .border(SelectedOutlineWidth, MaterialTheme.colorScheme.primary, MaterialTheme.shapes.small),
+            )
+            Icon(
+                imageVector = CustomMaterialSymbols.EdgeFilled.Downloaded,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier
+                    .padding(6.dp)
+                    .size(SelectedCheckSize)
+                    .background(MaterialTheme.colorScheme.surface, CircleShape)
+                    .align(Alignment.BottomEnd),
+            )
+        }
         if (badgesStart != null) {
             BadgeGroup(
                 modifier = Modifier
@@ -275,8 +294,6 @@ private fun GridItemTitle(
     Text(
         modifier = modifier,
         text = title,
-        fontSize = 12.sp,
-        lineHeight = 18.sp,
         minLines = minLines,
         maxLines = maxLines,
         overflow = TextOverflow.Ellipsis,
@@ -289,7 +306,6 @@ private fun GridItemTitle(
  */
 @Composable
 private fun GridItemSelectable(
-    isSelected: Boolean,
     onClick: () -> Unit,
     onLongClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -301,28 +317,11 @@ private fun GridItemSelectable(
             .combinedClickable(
                 onClick = onClick,
                 onLongClick = onLongClick,
-            )
-            .selectedOutline(isSelected = isSelected, color = MaterialTheme.colorScheme.secondary)
-            .padding(4.dp),
+            ),
     ) {
-        val contentColor = if (isSelected) {
-            MaterialTheme.colorScheme.onSecondary
-        } else {
-            LocalContentColor.current
-        }
-        CompositionLocalProvider(LocalContentColor provides contentColor) {
-            content()
-        }
+        content()
     }
 }
-
-/**
- * @see GridItemSelectable
- */
-private fun Modifier.selectedOutline(
-    isSelected: Boolean,
-    color: Color,
-) = drawBehind { if (isSelected) drawRect(color = color) }
 
 /**
  * Layout of list item.
@@ -341,7 +340,7 @@ fun MangaListItem(
     Row(
         modifier = Modifier
             .selectedBackground(isSelected)
-            .height(56.dp)
+            .height(80.dp)
             .combinedClickable(
                 onClick = onClick,
                 onLongClick = onLongClick,
@@ -349,9 +348,9 @@ fun MangaListItem(
             .padding(horizontal = 16.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        MangaCover.Square(
+        MangaCover.Book(
             modifier = Modifier
-                .fillMaxHeight()
+                .size(width = 48.dp, height = 64.dp)
                 .alpha(coverAlpha),
             data = coverData,
         )
@@ -362,7 +361,7 @@ fun MangaListItem(
                 .weight(1f),
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.bodyLarge,
         )
         BadgeGroup(content = badge)
         if (onClickContinueReading != null) {
@@ -388,13 +387,13 @@ private fun ContinueReadingButton(
             onClick = onClick,
             shape = MaterialTheme.shapes.small,
             colors = IconButtonDefaults.filledIconButtonColors(
-                containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.9f),
-                contentColor = contentColorFor(MaterialTheme.colorScheme.primaryContainer),
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
             ),
             modifier = Modifier.size(size),
         ) {
             Icon(
-                imageVector = MaterialSymbols.RoundedFilled.PlayArrow,
+                imageVector = CustomMaterialSymbols.EdgeFilled.NextChapter,
                 contentDescription = stringResource(MR.strings.action_resume),
                 modifier = Modifier.size(iconSize),
             )

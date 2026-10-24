@@ -19,8 +19,8 @@ import com.nilemnod.mangareader.core.ui.util.plus
 import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
 import com.nilemnod.mangareader.feature.extensions.stores.ExtensionStoreScreenState
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Refresh
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Refresh
 @Composable
 fun ExtensionStoresScreen(
     state: ExtensionStoreScreenState.Success,
@@ -42,7 +42,7 @@ fun ExtensionStoresScreen(
                 actions = {
                     IconButton(onClick = onClickRefresh) {
                         Icon(
-                            imageVector = MaterialSymbols.Rounded.Refresh,
+                            imageVector = CustomMaterialSymbols.Edge.Refresh,
                             contentDescription = stringResource(resource = MR.strings.action_webview_refresh),
                         )
                     }

@@ -33,8 +33,8 @@ import com.nilemnod.mangareader.feature.browse.presentation.BrowseSourceContent
 import com.nilemnod.mangareader.feature.browse.source.browse.BrowseSourceViewModel
 import com.nilemnod.mangareader.feature.browse.source.browse.SourceFilterDialog
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.FilterList
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Filter
 import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
 import kotlinx.coroutines.launch
 
@@ -76,7 +76,7 @@ data class MigrateSourceSearchScreen(
             floatingActionButton = {
                 SmallExtendedFloatingActionButton(
                     text = { Text(text = stringResource(MR.strings.action_filter)) },
-                    icon = { Icon(MaterialSymbols.Rounded.FilterList, contentDescription = null) },
+                    icon = { Icon(CustomMaterialSymbols.Edge.Filter, contentDescription = null) },
                     onClick = viewModel::openFilterSheet,
                     modifier = Modifier.animateFloatingActionButton(
                         visible = state.filters.isNotEmpty(),

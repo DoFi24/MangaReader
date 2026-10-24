@@ -1,6 +1,7 @@
 package com.nilemnod.mangareader.feature.categories
 
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -151,7 +152,10 @@ fun CategoryDeleteDialog(
                 onDelete()
                 onDismissRequest()
             }) {
-                Text(text = stringResource(MR.strings.action_ok))
+                Text(
+                    text = stringResource(MR.strings.action_ok),
+                    color = MaterialTheme.colorScheme.error,
+                )
             }
         },
         dismissButton = {

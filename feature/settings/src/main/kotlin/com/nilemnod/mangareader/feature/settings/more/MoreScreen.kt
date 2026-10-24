@@ -1,26 +1,25 @@
 package com.nilemnod.mangareader.feature.settings.more
 
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.unit.dp
+import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.ScrollbarLazyColumn
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
+import com.nilemnod.mangareader.core.ui.components.preference.PreferenceGroupHeader
 import com.nilemnod.mangareader.core.ui.components.preference.SwitchPreferenceWidget
 import com.nilemnod.mangareader.core.ui.components.preference.TextPreferenceWidget
 import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.feature.settings.more.DownloadQueueState
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.Label
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.CloudOff
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Download
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Eyeglasses2
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Info
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.QueryStats
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Settings
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Storage
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.About
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Category
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Download
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.DownloadedOnly
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Incognito
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Settings
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Statistics
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Storage
 @Composable
 fun MoreScreen(
     downloadQueueStateProvider: () -> DownloadQueueState,
@@ -35,33 +34,35 @@ fun MoreScreen(
     onClickSettings: () -> Unit,
     onClickAbout: () -> Unit,
 ) {
-    Scaffold { contentPadding ->
+    Scaffold(
+        topBar = { scrollBehavior ->
+            AppBar(
+                title = stringResource(MR.strings.label_more),
+                scrollBehavior = scrollBehavior,
+            )
+        },
+    ) { contentPadding ->
         ScrollbarLazyColumn(contentPadding = contentPadding) {
             item {
-                LogoHeader(
-                    iconPadding = PaddingValues(vertical = 32.dp),
+                SwitchPreferenceWidget(
+                    title = stringResource(MR.strings.pref_incognito_mode),
+                    subtitle = stringResource(MR.strings.pref_incognito_mode_summary),
+                    icon = CustomMaterialSymbols.Edge.Incognito,
+                    checked = incognitoMode,
+                    onCheckedChanged = onIncognitoModeChange,
                 )
             }
             item {
                 SwitchPreferenceWidget(
                     title = stringResource(MR.strings.label_downloaded_only),
                     subtitle = stringResource(MR.strings.downloaded_only_summary),
-                    icon = MaterialSymbols.Rounded.CloudOff,
+                    icon = CustomMaterialSymbols.Edge.DownloadedOnly,
                     checked = downloadedOnly,
                     onCheckedChanged = onDownloadedOnlyChange,
                 )
             }
-            item {
-                SwitchPreferenceWidget(
-                    title = stringResource(MR.strings.pref_incognito_mode),
-                    subtitle = stringResource(MR.strings.pref_incognito_mode_summary),
-                    icon = MaterialSymbols.Rounded.Eyeglasses2,
-                    checked = incognitoMode,
-                    onCheckedChanged = onIncognitoModeChange,
-                )
-            }
 
-            item { HorizontalDivider() }
+            item { PreferenceGroupHeader(title = stringResource(MR.strings.more_group_manage)) }
 
             item {
                 val downloadQueueState = downloadQueueStateProvider()
@@ -88,45 +89,45 @@ fun MoreScreen(
                             pluralStringResource(MR.plurals.download_queue_summary, count = pending, pending)
                         }
                     },
-                    icon = MaterialSymbols.Rounded.Download,
+                    icon = CustomMaterialSymbols.Edge.Download,
                     onPreferenceClick = onClickDownloadQueue,
                 )
             }
             item {
                 TextPreferenceWidget(
                     title = stringResource(MR.strings.categories),
-                    icon = MaterialSymbols.AutoMirroredRounded.Label,
+                    icon = CustomMaterialSymbols.Edge.Category,
                     onPreferenceClick = onClickCategories,
                 )
             }
             item {
                 TextPreferenceWidget(
                     title = stringResource(MR.strings.label_stats),
-                    icon = MaterialSymbols.Rounded.QueryStats,
+                    icon = CustomMaterialSymbols.Edge.Statistics,
                     onPreferenceClick = onClickStats,
                 )
             }
             item {
                 TextPreferenceWidget(
                     title = stringResource(MR.strings.label_data_storage),
-                    icon = MaterialSymbols.Rounded.Storage,
+                    icon = CustomMaterialSymbols.Edge.Storage,
                     onPreferenceClick = onClickDataAndStorage,
                 )
             }
 
-            item { HorizontalDivider() }
+            item { PreferenceGroupHeader(title = stringResource(MR.strings.more_group_app)) }
 
             item {
                 TextPreferenceWidget(
                     title = stringResource(MR.strings.label_settings),
-                    icon = MaterialSymbols.Rounded.Settings,
+                    icon = CustomMaterialSymbols.Edge.Settings,
                     onPreferenceClick = onClickSettings,
                 )
             }
             item {
                 TextPreferenceWidget(
                     title = stringResource(MR.strings.pref_category_about),
-                    icon = MaterialSymbols.Rounded.Info,
+                    icon = CustomMaterialSymbols.Edge.About,
                     onPreferenceClick = onClickAbout,
                 )
             }

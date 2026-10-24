@@ -1,32 +1,28 @@
 package com.nilemnod.mangareader.feature.updates
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.sizeIn
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
-import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.core.mangaui.ChapterDownloadAction
@@ -34,7 +30,6 @@ import com.nilemnod.mangareader.core.mangaui.ChapterDownloadIndicator
 import com.nilemnod.mangareader.core.mangaui.DotSeparatorText
 import com.nilemnod.mangareader.core.mangaui.MangaCover
 import com.nilemnod.mangareader.core.ui.components.ListGroupHeader
-import com.nilemnod.mangareader.core.ui.components.material.DISABLED_ALPHA
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.components.relativeDateText
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
@@ -43,9 +38,8 @@ import com.nilemnod.mangareader.core.ui.util.selectedBackground
 import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.domain.updates.model.UpdatesWithRelations
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Bookmark
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Circle
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Bookmark
 internal fun LazyListScope.updatesLastUpdatedItem(
     lastUpdated: Long,
 ) {
@@ -68,7 +62,8 @@ internal fun UpdatesLastUpdatedHeader(
     ) {
         Text(
             text = stringResource(MR.strings.updates_last_update_info, relativeTimeSpanString(lastUpdated)),
-            fontStyle = FontStyle.Italic,
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
     }
 }
@@ -153,7 +148,6 @@ private fun UpdatesUiItem(
     modifier: Modifier = Modifier,
 ) {
     val haptic = LocalHapticFeedback.current
-    val textAlpha = if (update.read) DISABLED_ALPHA else 1f
 
     Row(
         modifier = modifier
@@ -165,69 +159,74 @@ private fun UpdatesUiItem(
                     haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                 },
             )
-            .height(56.dp)
-            .padding(horizontal = MaterialTheme.padding.medium),
+            .height(72.dp)
+            .padding(start = MaterialTheme.padding.medium, end = 4.dp),
         verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        MangaCover.Square(
+        MangaCover.Book(
             modifier = Modifier
-                .padding(vertical = 6.dp)
-                .fillMaxHeight(),
+                .size(width = 42.dp, height = 56.dp)
+                .alpha(if (update.read) READ_COVER_ALPHA else 1f),
             data = update.coverData,
             onClick = onClickCover,
         )
 
         Column(
-            modifier = Modifier
-                .padding(horizontal = MaterialTheme.padding.medium)
-                .weight(1f),
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(2.dp),
         ) {
-            Text(
-                text = update.mangaTitle,
-                maxLines = 1,
-                style = MaterialTheme.typography.bodyMedium,
-                color = LocalContentColor.current.copy(alpha = textAlpha),
-                overflow = TextOverflow.Ellipsis,
-            )
-
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                var textHeight by remember { mutableIntStateOf(0) }
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                Text(
+                    text = update.mangaTitle,
+                    maxLines = 1,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = if (update.read) {
+                        MaterialTheme.colorScheme.onSurfaceVariant
+                    } else {
+                        MaterialTheme.colorScheme.onSurface
+                    },
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.weight(weight = 1f, fill = false),
+                )
                 if (!update.read) {
-                    Icon(
-                        imageVector = MaterialSymbols.RoundedFilled.Circle,
-                        contentDescription = stringResource(MR.strings.unread),
+                    val unreadDescription = stringResource(MR.strings.unread)
+                    Box(
                         modifier = Modifier
-                            .height(8.dp)
-                            .padding(end = 4.dp),
-                        tint = MaterialTheme.colorScheme.primary,
+                            .size(8.dp)
+                            .background(MaterialTheme.colorScheme.primary, CircleShape)
+                            .semantics { contentDescription = unreadDescription },
                     )
                 }
                 if (update.bookmark) {
                     Icon(
-                        imageVector = MaterialSymbols.RoundedFilled.Bookmark,
+                        imageVector = CustomMaterialSymbols.EdgeFilled.Bookmark,
                         contentDescription = stringResource(MR.strings.action_filter_bookmarked),
-                        modifier = Modifier
-                            .sizeIn(maxHeight = with(LocalDensity.current) { textHeight.toDp() - 2.dp }),
+                        modifier = Modifier.size(16.dp),
                         tint = MaterialTheme.colorScheme.primary,
                     )
-                    Spacer(modifier = Modifier.width(2.dp))
                 }
+            }
+
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     text = update.chapterName,
                     maxLines = 1,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = LocalContentColor.current.copy(alpha = textAlpha),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     overflow = TextOverflow.Ellipsis,
-                    onTextLayout = { textHeight = it.size.height },
-                    modifier = Modifier
-                        .weight(weight = 1f, fill = false),
+                    modifier = Modifier.weight(weight = 1f, fill = false),
                 )
                 if (readProgress != null) {
                     DotSeparatorText()
                     Text(
                         text = readProgress,
                         maxLines = 1,
-                        color = LocalContentColor.current.copy(alpha = DISABLED_ALPHA),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         overflow = TextOverflow.Ellipsis,
                     )
                 }
@@ -236,10 +235,11 @@ private fun UpdatesUiItem(
 
         ChapterDownloadIndicator(
             enabled = onDownloadChapter != null,
-            modifier = Modifier.padding(start = 4.dp),
             downloadStateProvider = downloadStateProvider,
             downloadProgressProvider = downloadProgressProvider,
             onClick = { onDownloadChapter?.invoke(it) },
         )
     }
 }
+
+private const val READ_COVER_ALPHA = 0.6f

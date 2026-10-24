@@ -62,18 +62,19 @@ import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.api.MangaStatus
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Add
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Close
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.MarkRead
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Pause
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Warning
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Add
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.AttachMoney
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Block
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Check
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Close
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.DoneAll
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Person
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.Schedule
 import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Brush
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Pause
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Warning
 
 @Composable
 fun DuplicateMangaDialog(
@@ -138,7 +139,7 @@ fun DuplicateMangaDialog(
 
                 TextPreferenceWidget(
                     title = stringResource(MR.strings.action_add_anyway),
-                    icon = MaterialSymbols.Rounded.Add,
+                    icon = CustomMaterialSymbols.Edge.Add,
                     onPreferenceClick = {
                         onDismissRequest()
                         onConfirm()
@@ -252,11 +253,11 @@ private fun DuplicateMangaListItem(
             },
             iconImageVector = when (manga.status) {
                 MangaStatus.ONGOING.code -> MaterialSymbols.Rounded.Schedule
-                MangaStatus.COMPLETED.code -> MaterialSymbols.Rounded.DoneAll
+                MangaStatus.COMPLETED.code -> CustomMaterialSymbols.Edge.MarkRead
                 MangaStatus.LICENSED.code -> MaterialSymbols.Rounded.AttachMoney
                 MangaStatus.PUBLISHING_FINISHED.code -> MaterialSymbols.Rounded.Check
-                MangaStatus.CANCELLED.code -> MaterialSymbols.Rounded.Close
-                MangaStatus.ON_HIATUS.code -> MaterialSymbols.RoundedFilled.Pause
+                MangaStatus.CANCELLED.code -> CustomMaterialSymbols.Edge.Close
+                MangaStatus.ON_HIATUS.code -> CustomMaterialSymbols.EdgeFilled.Pause
                 else -> MaterialSymbols.Rounded.Block
             },
         )
@@ -269,7 +270,7 @@ private fun DuplicateMangaListItem(
         ) {
             if (source?.isStub == true) {
                 Icon(
-                    imageVector = MaterialSymbols.RoundedFilled.Warning,
+                    imageVector = CustomMaterialSymbols.EdgeFilled.Warning,
                     contentDescription = null,
                     modifier = Modifier.size(16.dp),
                     tint = MaterialTheme.colorScheme.error,

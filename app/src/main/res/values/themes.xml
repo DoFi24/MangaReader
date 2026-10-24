@@ -52,6 +52,9 @@
         <!-- Ripples -->
         <item name="colorControlHighlight">?attr/colorSurfaceVariant</item>
 
+        <item name="fontFamily">@font/golos_text</item>
+        <item name="android:fontFamily">@font/golos_text</item>
+
         <!-- Handles RTL Text -->
         <item name="android:textAlignment">gravity</item>
         <item name="android:textDirection">locale</item>

@@ -19,11 +19,12 @@ import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.domain.extension.model.ExtensionStore
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Category
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Delete
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Web
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.automirroredrounded.Label
 import com.nilemnod.mangareader.icons.materialsymbols.rounded.ContentCopy
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Delete
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Public
 import com.nilemnod.mangareader.icons.simpleicons.Discord
 import com.nilemnod.mangareader.icons.simpleicons.SimpleIcons
 @Composable
@@ -80,7 +81,7 @@ private fun ExtensionStoresListItem(
                 ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Icon(imageVector = MaterialSymbols.AutoMirroredRounded.Label, contentDescription = null)
+            Icon(imageVector = CustomMaterialSymbols.Edge.Category, contentDescription = null)
             Text(
                 text = store.name,
                 modifier = Modifier.padding(start = MaterialTheme.padding.medium),
@@ -94,7 +95,7 @@ private fun ExtensionStoresListItem(
         ) {
             IconButton(onClick = onOpenWebsite) {
                 Icon(
-                    imageVector = MaterialSymbols.Rounded.Public,
+                    imageVector = CustomMaterialSymbols.Edge.Web,
                     contentDescription = stringResource(MR.strings.action_open_in_browser),
                 )
             }
@@ -117,7 +118,7 @@ private fun ExtensionStoresListItem(
 
             IconButton(onClick = onDelete) {
                 Icon(
-                    imageVector = MaterialSymbols.Rounded.Delete,
+                    imageVector = CustomMaterialSymbols.Edge.Delete,
                     contentDescription = stringResource(MR.strings.action_delete),
                 )
             }

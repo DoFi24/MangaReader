@@ -31,6 +31,7 @@ dependencies {
     implementation(projects.core.android)
     implementation(projects.core.metro)
     implementation(projects.icons.materialSymbols)
+    implementation(projects.icons.customMaterialSymbols)
 
     // Compose
     implementation(libs.androidx.activity.compose)

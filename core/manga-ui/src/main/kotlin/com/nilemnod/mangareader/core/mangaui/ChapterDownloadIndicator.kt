@@ -1,16 +1,18 @@
 package com.nilemnod.mangareader.core.mangaui
 
+import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.CircularWavyProgressIndicator
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.WavyProgressIndicatorDefaults
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,27 +21,25 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.hapticfeedback.HapticFeedback
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.core.ui.components.DropdownMenu
 import com.nilemnod.mangareader.core.ui.components.material.IconButtonTokens
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
-import com.nilemnod.mangareader.core.ui.util.secondaryItemAlpha
+import com.nilemnod.mangareader.core.ui.theme.Motion
 import com.nilemnod.mangareader.domain.download.model.Download
 import com.nilemnod.mangareader.i18n.MR
 import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
-import com.nilemnod.mangareader.icons.custommaterialsymbols.rounded.DownloadArrow
-import com.nilemnod.mangareader.icons.custommaterialsymbols.rounded.DownloadCircle
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Error
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.CheckCircle
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Download
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Downloaded
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Error
+import kotlin.math.PI
 enum class ChapterDownloadAction {
     START,
     START_NOW,
@@ -95,12 +95,11 @@ private fun NotDownloadedIndicator(
                 hapticFeedback = LocalHapticFeedback.current,
                 onLongClick = { onClick(ChapterDownloadAction.START_NOW) },
                 onClick = { onClick(ChapterDownloadAction.START) },
-            )
-            .secondaryItemAlpha(),
+            ),
         contentAlignment = Alignment.Center,
     ) {
         Icon(
-            imageVector = CustomMaterialSymbols.Rounded.DownloadCircle,
+            imageVector = CustomMaterialSymbols.Edge.Download,
             contentDescription = stringResource(MR.strings.manga_download),
             modifier = Modifier.size(IndicatorSize),
             tint = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -128,39 +127,50 @@ private fun DownloadingIndicator(
             ),
         contentAlignment = Alignment.Center,
     ) {
-        val color = MaterialTheme.colorScheme.onSurfaceVariant
-        val trackColor = color.copy(alpha = TRACK_ALPHA)
-        val stroke = Stroke(width = with(LocalDensity.current) { IndicatorStrokeWidth.toPx() }, cap = StrokeCap.Round)
         val downloadProgress = downloadProgressProvider()
-        val indeterminate = downloadState == Download.State.QUEUE ||
-            (downloadState == Download.State.DOWNLOADING && downloadProgress == 0)
-        if (indeterminate) {
-            CircularWavyProgressIndicator(
-                modifier = IndicatorModifier,
-                color = color,
-                trackColor = Color.Transparent,
-                stroke = stroke,
-                trackStroke = stroke,
-                // Only an active download waves, so a queued one reads as waiting
-                amplitude = if (downloadState == Download.State.DOWNLOADING) INDICATOR_AMPLITUDE else 0f,
-                wavelength = IndicatorWavelength,
-            )
-        } else {
-            val animatedProgress by animateFloatAsState(
-                targetValue = downloadProgress / 100f,
-                animationSpec = WavyProgressIndicatorDefaults.ProgressAnimationSpec,
-                label = "progress",
-            )
-            CircularWavyProgressIndicator(
-                progress = { animatedProgress },
-                modifier = IndicatorModifier,
-                color = color,
-                trackColor = trackColor,
-                stroke = stroke,
-                trackStroke = stroke,
-                amplitude = { WavyProgressIndicatorDefaults.indicatorAmplitude(it) * INDICATOR_AMPLITUDE },
-                wavelength = IndicatorWavelength,
-            )
+        when {
+            downloadState == Download.State.QUEUE -> {
+                val color = MaterialTheme.colorScheme.onSurfaceVariant
+                Canvas(modifier = IndicatorModifier) {
+                    val strokePx = IndicatorStrokeWidth.toPx()
+                    val radius = (size.minDimension - strokePx) / 2
+                    val dash = (2 * PI * radius / QUEUE_DASH_COUNT).toFloat()
+                    drawCircle(
+                        color = color,
+                        radius = radius,
+                        style = Stroke(
+                            width = strokePx,
+                            cap = StrokeCap.Round,
+                            pathEffect = PathEffect.dashPathEffect(floatArrayOf(0.1f, dash - 0.1f)),
+                        ),
+                    )
+                }
+            }
+            downloadProgress == 0 -> {
+                CircularProgressIndicator(
+                    modifier = IndicatorModifier,
+                    color = MaterialTheme.colorScheme.primary,
+                    trackColor = MaterialTheme.colorScheme.outlineVariant,
+                    strokeWidth = IndicatorStrokeWidth,
+                    strokeCap = StrokeCap.Round,
+                )
+            }
+            else -> {
+                val animatedProgress by animateFloatAsState(
+                    targetValue = downloadProgress / 100f,
+                    animationSpec = tween(Motion.MEDIUM, easing = LinearEasing),
+                    label = "progress",
+                )
+                CircularProgressIndicator(
+                    progress = { animatedProgress },
+                    modifier = IndicatorModifier,
+                    color = MaterialTheme.colorScheme.primary,
+                    trackColor = MaterialTheme.colorScheme.outlineVariant,
+                    strokeWidth = IndicatorStrokeWidth,
+                    strokeCap = StrokeCap.Round,
+                    gapSize = 0.dp,
+                )
+            }
         }
         DropdownMenu(expanded = isMenuExpanded, onDismissRequest = { isMenuExpanded = false }) {
             DropdownMenuItem(
@@ -178,12 +188,6 @@ private fun DownloadingIndicator(
                 },
             )
         }
-        Icon(
-            imageVector = CustomMaterialSymbols.Rounded.DownloadArrow,
-            contentDescription = null,
-            modifier = ArrowModifier,
-            tint = color,
-        )
     }
 }
 
@@ -206,10 +210,10 @@ private fun DownloadedIndicator(
         contentAlignment = Alignment.Center,
     ) {
         Icon(
-            imageVector = MaterialSymbols.RoundedFilled.CheckCircle,
+            imageVector = CustomMaterialSymbols.EdgeFilled.Downloaded,
             contentDescription = null,
             modifier = Modifier.size(IndicatorSize),
-            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            tint = MaterialTheme.colorScheme.tertiary,
         )
         DropdownMenu(expanded = isMenuExpanded, onDismissRequest = { isMenuExpanded = false }) {
             DropdownMenuItem(
@@ -241,7 +245,7 @@ private fun ErrorIndicator(
         contentAlignment = Alignment.Center,
     ) {
         Icon(
-            imageVector = MaterialSymbols.Rounded.Error,
+            imageVector = CustomMaterialSymbols.EdgeFilled.Error,
             contentDescription = stringResource(MR.strings.chapter_error),
             modifier = Modifier.size(IndicatorSize),
             tint = MaterialTheme.colorScheme.error,
@@ -269,16 +273,12 @@ private fun Modifier.commonClickable(
     ),
 )
 
-private val IndicatorSize = 26.dp
-private val IndicatorPadding = 1.dp
-private val IndicatorWavelength = 7.dp
-private const val INDICATOR_AMPLITUDE = 0.6f
-private const val TRACK_ALPHA = 0.25f
+private val IndicatorSize = 24.dp
+private val IndicatorPadding = 2.dp
+private const val QUEUE_DASH_COUNT = 10
 
-private val IndicatorStrokeWidth = 2.dp
+private val IndicatorStrokeWidth = 2.5.dp
 
 private val IndicatorModifier = Modifier
     .size(IndicatorSize)
     .padding(IndicatorPadding)
-private val ArrowModifier = Modifier
-    .size(IndicatorSize)

@@ -2,7 +2,6 @@ package com.nilemnod.mangareader.feature.manga.presentation.components
 
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -10,20 +9,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.unit.dp
 import com.nilemnod.mangareader.core.mangaui.DownloadAction
 import com.nilemnod.mangareader.core.mangaui.DownloadDropdownMenu
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.AppBarActions
 import com.nilemnod.mangareader.core.ui.components.AppBarTitle
+import com.nilemnod.mangareader.core.ui.components.SelectionTitle
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
-import com.nilemnod.mangareader.core.ui.theme.active
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Download
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.FilterList
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.FlipToBack
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.SelectAll
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Download
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Filter
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.InvertSelection
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.SelectAll
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Filter
 @Composable
 fun MangaToolbar(
     title: String,
@@ -51,15 +50,17 @@ fun MangaToolbar(
     AppBar(
         titleContent = {
             if (isActionMode) {
-                AppBarTitle(actionModeCounter.toString())
+                SelectionTitle(actionModeCounter)
             } else {
                 AppBarTitle(title, modifier = Modifier.alpha(titleAlphaProvider()))
             }
         },
         modifier = modifier,
-        backgroundColor = MaterialTheme.colorScheme
-            .surfaceColorAtElevation(3.dp)
-            .copy(alpha = if (isActionMode) 1f else backgroundAlphaProvider()),
+        backgroundColor = if (isActionMode) {
+            MaterialTheme.colorScheme.surfaceContainerHigh
+        } else {
+            MaterialTheme.colorScheme.surfaceContainer.copy(alpha = backgroundAlphaProvider())
+        },
         navigateUp = navigateUp,
         actions = {
             var downloadExpanded by remember { mutableStateOf(false) }
@@ -72,21 +73,21 @@ fun MangaToolbar(
                 )
             }
 
-            val filterTint = if (hasFilters) MaterialTheme.colorScheme.active else LocalContentColor.current
+            val filterTint = if (hasFilters) MaterialTheme.colorScheme.primary else LocalContentColor.current
             AppBarActions(
                 actions = buildList {
                     if (isActionMode) {
                         add(
                             AppBar.Action(
                                 title = stringResource(MR.strings.action_select_all),
-                                icon = MaterialSymbols.Rounded.SelectAll,
+                                icon = CustomMaterialSymbols.Edge.SelectAll,
                                 onClick = onSelectAll,
                             ),
                         )
                         add(
                             AppBar.Action(
                                 title = stringResource(MR.strings.action_select_inverse),
-                                icon = MaterialSymbols.Rounded.FlipToBack,
+                                icon = CustomMaterialSymbols.Edge.InvertSelection,
                                 onClick = onInvertSelection,
                             ),
                         )
@@ -96,7 +97,7 @@ fun MangaToolbar(
                         add(
                             AppBar.Action(
                                 title = stringResource(MR.strings.manga_download),
-                                icon = MaterialSymbols.Rounded.Download,
+                                icon = CustomMaterialSymbols.Edge.Download,
                                 onClick = { downloadExpanded = !downloadExpanded },
                             ),
                         )
@@ -104,7 +105,11 @@ fun MangaToolbar(
                     add(
                         AppBar.Action(
                             title = stringResource(MR.strings.action_filter),
-                            icon = MaterialSymbols.Rounded.FilterList,
+                            icon = if (hasFilters) {
+                                CustomMaterialSymbols.EdgeFilled.Filter
+                            } else {
+                                CustomMaterialSymbols.Edge.Filter
+                            },
                             iconTint = filterTint,
                             onClick = onClickFilter,
                         ),

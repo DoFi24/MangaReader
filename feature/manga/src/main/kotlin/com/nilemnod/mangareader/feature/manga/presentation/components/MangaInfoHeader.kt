@@ -2,10 +2,8 @@ package com.nilemnod.mangareader.feature.manga.presentation.components
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.spring
-import androidx.compose.animation.graphics.res.animatedVectorResource
-import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
-import androidx.compose.animation.graphics.vector.AnimatedImageVector
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,21 +16,26 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.appendInlineContent
 import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.SuggestionChip
+import androidx.compose.material3.SuggestionChipDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -44,14 +47,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clipToBounds
-import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
@@ -63,8 +61,6 @@ import androidx.compose.ui.text.withLink
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.mikepenz.markdown.model.markdownAnnotator
@@ -78,34 +74,34 @@ import com.nilemnod.mangareader.core.mangaui.MangaCover
 import com.nilemnod.mangareader.core.mangaui.MarkdownRender
 import com.nilemnod.mangareader.core.mangaui.getMarkdownLinkStyle
 import com.nilemnod.mangareader.core.ui.components.DropdownMenu
-import com.nilemnod.mangareader.core.ui.components.material.DISABLED_ALPHA
 import com.nilemnod.mangareader.core.ui.components.material.TextButton
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import com.nilemnod.mangareader.core.ui.i18n.pluralStringResource
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.preference.appUiPreferences
+import com.nilemnod.mangareader.core.ui.theme.Motion
 import com.nilemnod.mangareader.core.ui.util.clickableNoIndication
-import com.nilemnod.mangareader.core.ui.util.secondaryItemAlpha
 import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.api.MangaStatus
-import com.nilemnod.mangareader.feature.manga.R
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.About
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Cancelled
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Completed
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Favorite
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Note
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.OnHold
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Ongoing
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Security
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Updates
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Web
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Favorite
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Updates
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Warning
 import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.AttachMoney
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Block
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Check
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Close
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.DoneAll
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Favorite
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.HourglassEmpty
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Person
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Public
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Schedule
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Brush
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Favorite
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Pause
-import com.nilemnod.mangareader.icons.materialsymbols.roundedfilled.Warning
+import com.nilemnod.mangareader.icons.materialsymbols.rounded.KeyboardArrowDown
+import com.nilemnod.mangareader.icons.materialsymbols.rounded.KeyboardArrowUp
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.daysUntil
 import org.intellij.markdown.MarkdownElementTypes
@@ -128,31 +124,6 @@ fun MangaInfoBox(
     modifier: Modifier = Modifier,
 ) {
     Box(modifier = modifier) {
-        // Backdrop
-        val backdropGradientColors = listOf(
-            Color.Transparent,
-            MaterialTheme.colorScheme.background,
-        )
-        AsyncImage(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data(manga)
-                .crossfade(true)
-                .build(),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .matchParentSize()
-                .drawWithContent {
-                    drawContent()
-                    drawRect(
-                        brush = Brush.verticalGradient(colors = backdropGradientColors),
-                    )
-                }
-                .blur(4.dp)
-                .alpha(0.2f),
-        )
-
-        // Manga & source info
         CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onSurface) {
             if (!isTabletUi) {
                 MangaAndSourceTitlesSmall(
@@ -191,9 +162,8 @@ fun MangaActionRow(
     onEditCategory: (() -> Unit)?,
     modifier: Modifier = Modifier,
 ) {
-    val defaultActionButtonColor = MaterialTheme.colorScheme.onSurface.copy(alpha = DISABLED_ALPHA)
+    val defaultActionButtonColor = MaterialTheme.colorScheme.onSurfaceVariant
 
-    // TODO: show something better when using custom interval
     val nextUpdateDays = remember(nextUpdate) {
         return@remember if (nextUpdate != null) {
             val now = Clock.System.now()
@@ -203,14 +173,17 @@ fun MangaActionRow(
         }
     }
 
-    Row(modifier = modifier.padding(start = 16.dp, top = 8.dp, end = 16.dp)) {
+    Row(
+        modifier = modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
         MangaActionButton(
             title = if (favorite) {
                 stringResource(MR.strings.in_library)
             } else {
                 stringResource(MR.strings.add_to_library)
             },
-            icon = if (favorite) MaterialSymbols.RoundedFilled.Favorite else MaterialSymbols.Rounded.Favorite,
+            icon = if (favorite) CustomMaterialSymbols.EdgeFilled.Favorite else CustomMaterialSymbols.Edge.Favorite,
             color = if (favorite) MaterialTheme.colorScheme.primary else defaultActionButtonColor,
             onClick = onAddToLibraryClicked,
             onLongClick = onEditCategory,
@@ -225,14 +198,18 @@ fun MangaActionRow(
                     nextUpdateDays,
                 )
             },
-            icon = MaterialSymbols.Rounded.HourglassEmpty,
+            icon = if (isUserIntervalMode) {
+                CustomMaterialSymbols.EdgeFilled.Updates
+            } else {
+                CustomMaterialSymbols.Edge.Updates
+            },
             color = if (isUserIntervalMode) MaterialTheme.colorScheme.primary else defaultActionButtonColor,
             onClick = { onEditIntervalClicked?.invoke() },
         )
         if (onWebViewClicked != null) {
             MangaActionButton(
                 title = stringResource(MR.strings.action_web_view),
-                icon = MaterialSymbols.Rounded.Public,
+                icon = CustomMaterialSymbols.Edge.Web,
                 color = defaultActionButtonColor,
                 onClick = onWebViewClicked,
                 onLongClick = onWebViewLongClicked,
@@ -262,10 +239,9 @@ fun ExpandableMangaDescription(
         MangaSummary(
             description = desc,
             expanded = expanded,
-            notes = notes,
-            onEditNotesClicked = onEditNotes,
+            onToggle = { onExpanded(!expanded) },
             modifier = Modifier
-                .padding(top = 8.dp)
+                .padding(top = 16.dp)
                 .padding(horizontal = 16.dp)
                 .clickableNoIndication { onExpanded(!expanded) },
         )
@@ -274,8 +250,7 @@ fun ExpandableMangaDescription(
             Box(
                 modifier = Modifier
                     .padding(top = 8.dp)
-                    .padding(vertical = 12.dp)
-                    .animateContentSize(animationSpec = spring())
+                    .animateContentSize(animationSpec = tween(Motion.MEDIUM, easing = Motion.Standard))
                     .fillMaxWidth(),
             ) {
                 var showMenu by remember { mutableStateOf(false) }
@@ -302,7 +277,7 @@ fun ExpandableMangaDescription(
                 if (expanded) {
                     FlowRow(
                         modifier = Modifier.padding(horizontal = 16.dp),
-                        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
                         tags.forEach {
                             TagsChip(
@@ -317,8 +292,8 @@ fun ExpandableMangaDescription(
                     }
                 } else {
                     LazyRow(
-                        contentPadding = PaddingValues(horizontal = MaterialTheme.padding.medium),
-                        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
+                        contentPadding = PaddingValues(horizontal = 16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
                         items(items = tags) {
                             TagsChip(
@@ -332,6 +307,55 @@ fun ExpandableMangaDescription(
                         }
                     }
                 }
+            }
+        }
+        MangaNoteCard(
+            notes = notes,
+            onClick = onEditNotes,
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .padding(top = 16.dp, bottom = 8.dp),
+        )
+    }
+}
+
+@Composable
+private fun MangaNoteCard(
+    notes: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Card(
+        onClick = onClick,
+        modifier = modifier.fillMaxWidth(),
+        shape = MaterialTheme.shapes.medium,
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+        ),
+    ) {
+        Row(
+            modifier = Modifier
+                .heightIn(min = 56.dp)
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Icon(
+                imageVector = CustomMaterialSymbols.Edge.Note,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            if (notes.isBlank()) {
+                Text(
+                    text = stringResource(MR.strings.add_note),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            } else {
+                MangaNotesDisplay(
+                    content = notes,
+                    modifier = Modifier.weight(1f),
+                )
             }
         }
     }
@@ -396,7 +420,7 @@ private fun MangaAndSourceTitlesSmall(
     ) {
         MangaCover.Book(
             modifier = Modifier
-                .sizeIn(maxWidth = 100.dp)
+                .width(112.dp)
                 .align(Alignment.Top),
             data = ImageRequest.Builder(LocalContext.current)
                 .data(manga)
@@ -406,7 +430,8 @@ private fun MangaAndSourceTitlesSmall(
             onClick = onCoverClick,
         )
         Column(
-            verticalArrangement = Arrangement.spacedBy(2.dp),
+            modifier = Modifier.align(Alignment.Top).padding(top = 4.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             MangaContentInfo(
                 title = manga.title,
@@ -437,7 +462,9 @@ private fun ColumnScope.MangaContentInfo(
     val context = LocalContext.current
     Text(
         text = title.ifBlank { stringResource(MR.strings.unknown_title) },
-        style = MaterialTheme.typography.titleLarge,
+        style = MaterialTheme.typography.headlineSmall,
+        maxLines = 3,
+        overflow = TextOverflow.Ellipsis,
         modifier = Modifier.clickableNoIndication(
             onLongClick = {
                 if (title.isNotBlank()) {
@@ -452,22 +479,12 @@ private fun ColumnScope.MangaContentInfo(
         textAlign = textAlign,
     )
 
-    Spacer(modifier = Modifier.height(2.dp))
-
-    Row(
-        modifier = Modifier.secondaryItemAlpha(),
-        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
-        verticalAlignment = Alignment.CenterVertically,
+    ProvideTextStyle(
+        MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.onSurfaceVariant),
     ) {
-        Icon(
-            imageVector = MaterialSymbols.Rounded.Person,
-            contentDescription = null,
-            modifier = Modifier.size(16.dp),
-        )
         Text(
             text = author?.takeIf { it.isNotBlank() }
                 ?: stringResource(MR.strings.unknown_author),
-            style = MaterialTheme.typography.titleSmall,
             modifier = Modifier
                 .clickableNoIndication(
                     onLongClick = {
@@ -482,22 +499,10 @@ private fun ColumnScope.MangaContentInfo(
                 ),
             textAlign = textAlign,
         )
-    }
 
-    if (!artist.isNullOrBlank() && author != artist) {
-        Row(
-            modifier = Modifier.secondaryItemAlpha(),
-            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Icon(
-                imageVector = MaterialSymbols.RoundedFilled.Brush,
-                contentDescription = null,
-                modifier = Modifier.size(16.dp),
-            )
+        if (!artist.isNullOrBlank() && author != artist) {
             Text(
                 text = artist,
-                style = MaterialTheme.typography.titleSmall,
                 modifier = Modifier
                     .clickableNoIndication(
                         onLongClick = { context.copyToClipboard(artist, artist) },
@@ -508,28 +513,28 @@ private fun ColumnScope.MangaContentInfo(
         }
     }
 
-    Spacer(modifier = Modifier.height(2.dp))
-
     Row(
-        modifier = Modifier.secondaryItemAlpha(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Icon(
             imageVector = when (status) {
-                MangaStatus.ONGOING.code -> MaterialSymbols.Rounded.Schedule
-                MangaStatus.COMPLETED.code -> MaterialSymbols.Rounded.DoneAll
-                MangaStatus.LICENSED.code -> MaterialSymbols.Rounded.AttachMoney
-                MangaStatus.PUBLISHING_FINISHED.code -> MaterialSymbols.Rounded.Check
-                MangaStatus.CANCELLED.code -> MaterialSymbols.Rounded.Close
-                MangaStatus.ON_HIATUS.code -> MaterialSymbols.RoundedFilled.Pause
-                else -> MaterialSymbols.Rounded.Block
+                MangaStatus.ONGOING.code -> CustomMaterialSymbols.Edge.Ongoing
+                MangaStatus.COMPLETED.code -> CustomMaterialSymbols.Edge.Completed
+                MangaStatus.LICENSED.code -> CustomMaterialSymbols.Edge.Security
+                MangaStatus.PUBLISHING_FINISHED.code -> CustomMaterialSymbols.Edge.Completed
+                MangaStatus.CANCELLED.code -> CustomMaterialSymbols.Edge.Cancelled
+                MangaStatus.ON_HIATUS.code -> CustomMaterialSymbols.Edge.OnHold
+                else -> CustomMaterialSymbols.Edge.About
             },
             contentDescription = null,
+            tint = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier
-                .padding(end = 4.dp)
-                .size(16.dp),
+                .padding(end = 8.dp)
+                .size(20.dp),
         )
-        ProvideTextStyle(MaterialTheme.typography.bodyMedium) {
+        ProvideTextStyle(
+            MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.onSurfaceVariant),
+        ) {
             Text(
                 text = when (status) {
                     MangaStatus.ONGOING.code -> stringResource(MR.strings.ongoing)
@@ -546,7 +551,7 @@ private fun ColumnScope.MangaContentInfo(
             DotSeparatorText()
             if (isStubSource) {
                 Icon(
-                    imageVector = MaterialSymbols.RoundedFilled.Warning,
+                    imageVector = CustomMaterialSymbols.EdgeFilled.Warning,
                     contentDescription = null,
                     modifier = Modifier
                         .padding(end = 4.dp)
@@ -613,9 +618,8 @@ private fun descriptionAnnotator(loadImages: Boolean, linkStyle: SpanStyle) = re
 @Composable
 private fun MangaSummary(
     description: String,
-    notes: String,
     expanded: Boolean,
-    onEditNotesClicked: () -> Unit,
+    onToggle: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
@@ -623,6 +627,7 @@ private fun MangaSummary(
     val loadImages = remember { preferences.imagesInDescription.get() }
     val animProgress by animateFloatAsState(
         targetValue = if (expanded) 1f else 0f,
+        animationSpec = tween(Motion.MEDIUM, easing = Motion.Standard),
         label = "summary",
     )
     var infoHeight by remember { mutableIntStateOf(0) }
@@ -631,9 +636,7 @@ private fun MangaSummary(
         contents = listOf(
             {
                 Text(
-                    // Shows at least 3 lines if no notes
-                    // when there are notes show 6
-                    text = if (notes.isBlank()) "\n\n" else "\n\n\n\n\n",
+                    text = "\n\n",
                     style = MaterialTheme.typography.bodyMedium,
                 )
             },
@@ -643,15 +646,9 @@ private fun MangaSummary(
                         infoHeight = size.height
                     },
                 ) {
-                    MangaNotesSection(
-                        content = notes,
-                        expanded = expanded,
-                        onEditNotes = onEditNotesClicked,
-                    )
                     SelectionContainer {
                         MarkdownRender(
                             content = description,
-                            modifier = Modifier.secondaryItemAlpha(),
                             annotator = descriptionAnnotator(
                                 loadImages = loadImages,
                                 linkStyle = getMarkdownLinkStyle().toSpanStyle(),
@@ -662,20 +659,26 @@ private fun MangaSummary(
                 }
             },
             {
-                val colors = listOf(Color.Transparent, MaterialTheme.colorScheme.background)
                 Box(
-                    modifier = Modifier.background(Brush.verticalGradient(colors = colors)),
+                    modifier = Modifier.background(MaterialTheme.colorScheme.surface),
                     contentAlignment = Alignment.Center,
                 ) {
-                    val image = AnimatedImageVector.animatedVectorResource(R.drawable.animated_caret_flip)
-                    Icon(
-                        painter = rememberAnimatedVectorPainter(image, !expanded),
-                        contentDescription = stringResource(
-                            if (expanded) MR.strings.manga_info_collapse else MR.strings.manga_info_expand,
-                        ),
-                        tint = MaterialTheme.colorScheme.onBackground,
-                        modifier = Modifier.background(Brush.radialGradient(colors = colors.asReversed())),
-                    )
+                    IconButton(
+                        onClick = onToggle,
+                        modifier = Modifier.size(width = 48.dp, height = 32.dp),
+                    ) {
+                        Icon(
+                            imageVector = if (expanded) {
+                                MaterialSymbols.Rounded.KeyboardArrowUp
+                            } else {
+                                MaterialSymbols.Rounded.KeyboardArrowDown
+                            },
+                            contentDescription = stringResource(
+                                if (expanded) MR.strings.manga_info_collapse else MR.strings.manga_info_expand,
+                            ),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
                 }
             },
         ),
@@ -684,14 +687,14 @@ private fun MangaSummary(
             .measure(constraints)
             .height
         val heightDelta = infoHeight - shrunkHeight
-        val scrimHeight = 24.dp.roundToPx()
+        val scrimHeight = 32.dp.roundToPx()
 
         val actualPlaceable = actual.single()
             .measure(constraints)
         val scrimPlaceable = scrim.single()
             .measure(Constraints.fixed(width = constraints.maxWidth, height = scrimHeight))
 
-        val currentHeight = shrunkHeight + ((heightDelta + scrimHeight) * animProgress).roundToInt()
+        val currentHeight = shrunkHeight + scrimHeight + (heightDelta.coerceAtLeast(0) * animProgress).roundToInt()
         layout(constraints.maxWidth, currentHeight) {
             actualPlaceable.place(0, 0)
 
@@ -701,7 +704,7 @@ private fun MangaSummary(
     }
 }
 
-private val DefaultTagChipModifier = Modifier.padding(vertical = 4.dp)
+private val DefaultTagChipModifier = Modifier.padding(vertical = 4.dp).height(32.dp)
 
 @Composable
 private fun TagsChip(
@@ -713,7 +716,12 @@ private fun TagsChip(
         SuggestionChip(
             modifier = modifier,
             onClick = onClick,
-            label = { Text(text = text, style = MaterialTheme.typography.bodySmall) },
+            shape = MaterialTheme.shapes.small,
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+            colors = SuggestionChipDefaults.suggestionChipColors(
+                labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+            ),
+            label = { Text(text = text, style = MaterialTheme.typography.labelLarge) },
         )
     }
 }
@@ -728,21 +736,24 @@ private fun RowScope.MangaActionButton(
 ) {
     TextButton(
         onClick = onClick,
-        modifier = Modifier.weight(1f),
+        modifier = Modifier
+            .weight(1f)
+            .heightIn(min = 64.dp),
         onLongClick = onLongClick,
+        shape = MaterialTheme.shapes.medium,
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Icon(
                 imageVector = icon,
                 contentDescription = null,
                 tint = color,
-                modifier = Modifier.size(20.dp),
+                modifier = Modifier.size(24.dp),
             )
             Spacer(Modifier.height(4.dp))
             Text(
                 text = title,
                 color = color,
-                fontSize = 12.sp,
+                style = MaterialTheme.typography.labelMedium,
                 textAlign = TextAlign.Center,
             )
         }

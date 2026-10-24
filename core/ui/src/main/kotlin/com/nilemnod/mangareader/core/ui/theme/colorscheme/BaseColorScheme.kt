@@ -7,6 +7,7 @@ internal abstract class BaseColorScheme {
 
     abstract val darkScheme: ColorScheme
     abstract val lightScheme: ColorScheme
+    open val amoledScheme: ColorScheme? = null
 
     // Cannot be pure black as there's content scrolling behind it
     // https://m3.material.io/components/navigation-bar/guidelines#90615a71-607e-485e-9e09-778bfc080563
@@ -23,16 +24,18 @@ internal abstract class BaseColorScheme {
 
         if (!isAmoled) return darkScheme
 
-        val amoledScheme = darkScheme.copy(
+        amoledScheme?.let { return it }
+
+        val blackScheme = darkScheme.copy(
             background = Color.Black,
             onBackground = Color.White,
             surface = Color.Black,
             onSurface = Color.White,
         )
 
-        if (!overrideDarkSurfaceContainers) return amoledScheme
+        if (!overrideDarkSurfaceContainers) return blackScheme
 
-        return amoledScheme.copy(
+        return blackScheme.copy(
             surfaceVariant = surfaceContainer, // Navigation bar background (ThemePrefWidget)
             surfaceContainerLowest = surfaceContainer,
             surfaceContainerLow = surfaceContainer,

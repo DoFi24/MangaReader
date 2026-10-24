@@ -1,6 +1,7 @@
 package com.nilemnod.mangareader.core.mangaui
 
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -27,7 +28,10 @@ fun RemoveMangaDialog(
                     onConfirm()
                 },
             ) {
-                Text(text = stringResource(MR.strings.action_remove))
+                Text(
+                    text = stringResource(MR.strings.action_remove),
+                    color = MaterialTheme.colorScheme.error,
+                )
             }
         },
         title = {

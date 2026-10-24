@@ -52,10 +52,10 @@ import com.nilemnod.mangareader.feature.reader.legacy.readerOrientation
 import com.nilemnod.mangareader.feature.reader.legacy.readingMode
 import com.nilemnod.mangareader.feature.reader.legacy.setting.ReaderSettingsViewModel
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Add
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Delete
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.DragHandle
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Add
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Delete
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.DragHandle
 import dev.icerock.moko.resources.StringResource
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
@@ -325,7 +325,7 @@ private fun ShaderList(labelRes: StringResource, pref: Preference<List<WebGpuSha
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Icon(
-                        imageVector = MaterialSymbols.Rounded.DragHandle,
+                        imageVector = CustomMaterialSymbols.Edge.DragHandle,
                         contentDescription = null,
                         modifier = Modifier.draggableHandle(),
                     )
@@ -341,7 +341,7 @@ private fun ShaderList(labelRes: StringResource, pref: Preference<List<WebGpuSha
                         onClick = { WebGpuShaders.remove(context, pref, shader) },
                     ) {
                         Icon(
-                            imageVector = MaterialSymbols.Rounded.Delete,
+                            imageVector = CustomMaterialSymbols.Edge.Delete,
                             contentDescription = stringResource(MR.strings.action_delete),
                         )
                     }
@@ -359,7 +359,7 @@ private fun ShaderList(labelRes: StringResource, pref: Preference<List<WebGpuSha
         },
         modifier = Modifier.padding(horizontal = SettingsItemsPaddings.Horizontal - MaterialTheme.padding.small),
     ) {
-        Icon(imageVector = MaterialSymbols.Rounded.Add, contentDescription = null)
+        Icon(imageVector = CustomMaterialSymbols.Edge.Add, contentDescription = null)
         Text(
             text = stringResource(MR.strings.action_add_shader),
             modifier = Modifier.padding(start = MaterialTheme.padding.small),

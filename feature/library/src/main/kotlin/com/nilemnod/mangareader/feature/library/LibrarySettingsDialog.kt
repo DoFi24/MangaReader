@@ -34,8 +34,8 @@ import com.nilemnod.mangareader.domain.library.model.LibrarySort
 import com.nilemnod.mangareader.domain.library.model.sort
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
 import com.nilemnod.mangareader.i18n.MR
-import com.nilemnod.mangareader.icons.materialsymbols.MaterialSymbols
-import com.nilemnod.mangareader.icons.materialsymbols.rounded.Refresh
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Refresh
 @Composable
 fun LibrarySettingsDialog(
     onDismissRequest: () -> Unit,
@@ -150,7 +150,7 @@ private fun ColumnScope.SortPage(
         if (mode == LibrarySort.Type.Random) {
             BaseSortItem(
                 label = stringResource(titleRes),
-                icon = MaterialSymbols.Rounded.Refresh
+                icon = CustomMaterialSymbols.Edge.Refresh
                     .takeIf { sortingMode == LibrarySort.Type.Random },
                 onClick = {
                     viewModel.setSort(category, mode, LibrarySort.Direction.Ascending)

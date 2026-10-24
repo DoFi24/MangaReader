@@ -1,12 +1,10 @@
 package com.nilemnod.mangareader.feature.updates
 
-import androidx.compose.animation.graphics.res.animatedVectorResource
-import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
-import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -25,6 +23,9 @@ import com.nilemnod.mangareader.core.ui.util.SplashReady
 import com.nilemnod.mangareader.core.ui.util.Tab
 import com.nilemnod.mangareader.feature.updates.UpdatesViewModel.Event
 import com.nilemnod.mangareader.i18n.MR
+import com.nilemnod.mangareader.icons.custommaterialsymbols.CustomMaterialSymbols
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edge.Updates
+import com.nilemnod.mangareader.icons.custommaterialsymbols.edgefilled.Updates
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 import kotlinx.coroutines.flow.collectLatest
 
@@ -34,11 +35,12 @@ data object UpdatesTab : Tab {
         @Composable
         get() {
             val isSelected = LocalTabNavigator.current.current.key == key
-            val image = AnimatedImageVector.animatedVectorResource(R.drawable.animated_updates)
             return TabOptions(
                 index = 1u,
                 title = stringResource(MR.strings.label_recent_updates),
-                icon = rememberAnimatedVectorPainter(image, isSelected),
+                icon = rememberVectorPainter(
+                    if (isSelected) CustomMaterialSymbols.EdgeFilled.Updates else CustomMaterialSymbols.Edge.Updates,
+                ),
             )
         }
 
