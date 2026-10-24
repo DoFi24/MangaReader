@@ -151,7 +151,7 @@ class BrowseSourceViewModel(
         } else {
             libraryPreferences.portraitColumns
         }.get()
-        return if (columns == 0) GridCells.Adaptive(128.dp) else GridCells.Fixed(columns)
+        return if (columns == 0) GridCells.Adaptive(104.dp) else GridCells.Fixed(columns)
     }
 
     fun resetFilters() {

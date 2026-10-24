@@ -5,7 +5,6 @@ import com.nilemnod.mangareader.core.android.system.isDynamicColorAvailable
 import com.nilemnod.mangareader.core.common.preference.Preference
 import com.nilemnod.mangareader.core.common.preference.PreferenceStore
 import com.nilemnod.mangareader.core.common.preference.getEnum
-import com.nilemnod.mangareader.core.common.util.system.DeviceUtil
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.ui.preference.model.AppTheme
 import com.nilemnod.mangareader.core.ui.preference.model.TabletUiMode
@@ -28,14 +27,7 @@ class UiPreferences(
 
     val themeMode: Preference<ThemeMode> = preferenceStore.getEnum("pref_theme_mode_key", ThemeMode.SYSTEM)
 
-    val appTheme: Preference<AppTheme> = preferenceStore.getEnum(
-        "pref_app_theme",
-        if (DeviceUtil.isDynamicColorAvailable) {
-            AppTheme.MONET
-        } else {
-            AppTheme.DEFAULT
-        },
-    )
+    val appTheme: Preference<AppTheme> = preferenceStore.getEnum("pref_app_theme", AppTheme.DEFAULT)
 
     val themeDarkAmoled: Preference<Boolean> = preferenceStore.getBoolean("pref_theme_dark_amoled_key", false)
 

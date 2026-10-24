@@ -686,20 +686,22 @@ private fun MangaSummary(
         val shrunkHeight = shrunk.single()
             .measure(constraints)
             .height
-        val heightDelta = infoHeight - shrunkHeight
-        val scrimHeight = 32.dp.roundToPx()
-
         val actualPlaceable = actual.single()
             .measure(constraints)
+        val fullHeight = maxOf(infoHeight, actualPlaceable.height)
+        val collapsedHeight = minOf(shrunkHeight, fullHeight)
+        val overflows = fullHeight > shrunkHeight
+        val scrimHeight = if (overflows) 32.dp.roundToPx() else 0
         val scrimPlaceable = scrim.single()
             .measure(Constraints.fixed(width = constraints.maxWidth, height = scrimHeight))
 
-        val currentHeight = shrunkHeight + scrimHeight + (heightDelta.coerceAtLeast(0) * animProgress).roundToInt()
+        val currentHeight = collapsedHeight + scrimHeight +
+            ((fullHeight - collapsedHeight) * animProgress).roundToInt()
         layout(constraints.maxWidth, currentHeight) {
             actualPlaceable.place(0, 0)
-
-            val scrimY = currentHeight - scrimHeight
-            scrimPlaceable.place(0, scrimY)
+            if (overflows) {
+                scrimPlaceable.place(0, currentHeight - scrimHeight)
+            }
         }
     }
 }
