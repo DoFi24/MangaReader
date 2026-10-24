@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.widget
+package com.nilemnod.mangareader.feature.extensions.sourcesettings
 
 import android.content.Context
 import android.util.AttributeSet
@@ -6,9 +6,9 @@ import android.widget.EditText
 import androidx.appcompat.R
 import androidx.core.view.inputmethod.EditorInfoCompat
 import com.google.android.material.textfield.TextInputEditText
-import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.domain.base.BasePreferences
-import com.nilemnod.mangareader.app.widget.AppTextInputEditText.Companion.setIncognito
+import com.nilemnod.mangareader.domain.base.service.ModePreferences
+import com.nilemnod.mangareader.feature.extensions.extensionsGraph
+import com.nilemnod.mangareader.feature.extensions.sourcesettings.AppTextInputEditText.Companion.setIncognito
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.onEach
 
 /**
  * A custom [TextInputEditText] that sets [EditorInfoCompat.IME_FLAG_NO_PERSONALIZED_LEARNING] to imeOptions
- * if [BasePreferences.incognitoMode] is true. Some IMEs may not respect this flag.
+ * if [ModePreferences.incognitoMode] is true. Some IMEs may not respect this flag.
  *
  * @see setIncognito
  */
@@ -33,8 +33,7 @@ class AppTextInputEditText @JvmOverloads constructor(
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
-        val basePreferences = context.appGraph.basePreferences
-        setIncognito(basePreferences, scope!!)
+        setIncognito(context.extensionsGraph.modePreferences, scope!!)
     }
 
     override fun onDetachedFromWindow() {
@@ -46,10 +45,10 @@ class AppTextInputEditText @JvmOverloads constructor(
     companion object {
         /**
          * Sets Flow to this [EditText] that sets [EditorInfoCompat.IME_FLAG_NO_PERSONALIZED_LEARNING] to imeOptions
-         * if [BasePreferences.incognitoMode] is true. Some IMEs may not respect this flag.
+         * if [ModePreferences.incognitoMode] is true. Some IMEs may not respect this flag.
          */
-        fun EditText.setIncognito(basePreferences: BasePreferences, viewScope: CoroutineScope) {
-            basePreferences.incognitoMode.changes()
+        fun EditText.setIncognito(modePreferences: ModePreferences, viewScope: CoroutineScope) {
+            modePreferences.incognitoMode.changes()
                 .onEach {
                     imeOptions = if (it) {
                         imeOptions or EditorInfoCompat.IME_FLAG_NO_PERSONALIZED_LEARNING

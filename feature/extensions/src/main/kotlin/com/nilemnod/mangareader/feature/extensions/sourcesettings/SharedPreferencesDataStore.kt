@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.data.preference
+package com.nilemnod.mangareader.feature.extensions.sourcesettings
 
 import android.content.SharedPreferences
 import androidx.core.content.edit

@@ -9,6 +9,7 @@ import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import com.nilemnod.mangareader.core.ui.components.BrowseTabs
 import com.nilemnod.mangareader.core.ui.components.TabbedScreen
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.util.SplashReady

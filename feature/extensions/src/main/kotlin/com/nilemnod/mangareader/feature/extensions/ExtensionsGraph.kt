@@ -2,8 +2,10 @@ package com.nilemnod.mangareader.feature.extensions
 
 import android.content.Context
 import com.nilemnod.mangareader.core.metro.metroGraph
+import com.nilemnod.mangareader.domain.base.service.ModePreferences
 import com.nilemnod.mangareader.domain.extension.repository.ExtensionStoreRepository
 import com.nilemnod.mangareader.domain.extension.service.ExtensionSourceLoader
+import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import com.nilemnod.mangareader.feature.extensions.notification.ExtensionNotifications
 import com.nilemnod.mangareader.feature.extensions.trust.TrustExtension
@@ -15,6 +17,8 @@ interface ExtensionsGraph {
     val extensionManager: ExtensionManager
     val trustExtension: TrustExtension
     val sourcePreferences: SourcePreferences
+    val sourceManager: SourceManager
+    val modePreferences: ModePreferences
     val extensionStoreRepository: ExtensionStoreRepository
     val extensionSourceLoader: ExtensionSourceLoader
     val extensionNotifications: ExtensionNotifications
