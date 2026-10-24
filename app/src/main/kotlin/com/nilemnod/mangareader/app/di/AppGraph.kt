@@ -8,7 +8,6 @@ import com.nilemnod.mangareader.app.data.library.MetadataUpdateWorker
 import com.nilemnod.mangareader.app.data.notification.NotificationReceiver
 import com.nilemnod.mangareader.app.ui.base.delegate.SecureActivityDelegateImpl
 import com.nilemnod.mangareader.app.ui.main.MainActivity
-import com.nilemnod.mangareader.app.ui.webview.WebViewActivity
 import com.nilemnod.mangareader.app.util.CrashLogUtil
 import com.nilemnod.mangareader.core.common.security.SecurityPreferences
 import com.nilemnod.mangareader.core.metro.IsDebugBuild
@@ -35,7 +34,6 @@ import nl.adaptivity.xmlutil.serialization.XML
 interface AppGraph : ViewModelGraph, UiPreferencesProvider {
     fun inject(app: App)
     fun inject(mainActivity: MainActivity)
-    fun inject(webViewActivity: WebViewActivity)
     fun inject(libraryUpdateWorker: LibraryUpdateWorker)
     fun inject(metadataUpdateWorker: MetadataUpdateWorker)
     fun inject(downloadWorker: DownloadWorker)

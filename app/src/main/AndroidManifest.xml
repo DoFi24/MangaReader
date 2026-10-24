@@ -175,11 +175,6 @@
             android:exported="false"
             android:theme="@style/Theme.MangaReader" />
 
-        <activity
-            android:name=".ui.webview.WebViewActivity"
-            android:configChanges="uiMode|orientation|screenSize"
-            android:exported="false" />
-
         <receiver
             android:name=".data.notification.NotificationReceiver"
             android:exported="false" />

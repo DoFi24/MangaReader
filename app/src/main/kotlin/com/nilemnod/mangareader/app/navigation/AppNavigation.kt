@@ -5,8 +5,6 @@ import cafe.adriel.voyager.core.registry.ScreenRegistry
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.about.OpenSourceLicensesScreen
 import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.app.ui.manga.MangaCoverDialogHost
-import com.nilemnod.mangareader.app.ui.webview.WebViewActivity
-import com.nilemnod.mangareader.app.ui.webview.WebViewScreen
 import com.nilemnod.mangareader.core.common.Constants
 import com.nilemnod.mangareader.core.navigation.DialogRegistry
 import com.nilemnod.mangareader.core.navigation.IntentRegistry
@@ -27,6 +25,8 @@ import com.nilemnod.mangareader.feature.manga.MangaScreen
 import com.nilemnod.mangareader.feature.reader.legacy.ReaderActivity
 import com.nilemnod.mangareader.feature.stats.StatsScreen
 import com.nilemnod.mangareader.feature.upcoming.UpcomingScreen
+import com.nilemnod.mangareader.feature.webview.WebViewActivity
+import com.nilemnod.mangareader.feature.webview.WebViewScreen
 
 object AppNavigation {
 

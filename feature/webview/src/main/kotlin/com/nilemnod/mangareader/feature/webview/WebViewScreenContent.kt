@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.presentation.webview
+package com.nilemnod.mangareader.feature.webview
 
 import android.content.pm.ApplicationInfo
 import android.graphics.Bitmap
@@ -39,7 +39,7 @@ import com.kevinnzou.web.WebContent
 import com.kevinnzou.web.WebView
 import com.kevinnzou.web.WebViewNavigator
 import com.kevinnzou.web.WebViewState
-import com.nilemnod.mangareader.app.BuildConfig
+import com.nilemnod.mangareader.core.common.AppBuild
 import com.nilemnod.mangareader.core.common.util.system.getHtml
 import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.setDefaultSettings
@@ -348,7 +348,7 @@ fun WebViewScreenContent(
                     webView.setDefaultSettings()
 
                     // Debug mode (chrome://inspect/#devices)
-                    if (BuildConfig.DEBUG &&
+                    if (AppBuild.isDebug &&
                         0 != webView.context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE
                     ) {
                         WebView.setWebContentsDebuggingEnabled(true)

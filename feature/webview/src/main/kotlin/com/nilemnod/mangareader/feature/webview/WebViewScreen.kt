@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.ui.webview
+package com.nilemnod.mangareader.feature.webview
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -6,7 +6,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.presentation.webview.WebViewScreenContent
 import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
 import com.nilemnod.mangareader.core.ui.util.AssistContentScreen
 import com.nilemnod.mangareader.core.ui.util.Screen

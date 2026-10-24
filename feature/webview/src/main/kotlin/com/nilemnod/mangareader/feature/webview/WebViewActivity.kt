@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.ui.webview
+package com.nilemnod.mangareader.feature.webview
 
 import android.app.assist.AssistContent
 import android.content.Context
@@ -6,13 +6,15 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.compose.setContent
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import androidx.core.net.toUri
-import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.presentation.webview.WebViewScreenContent
-import com.nilemnod.mangareader.app.ui.base.activity.BaseActivity
-import com.nilemnod.mangareader.app.util.view.setComposeContent
 import com.nilemnod.mangareader.core.android.system.openInBrowser
 import com.nilemnod.mangareader.core.android.system.toShareIntent
 import com.nilemnod.mangareader.core.common.util.system.WebViewUtil
@@ -20,10 +22,11 @@ import com.nilemnod.mangareader.core.common.util.system.logcat
 import com.nilemnod.mangareader.core.common.util.system.toWebViewHeaders
 import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.core.network.NetworkHelper
+import com.nilemnod.mangareader.core.ui.activity.HostActivity
 import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
+import com.nilemnod.mangareader.core.ui.theme.MangaReaderTheme
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.i18n.MR
-import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import logcat.LogPriority
@@ -31,19 +34,16 @@ import okhttp3.Headers.Companion.toHeaders
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import com.nilemnod.mangareader.core.ui.R as UiR
 
-class WebViewActivity : BaseActivity() {
+class WebViewActivity : HostActivity() {
 
-    @Inject private lateinit var sourceManager: SourceManager
+    private val sourceManager: SourceManager by lazy { webViewGraph.sourceManager }
 
-    @Inject private lateinit var network: NetworkHelper
+    private val network: NetworkHelper by lazy { webViewGraph.networkHelper }
 
     private var assistUrl: String? = null
 
-    init {
-        registerSecureActivity(this)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
+        registerSecureActivity(this)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             overrideActivityTransition(
                 OVERRIDE_TRANSITION_OPEN,
@@ -55,8 +55,6 @@ class WebViewActivity : BaseActivity() {
             overridePendingTransition(UiR.anim.shared_axis_x_push_enter, UiR.anim.shared_axis_x_push_exit)
         }
         super.onCreate(savedInstanceState)
-        appGraph.inject(this)
-
         if (!WebViewUtil.supportsWebView(this)) {
             toast(MR.strings.information_webview_required, Toast.LENGTH_LONG)
             finish()
@@ -66,37 +64,49 @@ class WebViewActivity : BaseActivity() {
         val url = intent.extras?.getString(URL_KEY) ?: return
         assistUrl = url
 
-        setComposeContent {
-            // Null until the source it belongs to has been resolved
-            val headers by produceState<Map<String, String>?>(initialValue = null) {
-                val source = sourceManager.get(intent.extras!!.getLong(SOURCE_KEY))?.takeIf { it.web != null }
-                value = withContext(Dispatchers.IO) {
-                    try {
-                        source?.web?.headers?.toHeaders()?.toWebViewHeaders().orEmpty()
-                    } catch (e: Exception) {
-                        logcat(LogPriority.ERROR, e) { "Failed to build headers" }
-                        emptyMap()
-                    }
+        setContent {
+            MangaReaderTheme {
+                CompositionLocalProvider(
+                    LocalTextStyle provides MaterialTheme.typography.bodySmall,
+                    LocalContentColor provides MaterialTheme.colorScheme.onBackground,
+                ) {
+                    WebViewContent(url)
                 }
             }
-
-            if (headers == null) {
-                LoadingScreen()
-                return@setComposeContent
-            }
-
-            WebViewScreenContent(
-                onNavigateUp = { finish() },
-                initialTitle = intent.extras?.getString(TITLE_KEY),
-                url = url,
-                headers = headers.orEmpty(),
-                defaultUserAgentProvider = network::defaultUserAgentProvider,
-                onUrlChange = { assistUrl = it },
-                onShare = this::shareWebpage,
-                onOpenInBrowser = this::openInBrowser,
-                onClearCookies = this::clearCookies,
-            )
         }
+    }
+
+    @Composable
+    private fun WebViewContent(url: String) {
+        // Null until the source it belongs to has been resolved
+        val headers by produceState<Map<String, String>?>(initialValue = null) {
+            val source = sourceManager.get(intent.extras!!.getLong(SOURCE_KEY))?.takeIf { it.web != null }
+            value = withContext(Dispatchers.IO) {
+                try {
+                    source?.web?.headers?.toHeaders()?.toWebViewHeaders().orEmpty()
+                } catch (e: Exception) {
+                    logcat(LogPriority.ERROR, e) { "Failed to build headers" }
+                    emptyMap()
+                }
+            }
+        }
+
+        if (headers == null) {
+            LoadingScreen()
+            return
+        }
+
+        WebViewScreenContent(
+            onNavigateUp = { finish() },
+            initialTitle = intent.extras?.getString(TITLE_KEY),
+            url = url,
+            headers = headers.orEmpty(),
+            defaultUserAgentProvider = network::defaultUserAgentProvider,
+            onUrlChange = { assistUrl = it },
+            onShare = this::shareWebpage,
+            onOpenInBrowser = this::openInBrowser,
+            onClearCookies = this::clearCookies,
+        )
     }
 
     override fun onProvideAssistContent(outContent: AssistContent) {
