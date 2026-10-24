@@ -223,7 +223,7 @@ private fun ChapterText(
             }
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = header.uppercase(),
+                    text = header.trimEnd(':', ' ').uppercase(),
                     style = MaterialTheme.typography.labelMedium,
                     color = if (highlighted) LocalContentColor.current else MaterialTheme.colorScheme.onSurfaceVariant,
                 )
