@@ -20,12 +20,14 @@ dependencies {
     implementation(projects.icons.simpleIcons)
 
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.appCompat)
     implementation(libs.androidx.core)
     implementation(libs.bundles.androidx.lifecycle)
     implementation(libs.bundles.coil)
     implementation(libs.bundles.kotlinx.coroutines)
     implementation(libs.bundles.shizuku)
     implementation(libs.bundles.voyager)
+    implementation(libs.material)
     implementation(libs.unifile)
 
     implementation(libs.metro.runtime)

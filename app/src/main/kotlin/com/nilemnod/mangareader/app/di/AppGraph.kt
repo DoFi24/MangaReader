@@ -6,7 +6,6 @@ import com.nilemnod.mangareader.app.data.download.DownloadWorker
 import com.nilemnod.mangareader.app.data.library.LibraryUpdateWorker
 import com.nilemnod.mangareader.app.data.library.MetadataUpdateWorker
 import com.nilemnod.mangareader.app.data.notification.NotificationReceiver
-import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.ui.base.delegate.SecureActivityDelegateImpl
 import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.app.ui.webview.WebViewActivity
@@ -19,7 +18,6 @@ import com.nilemnod.mangareader.core.reader.ReaderPreferences
 import com.nilemnod.mangareader.core.ui.preference.UiPreferences
 import com.nilemnod.mangareader.core.ui.preference.UiPreferencesProvider
 import com.nilemnod.mangareader.domain.library.service.LibraryPreferences
-import com.nilemnod.mangareader.domain.source.service.SourceManager
 import com.nilemnod.mangareader.domain.source.service.SourcePreferences
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.DependencyGraph
@@ -46,7 +44,6 @@ interface AppGraph : ViewModelGraph, UiPreferencesProvider {
 
     val viewModelFactory: MetroViewModelFactory
 
-    val basePreferences: BasePreferences
     override val uiPreferences: UiPreferences
     val readerPreferences: ReaderPreferences
     val libraryPreferences: LibraryPreferences
@@ -54,8 +51,6 @@ interface AppGraph : ViewModelGraph, UiPreferencesProvider {
     val securityPreferences: SecurityPreferences
 
     val crashLogUtil: CrashLogUtil
-
-    val sourceManager: SourceManager
 
     val json: Json
     val protoBuf: ProtoBuf

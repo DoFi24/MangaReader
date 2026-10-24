@@ -1,12 +1,10 @@
-package com.nilemnod.mangareader.app.ui.browse.extension
+package com.nilemnod.mangareader.feature.extensions.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.nilemnod.mangareader.feature.browse.BrowseTabContribution
-import com.nilemnod.mangareader.feature.browse.BrowseTabSlot
-import com.nilemnod.mangareader.feature.extensions.ui.ExtensionsViewModel
-import com.nilemnod.mangareader.feature.extensions.ui.extensionsTab
+import com.nilemnod.mangareader.core.ui.components.BrowseTabContribution
+import com.nilemnod.mangareader.core.ui.components.BrowseTabSlot
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 
 object ExtensionsBrowseTab : BrowseTabContribution {

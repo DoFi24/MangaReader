@@ -3,8 +3,6 @@ package com.nilemnod.mangareader.app.navigation
 import android.content.Intent
 import cafe.adriel.voyager.core.registry.ScreenRegistry
 import com.nilemnod.mangareader.app.presentation.more.settings.screen.about.OpenSourceLicensesScreen
-import com.nilemnod.mangareader.app.ui.browse.extension.ExtensionsBrowseTab
-import com.nilemnod.mangareader.app.ui.browse.extension.details.SourcePreferencesScreen
 import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.app.ui.manga.MangaCoverDialogHost
 import com.nilemnod.mangareader.app.ui.webview.WebViewActivity
@@ -15,14 +13,16 @@ import com.nilemnod.mangareader.core.navigation.IntentRegistry
 import com.nilemnod.mangareader.core.navigation.SharedDialog
 import com.nilemnod.mangareader.core.navigation.SharedIntent
 import com.nilemnod.mangareader.core.navigation.SharedScreen
-import com.nilemnod.mangareader.feature.browse.BrowseTabs
+import com.nilemnod.mangareader.core.ui.components.BrowseTabs
 import com.nilemnod.mangareader.feature.browse.migration.config.MigrationConfigScreen
 import com.nilemnod.mangareader.feature.browse.migration.dialog.MigrateMangaDialog
 import com.nilemnod.mangareader.feature.browse.source.browse.BrowseSourceScreen
 import com.nilemnod.mangareader.feature.browse.source.globalsearch.GlobalSearchScreen
 import com.nilemnod.mangareader.feature.categories.CategoryScreen
 import com.nilemnod.mangareader.feature.downloads.DownloadQueueScreen
+import com.nilemnod.mangareader.feature.extensions.sourcesettings.SourcePreferencesScreen
 import com.nilemnod.mangareader.feature.extensions.stores.ExtensionStoresScreen
+import com.nilemnod.mangareader.feature.extensions.ui.ExtensionsBrowseTab
 import com.nilemnod.mangareader.feature.manga.MangaScreen
 import com.nilemnod.mangareader.feature.reader.legacy.ReaderActivity
 import com.nilemnod.mangareader.feature.stats.StatsScreen

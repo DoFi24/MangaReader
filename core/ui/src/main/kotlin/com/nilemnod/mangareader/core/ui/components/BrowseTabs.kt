@@ -1,7 +1,6 @@
-package com.nilemnod.mangareader.feature.browse
+package com.nilemnod.mangareader.core.ui.components
 
 import androidx.compose.runtime.Composable
-import com.nilemnod.mangareader.core.ui.components.TabContent
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -26,9 +25,9 @@ object BrowseTabs {
 
     private val showRequests = Channel<BrowseTabContribution>(1, BufferOverflow.DROP_OLDEST)
 
-    internal val showEvents: Flow<BrowseTabContribution> = showRequests.receiveAsFlow()
+    val showEvents: Flow<BrowseTabContribution> = showRequests.receiveAsFlow()
 
-    internal fun all(): List<BrowseTabContribution> = contributions.toList()
+    fun all(): List<BrowseTabContribution> = contributions.toList()
 
     fun register(contribution: BrowseTabContribution) {
         contributions += contribution

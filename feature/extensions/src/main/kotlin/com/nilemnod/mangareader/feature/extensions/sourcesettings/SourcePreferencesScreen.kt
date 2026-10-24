@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.ui.browse.extension.details
+package com.nilemnod.mangareader.feature.extensions.sourcesettings
 
 import android.content.Context
 import android.os.Bundle
@@ -32,14 +32,13 @@ import androidx.preference.forEach
 import androidx.preference.getOnBindEditTextListener
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.nilemnod.mangareader.app.data.preference.SharedPreferencesDataStore
-import com.nilemnod.mangareader.app.di.appGraph
-import com.nilemnod.mangareader.app.widget.AppTextInputEditText.Companion.setIncognito
 import com.nilemnod.mangareader.core.ui.components.AppBar
 import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
 import com.nilemnod.mangareader.core.ui.util.Screen
 import com.nilemnod.mangareader.domain.source.api.ContentSource
+import com.nilemnod.mangareader.feature.extensions.extensionsGraph
+import com.nilemnod.mangareader.feature.extensions.sourcesettings.AppTextInputEditText.Companion.setIncognito
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -52,7 +51,7 @@ class SourcePreferencesScreen(val sourceId: Long) : Screen() {
         val navigator = LocalNavigator.currentOrThrow
 
         val source by produceState<ContentSource?>(initialValue = null) {
-            value = context.appGraph.sourceManager.getOrStub(sourceId)
+            value = context.extensionsGraph.sourceManager.getOrStub(sourceId)
         }
 
         if (source == null) {
@@ -139,9 +138,9 @@ class SourcePreferencesFragment : PreferenceFragmentCompat() {
 
     private suspend fun populateScreen(): PreferenceScreen {
         val sourceId = requireArguments().getLong(SOURCE_ID)
-        val appGraph = requireContext().appGraph
-        val settings = appGraph.sourceManager.getOrStub(sourceId).settings
-        val basePreferences = appGraph.basePreferences
+        val graph = requireContext().extensionsGraph
+        val settings = graph.sourceManager.getOrStub(sourceId).settings
+        val modePreferences = graph.modePreferences
         val sourceScreen = preferenceManager.createPreferenceScreen(requireContext())
 
         if (settings != null) {
@@ -164,7 +163,7 @@ class SourcePreferencesFragment : PreferenceFragmentCompat() {
                     val setListener = pref.getOnBindEditTextListener()
                     pref.setOnBindEditTextListener {
                         setListener?.onBindEditText(it)
-                        it.setIncognito(basePreferences, lifecycleScope)
+                        it.setIncognito(modePreferences, lifecycleScope)
                     }
                 }
             }
