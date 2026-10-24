@@ -222,6 +222,7 @@ dependencies {
     implementation(projects.feature.library)
     implementation(projects.feature.manga)
     implementation(projects.feature.stats)
+    implementation(projects.feature.upcoming)
     implementation(projects.feature.updates)
     implementation(projects.feature.widget)
 
@@ -311,7 +312,6 @@ dependencies {
     implementation(libs.composeMaterialMotion)
     implementation(libs.swipe)
     implementation(libs.composeWebview)
-    implementation(libs.composeGrid)
     implementation(libs.reorderable)
     implementation(libs.bundles.markdown)
     implementation(libs.materialKolor)

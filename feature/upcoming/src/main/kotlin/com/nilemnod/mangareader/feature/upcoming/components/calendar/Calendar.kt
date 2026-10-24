@@ -19,8 +19,8 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.fastForEach
 import com.cheonjaeung.compose.grid.SimpleGridCells
 import com.cheonjaeung.compose.grid.VerticalGrid
-import com.nilemnod.mangareader.core.designsystem.utils.isExpandedWidthWindow
-import com.nilemnod.mangareader.core.designsystem.utils.isMediumWidthWindow
+import com.nilemnod.mangareader.core.ui.util.isExpandedWidthWindow
+import com.nilemnod.mangareader.core.ui.util.isMediumWidthWindow
 import com.nilemnod.mangareader.core.ui.components.material.padding
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.YearMonth
