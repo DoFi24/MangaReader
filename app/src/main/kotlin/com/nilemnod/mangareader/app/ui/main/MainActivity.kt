@@ -73,7 +73,6 @@ import com.nilemnod.mangareader.app.di.appGraph
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
 import com.nilemnod.mangareader.app.presentation.more.AppMigratingScreen
 import com.nilemnod.mangareader.app.ui.base.activity.BaseActivity
-import com.nilemnod.mangareader.app.ui.deeplink.DeepLinkScreen
 import com.nilemnod.mangareader.app.ui.home.HomeScreen
 import com.nilemnod.mangareader.app.util.system.isBenchmarkBuildType
 import com.nilemnod.mangareader.app.util.view.setComposeContent
@@ -86,6 +85,8 @@ import com.nilemnod.mangareader.core.download.DownloadCache
 import com.nilemnod.mangareader.core.metro.metroGraph
 import com.nilemnod.mangareader.core.migration.Migrator
 import com.nilemnod.mangareader.core.navigation.HomeTab
+import com.nilemnod.mangareader.core.navigation.SharedScreen
+import com.nilemnod.mangareader.core.navigation.screen
 import com.nilemnod.mangareader.core.ui.components.AdaptiveSheet
 import com.nilemnod.mangareader.core.ui.components.AppStateBanners
 import com.nilemnod.mangareader.core.ui.components.DownloadedOnlyBannerBackgroundColor
@@ -508,7 +509,7 @@ class MainActivity : BaseActivity(), SplashReady {
                 val query = intent.getStringExtra(SearchManager.QUERY) ?: intent.getStringExtra(Intent.EXTRA_TEXT)
                 if (!query.isNullOrEmpty()) {
                     navigator.popUntilRoot()
-                    navigator.push(DeepLinkScreen(query))
+                    navigator.push(SharedScreen.DeepLink(query).screen())
                 }
                 null
             }

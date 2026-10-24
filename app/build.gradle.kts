@@ -216,6 +216,7 @@ dependencies {
     implementation(projects.core.mangaUi)
     implementation(projects.feature.browse)
     implementation(projects.feature.categories)
+    implementation(projects.feature.deeplink)
     implementation(projects.feature.downloads)
     implementation(projects.feature.extensions)
     implementation(projects.feature.history)

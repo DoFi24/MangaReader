@@ -17,6 +17,7 @@ import com.nilemnod.mangareader.feature.browse.migration.dialog.MigrateMangaDial
 import com.nilemnod.mangareader.feature.browse.source.browse.BrowseSourceScreen
 import com.nilemnod.mangareader.feature.browse.source.globalsearch.GlobalSearchScreen
 import com.nilemnod.mangareader.feature.categories.CategoryScreen
+import com.nilemnod.mangareader.feature.deeplink.DeepLinkScreen
 import com.nilemnod.mangareader.feature.downloads.DownloadQueueScreen
 import com.nilemnod.mangareader.feature.extensions.sourcesettings.SourcePreferencesScreen
 import com.nilemnod.mangareader.feature.extensions.stores.ExtensionStoresScreen
@@ -39,6 +40,7 @@ object AppNavigation {
             register<SharedScreen.MigrationConfig> { MigrationConfigScreen(it.mangaIds) }
             register<SharedScreen.WebView> { WebViewScreen(it.url, it.initialTitle, it.sourceId) }
             register<SharedScreen.ExtensionStores> { ExtensionStoresScreen(it.repoUrl) }
+            register<SharedScreen.DeepLink> { DeepLinkScreen(it.query) }
             register<SharedScreen.Stats> { StatsScreen() }
             register<SharedScreen.SourcePreferences> { SourcePreferencesScreen(it.sourceId) }
             register<SharedScreen.Category> { CategoryScreen() }

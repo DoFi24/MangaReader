@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.ui.deeplink
+package com.nilemnod.mangareader.feature.deeplink
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -17,9 +17,6 @@ import com.nilemnod.mangareader.core.ui.components.material.Scaffold
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
 import com.nilemnod.mangareader.core.ui.screens.LoadingScreen
 import com.nilemnod.mangareader.core.ui.util.Screen
-import com.nilemnod.mangareader.feature.browse.source.globalsearch.GlobalSearchScreen
-import com.nilemnod.mangareader.feature.manga.MangaScreen
-import com.nilemnod.mangareader.feature.reader.legacy.ReaderActivity
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metrox.viewmodel.assistedMetroViewModel
 
@@ -48,7 +45,7 @@ class DeepLinkScreen(
                     LoadingScreen(Modifier.padding(contentPadding))
                 }
                 is DeepLinkViewModel.State.NoResults -> {
-                    navigator.replace(GlobalSearchScreen(query))
+                    navigator.replace(SharedScreen.GlobalSearch(query).screen())
                 }
                 is DeepLinkViewModel.State.Result -> {
                     val resultState = state as DeepLinkViewModel.State.Result
