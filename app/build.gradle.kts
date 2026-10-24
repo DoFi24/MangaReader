@@ -223,6 +223,7 @@ dependencies {
     implementation(projects.feature.manga)
     implementation(projects.feature.stats)
     implementation(projects.feature.updates)
+    implementation(projects.feature.webview)
     implementation(projects.feature.widget)
 
     // Compose
@@ -310,7 +311,6 @@ dependencies {
     implementation(libs.bundles.voyager)
     implementation(libs.composeMaterialMotion)
     implementation(libs.swipe)
-    implementation(libs.composeWebview)
     implementation(libs.composeGrid)
     implementation(libs.reorderable)
     implementation(libs.bundles.markdown)

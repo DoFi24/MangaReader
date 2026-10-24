@@ -1,4 +1,4 @@
-package com.nilemnod.mangareader.app.ui.webview
+package com.nilemnod.mangareader.feature.webview
 
 import android.content.Context
 import androidx.core.net.toUri
