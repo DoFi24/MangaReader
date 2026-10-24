@@ -41,6 +41,10 @@ sealed interface SharedScreen : ScreenProvider {
         val repoUrl: String? = null,
     ) : SharedScreen
 
+    data class DeepLink(
+        val query: String = "",
+    ) : SharedScreen
+
     data object Stats : SharedScreen
 
     data object Category : SharedScreen

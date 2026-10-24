@@ -1,9 +1,8 @@
-package com.nilemnod.mangareader.app.ui.deeplink
+package com.nilemnod.mangareader.feature.deeplink
 
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nilemnod.mangareader.app.source.interactor.UpdateMangaFromRemote
 import com.nilemnod.mangareader.domain.chapter.interactor.GetChapterByUrlAndMangaId
 import com.nilemnod.mangareader.domain.chapter.model.Chapter
 import com.nilemnod.mangareader.domain.manga.interactor.NetworkToLocalManga
@@ -11,6 +10,7 @@ import com.nilemnod.mangareader.domain.manga.model.Manga
 import com.nilemnod.mangareader.domain.manga.model.toDomainManga
 import com.nilemnod.mangareader.domain.source.api.SourceChapter
 import com.nilemnod.mangareader.domain.source.api.UriType
+import com.nilemnod.mangareader.domain.source.service.RemoteMangaUpdater
 import com.nilemnod.mangareader.domain.source.service.SourceManager
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.Assisted
@@ -31,7 +31,7 @@ class DeepLinkViewModel(
     private val sourceManager: SourceManager,
     private val networkToLocalManga: NetworkToLocalManga,
     private val getChapterByUrlAndMangaId: GetChapterByUrlAndMangaId,
-    private val updateMangaFromRemote: UpdateMangaFromRemote,
+    private val updateMangaFromRemote: RemoteMangaUpdater,
 ) : ViewModel() {
 
     val state: StateFlow<DeepLinkViewModel.State>
