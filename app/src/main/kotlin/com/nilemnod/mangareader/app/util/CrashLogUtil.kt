@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Build
 import com.nilemnod.mangareader.app.BuildConfig
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
-import com.nilemnod.mangareader.app.extension.ExtensionManager
 import com.nilemnod.mangareader.core.android.storage.createFileInCacheDir
 import com.nilemnod.mangareader.core.android.storage.getUriCompat
 import com.nilemnod.mangareader.core.android.system.toShareIntent
@@ -12,6 +11,7 @@ import com.nilemnod.mangareader.core.common.util.system.WebViewUtil
 import com.nilemnod.mangareader.core.common.util.system.toast
 import com.nilemnod.mangareader.core.network.NetworkPreferences
 import com.nilemnod.mangareader.domain.extension.model.Extension
+import com.nilemnod.mangareader.feature.extensions.ExtensionManager
 import com.nilemnod.mangareader.feature.settings.about.DebugInfoProvider
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding

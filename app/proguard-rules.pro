@@ -90,7 +90,7 @@
 -keep,allowoptimization class kotlinx.datetime.** { public protected *; }
 
 # Methods called by Shizuku only
--keepclassmembers class com.nilemnod.mangareader.app.shizuku.ShellInterface {
+-keepclassmembers class com.nilemnod.mangareader.feature.extensions.shizuku.ShellInterface {
     public <init>();
     public void destroy();
 }

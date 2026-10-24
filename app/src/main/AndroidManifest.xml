@@ -180,19 +180,9 @@
             android:configChanges="uiMode|orientation|screenSize"
             android:exported="false" />
 
-        <activity
-            android:name=".extension.util.ExtensionInstallActivity"
-            android:exported="false"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
         <receiver
             android:name=".data.notification.NotificationReceiver"
             android:exported="false" />
-
-        <service
-            android:name=".extension.util.ExtensionInstallService"
-            android:exported="false"
-            android:foregroundServiceType="shortService" />
 
         <service
             android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"

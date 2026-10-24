@@ -1,12 +1,12 @@
 package com.nilemnod.mangareader.app.source
 
-import com.nilemnod.mangareader.app.extension.ExtensionManager
 import com.nilemnod.mangareader.core.download.DownloadManager
 import com.nilemnod.mangareader.core.metro.AppCoroutineScope
 import com.nilemnod.mangareader.domain.source.api.ContentSource
 import com.nilemnod.mangareader.domain.source.model.StubSource
 import com.nilemnod.mangareader.domain.source.repository.StubSourceRepository
 import com.nilemnod.mangareader.domain.source.service.SourceManager
+import com.nilemnod.mangareader.feature.extensions.ExtensionManager
 import com.nilemnod.mangareader.source.local.LocalSource
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding

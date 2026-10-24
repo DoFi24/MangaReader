@@ -5,9 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.core.net.toUri
-import com.nilemnod.mangareader.app.extension.util.ExtensionInstaller
 import com.nilemnod.mangareader.app.ui.main.MainActivity
 import com.nilemnod.mangareader.core.common.Constants
+import com.nilemnod.mangareader.feature.extensions.installer.ExtensionInstaller
 
 /**
  * Class that manages [PendingIntent] of activity's

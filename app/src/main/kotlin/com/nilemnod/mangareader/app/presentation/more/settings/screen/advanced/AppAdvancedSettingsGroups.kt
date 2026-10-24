@@ -10,12 +10,13 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
-import com.nilemnod.mangareader.app.domain.base.BasePreferences
-import com.nilemnod.mangareader.app.domain.extension.interactor.TrustExtension
 import com.nilemnod.mangareader.app.util.system.isReleaseBuildType
-import com.nilemnod.mangareader.app.util.system.isShizukuInstalled
 import com.nilemnod.mangareader.core.reader.ReaderPreferences
 import com.nilemnod.mangareader.core.ui.i18n.stringResource
+import com.nilemnod.mangareader.feature.extensions.installer.isShizukuInstalled
+import com.nilemnod.mangareader.feature.extensions.preference.ExtensionPreferences
+import com.nilemnod.mangareader.feature.extensions.preference.InstallerType
+import com.nilemnod.mangareader.feature.extensions.trust.TrustExtension
 import com.nilemnod.mangareader.feature.settings.Preference
 import com.nilemnod.mangareader.feature.settings.screen.advanced.AdvancedSettingsGroups
 import com.nilemnod.mangareader.i18n.MR
@@ -26,7 +27,7 @@ import dev.zacsweers.metro.Inject
 @Inject
 @ContributesBinding(AppScope::class)
 class AppAdvancedSettingsGroups(
-    private val basePreferences: BasePreferences,
+    private val extensionPreferences: ExtensionPreferences,
     private val trustExtension: TrustExtension,
     private val readerPreferences: ReaderPreferences,
 ) : AdvancedSettingsGroups {
@@ -54,7 +55,7 @@ class AppAdvancedSettingsGroups(
     private fun getExtensionsGroup(): Preference.PreferenceGroup {
         val context = LocalContext.current
         val uriHandler = LocalUriHandler.current
-        val extensionInstallerPref = basePreferences.extensionInstaller
+        val extensionInstallerPref = extensionPreferences.installer
         var shizukuMissing by rememberSaveable { mutableStateOf(false) }
 
         if (shizukuMissing) {
@@ -89,7 +90,7 @@ class AppAdvancedSettingsGroups(
                         .filter {
                             // TODO: allow private option in stable versions once URL handling is more fleshed out
                             if (isReleaseBuildType) {
-                                it != BasePreferences.ExtensionInstaller.PRIVATE
+                                it != InstallerType.PRIVATE
                             } else {
                                 true
                             }
@@ -97,7 +98,7 @@ class AppAdvancedSettingsGroups(
                         .associateWith { stringResource(it.titleRes) },
                     title = stringResource(MR.strings.ext_installer_pref),
                     onValueChanged = {
-                        if (it == BasePreferences.ExtensionInstaller.SHIZUKU &&
+                        if (it == InstallerType.SHIZUKU &&
                             !context.isShizukuInstalled
                         ) {
                             shizukuMissing = true

@@ -25,16 +25,12 @@ import com.nilemnod.mangareader.app.crash.CrashActivity
 import com.nilemnod.mangareader.app.crash.GlobalExceptionHandler
 import com.nilemnod.mangareader.app.data.coil.BufferedSourceFetcher
 import com.nilemnod.mangareader.app.data.coil.CoverRequestInterceptor
-import com.nilemnod.mangareader.app.data.coil.ExtensionIconFetcher
-import com.nilemnod.mangareader.app.data.coil.InstalledExtensionIconKeyer
-import com.nilemnod.mangareader.app.data.coil.InstalledSourceIconKeyer
 import com.nilemnod.mangareader.app.data.coil.MangaCoverFetcher
 import com.nilemnod.mangareader.app.data.coil.MangaCoverKeyer
 import com.nilemnod.mangareader.app.data.coil.MangaKeyer
 import com.nilemnod.mangareader.app.data.notification.Notifications
 import com.nilemnod.mangareader.app.di.AppGraph
 import com.nilemnod.mangareader.app.domain.base.BasePreferences
-import com.nilemnod.mangareader.app.extension.ExtensionManager
 import com.nilemnod.mangareader.app.navigation.AppNavigation
 import com.nilemnod.mangareader.app.ui.base.delegate.SecureActivityDelegate
 import com.nilemnod.mangareader.app.util.system.cancelNotification
@@ -60,6 +56,10 @@ import com.nilemnod.mangareader.core.storage.CoverCache
 import com.nilemnod.mangareader.core.ui.preference.UiPreferences
 import com.nilemnod.mangareader.core.ui.preference.model.setAppCompatDelegateThemeMode
 import com.nilemnod.mangareader.domain.source.service.SourceManager
+import com.nilemnod.mangareader.feature.extensions.ExtensionManager
+import com.nilemnod.mangareader.feature.extensions.icon.ExtensionIconFetcher
+import com.nilemnod.mangareader.feature.extensions.icon.InstalledExtensionIconKeyer
+import com.nilemnod.mangareader.feature.extensions.icon.InstalledSourceIconKeyer
 import com.nilemnod.mangareader.feature.widget.WidgetManager
 import com.nilemnod.mangareader.i18n.MR
 import dev.zacsweers.metro.Inject
